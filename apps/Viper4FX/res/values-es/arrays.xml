@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+	<string-array name="drvinst_prefer">
+		<item>Calidad Super</item>
+		<item>Calidad Alta</item>
+		<item>Calidad Buena (menos consumo)</item>
+	</string-array>
+
+	<string-array name="ui_prefer">
+		<item>Principiante</item>
+		<item>Moderado</item>
+		<item>Experto</item>
+	</string-array>
+
+	<string-array name="compatible_mode">
+		<item>Normal</item>
+		<item>Compatible</item>
+	</string-array>
+
+	<string-array name="colorfulmusic_coeffs">
+		<item>Leve</item>
+		<item>Nivel 1</item>
+		<item>Nivel 2</item>
+		<item>Nivel 3</item>
+		<item>Nivel 4</item>
+		<item>Nivel 5</item>
+		<item>Nivel 6</item>
+		<item>Nivel 7</item>
+		<item>Extremo</item>
+	</string-array>
+
+	<string-array name="colorfulmusic_midimage">
+		<item>Leve</item>
+		<item>Nivel 1</item>
+		<item>Nivel 2</item>
+		<item>Nivel 3</item>
+		<item>Nivel 4</item>
+		<item>Nivel 5</item>
+		<item>Nivel 6</item>
+		<item>Nivel 7</item>
+		<item>Nivel 8</item>
+		<item>Nivel 9</item>
+		<item>Extremo</item>
+	</string-array>
+
+	<string-array name="conv_cross_channel">
+		<item>" 0   por ciento"</item>
+		<item>" 5   por ciento"</item>
+		<item>"10   por ciento"</item>
+		<item>"15   por ciento"</item>
+		<item>"20   por ciento"</item>
+		<item>"25   por ciento"</item>
+		<item>"30   por ciento"</item>
+		<item>"35   por ciento"</item>
+		<item>"40   por ciento"</item>
+		<item>"45   por ciento"</item>
+		<item>"50   por ciento"</item>
+		<item>"55   por ciento"</item>
+		<item>"60   por ciento"</item>
+		<item>"70   por ciento"</item>
+		<item>"80   por ciento"</item>
+	</string-array>
+
+	<string-array name="reverb_roomsize">
+		<item>"  25  m2"</item>
+		<item>"  36  m2"</item>
+		<item>"  49  m2"</item>
+		<item>"  64  m2"</item>
+		<item>"  81  m2"</item>
+		<item>" 100  m2"</item>
+		<item>" 121  m2"</item>
+		<item>" 203  m2"</item>
+		<item>" 347  m2"</item>
+		<item>" 652  m2"</item>
+		<item>"1200  m2"</item>
+	</string-array>
+
+	<string-array name="reverb_roomwidth">
+		<item>" 5  m"</item>
+		<item>" 6  m"</item>
+		<item>" 7  m"</item>
+		<item>" 8  m"</item>
+		<item>" 9  m"</item>
+		<item>"10  m"</item>
+		<item>"11  m"</item>
+		<item>"14  m"</item>
+		<item>"19  m"</item>
+		<item>"26  m"</item>
+		<item>"36  m"</item>
+	</string-array>
+
+	<string-array name="reverb_percent">
+		<item>"  0   por ciento"</item>
+		<item>" 10   por ciento"</item>
+		<item>" 20   por ciento"</item>
+		<item>" 30   por ciento"</item>
+		<item>" 40   por ciento"</item>
+		<item>" 50   por ciento"</item>
+		<item>" 60   por ciento"</item>
+		<item>" 70   por ciento"</item>
+		<item>" 80   por ciento"</item>
+		<item>" 90   por ciento"</item>
+		<item>"100   por ciento"</item>
+	</string-array>
+
+	<string-array name="cure_crossfeed">
+		<item>Leve</item>
+		<item>Moderado</item>
+		<item>Extremo</item>
+	</string-array>
+
+	<string-array name="vhs_qual">
+		<item>Nivel 1</item>
+		<item>Nivel 2</item>
+		<item>Nivel 3</item>
+		<item>Nivel 4</item>
+		<item>Nivel 5</item>
+	</string-array>
+
+	<string-array name="playbackgain_ratio">
+		<item>Leve</item>
+		<item>Moderado</item>
+		<item>Extremo</item>
+	</string-array>
+
+	<string-array name="multi_factor">
+		<item>"x  1"</item>
+		<item>"x  2"</item>
+		<item>"x  3"</item>
+		<item>"x  4"</item>
+		<item>"x  5"</item>
+		<item>"x  6"</item>
+		<item>"x  7"</item>
+		<item>"x  8"</item>
+		<item>"x  9"</item>
+		<item>"x 10"</item>
+		<item>"Infinito"</item>
+	</string-array>
+
+	<string-array name="amplification_db">
+		<item>"0.0  dB"</item>
+		<item>"3.5  dB"</item>
+		<item>"6.0  dB"</item>
+		<item>"9.5  dB"</item>
+		<item>12.0  dB"</item>
+		<item>14.0  dB"</item>
+		<item>18.0  dB"</item>
+		<item>20.0  dB"</item>
+	</string-array>
+
+	<string-array name="output_db">
+		<item>" 0.0  dB"</item>
+		<item>"-1.0  dB"</item>
+		<item>"-1.9  dB"</item>
+		<item>"-3.0  dB"</item>
+		<item>"-6.0  dB"</item>
+		<item>-10.5  dB"</item>
+	</string-array>
+
+	<string-array name="output_volume">
+		<item>"  6.0  dB"</item>
+		<item>"  5.6  dB"</item>
+		<item>"  5.1  dB"</item>
+		<item>"  4.6  dB"</item>
+		<item>"  4.1  dB"</item>
+		<item>"  3.5  dB"</item>
+		<item>"  2.9  dB"</item>
+		<item>"  2.3  dB"</item>
+		<item>"  1.6  dB"</item>
+		<item>"  0.8  dB"</item>
+		<item>"  0.0  dB"</item>
+		<item>" -1.0  dB"</item>
+		<item>" -1.9  dB"</item>
+		<item>" -3.0  dB"</item>
+		<item>" -4.4  dB"</item>
+		<item>" -6.0  dB"</item>
+		<item>" -8.0  dB"</item>
+		<item>"-10.5  dB"</item>
+		<item>"-14.0  dB"</item>
+		<item>"-20.0  dB"</item>
+		<item>"-26.0  dB"</item>
+		<item>"-40.0  dB"</item>
+	</string-array>
+
+	<string-array name="dynamicsystem_bass">
+		<item>"  0   por ciento"</item>
+		<item>"  1   por ciento"</item>
+		<item>"  2   por ciento"</item>
+		<item>"  3   por ciento"</item>
+		<item>"  4   por ciento"</item>
+		<item>"  5   por ciento"</item>
+		<item>"  6   por ciento"</item>
+		<item>"  7   por ciento"</item>
+		<item>"  8   por ciento"</item>
+		<item>"  9   por ciento"</item>
+		<item>" 10   por ciento"</item>
+		<item>" 12   por ciento"</item>
+		<item>" 14   por ciento"</item>
+		<item>" 16   por ciento"</item>
+		<item>" 18   por ciento"</item>
+		<item>" 20   por ciento"</item>
+		<item>" 22   por ciento"</item>
+		<item>" 24   por ciento"</item>
+		<item>" 26   por ciento"</item>
+		<item>" 28   por ciento"</item>
+		<item>" 30   por ciento"</item>
+		<item>" 33   por ciento"</item>
+		<item>" 36   por ciento"</item>
+		<item>" 40   por ciento"</item>
+		<item>" 45   por ciento"</item>
+		<item>" 50   por ciento"</item>
+		<item>" 55   por ciento"</item>
+		<item>" 60   por ciento"</item>
+		<item>" 70   por ciento"</item>
+		<item>" 80   por ciento"</item>
+		<item>" 90   por ciento"</item>
+		<item>"100   por ciento"</item>
+	</string-array>
+
+	<string-array name="dynamicsystem_outputs">
+		<item>Cascos extremos (v2)</item>
+		<item>Cascos gama alta (v2)</item>
+		<item>Cascos comunes (v2)</item>
+		<item>Cascos gama baja (v2)</item>
+		<item>Auriculares comunes (v2)</item>
+		<item>Cascos extremos (v1)</item>
+		<item>Cascos gama alta (v1)</item>
+		<item>Cascos comunes (v1)</item>
+		<item>Auriculares comunes (v1)</item>
+		<item>Auriculares Apple</item>
+		<item>Auriculares Monster</item>
+		<item>Auriculares Moto</item>
+		<item>Auriculares Philips</item>
+		<item>SHP2000</item>
+		<item>SHP9000</item>
+		<item>Desconocido Tipo I</item>
+		<item>Desconocido Tipo II</item>
+		<item>Desconocido Tipo III</item>
+		<item>Desconocido Tipo IV</item>
+	</string-array>
+
+	<string-array name="vbass_mode">
+		<item>Natural Bass</item>
+		<item>Pure Bass+</item>
+		<item>Subwoofer</item>
+	</string-array>
+
+	<string-array name="vbass_freq">
+		<item>" 30  Hz"</item>
+		<item>" 40  Hz"</item>
+		<item>" 50  Hz"</item>
+		<item>" 60  Hz"</item>
+		<item>" 66  Hz"</item>
+		<item>" 78  Hz"</item>
+		<item>" 80  Hz"</item>
+		<item>"100  Hz"</item>
+	</string-array>
+
+	<string-array name="vbass_boost">
+		<item>" 3.5  dB"</item>
+		<item>" 6.0  dB"</item>
+		<item>" 8.0  dB"</item>
+		<item>"10.0  dB"</item>
+		<item>"11.0  dB"</item>
+		<item>"12.0  dB"</item>
+		<item>"13.0  dB"</item>
+		<item>"14.0  dB"</item>
+		<item>"14.8  dB"</item>
+		<item>"15.6  dB"</item>
+		<item>"16.3  dB"</item>
+		<item>"17.0  dB"</item>
+	</string-array>
+
+	<string-array name="vclarity_mode">
+		<item>Natural</item>
+		<item>OZone+</item>
+		<item>XHiFi</item>
+	</string-array>
+
+	<string-array name="vclarity_boost">
+		<item>" 0.0  dB"</item>
+		<item>" 3.5  dB"</item>
+		<item>" 6.0  dB"</item>
+		<item>" 8.0  dB"</item>
+		<item>"10.0  dB"</item>
+		<item>"11.0  dB"</item>
+		<item>"12.0  dB"</item>
+		<item>"13.0  dB"</item>
+		<item>"14.0  dB"</item>
+		<item>"14.8  dB"</item>
+	</string-array>
+
+	<string-array name="speaker_lowfreq">
+		<item>100  Hz</item>
+		<item>140  Hz</item>
+		<item>180  Hz</item>
+		<item>200  Hz</item>
+		<item>220  Hz</item>
+	</string-array>
+
+	<string-array name="speaker_highfreq">
+		<item>3000  Hz</item>
+		<item>4000  Hz</item>
+		<item>5000  Hz</item>
+		<item>6000  Hz</item>
+		<item>7000  Hz</item>
+		<item>8000  Hz</item>
+	</string-array>
+
+</resources>

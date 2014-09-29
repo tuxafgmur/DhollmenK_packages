@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Ecualizar</string>
+	<string name="select_configuration_title">ViPER4 FX</string>
+	<string name="headset_title">"   Auriculares   "</string>
+	<string name="speaker_title">"    Altavoces    "</string>
+	<string name="bluetooth_title">"    Bluetooth    "</string>
+	<string name="usb_title">"    USB/Dock     "</string>
+	<string name="audio_effects">Efectos de sonido</string>
+	<string name="dsp_settings_headset">"  Ajuste de efectos          "</string>
+	<string name="dsp_settings_speaker">"  Ajuste de efectos          "</string>
+	<string name="dsp_settings_bluetooth">"  Ajuste de efectos          "</string>
+	<string name="dsp_settings_usb">"  Ajuste de efectos          "</string>
+	<string name="pref_dsp_enable">Estado</string>
+	<string name="pref_effect_title">Nivel</string>
+	<string name="dialog_effect">Nivel</string>
+	<string name="pref_force_enable_text">Activación forzada</string>
+	<string name="pref_force_enable_warn">En el caso de problemas de sonido o excesivo consumo de batería, debe desactivar esta opción.</string>
+	<string name="pref_fx_master_title">Potencia principal</string>
+	<string name="pref_fx_master_summary_on">FX activado</string>
+	<string name="pref_fx_master_summary_off">FX desactivado</string>
+	<string name="pref_spkfx_master_title">Potencia principal</string>
+	<string name="pref_spkfx_master_summary_on">FX activado</string>
+	<string name="pref_spkfx_master_summary_off">FX desactivado</string>
+	<string name="pref_fx_limiter_title">Limitador de potencia</string>
+	<string name="pref_fx_limiter_threshold">Limitador de potencia</string>
+	<string name="pref_spkfx_limiter_title">Limitador maestro</string>
+	<string name="pref_spkfx_limiter_threshold">Umbral de límite</string>
+	<string name="pref_output_gain">Ganancia de salida</string>
+	<string name="pref_output_pan">Canal de salida</string>
+	<string name="pref_playback_title">Control de ganancia</string>
+	<string name="pref_playback_summary_on">AGC activado</string>
+	<string name="pref_playback_summary_off">AGC desactivado</string>
+	<string name="pref_playback_output_threshold">Máxima intensidad de salida</string>
+	<string name="pref_playback_maxgain">Máxima ganancia</string>
+	<string name="pref_xloud_summary_on">eXtra-Loud activado</string>
+	<string name="pref_xloud_summary_off">eXtra-Loud desactivado</string>
+	<string name="pref_xloud_output_amplifer">Ganancia de salida</string>
+	<string name="pref_xloud_spk_lowfreq">Baja frecuencia</string>
+	<string name="pref_xloud_spk_highfreq">Alta frecuencia</string>
+	<string name="pref_spk_opt_title">Optimización de altavoces</string>
+	<string name="pref_spk_opt_summary_on">Activada</string>
+	<string name="pref_spk_opt_summary_off">Desactivada</string>
+	<string name="pref_viperddc_title">ViPER-DDC</string>
+	<string name="pref_viperddc_summary_on">ViPER-DDC activado</string>
+	<string name="pref_viperddc_summary_off">ViPER-DDC desactivado</string>
+	<string name="pref_viperddc_enable">Estado</string>
+	<string name="pref_viperddc_device">Dispositivo</string>
+	<string name="pref_viperddc_device_manufacturer">Seleccione fabricante</string>
+	<string name="pref_viperddc_device_model">Seleccione modelo</string>
+	<string name="pref_viperddc_tips">Viper-DDC es un procesador de audio Hi-Fi para la corrección de auriculares.\nSi su modelo no está en la lista, es mejor que lo desactive.</string>
+	<string name="pref_vse_title">Extensión Spectrum</string>
+	<string name="pref_vse_summary_on">Spectrum activado</string>
+	<string name="pref_vse_summary_off">Spectrum desactivado</string>
+	<string name="pref_vse_enable">Estado</string>
+	<string name="pref_vse_strength">Intensidad</string>
+	<string name="pref_vse_strength_title">Seleccione la intensidad</string>
+	<string name="pref_vse_tips">Spectrum es un procesador de audio Hi-Fi que mejora el sonido comprimido con pérdida.\nSi reproduce música de este tipo (mp3, aac, ogg) puede mejorar la calidad del sonido.\nEn el caso contrario, es recomendable que desactive esta característica</string>
+	<string name="pref_equalizer_title">Ecualizador</string>
+	<string name="pref_equalizer_summary_on">Ecualizador activado</string>
+	<string name="pref_equalizer_summary_off">Ecualizador desactivado</string>
+	<string name="pref_equalizer_enable">Estado</string>
+	<string name="pref_equalizer_preset_title">Modo predeterminado</string>
+	<string name="pref_dynamicsystem_title">Sistema dinamico</string>
+	<string name="pref_dynamicsystem_summary_on">Sistema dinámico activado</string>
+	<string name="pref_dynamicsystem_summary_off">Sistema dinámico desactivado</string>
+	<string name="pref_dynamicsystem_enable">Estado</string>
+	<string name="pref_dynamicsystem_output">Dispositivo de escucha</string>
+	<string name="pref_dynamicsystem_output_title">Seleccionar dispositivo de escucha</string>
+	<string name="pref_dynamicsystem_bass">Seleccionar Dynamic Bass</string>
+	<string name="pref_dynamicsystem_tube_title">Simulador de sonido Tube(6N1J)</string>
+	<string name="pref_dynamicsystem_tube_summary_on">Simulador de sonido Tube activado</string>
+	<string name="pref_dynamicsystem_tube_summary_off">Simulador de sonido Tube desactivado</string>
+	<string name="pref_fidelity_title">Control de fidelidad</string>
+	<string name="pref_fidelity_vb_summary_on">Bass activado</string>
+	<string name="pref_fidelity_vb_summary_off">Bass desactivado</string>
+	<string name="pref_fidelity_vb_enable">Bass</string>
+	<string name="pref_fidelity_vb_mode">Modo Bass</string>
+	<string name="pref_fidelity_vb_mode_title">Seleccionar modo Bass</string>
+	<string name="pref_fidelity_vb_bassfreq">Frecuencia Bass</string>
+	<string name="pref_fidelity_vb_bassfreq_title">Seleccionar frecuencia Bass</string>
+	<string name="pref_fidelity_vb_bassgain">Impulso Bass</string>
+	<string name="pref_fidelity_vb_bassgain_title">Seleccionar impulso Bass</string>
+	<string name="pref_fidelity_vc_summary_on">Clarity activado</string>
+	<string name="pref_fidelity_vc_summary_off">Clarity desactivado</string>
+	<string name="pref_fidelity_vc_enable">Clarity</string>
+	<string name="pref_fidelity_vc_mode">Modo Clarity</string>
+	<string name="pref_fidelity_vc_mode_title">Seleccionar modo Clarity</string>
+	<string name="pref_fidelity_vc_bassgain">Clarity</string>
+	<string name="pref_fidelity_vc_bassgain_title">Seleccionar Clarity</string>
+	<string name="pref_curesystem_title">Sistema de proteccion auditiva</string>
+	<string name="pref_curesystem_summary_on">Cure Tech+ activado</string>
+	<string name="pref_curesystem_summary_off">Cure Tech+ desactivado</string>
+	<string name="pref_curesystem_enable">Estado</string>
+	<string name="pref_select_cure_cf_title">Seleccionar nivel binaural</string>
+	<string name="dialog_cure_crossfeed">Nivel binaural</string>
+	<string name="pref_convolver_title">Convolver</string>
+	<string name="pref_convolver_summary_on">Convolver activado</string>
+	<string name="pref_convolver_summary_off">Convolver desactivado</string>
+	<string name="pref_convolver_enable">Estado</string>
+	<string name="pref_convolver_knl">Respuesta de impulso</string>
+	<string name="pref_convolver_knl_title">Seleccionar respuesta de impulso</string>
+	<string name="pref_convolver_crosschannel">Cruce de canales</string>
+	<string name="pref_convolver_crosschannel_title">Porcentaje</string>
+	<string name="pref_vhs_title">Auriculares Surround +</string>
+	<string name="pref_vhs_summary_on">VHS+ activado</string>
+	<string name="pref_vhs_summary_off">VHS+ desactivado</string>
+	<string name="pref_vhs_enable">Estado</string>
+	<string name="pref_select_vhs_qual_title">Seleccionar nivel de efecto</string>
+	<string name="dialog_vhs_qual">Nivel de efecto</string>
+	<string name="pref_colorfulmusic_title">Ambito Surround</string>
+	<string name="pref_colorfulmusic_summary_on">Ambito Surround activado</string>
+	<string name="pref_colorfulmusic_summary_off">Ambito Surround desactivado</string>
+	<string name="pref_colorfulmusic_enable">Estado</string>
+	<string name="pref_select_colorfulmusic_title">Seleccionar intensidad Surround</string>
+	<string name="dialog_colorfulmusic">Intensidad Surround</string>
+	<string name="pref_select_colorfulmusic_mi_title">Seleccionar intensidad Mid Image</string>
+	<string name="dialog_colorfulmusic_mi">Intensidad Mid Image</string>
+	<string name="pref_diffsurr_title">Diferencial Surround</string>
+	<string name="pref_diffsurr_summary_on">Diferencial Surround activado</string>
+	<string name="pref_diffsurr_summary_off">Diferencial Surround desactivado</string>
+	<string name="pref_diffsurr_enable">Estado</string>
+	<string name="pref_select_diffsurr_ms_title">Seleccionar retraso</string>
+	<string name="dialog_diffsurr_ms">Retraso</string>
+	<string name="pref_reverb_title">Reverberacion</string>
+	<string name="pref_reverb_summary_on">Reverberación activada</string>
+	<string name="pref_reverb_summary_off">Reverberación desactivada</string>
+	<string name="pref_reverb_enable">Estado</string>
+	<string name="pref_reverb_roomsize">Tamaño del local</string>
+	<string name="pref_reverb_width">Campo sonoro</string>
+	<string name="pref_reverb_damp">Factor de atenuación</string>
+	<string name="pref_reverb_wet">Señal húmeda (wet)</string>
+	<string name="pref_reverb_dry">Señal seca (dry)</string>
+	<string name="eq_preset_acoustic">Acústico</string>
+	<string name="eq_preset_bass_booster">Realce de graves</string>
+	<string name="eq_preset_bass_reducer">Reducción de graves</string>
+	<string name="eq_preset_classical">Música clásica</string>
+	<string name="eq_preset_deep">Profundo</string>
+	<string name="eq_preset_flat">Plano</string>
+	<string name="eq_preset_r_and_b">R&amp;B</string>
+	<string name="eq_preset_rock">Rock</string>
+	<string name="eq_preset_small_speakers">Altavoces pequeños</string>
+	<string name="eq_preset_treble_booster">Realce de agudos</string>
+	<string name="eq_preset_treble_reducer">Reducción de agudos</string>
+	<string name="eq_preset_vocal_booster">Realce de voz</string>
+	<string name="eq_preset_custom">Personalizado</string>
+	<string name="text_ir_dir_isempty">El directorio IRS %1$s está vacio.</string>
+	<string name="text_token_lost">Error del control de efectos Viper4, intente cambiar el controlador.</string>
+	<string name="text_enabled">Estado</string>
+	<string name="text_disabled">Desactivado</string>
+	<string name="text_headset">Auriculares</string>
+	<string name="text_bluetooth">Bluetooth</string>
+	<string name="text_speaker">Altavoces</string>
+	<string name="text_usb">USB/Dock</string>
+	<string name="text_showtrayicon">Mostrar notificación</string>
+	<string name="text_hidetrayicon">Ocultar notificación</string>
+	<string name="text_lockeffect">Bloquear efectos</string>
+	<string name="text_yes">Si</string>
+	<string name="text_no">No</string>
+	<string name="text_normal">Normal</string>
+	<string name="text_abnormal">Anormal</string>
+	<string name="text_supported">Soportado</string>
+	<string name="text_unsupported">No soportado</string>
+	<string name="text_loadfxprofile">Cargar perfil de efectos</string>
+	<string name="text_newfxprofile">Perfil de efectos nuevo &#8230;</string>
+	<string name="text_savefxprofile">Guardar perfil de efectos</string>
+	<string name="text_profilesaved_overwrite">¿Desea reemplazar este perfil?</string>
+	<string name="text_profileload_tip">Aplicar el perfil</string>
+	<string name="text_ok">Aceptar</string>
+	<string name="text_cancel">Cancelar</string>
+	<string name="text_drvinst_prefer">Seleccione el controlador</string>
+	<string name="text_drvinst_sqdrv">"La calidad Super Audio aumenta notablemente el consumo de batería.\n¿Desea utilizar Super Audio?"</string>
+	<string name="text_drvvernotmatch">"Se necesita cambiar el controlador mediante un proceso que se realizará automáticamente.\n¿Se puede realizar el cambio ahora?"</string>
+	<string name="text_drvuninst_confim">¿Realmente desea desinstalar el controlador?</string>
+	<string name="text_uiprefer">Experiencia</string>
+	<string name="text_uiprefer_dialog">Seleccione su nivel de experiencia</string>
+	<string name="text_commode">Modo de efectos</string>
+	<string name="text_drv_blank" />
+	<string name="text_uninstall">Desinstalar el controlador</string>
+	<string name="text_install">Cambiar el controlador</string>
+	<string name="text_drvinst_ok">"El controlador se ha cambiado. Reinicie el dispositivo para activarlo"</string>
+	<string name="text_drvuninst_ok">Controlador desinstalado, reinicie el dispositivo</string>
+	<string name="text_drvinst_failed">Controlador no cambiado, busybox no funciona</string>
+	<string name="text_drv_status">Estado del controlador</string>
+	<string name="text_drv_status_view">"
+Versión del controlador : %1$s
+
+NEON activado : %2$s
+
+Controlador activo : %3$s
+
+Estado : %4$s
+
+Formato de audio : %5$s
+
+Procesamiento : %6$s
+
+Frecuencia de muestreo : %7$d
+
+"</string>
+	<string name="text_service_error">Error de comunicación con el servicio ViPER4</string>
+	<string name="about_title">Acerca de</string>
+	<string name="about_text">"***    ViPER4 FX    ***
+
+Copyright © 2006-2016, vipercn.com. All rights reserved.
+
+ Este es el panel de control de ViPER4 FX
+Basado en codigo DSPmanager de Cyanogenmod
+
+Version %1$s (FX) Codename Beautiful
+"</string>
+	<string name="text_help_content">"Nota:
+Si no tiene efecto ViPER4 en ningún reproductor pruebe
+a cambiar al modo FX compatible y vuelva a intentarlo.
+"</string>
+	<string name="navigation_drawer_open">Abrir el panel de navegación</string>
+	<string name="navigation_drawer_close">Cerrar el panel de navegación</string>
+	<string name="navigation_toggle_drawer">Cambiar a la vista de panel</string>
+	<string name="navigation_toggle_tabbed">Cabiar a la vista de pestaña</string>
+
+</resources>

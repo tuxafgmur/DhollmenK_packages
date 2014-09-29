@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string-array name="drvinst_prefer">
+        <item>B. wysoka jakość dźwięku</item>
+        <item>Wysoka jakość dźwięku</item>
+        <item>Oszczędność baterii</item>
+    </string-array>
+
+    <string-array name="ui_prefer">
+        <item>Początkujący</item>
+        <item>Standardowy</item>
+        <item>Zaawansowany</item>
+    </string-array>
+
+    <string-array name="compatible_mode">
+        <item>Normalny</item>
+        <item>Kompatybilny</item>
+    </string-array>
+
+    <string-array name="colorfulmusic_coeffs">
+        <item>Delikatna</item>
+        <item>Poziom 1</item>
+        <item>Poziom 2</item>
+        <item>Poziom 3</item>
+        <item>Poziom 4</item>
+        <item>Poziom 5</item>
+        <item>Poziom 6</item>
+        <item>Poziom 7</item>
+        <item>Mocna</item>
+    </string-array>
+
+    <string-array name="colorfulmusic_midimage">
+        <item>Delikatna</item>
+        <item>Poziom 1</item>
+        <item>Poziom 2</item>
+        <item>Poziom 3</item>
+        <item>Poziom 4</item>
+        <item>Poziom 5</item>
+        <item>Poziom 6</item>
+        <item>Poziom 7</item>
+        <item>Poziom 8</item>
+        <item>Poziom 9</item>
+        <item>Mocna</item>
+    </string-array>
+
+    <string-array name="conv_cross_channel">
+        <item>0 procent</item>
+        <item>5 procent</item>
+        <item>10 procent</item>
+        <item>15 procent</item>
+        <item>20 procent</item>
+        <item>25 procent</item>
+        <item>30 procent</item>
+        <item>35 procent</item>
+        <item>40 procent</item>
+        <item>45 procent</item>
+        <item>50 procent</item>
+        <item>55 procent</item>
+        <item>60 procent</item>
+        <item>70 procent</item>
+        <item>80 procent</item>
+    </string-array>
+
+    <string-array name="reverb_percent">
+        <item>0 procent</item>
+        <item>10 procent</item>
+        <item>20 procent</item>
+        <item>30 procent</item>
+        <item>40 procent</item>
+        <item>50 procent</item>
+        <item>60 procent</item>
+        <item>70 procent</item>
+        <item>80 procent</item>
+        <item>90 procent</item>
+        <item>100 procent</item>
+    </string-array>
+
+    <string-array name="cure_crossfeed">
+        <item>Delikatny</item>
+        <item>Umiarkowany</item>
+        <item>Mocny</item>
+    </string-array>
+
+    <string-array name="vhs_qual">
+        <item>Poziom 1</item>
+        <item>Poziom 2</item>
+        <item>Poziom 3</item>
+        <item>Poziom 4</item>
+        <item>Poziom 5</item>
+    </string-array>
+
+    <string-array name="playbackgain_ratio">
+        <item>Delikatna</item>
+        <item>Umiarkowana</item>
+        <item>Mocna</item>
+    </string-array>
+
+    <string-array name="dynamicsystem_bass">
+        <item>0 procent</item>
+        <item>1 procent</item>
+        <item>2 procent</item>
+        <item>3 procent</item>
+        <item>4 procent</item>
+        <item>5 procent</item>
+        <item>6 procent</item>
+        <item>7 procent</item>
+        <item>8 procent</item>
+        <item>9 procent</item>
+        <item>10 procent</item>
+        <item>12 procent</item>
+        <item>14 procent</item>
+        <item>16 procent</item>
+        <item>18 procent</item>
+        <item>20 procent</item>
+        <item>22 procent</item>
+        <item>24 procent</item>
+        <item>26 procent</item>
+        <item>28 procent</item>
+        <item>30 procent</item>
+        <item>33 procent</item>
+        <item>36 procent</item>
+        <item>40 procent</item>
+        <item>45 procent</item>
+        <item>50 procent</item>
+        <item>55 procent</item>
+        <item>60 procent</item>
+        <item>70 procent</item>
+        <item>80 procent</item>
+        <item>90 procent</item>
+        <item>100 procent</item>
+    </string-array>
+
+    <string-array name="dynamicsystem_outputs">
+        <item>Nauszne z mocnym basem (v2)</item>
+        <item>Nauszne wysokiej klasy (v2)</item>
+        <item>Nauszne uniwersalne (v2)</item>
+        <item>Nauszne niskiej klasy (v2)</item>
+        <item>Douszne uniwersalne (v2)</item>
+        <item>Nauszne z mocnym basem (v1)</item>
+        <item>Nauszne wysokiej klasy (v1)</item>
+        <item>Nauszne uniwersalne (v1)</item>
+        <item>Douszne uniwersalne (v1)</item>
+        <item>Douszne Apple</item>
+        <item>Douszne Monster</item>
+        <item>Douszne Motoroli</item>
+        <item>Douszne Philips</item>
+        <item>Philips SHP 2000</item>
+        <item>Philips SHP 9000</item>
+        <item>Nieznany typ I</item>
+        <item>Nieznany typ II</item>
+        <item>Nieznany typ III</item>
+        <item>Nieznany typ IV</item>
+    </string-array>
+
+    <string-array name="vbass_mode">
+        <item>Naturalny Bas</item>
+        <item>Czysty Bas+</item>
+        <item>Subwoofer</item>
+    </string-array>
+
+    <string-array name="vclarity_mode">
+        <item>Naturalna</item>
+        <item>OZone+</item>
+        <item>XHiFi</item>
+    </string-array>
+
+    <string-array name="vclarity_boost">
+        <item>Domyślnie</item>
+        <item>3.5 dB</item>
+        <item>6.0 dB</item>
+        <item>8.0 dB</item>
+        <item>10.0 dB</item>
+        <item>11.0 dB</item>
+        <item>12.0 dB</item>
+        <item>13.0 dB</item>
+        <item>14.0 dB</item>
+        <item>14.8 dB</item>
+    </string-array>
+
+</resources>
