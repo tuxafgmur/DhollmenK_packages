@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+* Copyright (C) 2008 The Android Open Source Project
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="home" >"መነሻ"</string>
+    <string name="uid_name" >"የAndroid ኮር ትግበራዎች"</string>
+    <string name="folder_name" ></string>
+    <string name="chooser_wallpaper" >"ልጣፍ ምረጥ ከ"</string>
+    <string name="wallpaper_instructions" >"ልጣፍ አዘጋጅ"</string>
+    <string name="pick_wallpaper" >"ልጥፎች"</string>
+    <string name="activity_not_found" >"ትግበራ አልተጫነም።"</string>
+    <string name="widgets_tab_label" >" ፍርግሞች"</string>
+    <string name="long_press_widget_to_add" >"ፍርግም ለማንሳት ይንክ እና በመጫን ይያዙ"</string>
+    <string name="widget_dims_format" >"%1$d × %2$d"</string>
+    <string name="external_drop_widget_error" >"እዚህ የመነሻ ማያ ላይ ንጥል ማኖር አልተቻለም።"</string>
+    <string name="external_drop_widget_pick_title" >"ለመፍጠር ምግብር  ምረጥ"</string>
+    <string name="rename_folder_label" >"አቃፊ ስም"</string>
+    <string name="rename_folder_title" >"አቃፊ እንደገና ሰይም"</string>
+    <string name="rename_action" >"እሺ"</string>
+    <string name="cancel_action" >"ይቅር"</string>
+    <string name="menu_item_add_item" >"ወደ መነሻ ማያ አክል"</string>
+    <string name="group_applications" >"መተግበሪያዎች"</string>
+    <string name="group_shortcuts" >"አቋራጮች"</string>
+    <string name="group_widgets" >"ፍርግሞች"</string>
+    <string name="group_wallpapers" >"ልጣፍ"</string>
+    <string name="completely_out_of_space" >"የመነሻ ማያ ገጾችህ ላይ ተጨማሪ ቦታ የለም።"</string>
+    <string name="out_of_space" >"በዚህ መነሻ ማያ ላይ ምንም ቦታ የለም።"</string>
+    <string name="hotseat_out_of_space" >"በመትከያ ቦታው ላይ ተጨማሪ ክፍል የለም።"</string>
+    <string name="invalid_hotseat_item" >"ይህ ፍርግም ለማስቀመጫው በጣም ትልቅ ነው።"</string>
+    <string name="shortcut_installed" >"አቋራጭ\"<xliff:g id="NAME">%s</xliff:g> \"ተፈጥሯል።"</string>
+    <string name="shortcut_uninstalled" >"አቋራጭ \"<xliff:g id="NAME">%s</xliff:g>\" ተወግዶ ነበር።"</string>
+    <string name="shortcut_duplicate" >"አቋራጭ \"<xliff:g id="NAME">%s</xliff:g>\" አስቀድሞ አለ።"</string>
+    <string name="title_select_shortcut" >"አቋራጭ ምረጥ"</string>
+    <string name="title_select_application" >"መተግበሪያ ምረጥ"</string>
+    <string name="all_apps_button_label" >"ትግበራ"</string>
+    <string name="all_apps_home_button_label" >"መነሻ"</string>
+    <string name="delete_zone_label_workspace" >"አስወግድ"</string>
+    <string name="delete_zone_label_all_apps" >"አራግፍ"</string>
+    <string name="delete_target_label" >"አስወግድ"</string>
+    <string name="delete_target_uninstall_label" >"አራግፍ"</string>
+    <string name="info_target_label" >"የትግበራ መረጃ"</string>
+    <string name="accessibility_search_button" >"ፈልግ"</string>
+    <string name="accessibility_voice_search_button" >"የድምፅ ፍለጋ"</string>
+    <string name="accessibility_all_apps_button" >"መተግበሪያዎች"</string>
+    <string name="accessibility_delete_button" >"አስወግድ"</string>
+    <string name="delete_zone_label_all_apps_system_app" >"ማዘመን አትጫን"</string>
+    <string name="menu_add" >"አክል"</string>
+    <string name="menu_manage_apps" >"ትግበራዎች አደራጅ"</string>
+    <string name="menu_wallpaper" >"ልጣፍ"</string>
+    <string name="menu_search" >" ፈልግ"</string>
+    <string name="menu_notifications" >"ማሳወቂያዎች"</string>
+    <string name="menu_settings" >"የስርዓት ቅንብሮች"</string>
+    <string name="menu_help" >"እገዛ"</string>
+    <string name="cab_menu_delete_app" >"ትግበራ አራግፍ"</string>
+    <string name="cab_menu_app_info" >"የትግበራ ዝርዝር"</string>
+    <string name="cab_app_selection_text" >"1 መተግበሪያ  ተመርጧል"</string>
+    <string name="cab_widget_selection_text" >"1 ፍርግም ተመርጧል"</string>
+    <string name="cab_folder_selection_text" >"1 አቃፊ ተመርጧል"</string>
+    <string name="cab_shortcut_selection_text" >"1 አቋራጭ ተመርጧል"</string>
+    <string name="permlab_install_shortcut" >"አቋራጮችን ጫን።"</string>
+    <string name="permdesc_install_shortcut" >"መተግበሪያ  ያለተጠቃሚ ጣልቃ ገብነት አቋራጭ ለማከል ይፈቅዳል።"</string>
+    <string name="permlab_uninstall_shortcut" >"አቋራጮችን አራግፍ"</string>
+    <string name="permdesc_uninstall_shortcut" >"ያለተጠቃሚ ጣልቃ ገብነት አቋራጭ ለማስወገድ ለመተግበሪያ ይፈቅዳል።"</string>
+    <string name="permlab_read_settings" >"የመነሻ ቅንብሮች እና አቋራጮችን ያንብቡ"</string>
+    <string name="permdesc_read_settings" >"ቅንብሮችን እና አቋራጮችን በመነሻ ለማንበብ ለትግበራ ይፈቅዳል።"</string>
+    <string name="permlab_write_settings" >"መነሻ ቅንብሮች እና አቋራጮች ፃፍ"</string>
+    <string name="permdesc_write_settings" >"ቅንብሮችን እና አቋራጮችን በመነሻ ለመለወጥ ለመተግበሪያ ይፈቅዳል።"</string>
+    <string name="gadget_error_text" >"ፍርግም የመጫን ችግር"</string>
+    <string name="uninstall_system_app_text" >"ይህ የስርዓት ትግበራ ነው እና አለማራገፍ አይቻልም።"</string>
+    <string name="dream_name" >"የሮኬት ማስነሻ"</string>
+    <string name="folder_hint_text" >"ስም አልባ አቃፊ"</string>
+    <string name="workspace_description_format" >"መነሻ ማያ ገጽ %1$d"</string>
+    <string name="default_scroll_format" >"ገጽ %1$d የ %2$d"</string>
+    <string name="workspace_scroll_format" >"መነሻ ማያ ገጽ %1$d ከ%2$d"</string>
+    <string name="apps_customize_apps_scroll_format" >"Appsገጽ %1$d የ %2$d"</string>
+    <string name="apps_customize_widgets_scroll_format" >"ፍርግሞች ገጽ %1$d የ %2$d"</string>
+    <string name="workspace_cling_title" >"እቤትዎ እንዳሉ ሆነው ዘና ይበሉ"</string>
+    <string name="workspace_cling_move_item" >"ተወዳጅ መተግበሪያዎችዎን እዚህ ላይ ማስቀመጥ ይችላሉ።"</string>
+    <string name="workspace_cling_open_all_apps" >"ሁሉንም መተግበሪያዎችዎን ለማየት፣ ክቡን ይንኩ"</string>
+    <string name="all_apps_cling_title" >"አንዳንድ መተግበሪያዎችን ይምረጡ"</string>
+    <string name="all_apps_cling_add_item" >"ወደ መነሻ ማያዎ፣ መተግበሪያ ለማከል፣ ይንኩት እና ይያዙ።"</string>
+    <string name="folder_cling_title" >"መተግበሪያዎችዎን ከዓቃፊዎች ጋር ያደራጁ"</string>
+    <string name="folder_cling_move_item" >"መተግበሪያ ለማንቀሳቀስ፣ ይንኩት እና ይያዙት"</string>
+    <string name="folder_cling_create_folder" >"በመነሻ ማያዎ ላይ አዲስ ዓቃፊ ለመፍጠር፣ አንዱን መተግበሪያ በሌላው ላይ ይቆልሉ።"</string>
+    <string name="cling_dismiss" >"እሺ"</string>
+    <string name="folder_opened" >"አቃፊ ተከፍቷል፣ <xliff:g id="WIDTH">%1$d</xliff:g> በ <xliff:g id="HEIGHT">%2$d</xliff:g>"</string>
+    <string name="folder_tap_to_close" >"አቃፊን ለመዝጋት ንካ"</string>
+    <string name="folder_tap_to_rename" >"ዳግም ሰይምን ለማስቀመጥ ንካ"</string>
+    <string name="folder_closed" >"አቃፊ ተዘግቷል"</string>
+    <string name="folder_renamed" >"አቃፊ ዳግም ወደ <xliff:g id="NAME">%1$s</xliff:g> ተሰይሟል"</string>
+    <string name="folder_name_format" >"አቃፊ ስም፦ <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="custom_workspace_cling_title_1" ></string>
+    <string name="custom_workspace_cling_description_1" ></string>
+    <string name="custom_workspace_cling_title_2" ></string>
+    <string name="custom_workspace_cling_description_2" ></string>
+</resources>
