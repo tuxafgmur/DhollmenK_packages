@@ -400,6 +400,7 @@ aggiungere ulteriori punti di controllo. \'Rimuovi\' elimina la riga selezionata
     <string name="shortcut_action_search">Cerca in app</string>
     <string name="shortcut_action_voice_search">Ricerca vocale</string>
     <string name="shortcut_action_screenshot">Screenshot</string>
+    <string name="shortcut_action_screenrecord">Registrazione schermo</string>
     <string name="shortcut_action_menu">Menu</string>
     <string name="shortcut_action_ime">Apri commutatore IME</string>
     <string name="shortcut_action_kill">Termina app</string>

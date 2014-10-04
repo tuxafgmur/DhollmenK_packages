@@ -392,6 +392,7 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="shortcut_action_search">Suche in App</string>
     <string name="shortcut_action_voice_search">Sprach-Suche</string>
     <string name="shortcut_action_screenshot">Bildschirmfoto</string>
+    <string name="shortcut_action_screenrecord">Bildschirm-Aufnahme</string>
     <string name="shortcut_action_menu">Menü</string>
     <string name="shortcut_action_ime">Tastatur-Einstellungen</string>
     <string name="shortcut_action_kill">App beenden</string>

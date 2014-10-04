@@ -396,6 +396,7 @@ contrôle additionnel. \'Retirer\' supprime la ligne sélectionnée.
     <string name="shortcut_action_search">Recherche dans l\'application</string>
     <string name="shortcut_action_voice_search">Recherche vocale</string>
     <string name="shortcut_action_screenshot">Capture d\'écran</string>
+    <string name="shortcut_action_screenrecord">Enregistrement d\'écran</string>
     <string name="shortcut_action_menu">Menu</string>
     <string name="shortcut_action_ime">Ouvrir le sélecteur de clavier</string>
     <string name="shortcut_action_kill">Tuer l\'application</string>

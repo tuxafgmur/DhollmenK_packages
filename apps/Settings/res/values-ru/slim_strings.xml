@@ -560,6 +560,7 @@
     <string name="shortcut_action_lastapp">Предыдущее приложение</string>
     <string name="shortcut_action_search">Поиск</string>
     <string name="shortcut_action_screenshot">Снимок экрана</string>
+    <string name="shortcut_action_screenrecord">Запись экрана</string>
     <string name="shortcut_action_menu">Меню</string>
     <string name="shortcut_action_ime">Открыть переключатель IME</string>
     <string name="shortcut_action_kill">Завершить приложение</string>

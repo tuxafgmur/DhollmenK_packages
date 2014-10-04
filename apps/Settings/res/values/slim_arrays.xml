@@ -645,6 +645,7 @@
         <item>@string/shortcut_action_recent</item>
         <item>@string/shortcut_action_power</item>
         <item>@string/shortcut_action_screenshot</item>
+	<item>@string/shortcut_action_screenrecord</item>
         <item>@string/shortcut_action_search</item>
         <item>@string/shortcut_action_theme_switch</item>
         <item>@string/shortcut_action_torch</item>
@@ -669,6 +670,7 @@
         <item>**recents**</item>
         <item>**power**</item>
         <item>**screenshot**</item>
+	<item>**screenrecord**</item>
         <item>**search**</item>
         <item>**theme_switch**</item>
         <item>**torch**</item>
@@ -684,6 +686,7 @@
         <item>@string/shortcut_action_power_menu</item>
         <item>@string/shortcut_action_power</item>
         <item>@string/shortcut_action_screenshot</item>
+	<item>@string/shortcut_action_screenrecord</item>
         <item>@string/shortcut_action_theme_switch</item>
         <item>@string/shortcut_action_torch</item>
         <item>@string/shortcut_action_none</item>
@@ -698,6 +701,7 @@
         <item>**power_menu**</item>
         <item>**power**</item>
         <item>**screenshot**</item>
+        <item>**screenrecord**</item>
         <item>**theme_switch**</item>
         <item>**torch**</item>
         <item>**null**</item>
@@ -718,6 +722,7 @@
         <item>@string/shortcut_action_ring_vib_silent</item>
         <item>@string/shortcut_action_power</item>
         <item>@string/shortcut_action_screenshot</item>
+	<item>@string/shortcut_action_screenrecord</item>
         <item>@string/shortcut_action_assist</item>
         <item>@string/shortcut_action_theme_switch</item>
         <item>@string/shortcut_action_torch</item>
@@ -739,6 +744,7 @@
         <item>**ring_vib_silent**</item>
         <item>**power**</item>
         <item>**screenshot**</item>
+	<item>**screenrecord**</item>
         <item>**assist**</item>
         <item>**theme_switch**</item>
         <item>**torch**</item>
@@ -766,6 +772,7 @@
         <item>@string/shortcut_action_ring_vib_silent</item>
         <item>@string/shortcut_action_power</item>
         <item>@string/shortcut_action_screenshot</item>
+        <item>@string/shortcut_action_screenrecord</item>
         <item>@string/shortcut_action_assist</item>
         <item>@string/shortcut_action_search</item>
         <item>@string/shortcut_action_theme_switch</item>
@@ -795,6 +802,7 @@
         <item>**ring_vib_silent**</item>
         <item>**power**</item>
         <item>**screenshot**</item>
+        <item>**screenrecord**</item>
         <item>**assist**</item>
         <item>**search**</item>
         <item>**theme_switch**</item>
@@ -812,6 +820,7 @@
         <item>@string/shortcut_action_power_off</item>
         <item>@string/shortcut_action_reboot</item>
         <item>@string/shortcut_action_screenshot</item>
+	<item>@string/shortcut_action_screenrecord</item>
         <item>@string/shortcut_action_sound</item>
     </string-array>
 
@@ -824,6 +833,7 @@
         <item>**poweroff**</item>
         <item>**reboot**</item>
         <item>**screenshot**</item>
+        <item>**screenrecord**</item>
         <item>**sound**</item>
     </string-array>
 
