@@ -52,7 +52,7 @@
   <string name="msgs_privileged_console_alloc_failed">無法在超級使用者存取模式下執行。正在切換至安全模式。</string>
   <string name="msgs_settings_save_failure">無法套用或儲存設定。</string>
   <string name="msgs_settings_invalid_initial_directory">初始資料夾「<xliff:g id="initial_dir">%1$s</xliff:g>」無效。切換至 root 資料夾。</string>
-  <string name="msgs_success">操已成功的完成。</string>
+  <string name="msgs_success">操作成功。</string>
   <string name="msgs_unknown">檢測到了一個錯誤。此操作未能成功完成。</string>
   <string name="msgs_insufficient_permissions">此操作需要更高的權限。請嘗試切換到超級使用者存取模式。</string>
   <string name="msgs_file_not_found">未找到檔案或資料夾。</string>
@@ -80,8 +80,6 @@
   <string name="actionbar_button_other_view_options_cd">其他視圖選項</string>
   <string name="actionbar_button_selection_done_cd">完成</string>
   <string name="actionbar_button_actions_cd">操作</string>
-  <string name="actionbar_button_history_cd">記錄</string>
-  <string name="actionbar_button_bookmarks_cd">書籤</string>
   <string name="actionbar_button_search_cd">搜尋</string>
   <string name="actionbar_button_overflow_cd">更多選項</string>
   <string name="actionbar_button_storage_cd">儲存容體</string>
@@ -178,8 +176,6 @@
   <string name="initial_directory_label">選擇初始資料夾：</string>
   <string name="initial_directory_relative_msg">不允許相對路徑。</string>
   <string name="initial_directory_error_msg">儲存初始資料夾時發生了錯誤。</string>
-  <string name="menu_history">記錄</string>
-  <string name="menu_bookmarks">書籤</string>
   <string name="menu_search">搜尋</string>
   <string name="menu_settings">設定</string>
   <string name="menu_clear_history">清除記錄</string>
@@ -262,21 +258,6 @@
   <string name="filetime_format_mode_MMddyyyy_HHmmss">mm/dd/yyyy hh:mm:ss</string>
   <string name="filetime_format_mode_yyyyMMdd_HHmmss">yyyy-mm-dd hh:mm:ss</string>
   <string name="selection_folders_and_files">已選取 <xliff:g id="folders">%1$s</xliff:g> 個資料夾和 <xliff:g id="files">%2$s</xliff:g> 個檔案。</string>
-  <string name="category_system">SYSTEM</string>
-  <string name="category_app">程式</string>
-  <string name="category_binary">二進制</string>
-  <string name="category_text">文字</string>
-  <string name="category_document">文件</string>
-  <string name="category_ebook">電子書</string>
-  <string name="category_mail">郵件</string>
-  <string name="category_compress">壓縮</string>
-  <string name="category_exec">可執行</string>
-  <string name="category_database">數據庫</string>
-  <string name="category_font">字體</string>
-  <string name="category_image">圖像</string>
-  <string name="category_audio">音訊</string>
-  <string name="category_video">影片</string>
-  <string name="category_security">安全性</string>
   <string name="compression_mode_title">壓縮模式</string>
   <string name="shortcut_failed_msg">處理捷徑失敗。</string>
   <string name="shortcut_creation_success_msg">建立捷徑成功。</string>
@@ -297,7 +278,9 @@
   <string name="pref_compute_folder_statistics">計算資料夾統計數據</string>
   <string name="pref_compute_folder_statistics_on">警告! 資料夾統計數據的計算將會花費較長的時間與較多的系統資源</string>
   <string name="pref_display_thumbs">預覽</string>
+  <string name="pref_display_thumbs_summary">為應用程式、音樂、相片及影片顯示預覽圖片。</string>
   <string name="pref_use_flinger">使用滑動手勢</string>
+  <string name="pref_use_flinger_summary">自左到右滑動將會刪除檔案或資料夾。</string>
   <string name="pref_general_advanced_settings_category">進階</string>
   <string name="pref_access_mode">存取模式</string>
   <string name="pref_access_mode_safe">安全模式</string>
@@ -335,7 +318,6 @@
   <string name="pref_editor_sh_item_category">項目</string>
   <string name="pref_themes_selection_category">主題</string>
   <string name="pref_themes_set_theme">設定主題</string>
-  <string name="pref_themes_no_preview">無可用\n預覽</string>
   <string name="pref_themes_confirmation">主題已被成功套用。</string>
   <string name="pref_themes_not_found">未找到主題。</string>
   <string name="pref_debug_traces">記錄偵錯資訊</string>
