@@ -22,7 +22,7 @@
     <!-- Preferable keyboard height in absolute scale: 1.285in -->
     <!-- This keyboardHeight value should match with keyboard-heights.xml -->
     <dimen name="keyboardHeight">205.6dp</dimen>
-    <fraction name="maxKeyboardHeight">46%p</fraction>
+    <fraction name="maxKeyboardHeight">44%p</fraction>
     <fraction name="minKeyboardHeight">-61.8%p</fraction>
 
     <dimen name="popup_key_height">52.8dp</dimen>
@@ -51,8 +51,8 @@
 
     <fraction name="key_letter_ratio">55%</fraction>
     <fraction name="key_large_letter_ratio">65%</fraction>
-    <fraction name="key_label_ratio">34%</fraction>
-    <fraction name="key_large_label_ratio">40%</fraction>
+    <fraction name="key_label_ratio">36%</fraction>
+    <fraction name="key_large_label_ratio">42%</fraction>
     <fraction name="key_hint_letter_ratio">25%</fraction>
     <fraction name="key_hint_label_ratio">44%</fraction>
     <fraction name="key_uppercase_letter_ratio">35%</fraction>
@@ -75,7 +75,7 @@
     <!-- popup_key_height x -0.5 -->
     <dimen name="more_keys_keyboard_vertical_correction_holo">-26.4dp</dimen>
 
-    <dimen name="suggestions_strip_height">40dp</dimen>
+    <dimen name="suggestions_strip_height">34dp</dimen>
     <dimen name="more_suggestions_key_horizontal_padding">12dp</dimen>
     <dimen name="more_suggestions_row_height">40dp</dimen>
     <dimen name="more_suggestions_bottom_gap">6dp</dimen>
@@ -87,8 +87,8 @@
     <dimen name="suggestions_strip_padding">0dp</dimen>
     <dimen name="suggestion_min_width">44dp</dimen>
     <dimen name="suggestion_padding">6dp</dimen>
-    <dimen name="suggestion_text_size">18dp</dimen>
-    <dimen name="more_suggestions_hint_text_size">27dp</dimen>
+    <dimen name="suggestion_text_size">16dp</dimen>
+    <dimen name="more_suggestions_hint_text_size">25dp</dimen>
     <integer name="suggestions_count_in_strip">3</integer>
     <fraction name="center_suggestion_percentile">36%</fraction>
 

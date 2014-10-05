@@ -23,8 +23,8 @@ LOCAL_PACKAGE_NAME := LatinIME
 
 LOCAL_CERTIFICATE := shared
 
-# We want to package libjni_latinime.so into the apk.
-LOCAL_JNI_SHARED_LIBRARIES := libjni_latinime
+# We NOT want to package libjni_latinime.so into the apk.
+LOCAL_JNI_SHARED_LIBRARIES :=
 # We want to install libjni_latinime.so to the system partition if LatinIME gets installed.
 LOCAL_REQUIRED_MODULES := libjni_latinime
 

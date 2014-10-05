@@ -311,7 +311,6 @@ public class MetadataDbHelper extends SQLiteOpenHelper {
      * @param uri the metadata URI we just downloaded
      */
     public static void saveLastUpdateTimeOfUri(final Context context, final String uri) {
-        PrivateLog.log("Save last update time of URI : " + uri + " " + System.currentTimeMillis());
         final ContentValues values = new ContentValues();
         values.put(CLIENT_LAST_UPDATE_DATE_COLUMN, System.currentTimeMillis());
         final SQLiteDatabase defaultDb = getDb(context, null);
@@ -774,13 +773,10 @@ public class MetadataDbHelper extends SQLiteOpenHelper {
         if (TextUtils.isEmpty(valuesClientId) || null == valuesMetadataUri
                 || null == valuesMetadataAdditionalId) {
             // We need all these columns to be filled in
-            DebugLogUtils.l("Missing parameter for updateClientInfo");
             return;
         }
         if (!clientId.equals(valuesClientId)) {
             // Mismatch! The client violates the protocol.
-            DebugLogUtils.l("Received an updateClientInfo request for ", clientId,
-                    " but the values " + "contain a different ID : ", valuesClientId);
             return;
         }
         // Default value for a pending ID is NOT_AN_ID
@@ -851,7 +847,6 @@ public class MetadataDbHelper extends SQLiteOpenHelper {
             final ContentValues r) {
         switch (r.getAsInteger(TYPE_COLUMN)) {
             case TYPE_BULK:
-                DebugLogUtils.l("Ended processing a wordlist");
                 // Updating a bulk word list is a three-step operation:
                 // - Add the new entry to the table
                 // - Remove the old entry from the table
@@ -873,7 +868,6 @@ public class MetadataDbHelper extends SQLiteOpenHelper {
                         // the phone is suddenly cut during an update.
                         final int filenameIndex = c.getColumnIndex(LOCAL_FILENAME_COLUMN);
                         do {
-                            DebugLogUtils.l("Setting for removal", c.getString(filenameIndex));
                             filenames.add(c.getString(filenameIndex));
                         } while (c.moveToNext());
                     }

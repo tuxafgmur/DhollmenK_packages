@@ -155,10 +155,6 @@ void Dictionary::logDictionaryInfo(JNIEnv *const env) const {
             versionStringCharBuffer, HEADER_ATTRIBUTE_BUFFER_SIZE);
     intArrayToCharArray(dateStringCodePointBuffer, HEADER_ATTRIBUTE_BUFFER_SIZE,
             dateStringCharBuffer, HEADER_ATTRIBUTE_BUFFER_SIZE);
-
-    LogUtils::logToJava(env,
-            "Dictionary info: dictionary = %s ; version = %s ; date = %s",
-            dictionaryIdCharBuffer, versionStringCharBuffer, dateStringCharBuffer);
 }
 
 } // namespace latinime
