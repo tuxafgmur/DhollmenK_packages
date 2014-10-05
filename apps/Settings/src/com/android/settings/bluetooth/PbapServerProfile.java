@@ -34,7 +34,7 @@ import java.util.List;
  */
 final class PbapServerProfile implements LocalBluetoothProfile {
     private static final String TAG = "PbapServerProfile";
-    private static boolean V = true;
+    private static boolean V = false;
 
     private BluetoothPbap mService;
     private boolean mIsProfileReady;

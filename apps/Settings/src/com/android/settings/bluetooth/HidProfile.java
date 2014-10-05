@@ -33,7 +33,7 @@ import java.util.List;
  */
 final class HidProfile implements LocalBluetoothProfile {
     private static final String TAG = "HidProfile";
-    private static boolean V = true;
+    private static boolean V = false;
 
     private BluetoothInputDevice mService;
     private boolean mIsProfileReady;

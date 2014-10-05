@@ -54,7 +54,7 @@ import java.util.List;
 
 public class NotificationStation extends SettingsPreferenceFragment {
     private static final String TAG = NotificationStation.class.getSimpleName();
-    static final boolean DEBUG = true;
+    static final boolean DEBUG = false;
     private static final String PACKAGE_SCHEME = "package";
     private static final boolean SHOW_HISTORICAL_NOTIFICATIONS = true;
 

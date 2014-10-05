@@ -36,7 +36,7 @@ import java.util.List;
  */
 final class HeadsetProfile implements LocalBluetoothProfile {
     private static final String TAG = "HeadsetProfile";
-    private static boolean V = true;
+    private static boolean V = false;
 
     private BluetoothHeadset mService;
     private boolean mIsProfileReady;

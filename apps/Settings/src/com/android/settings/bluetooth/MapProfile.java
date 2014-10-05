@@ -36,7 +36,7 @@ import java.util.List;
  */
 final class MapProfile implements LocalBluetoothProfile {
     private static final String TAG = "MapProfile";
-    private static boolean V = true;
+    private static boolean V = false;
 
     private BluetoothMap mService;
     private boolean mIsProfileReady;

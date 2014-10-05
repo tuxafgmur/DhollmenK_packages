@@ -61,8 +61,8 @@ import javax.annotation.concurrent.GuardedBy;
 public class StorageMeasurement {
     private static final String TAG = "StorageMeasurement";
 
-    private static final boolean LOCAL_LOGV = true;
-    static final boolean LOGV = LOCAL_LOGV && Log.isLoggable(TAG, Log.VERBOSE);
+    private static final boolean LOCAL_LOGV = false;
+    static final boolean LOGV = false;
 
     private static final String DEFAULT_CONTAINER_PACKAGE = "com.android.defcontainer";
 

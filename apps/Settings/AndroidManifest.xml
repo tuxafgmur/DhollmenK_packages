@@ -70,6 +70,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CHANGE_HEADS_UP_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <permission
         android:name="android.permission.REQUEST_SUPERUSER"
@@ -228,7 +229,14 @@
             android:taskAffinity="com.android.settings.slim.service.BypassAlarm"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
-        <!-- Wireless Controls -->
+        <receiver
+		android:name=".BootReceiver">
+		<intent-filter>
+			<action android:name="android.intent.action.BOOT_COMPLETED"/>
+		</intent-filter>
+	</receiver>
+
+	<!-- Wireless Controls -->
 
         <activity android:name="Settings$WirelessSettingsActivity"
                 android:taskAffinity="com.android.settings"
@@ -247,7 +255,6 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
         </activity>
-
 
         <!-- Top-level settings -->
 

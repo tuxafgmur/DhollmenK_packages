@@ -34,7 +34,7 @@ import java.util.List;
  */
 final class PanProfile implements LocalBluetoothProfile {
     private static final String TAG = "PanProfile";
-    private static boolean V = true;
+    private static boolean V = false;
 
     private BluetoothPan mService;
     private boolean mIsProfileReady;
