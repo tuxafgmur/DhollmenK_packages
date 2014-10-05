@@ -12,14 +12,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_TAGS := optional
 
+LOCAL_PROGUARD_FLAG_FILES := proguard.flags
+
 LOCAL_STATIC_JAVA_LIBRARIES := libarity android-support-v4 guava
+LOCAL_STATIC_JAVA_LIBRARIES += chartengine ejml slider
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
@@ -28,12 +30,11 @@ LOCAL_SDK_VERSION := current
 LOCAL_PACKAGE_NAME := Calculator
 
 include $(BUILD_PACKAGE)
-##################################################
+
 include $(CLEAR_VARS)
 
-LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := libarity:arity-2.1.2.jar
+LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := libarity:libs/arity-2.1.6.jar chartengine:libs/achartengine.jar ejml:libs/ejml-0.21.jar slider:libs/slider.jar
 
 include $(BUILD_MULTI_PREBUILT)
 
-# Use the folloing include to make our test apk.
 include $(call all-makefiles-under,$(LOCAL_PATH))
