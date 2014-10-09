@@ -397,7 +397,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="shortcut_action_back">Atrás</string>
     <string name="shortcut_action_recent">Recientes</string>
     <string name="shortcut_action_lastapp">Última app.</string>
-    <string name="shortcut_action_search">Buscar</string>
+    <string name="shortcut_action_assist">Buscar por voz</string>
     <string name="shortcut_action_search">Buscar en la app.</string>
     <string name="shortcut_action_voice_search">Búsqueda por voz</string>
     <string name="shortcut_action_screenshot">Captura pantalla</string>
