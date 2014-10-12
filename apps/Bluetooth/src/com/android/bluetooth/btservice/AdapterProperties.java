@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 class AdapterProperties {
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
     private static final boolean VDBG = false;
     private static final String TAG = "BluetoothAdapterProperties";
 
