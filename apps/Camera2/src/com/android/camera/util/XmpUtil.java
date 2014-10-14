@@ -85,7 +85,6 @@ public class XmpUtil {
   public static XMPMeta extractXMPMeta(String filename) {
     if (!filename.toLowerCase().endsWith(".jpg")
         && !filename.toLowerCase().endsWith(".jpeg")) {
-      Log.d(TAG, "XMP parse: only jpeg file is supported");
       return null;
     }
 
@@ -119,7 +118,6 @@ public class XmpUtil {
           XMPMeta result = XMPMetaFactory.parseFromBuffer(buffer);
           return result;
         } catch (XMPException e) {
-          Log.d(TAG, "XMP parse error", e);
           return null;
         }
       }
@@ -148,7 +146,6 @@ public class XmpUtil {
   public static boolean writeXMPMeta(String filename, XMPMeta meta) {
     if (!filename.toLowerCase().endsWith(".jpg")
         && !filename.toLowerCase().endsWith(".jpeg")) {
-      Log.d(TAG, "XMP parse: only jpeg file is supported");
       return false;
     }
     List<Section> sections = null;
@@ -168,7 +165,6 @@ public class XmpUtil {
       os = new FileOutputStream(filename);
       writeJpegFile(os, sections);
     } catch (IOException e) {
-      Log.d(TAG, "Write file failed:" + filename, e);
       return false;
     } finally {
       if (os != null) {
@@ -196,7 +192,6 @@ public class XmpUtil {
       // Overwrite the image file with the new meta data.
       writeJpegFile(outputStream, sections);
     } catch (IOException e) {
-      Log.d(TAG, "Write to stream failed", e);
       return false;
     } finally {
       if (outputStream != null) {
@@ -247,7 +242,6 @@ public class XmpUtil {
       options.setOmitPacketWrapper(true);
       buffer = XMPMetaFactory.serializeToBuffer(meta, options);
     } catch (XMPException e) {
-      Log.d(TAG, "Serialize xmp failed", e);
       return null;
     }
     if (buffer.length > MAX_XMP_BUFFER_SIZE) {
@@ -388,7 +382,6 @@ public class XmpUtil {
       }
       return sections;
     } catch (IOException e) {
-      Log.d(TAG, "Could not parse file.", e);
       return null;
     } finally {
       if (is != null) {

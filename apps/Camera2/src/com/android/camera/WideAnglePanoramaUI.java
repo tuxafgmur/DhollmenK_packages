@@ -238,7 +238,6 @@ public class WideAnglePanoramaUI implements
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
         mController.onPreviewUIDestroyed();
         mSurfaceTexture = null;
-        Log.d(TAG, "surfaceTexture is destroyed");
         return true;
     }
 

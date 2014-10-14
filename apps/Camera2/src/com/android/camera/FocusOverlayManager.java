@@ -418,7 +418,6 @@ public class FocusOverlayManager {
     }
 
     private void autoFocus() {
-        Log.v(TAG, "Start autofocus.");
         mListener.autoFocus();
         mState = STATE_FOCUSING;
         // Pause the face view because the driver will keep sending face
@@ -429,7 +428,6 @@ public class FocusOverlayManager {
     }
 
     private void cancelAutoFocus() {
-        Log.v(TAG, "Cancel autofocus.");
 
         // Reset the tap area before calling mListener.cancelAutofocus.
         // Otherwise, focus mode stays at auto and the tap area passed to the

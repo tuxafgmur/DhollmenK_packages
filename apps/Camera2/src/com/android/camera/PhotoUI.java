@@ -259,7 +259,6 @@ public class PhotoUI implements PieListener,
             ratio = 1 / ratio;
         }
 
-        Log.d(TAG,"setAspectRatio() ratio["+ratio+"] mAspectRatio["+mAspectRatio+"]");
         mAspectRatio = ratio;
         mAspectRatioResize = true;
         mTextureView.requestLayout();
@@ -988,7 +987,6 @@ public class PhotoUI implements PieListener,
 
     @Override
     public void onDisplayChanged() {
-        Log.d(TAG, "Device flip detected.");
         mCameraControls.checkLayoutFlip();
         mController.updateCameraOrientation();
     }

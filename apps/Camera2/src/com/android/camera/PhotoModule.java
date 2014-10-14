@@ -401,7 +401,6 @@ public class PhotoModule
                     break;
                 }
                case SET_SKIN_TONE_FACTOR: {
-                    Log.v(TAG, "set tone bar: mSceneMode = " + mSceneMode);
                     setSkinToneFactor();
                     mSeekBarInitialized = true;
                     // skin tone ie enabled only for party and portrait BSM
@@ -415,7 +414,6 @@ public class PhotoModule
                         ;
                     }
                     else{
-                        Log.v(TAG, "Skin tone bar: disable");
                         disableSkinToneSeekBar();
                     }
                     break;
@@ -558,7 +556,6 @@ public class PhotoModule
     private void switchCamera() {
         if (mPaused) return;
 
-        Log.v(TAG, "Start to switch camera. id=" + mPendingSwitchCameraId);
         mCameraId = mPendingSwitchCameraId;
         mPendingSwitchCameraId = -1;
         setCameraId(mCameraId);
@@ -856,9 +853,6 @@ public class PhotoModule
         @Override
         public void onPictureTaken(byte [] data, CameraProxy camera) {
             mPostViewPictureCallbackTime = System.currentTimeMillis();
-            Log.v(TAG, "mShutterToPostViewCallbackTime = "
-                    + (mPostViewPictureCallbackTime - mShutterCallbackTime)
-                    + "ms");
         }
     }
 
@@ -867,8 +861,6 @@ public class PhotoModule
         @Override
         public void onPictureTaken(byte [] rawData, CameraProxy camera) {
             mRawPictureCallbackTime = System.currentTimeMillis();
-            Log.v(TAG, "mShutterToRawCallbackTime = "
-                    + (mRawPictureCallbackTime - mShutterCallbackTime) + "ms");
         }
     }
 
@@ -955,13 +947,9 @@ public class PhotoModule
             mReceivedSnapNum = mReceivedSnapNum + 1;
             mJpegPictureCallbackTime = System.currentTimeMillis();
             if(mSnapshotMode == CameraInfo.CAMERA_SUPPORT_MODE_ZSL) {
-                Log.v(TAG, "JpegPictureCallback : in zslmode");
                 mParameters = mCameraDevice.getParameters();
                 mBurstSnapNum = CameraUtil.getNumSnapsPerShutter(mParameters);
             }
-            Log.v(TAG, "JpegPictureCallback: Received = " + mReceivedSnapNum +
-                      "Burst count = " + mBurstSnapNum);
-
             // If postview callback has arrived, the captured image is displayed
             // in postview callback. If not, the captured image is displayed in
             // raw picture callback.
@@ -976,8 +964,6 @@ public class PhotoModule
                 mPictureDisplayedToJpegCallbackTime =
                         mJpegPictureCallbackTime - mRawPictureCallbackTime;
             }
-            Log.v(TAG, "mPictureDisplayedToJpegCallbackTime = "
-                    + mPictureDisplayedToJpegCallbackTime + "ms");
 
             mFocusManager.updateFocusUI(); // Ensure focus indicator is hidden.
 
@@ -985,8 +971,6 @@ public class PhotoModule
                       && (mCameraState != LONGSHOT)
                       && (mSnapshotMode != CameraInfo.CAMERA_SUPPORT_MODE_ZSL)
                       && (mReceivedSnapNum == mBurstSnapNum);
-
-            Log.v(TAG, "needRestartPreview=" + needRestartPreview);
 
             if (needRestartPreview) {
                 setupPreview();
@@ -1125,8 +1109,6 @@ public class PhotoModule
 
             long now = System.currentTimeMillis();
             mJpegCallbackFinishTime = now - mJpegPictureCallbackTime;
-            Log.v(TAG, "mJpegCallbackFinishTime = "
-                    + mJpegCallbackFinishTime + "ms");
 
             if (mReceivedSnapNum == mBurstSnapNum)
                 mJpegPictureCallbackTime = 0;
@@ -1175,7 +1157,6 @@ public class PhotoModule
         }
 
         public void onStopTrackingTouch(SeekBar bar) {
-            Log.v(TAG, "Set onStopTrackingTouch mskinToneValue = " + mskinToneValue);
             Editor editor = mPreferences.edit();
             editor.putString(CameraSettings.KEY_SKIN_TONE_ENHANCEMENT_FACTOR,
                              Integer.toString(mskinToneValue));
@@ -1190,7 +1171,6 @@ public class PhotoModule
             if (mPaused) return;
 
             mAutoFocusTime = System.currentTimeMillis() - mFocusStartTime;
-            Log.v(TAG, "mAutoFocusTime = " + mAutoFocusTime + "ms");
             if (mCameraState != PhotoController.LONGSHOT) setCameraState(IDLE);
             mFocusManager.onAutoFocus(focused, mUI.isShutterPressed());
         }
@@ -1428,7 +1408,6 @@ public class PhotoModule
         int oldOrientation = mOrientation;
         mOrientation = CameraUtil.roundOrientation(orientation, mOrientation);
         if (oldOrientation != mOrientation) {
-            Log.v(TAG, "onOrientationChanged, update parameters");
             if (mParameters != null && mCameraDevice != null) {
                 onSharedPreferenceChanged();
             }
@@ -1607,7 +1586,6 @@ public class PhotoModule
                     + mActivity.getStorageSpaceBytes());
             return;
         }
-        Log.v(TAG, "onShutterButtonClick: mCameraState=" + mCameraState);
 
         if (mSceneMode == CameraUtil.SCENE_MODE_HDR) {
             mUI.hideSwitcher();
@@ -1681,7 +1659,6 @@ public class PhotoModule
     private boolean prepareCamera() {
         // We need to check whether the activity is paused before long
         // operations to ensure that onPause() can be done ASAP.
-        Log.v(TAG, "Open camera device.");
         mCameraDevice = CameraUtil.openCamera(
                 mActivity, mCameraId, mHandler,
                 mActivity.getCameraOpenErrorCallback());
@@ -1710,7 +1687,6 @@ public class PhotoModule
         String action = mActivity.getIntent().getAction();
         if (MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA.equals(action)
                 || MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA_SECURE.equals(action)) {
-            Log.v(TAG, "On resume, from lock screen.");
             // Note: onPauseAfterSuper() will delete this runnable, so we will
             // at most have 1 copy queued up.
             mHandler.postDelayed(new Runnable() {
@@ -1719,13 +1695,11 @@ public class PhotoModule
                 }
             }, ON_RESUME_TASKS_DELAY_MSEC);
         } else {
-            Log.v(TAG, "On resume.");
             onResumeTasks();
         }
     }
 
     private void onResumeTasks() {
-        Log.v(TAG, "Executing onResumeTasks.");
         if (mOpenCameraFail || mCameraDisabled) return;
 
         mJpegPictureCallbackTime = 0;
@@ -1738,7 +1712,6 @@ public class PhotoModule
 
         if (mSkinToneSeekBar != true)
         {
-            Log.v(TAG, "Send tone bar: mSkinToneSeekBar = " + mSkinToneSeekBar);
             mHandler.sendEmptyMessage(SET_SKIN_TONE_FACTOR);
         }
         // If first time initialization is not finished, put it in the
@@ -1786,7 +1759,6 @@ public class PhotoModule
 
     @Override
     public void onPauseAfterSuper() {
-        Log.v(TAG, "On pause.");
         mUI.showPreviewCover();
 
         // Reset the focus first. Camera CTS does not guarantee that
@@ -1847,7 +1819,6 @@ public class PhotoModule
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        Log.v(TAG, "onConfigurationChanged");
         setDisplayOrientation();
         resizeForPreviewAspectRatio();
     }
@@ -2042,7 +2013,6 @@ public class PhotoModule
     }
 
     private void closeCamera() {
-        Log.v(TAG, "Close camera device.");
         if (mCameraDevice != null) {
             mCameraDevice.setZoomChangeListener(null);
             mCameraDevice.setFaceDetectionCallback(null, null);
@@ -2157,7 +2127,6 @@ public class PhotoModule
         // Let UI set its expected aspect ratio
         mCameraDevice.setPreviewTexture(st);
 
-        Log.v(TAG, "startPreview");
         mCameraDevice.startPreview();
         mFocusManager.onPreviewStarted();
         onPreviewStarted();
@@ -2174,7 +2143,6 @@ public class PhotoModule
     @Override
     public void stopPreview() {
         if (mCameraDevice != null && mCameraState != PREVIEW_STOPPED) {
-            Log.v(TAG, "stopPreview");
             mCameraDevice.stopPreview();
         }
         setCameraState(PREVIEW_STOPPED);
@@ -2268,7 +2236,6 @@ public class PhotoModule
         String colorEffect = mPreferences.getString(
                 CameraSettings.KEY_CAMERA_COLOR_EFFECT,
                 mActivity.getString(R.string.pref_coloreffect_default));
-        Log.v(TAG, "Color effect value =" + colorEffect);
         if (CameraUtil.isSupported(colorEffect, mParameters.getSupportedColorEffects())) {
             mParameters.setColorEffect(colorEffect);
         }
@@ -2279,7 +2246,6 @@ public class PhotoModule
                     CameraSettings.KEY_SATURATION,
                     mActivity.getString(R.string.pref_camera_saturation_default));
             int saturation = Integer.parseInt(saturationStr);
-            Log.v(TAG, "Saturation value =" + saturation);
             if((0 <= saturation) && (saturation <= mParameters.getMaxSaturation())){
                 mParameters.setSaturation(saturation);
             }
@@ -2291,7 +2257,6 @@ public class PhotoModule
                     CameraSettings.KEY_CONTRAST,
                     mActivity.getString(R.string.pref_camera_contrast_default));
             int contrast = Integer.parseInt(contrastStr);
-            Log.v(TAG, "Contrast value =" + contrast);
             if ((0 <= contrast) && (contrast <= mParameters.getMaxContrast())) {
                 mParameters.setContrast(contrast);
             }
@@ -2304,7 +2269,6 @@ public class PhotoModule
                     mActivity.getString(R.string.pref_camera_sharpness_default));
             int sharpness = Integer.parseInt(sharpnessStr) *
                     (mParameters.getMaxSharpness() / MAX_SHARPNESS_LEVEL);
-            Log.v(TAG, "Sharpness value =" + sharpness);
             if ((0 <= sharpness) && (sharpness <= mParameters.getMaxSharpness())) {
                 mParameters.setSharpness(sharpness);
             }
@@ -2313,7 +2277,6 @@ public class PhotoModule
         String faceRC = mPreferences.getString(
                 CameraSettings.KEY_FACE_RECOGNITION,
                 mActivity.getString(R.string.pref_camera_facerc_default));
-        Log.v(TAG, "Face Recognition value = " + faceRC);
         if (CameraUtil.isSupported(faceRC,
                 CameraSettings.getSupportedFaceRecognitionModes(mParameters))) {
             mParameters.set(CameraSettings.KEY_QC_FACE_RECOGNITION, faceRC);
@@ -2322,7 +2285,6 @@ public class PhotoModule
         String aeBracketing = mPreferences.getString(
                 CameraSettings.KEY_AE_BRACKET_HDR,
                 mActivity.getString(R.string.pref_camera_ae_bracket_hdr_default));
-        Log.v(TAG, "AE Bracketing value =" + aeBracketing);
         if (CameraUtil.isSupported(aeBracketing,
                 CameraSettings.getSupportedAEBracketingModes(mParameters))) {
             mParameters.set(CameraSettings.KEY_QC_AE_BRACKETING, aeBracketing);
@@ -2331,7 +2293,6 @@ public class PhotoModule
         String autoExposure = mPreferences.getString(
                 CameraSettings.KEY_AUTOEXPOSURE,
                 mActivity.getString(R.string.pref_camera_autoexposure_default));
-        Log.v(TAG, "autoExposure value =" + autoExposure);
         if (CameraUtil.isSupported(autoExposure, mParameters.getSupportedAutoexposure())) {
             mParameters.setAutoExposure(autoExposure);
         }
@@ -2340,7 +2301,6 @@ public class PhotoModule
         String antiBanding = mPreferences.getString(
                  CameraSettings.KEY_ANTIBANDING,
                  mActivity.getString(R.string.pref_camera_antibanding_default));
-        Log.v(TAG, "antiBanding value =" + antiBanding);
         if (CameraUtil.isSupported(antiBanding, mParameters.getSupportedAntibanding())) {
             mParameters.setAntibanding(antiBanding);
         }
@@ -2392,7 +2352,6 @@ public class PhotoModule
             Parameters.SCENE_MODE_PORTRAIT.equals(mSceneMode)) &&
             (Parameters.EFFECT_NONE.equals(colorEffect))) {
              //Set Skin Tone Correction factor
-             Log.v(TAG, "set tone bar: mSceneMode = " + mSceneMode);
              if(mSeekBarInitialized == true)
                  mHandler.sendEmptyMessage(SET_SKIN_TONE_FACTOR);
         }
@@ -2527,15 +2486,12 @@ public class PhotoModule
             CameraSettings.initialCameraPictureSize(mActivity, mParameters);
         } else {
             Size old_size = mParameters.getPictureSize();
-            Log.v(TAG, "old picture_size = " + old_size.width + " x " + old_size.height);
             List<Size> supported = mParameters.getSupportedPictureSizes();
             CameraSettings.setCameraPictureSize(
                     pictureSize, supported, mParameters);
             Size size = mParameters.getPictureSize();
-            Log.v(TAG, "new picture_size = " + size.width + " x " + size.height);
             if (old_size != null && size != null) {
                 if(!size.equals(old_size) && mCameraState != PREVIEW_STOPPED) {
-                    Log.v(TAG, "Picture Size changed. Restart Preview");
                     mRestartPreview = true;
                 }
             }
@@ -2560,7 +2516,6 @@ public class PhotoModule
                 mCameraDevice.setParameters(mParameters);
             }
             mParameters = mCameraDevice.getParameters();
-            Log.v(TAG, "Preview Size changed. Restart Preview");
             mRestartPreview = true;
         }
 
@@ -2568,8 +2523,6 @@ public class PhotoModule
             mUI.updatePreviewAspectRatio((float) optimalSize.width
                     / (float) optimalSize.height, false);
         }
-        Log.v(TAG, "Preview size is " + optimalSize.width + "x" + optimalSize.height);
-
         // Since changing scene mode may change supported values, set scene mode
         // first. HDR is a scene mode. To promote it in UI, it is stored in a
         // separate preference.
@@ -2728,7 +2681,6 @@ public class PhotoModule
         } else if (isCameraIdle()) {
             setCameraParameters(mUpdateSet);
              if(mRestartPreview && mCameraState != PREVIEW_STOPPED) {
-                Log.v(TAG, "Restarting Preview...");
                 stopPreview();
                 resizeForPreviewAspectRatio();
                 startPreview();
@@ -2793,7 +2745,6 @@ public class PhotoModule
         }
         resizeForPreviewAspectRatio();
         if (mSeekBarInitialized == true){
-            Log.v(TAG, "onSharedPreferenceChanged Skin tone bar: change");
             // skin tone is enabled only for party and portrait BSM
             // when color effects are not enabled
             String colorEffect = mPreferences.getString(
@@ -2802,7 +2753,6 @@ public class PhotoModule
             if((Parameters.SCENE_MODE_PARTY.equals(mSceneMode) ||
                 Parameters.SCENE_MODE_PORTRAIT.equals(mSceneMode)) &&
                 (Parameters.EFFECT_NONE.equals(colorEffect))) {
-                Log.v(TAG, "Party/Portrait + No effect, SkinToneBar enabled");
             } else {
                 disableSkinToneSeekBar();
             }
@@ -2815,7 +2765,6 @@ public class PhotoModule
 
         mPendingSwitchCameraId = cameraId;
 
-        Log.v(TAG, "Start to switch camera. cameraId=" + cameraId);
         // We need to keep a preview frame for the animation before
         // releasing the camera. This will trigger onPreviewTextureCopied.
         //TODO: Need to animate the camera switch
@@ -2981,7 +2930,6 @@ public class PhotoModule
                     skinToneValue = Integer.parseInt(factor);
                 }
 
-                Log.v(TAG, "Skin tone bar: enable = " + mskinToneValue);
                 enableSkinToneSeekBar();
                 //As a wrokaround set progress again to show the actually progress on screen.
                 if (skinToneValue != 0) {
@@ -2989,11 +2937,9 @@ public class PhotoModule
                     skinToneSeekBar.setProgress(progress);
                 }
             } else {
-                Log.v(TAG, "Skin tone bar: disable");
                 disableSkinToneSeekBar();
             }
         } else {
-            Log.v(TAG, "Skin tone bar: Not supported");
             skinToneSeekBar.setVisibility(View.INVISIBLE);
         }
     }

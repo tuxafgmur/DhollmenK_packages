@@ -114,7 +114,6 @@ int Init(int mID, int nmax)
 
         t1 = now_ms();
         time_c = t1 - t0;
-        LOGV("Init[%d]: %g ms [%d frames]",mID,time_c,nmax);
         return 1;
 }
 
@@ -198,7 +197,6 @@ int Finalize(int mID)
     int ret = mosaic[mID]->createMosaic(gProgress[mID], gCancelComputation[mID]);
     t1 = now_ms();
     time_c = t1 - t0;
-    LOGV("CreateMosaic: %g ms",time_c);
 
     // Get back the result
     resultYVU = mosaic[mID]->getMosaic(mosaicWidth, mosaicHeight);
@@ -520,7 +518,6 @@ JNIEXPORT jint JNICALL Java_com_android_camera_Mosaic_createMosaic(
 
     if(high_res)
     {
-        LOGV("createMosaic() - High-Res Mode");
         double  t0, t1, time_c;
 
         gProgress[HR] = 0.0;
@@ -546,7 +543,6 @@ JNIEXPORT jint JNICALL Java_com_android_camera_Mosaic_createMosaic(
 
             t1 = now_ms();
             time_c = t1 - t0;
-            LOGV("AlignAll - %d frames [HR]: %g ms", frame_number_HR, time_c);
 
             ret = Finalize(HR);
 
@@ -557,7 +553,6 @@ JNIEXPORT jint JNICALL Java_com_android_camera_Mosaic_createMosaic(
     }
     else
     {
-        LOGV("createMosaic() - Low-Res Mode");
         gProgress[LR] = TIME_PERCENT_ALIGN;
 
         ret = Finalize(LR);
@@ -580,8 +575,6 @@ JNIEXPORT jintArray JNICALL Java_com_android_camera_Mosaic_getFinalMosaic(
     resultBGR = ImageUtils::allocateImage(mosaicWidth, mosaicHeight,
             ImageUtils::IMAGE_TYPE_NUM_CHANNELS);
     ImageUtils::yvu2bgr(resultBGR, resultYVU, mosaicWidth, mosaicHeight);
-
-    LOGV("MosBytes: %d, W = %d, H = %d", imageSize, width, height);
 
     int* image = new int[imageSize];
     int* dims = new int[2];
@@ -636,8 +629,6 @@ JNIEXPORT jbyteArray JNICALL Java_com_android_camera_Mosaic_getFinalMosaicNV21(
             V[j*mosaicWidth+i+1] = U[(2*j)*mosaicWidth+i];        // U
         }
     }
-
-    LOGV("MosBytes: %d, W = %d, H = %d", imageSize, width, height);
 
     unsigned char* dims = new unsigned char[8];
 

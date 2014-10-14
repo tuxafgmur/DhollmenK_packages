@@ -28,7 +28,7 @@ import android.util.Log;
  */
 public class LocationManager implements android.location.GpsStatus.Listener {
     private static final String TAG = "LocationManager";
-    private static final short LOCATION_UPDATE_INTERVAL = 1000;
+    private static final short LOCATION_UPDATE_INTERVAL = 2000;
 
     private Context mContext;
     private Listener mListener;
@@ -63,7 +63,6 @@ public class LocationManager implements android.location.GpsStatus.Listener {
             Location l = mLocationListeners[i].current();
             if (l != null) return l;
         }
-        Log.d(TAG, "No location received yet.");
         return null;
     }
 
@@ -93,9 +92,9 @@ public class LocationManager implements android.location.GpsStatus.Listener {
                         0F,
                         mLocationListeners[1]);
             } catch (SecurityException ex) {
-                Log.i(TAG, "fail to request location update, ignore", ex);
+
             } catch (IllegalArgumentException ex) {
-                Log.d(TAG, "provider does not exist " + ex.getMessage());
+
             }
             try {
                 mGpsEnabled = mLocationManager.isProviderEnabled(
@@ -107,11 +106,10 @@ public class LocationManager implements android.location.GpsStatus.Listener {
                         0F,
                         mLocationListeners[0]);
             } catch (SecurityException ex) {
-                Log.i(TAG, "fail to request location update, ignore", ex);
+
             } catch (IllegalArgumentException ex) {
                 Log.d(TAG, "provider does not exist " + ex.getMessage());
             }
-            Log.d(TAG, "startReceivingLocationUpdates");
         }
     }
 
@@ -121,10 +119,8 @@ public class LocationManager implements android.location.GpsStatus.Listener {
                 try {
                     mLocationManager.removeUpdates(mLocationListeners[i]);
                 } catch (Exception ex) {
-                    Log.i(TAG, "fail to remove location listners, ignore", ex);
                 }
             }
-            Log.d(TAG, "stopReceivingLocationUpdates");
         }
 
         if (mListener != null) {
@@ -178,9 +174,6 @@ public class LocationManager implements android.location.GpsStatus.Listener {
                     && newLocation.getLongitude() == 0.0) {
                 // Hack to filter out 0.0,0.0 locations
                 return;
-            }
-            if (!mValid) {
-                Log.d(TAG, "Got first location.");
             }
             if (android.location.LocationManager.GPS_PROVIDER.equals(mProvider)) {
                 mLastLocationMillis = SystemClock.elapsedRealtime();

@@ -97,10 +97,6 @@ int Mosaic::initialize(int blendingType, int stripType, int width, int height, i
     owned_frames = new ImageType[max_frames];
     owned_size = 0;
 
-    LOGV("Initialize %d %d", width, height);
-    LOGV("Frame width %d,%d", width, height);
-    LOGV("Max num frames %d", max_frames);
-
     aligner = new Align();
     aligner->initialize(width, height,quarter_res,thresh_still);
 
@@ -159,8 +155,6 @@ int Mosaic::addFrame(ImageType imageYVU)
 
         if (frames_size >= max_frames)
         {
-            LOGV("WARNING: More frames than preallocated, ignoring."
-                 "Increase maximum number of frames (-f <max_frames>) to avoid this");
             return MOSAIC_RET_ERROR;
         }
 

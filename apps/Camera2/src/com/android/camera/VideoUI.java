@@ -829,7 +829,6 @@ public class VideoUI implements PieRenderer.PieListener,
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
         mSurfaceTexture = null;
         mController.onPreviewUIDestroyed();
-        Log.d(TAG, "surfaceTexture is destroyed");
         return true;
     }
 
@@ -848,17 +847,14 @@ public class VideoUI implements PieRenderer.PieListener,
     // SurfaceHolder callbacks
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        Log.v(TAG, "Surface changed. width=" + width + ". height=" + height);
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        Log.v(TAG, "Surface created");
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Log.v(TAG, "Surface destroyed");
         mController.stopPreview();
     }
 }

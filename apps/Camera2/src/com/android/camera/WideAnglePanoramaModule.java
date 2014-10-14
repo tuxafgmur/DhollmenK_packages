@@ -417,8 +417,6 @@ public class WideAnglePanoramaModule
                 findBestPreviewSize(supportedSizes, false, false);
             }
         }
-        Log.d(TAG, "camera preview h = "
-                    + mCameraPreviewHeight + " , w = " + mCameraPreviewWidth);
         parameters.setPreviewSize(mCameraPreviewWidth, mCameraPreviewHeight);
 
         List<int[]> frameRates = parameters.getSupportedPreviewFpsRange();
@@ -426,7 +424,6 @@ public class WideAnglePanoramaModule
         int minFps = (frameRates.get(last))[Parameters.PREVIEW_FPS_MIN_INDEX];
         int maxFps = (frameRates.get(last))[Parameters.PREVIEW_FPS_MAX_INDEX];
         parameters.setPreviewFpsRange(minFps, maxFps);
-        Log.d(TAG, "preview fps: " + minFps + ", " + maxFps);
 
         List<String> supportedFocusModes = parameters.getSupportedFocusModes();
         if (supportedFocusModes.indexOf(mTargetFocusMode) >= 0) {
@@ -498,7 +495,6 @@ public class WideAnglePanoramaModule
      */
     @Override
     public void onPreviewUILayoutChange(int l, int t, int r, int b) {
-        Log.d(TAG, "layout change: " + (r - l) + "/" + (b - t));
         boolean capturePending = false;
         if (mCaptureState == CAPTURE_STATE_MOSAIC){
             capturePending = true;
@@ -972,7 +968,6 @@ public class WideAnglePanoramaModule
                 + ((imageData[len + 2] & 0xFF) << 8) + (imageData[len + 3] & 0xFF);
         int height = (imageData[len + 4] << 24) + ((imageData[len + 5] & 0xFF) << 16)
                 + ((imageData[len + 6] & 0xFF) << 8) + (imageData[len + 7] & 0xFF);
-        Log.d(TAG, "ImLength = " + (len) + ", W = " + width + ", H = " + height);
 
         if (width <= 0 || height <= 0) {
             // TODO: pop up an error message indicating that the final result is not generated.

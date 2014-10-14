@@ -372,7 +372,6 @@ public class VideoModule implements CameraModule,
                 }
 
                 default:
-                    Log.v(TAG, "Unhandled message: " + msg.what);
                     break;
             }
         }
@@ -503,7 +502,6 @@ public class VideoModule implements CameraModule,
             CameraUtil.setGpsParameters(mParameters, loc);
             mCameraDevice.setParameters(mParameters);
 
-            Log.v(TAG, "Video snapshot start");
             mCameraDevice.takePicture(mHandler,
                     null, null, null, new JpegPictureCallback(loc));
             showVideoSnapshotUI(true);
@@ -559,7 +557,6 @@ public class VideoModule implements CameraModule,
 
         if (mOrientation != newOrientation) {
             mOrientation = newOrientation;
-            Log.v(TAG, "onOrientationChanged, update parameters");
             if ((mParameters != null) && (true == mPreviewing) && !mMediaRecorderRecording){
                 setCameraParameters();
             }
@@ -707,14 +704,10 @@ public class VideoModule implements CameraModule,
                mActivity.getString(R.string.pref_camera_videoencoder_default));
         mVideoEncoder = VIDEO_ENCODER_TABLE.get(videoEncoder);
 
-        Log.v(TAG, "Video Encoder selected = " +mVideoEncoder);
-
         String audioEncoder = mPreferences.getString(
                CameraSettings.KEY_AUDIO_ENCODER,
                mActivity.getString(R.string.pref_camera_audioencoder_default));
         mAudioEncoder = AUDIO_ENCODER_TABLE.get(audioEncoder);
-
-        Log.v(TAG, "Audio Encoder selected = " +mAudioEncoder);
 
         String minutesStr = mPreferences.getString(
               CameraSettings.KEY_VIDEO_DURATION,
@@ -821,8 +814,6 @@ public class VideoModule implements CameraModule,
             mDesiredPreviewHeight = optimalSize.height;
         }
         mUI.setPreviewSize(mDesiredPreviewWidth, mDesiredPreviewHeight);
-        Log.v(TAG, "mDesiredPreviewWidth=" + mDesiredPreviewWidth +
-                ". mDesiredPreviewHeight=" + mDesiredPreviewHeight);
     }
 
     void setPreviewFrameLayoutCameraOrientation(){
@@ -941,7 +932,6 @@ public class VideoModule implements CameraModule,
     }
 
     private void startPreview() {
-        Log.v(TAG, "startPreview");
         mStartPrevPending = true;
 
         SurfaceTexture surfaceTexture = mUI.getSurfaceTexture();
@@ -990,9 +980,7 @@ public class VideoModule implements CameraModule,
     }
 
     private void closeCamera() {
-        Log.v(TAG, "closeCamera");
         if (mCameraDevice == null) {
-            Log.d(TAG, "already stopped.");
             return;
         }
         mCameraDevice.setZoomChangeListener(null);
@@ -1179,7 +1167,6 @@ public class VideoModule implements CameraModule,
         if (mVideoFilename != null) {
             File f = new File(mVideoFilename);
             if (f.length() == 0 && f.delete()) {
-                Log.v(TAG, "Empty video file deleted: " + mVideoFilename);
                 mVideoFilename = null;
             }
         }
@@ -1231,7 +1218,6 @@ public class VideoModule implements CameraModule,
 
     // Prepares media recorder.
     private void initializeRecorder() {
-        Log.v(TAG, "initializeRecorder");
         // If the mCameraDevice is null, then this activity is going to finish
         if (mCameraDevice == null) return;
 
@@ -1387,7 +1373,6 @@ public class VideoModule implements CameraModule,
     }
 
     private void releaseMediaRecorder() {
-        Log.v(TAG, "Releasing media recorder.");
         if (mMediaRecorder != null) {
             cleanupEmptyFile();
             mMediaRecorder.reset();
@@ -1421,7 +1406,6 @@ public class VideoModule implements CameraModule,
             mCurrentVideoValues.put(Video.Media.LONGITUDE, loc.getLongitude());
         }
         mVideoFilename = tmpPath;
-        Log.v(TAG, "New video filename: " + mVideoFilename);
     }
 
     private void saveVideo() {
@@ -1450,11 +1434,7 @@ public class VideoModule implements CameraModule,
     }
 
     private void deleteVideoFile(String fileName) {
-        Log.v(TAG, "Deleting video " + fileName);
         File f = new File(fileName);
-        if (!f.delete()) {
-            Log.v(TAG, "Could not delete " + fileName);
-        }
     }
 
     private PreferenceGroup filterPreferenceScreenByIntent(
@@ -1516,14 +1496,12 @@ public class VideoModule implements CameraModule,
     }
 
     private void startVideoRecording() {
-        Log.v(TAG, "startVideoRecording");
         mStartRecPending = true;
         mUI.cancelAnimations();
         mUI.setSwipingEnabled(false);
 
         mActivity.updateStorageSpaceAndHint();
         if (mActivity.getStorageSpaceBytes() <= Storage.LOW_STORAGE_THRESHOLD_BYTES) {
-            Log.v(TAG, "Storage issue, ignore the start request");
             mStartRecPending = false;
             return;
         }
@@ -1548,7 +1526,6 @@ public class VideoModule implements CameraModule,
 
         initializeRecorder();
         if (mUnsupportedResolution == true) {
-              Log.v(TAG, "Unsupported Resolution according to target");
               mStartRecPending = false;
               return;
         }
@@ -1637,7 +1614,6 @@ public class VideoModule implements CameraModule,
     }
 
     private boolean stopVideoRecording() {
-        Log.v(TAG, "stopVideoRecording");
         mStopRecPending = true;
         mUI.setSwipingEnabled(true);
         if (!isVideoCaptureIntent()) {
@@ -1654,8 +1630,6 @@ public class VideoModule implements CameraModule,
                 mMediaRecorder.stop();
                 shouldAddToMediaStoreNow = true;
                 mCurrentVideoFilename = mVideoFilename;
-                Log.v(TAG, "stopVideoRecording: Setting current video filename: "
-                        + mCurrentVideoFilename);
                 AccessibilityUtils.makeAnnouncement(mUI.getShutterButton(),
                         mActivity.getString(R.string.video_recording_stopped));
             } catch (RuntimeException e) {
@@ -1838,7 +1812,6 @@ public class VideoModule implements CameraModule,
         String colorEffect = mPreferences.getString(
             CameraSettings.KEY_VIDEO_COLOR_EFFECT,
             mActivity.getString(R.string.pref_coloreffect_default));
-        Log.v(TAG, "Color effect value =" + colorEffect);
         if (isSupported(colorEffect, mParameters.getSupportedColorEffects())) {
             mParameters.setColorEffect(colorEffect);
         }
@@ -1846,7 +1819,6 @@ public class VideoModule implements CameraModule,
         String disMode = mPreferences.getString(
                 CameraSettings.KEY_DIS,
                 mActivity.getString(R.string.pref_camera_dis_default));
-        Log.v(TAG, "DIS value =" + disMode);
         if (isSupported(disMode,
                         CameraSettings.getSupportedDISModes(mParameters))) {
             mParameters.set(CameraSettings.KEY_QC_DIS_MODE, disMode);
@@ -1858,7 +1830,6 @@ public class VideoModule implements CameraModule,
         // "adb shell setprop "debug.camera.yv12" true"
         String yv12formatset = SystemProperties.get("debug.camera.yv12");
         if(yv12formatset.equals("true")) {
-            Log.v(TAG, "preview format set to YV12");
             mParameters.setPreviewFormat (ImageFormat.YV12);
         }
 
@@ -1869,14 +1840,11 @@ public class VideoModule implements CameraModule,
         if(!("off".equals(HighFrameRate))){
             mUnsupportedHFRVideoSize = true;
             String hfrsize = videoWidth+"x"+videoHeight;
-            Log.v(TAG, "current set resolution is : "+hfrsize);
             try {
                 for(Size size :  mParameters.getSupportedHfrSizes()){
                     if(size != null) {
-                        Log.v(TAG, "supported hfr size : "+ size.width+ " "+size.height);
                         if(videoWidth <= size.width && videoHeight <= size.height) {
                             mUnsupportedHFRVideoSize = false;
-                            Log.v(TAG,"Current hfr resolution is supported");
                             break;
                         }
                     }
@@ -1884,9 +1852,6 @@ public class VideoModule implements CameraModule,
             } catch (NullPointerException e){
                 Log.e(TAG, "supported hfr sizes is null");
             }
-
-            if(mUnsupportedHFRVideoSize)
-                Log.v(TAG,"Unsupported hfr resolution");
 
             if(mVideoEncoder != MediaRecorder.VideoEncoder.H264)
                 mUnsupportedHFRVideoCodec = true;
@@ -1944,7 +1909,6 @@ public class VideoModule implements CameraModule,
         String videoHDR = mPreferences.getString(
                 CameraSettings.KEY_VIDEO_HDR,
                 mActivity.getString(R.string.pref_camera_video_hdr_default));
-        Log.v(TAG, "Video HDR Setting =" + videoHDR);
         if (isSupported(videoHDR, mParameters.getSupportedVideoHDRModes())) {
              mParameters.setVideoHDRMode(videoHDR);
         } else {
@@ -1970,7 +1934,6 @@ public class VideoModule implements CameraModule,
 
     @SuppressWarnings("deprecation")
     private void setCameraParameters() {
-        Log.d(TAG,"Preview dimension in App->"+mDesiredPreviewWidth+"X"+mDesiredPreviewHeight);
         mParameters.setPreviewSize(mDesiredPreviewWidth, mDesiredPreviewHeight);
         mParameters.set("video-size", mProfile.videoFrameWidth+"x"+mProfile.videoFrameHeight);
         int[] fpsRange = CameraUtil.getMaxPreviewFpsRange(mParameters);
@@ -2040,8 +2003,6 @@ public class VideoModule implements CameraModule,
         if (!original.equals(optimalSize)) {
             mParameters.setPictureSize(optimalSize.width, optimalSize.height);
         }
-        Log.v(TAG, "Video snapshot size is " + optimalSize.width + "x" +
-                optimalSize.height);
 
         // Set JPEG quality.
         String jpegQuality = mPreferences.getString(
@@ -2079,7 +2040,6 @@ public class VideoModule implements CameraModule,
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        Log.v(TAG, "onConfigurationChanged");
         setDisplayOrientation();
         resizeForPreviewAspectRatio();
     }
@@ -2139,7 +2099,6 @@ public class VideoModule implements CameraModule,
             return;
         }
 
-        Log.d(TAG, "Start to switch camera.");
         mCameraId = mPendingSwitchCameraId;
         mPendingSwitchCameraId = -1;
         setCameraId(mCameraId);
@@ -2260,7 +2219,6 @@ public class VideoModule implements CameraModule,
 
         @Override
         public void onPictureTaken(byte [] jpegData, CameraProxy camera) {
-            Log.v(TAG, "onPictureTaken");
             mSnapshotInProgress = false;
             showVideoSnapshotUI(false);
             storeImage(jpegData, mLocation);
@@ -2324,7 +2282,6 @@ public class VideoModule implements CameraModule,
         if (mPaused || mPendingSwitchCameraId != -1) return;
 
         mPendingSwitchCameraId = cameraId;
-        Log.d(TAG, "Start to copy texture.");
         // We need to keep a preview frame for the animation before
         // releasing the camera. This will trigger onPreviewTextureCopied.
         // TODO: ((CameraScreenNail) mActivity.mCameraScreenNail).copyTexture();

@@ -915,7 +915,6 @@ public class CameraUtil {
             boolean hasLatLon = (lat != 0.0d) || (lon != 0.0d);
 
             if (hasLatLon) {
-                Log.d(TAG, "Set gps location");
                 parameters.setGpsLatitude(lat);
                 parameters.setGpsLongitude(lon);
                 parameters.setGpsProcessingMethod(loc.getProvider().toUpperCase());
