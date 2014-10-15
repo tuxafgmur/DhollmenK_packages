@@ -978,7 +978,6 @@ public class GLES20Canvas implements GLCanvas {
             }
             b.append(m[offset + i]);
         }
-        Log.v(TAG, b.toString());
     }
 
     @Override

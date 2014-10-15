@@ -76,7 +76,6 @@ public class CachingPipeline implements PipelineInterface {
 
     public static synchronized void createRenderscriptContext(Context context) {
         if (sRS != null) {
-            Log.w(LOGTAG, "A prior RS context exists when calling setRenderScriptContext");
             destroyRenderScriptContext();
         }
         sRS = RenderScript.create(context);
@@ -179,7 +178,6 @@ public class CachingPipeline implements PipelineInterface {
             mOriginalBitmap.recycle();
         }
         mOriginalBitmap = bitmap;
-        Log.v(LOGTAG,"setOriginal, size " + bitmap.getWidth() + " x " + bitmap.getHeight());
         ImagePreset preset = MasterImage.getImage().getPreset();
         setupEnvironment(preset, false);
         updateOriginalAllocation(preset);

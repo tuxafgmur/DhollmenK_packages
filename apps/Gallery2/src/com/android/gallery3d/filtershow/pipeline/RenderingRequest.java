@@ -57,8 +57,6 @@ public class RenderingRequest {
         if (((type != PARTIAL_RENDERING && type != HIGHRES_RENDERING
                 && type != GEOMETRY_RENDERING && type != FILTERS_RENDERING) && source == null)
                 || preset == null || caller == null) {
-            Log.v(LOGTAG, "something null: source: " + source
-                    + " or preset: " + preset + " or caller: " + caller);
             return;
         }
         RenderingRequest request = new RenderingRequest();
@@ -96,8 +94,6 @@ public class RenderingRequest {
                                        ImagePreset preset,
                                        RenderingRequestCaller caller) {
         if (preset == null || caller == null) {
-            Log.v(LOGTAG, "something null, preset: "
-                    + preset + " or caller: " + caller);
             return;
         }
         RenderingRequest request = new RenderingRequest();

@@ -271,25 +271,18 @@ public class CacheProcessing {
     }
 
     private void displayFilters(Vector<FilterRepresentation> filters) {
-        Log.v(LOGTAG, "------>>> Filters received");
         for (int i = 0; i < filters.size(); i++) {
             FilterRepresentation filter = filters.elementAt(i);
             Log.v(LOGTAG, "[" + i + "] - " + filter.getName());
         }
-        Log.v(LOGTAG, "<<<------");
     }
 
     private void displaySteps(Vector<CacheStep> filters) {
-        Log.v(LOGTAG, "------>>>");
         for (int i = 0; i < filters.size(); i++) {
             CacheStep newStep = filters.elementAt(i);
             CacheStep step = mSteps.elementAt(i);
             boolean similar = step.equals(newStep);
-            Log.v(LOGTAG, "[" + i + "] - " + step.getName()
-                    + " similar rep ? " + (similar ? "YES" : "NO")
-                    + " -- bitmap: " + step.cache);
         }
-        Log.v(LOGTAG, "<<<------");
     }
 
     private void displayNbBitmapsInCache() {
@@ -300,7 +293,6 @@ public class CacheProcessing {
                 nbBitmapsCached++;
             }
         }
-        Log.v(LOGTAG, "nb bitmaps in cache: " + nbBitmapsCached + " / " + mSteps.size());
     }
 
 }

@@ -308,13 +308,10 @@ public class ImagePreset {
     }
 
     public void showFilters() {
-        Log.v(LOGTAG, "\\\\\\ showFilters -- " + mFilters.size() + " filters");
         int n = 0;
         for (FilterRepresentation representation : mFilters) {
-            Log.v(LOGTAG, " filter " + n + " : " + representation.toString());
             n++;
         }
-        Log.v(LOGTAG, "/// showFilters -- " + mFilters.size() + " filters");
     }
 
     public FilterRepresentation getLastRepresentation() {

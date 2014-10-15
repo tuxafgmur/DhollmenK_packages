@@ -381,7 +381,6 @@ public class MenuExecutor {
     private boolean execute(
             DataManager manager, JobContext jc, int cmd, Path path) {
         boolean result = true;
-        Log.v(TAG, "Execute cmd: " + cmd + " for " + path);
         long startTime = System.currentTimeMillis();
 
         switch (cmd) {
@@ -417,8 +416,6 @@ public class MenuExecutor {
             default:
                 throw new AssertionError();
         }
-        Log.v(TAG, "It takes " + (System.currentTimeMillis() - startTime) +
-                " ms to execute cmd for " + path);
         return result;
     }
 
