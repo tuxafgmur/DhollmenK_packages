@@ -61,14 +61,15 @@
     <dimen name="small_space">32dp</dimen>
     <dimen name="medium_space_top">46dp</dimen>
     <dimen name="medium_space_bottom">18dp</dimen>
+    <dimen name="medium_space_center">9dp</dimen>
     <dimen name="main_clock_padding">40dp</dimen>
 
     <dimen name="label_margin_big">8dp</dimen>
     <dimen name="label_margin_small">4dp</dimen>
 
-    <dimen name="dialpad_font_size">56sp</dimen>
+    <dimen name="dialpad_font_size">80sp</dimen>
     <dimen name="dialpad_digit_padding">34dip</dimen>
-    <dimen name="timer_setup_font_size">86sp</dimen>
+    <dimen name="timer_setup_font_size">108sp</dimen>
     <dimen name="timer_setup_button_size">36sp</dimen>
     <dimen name="timer_setup_delete_start_margin">42sp</dimen>
     <dimen name="timer_setup_label_size">28sp</dimen>

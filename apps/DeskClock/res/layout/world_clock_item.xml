@@ -55,13 +55,21 @@
                 android:hand_minute="@drawable/clock_analog_minute_mipmap"
                 android:layout_marginBottom="@dimen/bottom_text_spacing_analog_small"/>
         </FrameLayout>
+
+        <View
+            android:id="@+id/separator"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="#7fffffff" />
+
         <com.android.deskclock.widget.EllipsizeLayout
             android:id="@+id/city_name_layout"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginLeft="@dimen/label_margin_small"
             android:layout_marginStart="@dimen/label_margin_small"
-            android:paddingBottom="@dimen/medium_space_bottom"
+	    android:paddingTop="@dimen/medium_space_center"
+            android:paddingBottom="@dimen/medium_space_center"
             android:gravity="center"
             >
             <include layout="@layout/world_clock_label"/>
@@ -71,6 +79,6 @@
             android:id="@+id/separator"
             android:layout_height="1dp"
             android:layout_width="match_parent"
-            android:background="#28ffffff" />
+            android:background="#7fffffff" />
     </LinearLayout>
 </FrameLayout>

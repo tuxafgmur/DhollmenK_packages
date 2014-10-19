@@ -25,23 +25,26 @@
             android:layout_width="0dip"
             android:layout_weight="1"
             style="@style/dialpad"
-            android:background="@drawable/item_background"
-            android:layout_height="match_parent"/>
+            android:background="@drawable/item_dial_background"
+	    android:layout_marginRight="@dimen/dialpad_digit_padding"
+            android:layout_height="wrap_content"/>
 
     <Button
             android:id="@+id/key_middle"
             android:layout_width="0dip"
             android:layout_weight="1"
             style="@style/dialpad"
-            android:background="@drawable/item_background"
-            android:layout_height="match_parent"/>
+            android:background="@drawable/item_dial_background"
+	    android:layout_marginRight="@dimen/dialpad_digit_padding"
+            android:layout_height="wrap_content"/>
 
     <Button
             android:id="@+id/key_right"
             android:layout_width="0dip"
             android:layout_weight="1"
             style="@style/dialpad"
-            android:background="@drawable/item_background"
-            android:layout_height="match_parent"/>
+            android:background="@drawable/item_dial_background"
+	    android:layout_marginRight="@dimen/dialpad_digit_padding"
+            android:layout_height="wrap_content"/>
 
 </LinearLayout>

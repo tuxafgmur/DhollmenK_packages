@@ -27,6 +27,3 @@ LOCAL_AAPT_FLAGS := --auto-add-overlay
 LOCAL_AAPT_FLAGS += --extra-packages com.android.datetimepicker
 
 include $(BUILD_PACKAGE)
-
-# Use the following include to make our test apk.
-include $(call all-makefiles-under,$(LOCAL_PATH))
