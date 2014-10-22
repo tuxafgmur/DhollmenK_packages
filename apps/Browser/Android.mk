@@ -23,6 +23,3 @@ LOCAL_EMMA_COVERAGE_FILTER := *,-com.android.common.*
 LOCAL_REQUIRED_MODULES := SoundRecorder
 
 include $(BUILD_PACKAGE)
-
-# additionally, build tests in sub-folders in a separate .apk
-include $(call all-makefiles-under,$(LOCAL_PATH))

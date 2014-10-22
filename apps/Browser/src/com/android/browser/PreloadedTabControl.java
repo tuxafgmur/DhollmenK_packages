@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  * Class to manage the controlling of preloaded tab.
  */
 public class PreloadedTabControl {
-    private static final boolean LOGD_ENABLED = com.android.browser.Browser.LOGD_ENABLED;
+    private static final boolean LOGD_ENABLED = false;
     private static final String LOGTAG = "PreloadedTabControl";
 
     final Tab mTab;

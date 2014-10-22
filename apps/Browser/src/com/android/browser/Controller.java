@@ -1274,8 +1274,6 @@ public class Controller
 
         int type = result.getType();
         if (type == WebView.HitTestResult.UNKNOWN_TYPE) {
-            Log.w(LOGTAG,
-                    "We should not show context menu when nothing is touched");
             return;
         }
         if (type == WebView.HitTestResult.EDIT_TEXT_TYPE) {

@@ -794,7 +794,7 @@
     <string name="dump_nav" translatable="false">Dump navigation cache</string>
 
     <!-- The default homepage. -->
-    <string name="homepage_base" translatable="false">http://www.slimroms.net</string>
+    <string name="homepage_base" translatable="false">http://www.google.com</string>
 
     <!-- Bookmarks -->
     <string-array name="bookmarks" translatable="false">
@@ -826,6 +826,8 @@
         <item>http://www.weather.com/</item>
         <item>BBC</item>
         <item>http://www.bbc.co.uk/</item>
+        <item>XDA</item>
+        <item>http://forum.xda-developers.com/</item>
     </string-array>
 
     <!-- Bookmark name for Picasa website -->

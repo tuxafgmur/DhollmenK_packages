@@ -29,7 +29,7 @@ import java.util.Map;
 public class Preloader {
 
     private final static String LOGTAG = "browser.preloader";
-    private final static boolean LOGD_ENABLED = com.android.browser.Browser.LOGD_ENABLED;
+    private final static boolean LOGD_ENABLED = false;
 
     private static final int PRERENDER_TIMEOUT_MILLIS = 30 * 1000; // 30s
 

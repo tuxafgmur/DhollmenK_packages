@@ -127,7 +127,6 @@ public class OpenSearchSearchEngine implements SearchEngine {
             return null;
         }
         if (!isNetworkConnected(context)) {
-            Log.i(TAG, "Not connected to network.");
             return null;
         }
 
@@ -178,7 +177,6 @@ public class OpenSearchSearchEngine implements SearchEngine {
             if (response.getStatusLine().getStatusCode() == 200) {
                 return EntityUtils.toString(response.getEntity());
             } else {
-                Log.i(TAG, "Suggestion request failed");
                 return null;
             }
         } catch (IOException e) {

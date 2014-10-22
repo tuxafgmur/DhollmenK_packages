@@ -34,7 +34,7 @@ import java.util.Map;
 public class PreloadRequestReceiver extends BroadcastReceiver {
 
     private final static String LOGTAG = "browser.preloader";
-    private final static boolean LOGD_ENABLED = com.android.browser.Browser.LOGD_ENABLED;
+    private final static boolean LOGD_ENABLED = false;
 
     private static final String ACTION_PRELOAD = "android.intent.action.PRELOAD";
     static final String EXTRA_PRELOAD_ID = "preload_id";

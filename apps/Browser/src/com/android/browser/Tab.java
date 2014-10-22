@@ -90,7 +90,7 @@ class Tab implements PictureListener {
 
     // Log Tag
     private static final String LOGTAG = "Tab";
-    private static final boolean LOGD_ENABLED = com.android.browser.Browser.LOGD_ENABLED;
+    private static final boolean LOGD_ENABLED = false;
     // Special case the logtag for messages for the Console to make it easier to
     // filter them and match the logtag used for these messages in older versions
     // of the browser.
@@ -460,8 +460,6 @@ class Tab implements PictureListener {
                 return;
             }
             if (mDontResend != null) {
-                Log.w(LOGTAG, "onFormResubmission should not be called again "
-                        + "while dialog is still up");
                 dontResend.sendToTarget();
                 return;
             }
@@ -918,25 +916,20 @@ class Tab implements PictureListener {
             // Don't log console messages in private browsing mode
             if (isPrivateBrowsingEnabled()) return true;
 
-            String message = "Console: " + consoleMessage.message() + " "
-                    + consoleMessage.sourceId() +  ":"
-                    + consoleMessage.lineNumber();
+	//  String message = "Console: " + consoleMessage.message() + " "
+	// 		     + consoleMessage.sourceId() +  ":"
+	//                   + consoleMessage.lineNumber();
 
             switch (consoleMessage.messageLevel()) {
                 case TIP:
-                    Log.v(CONSOLE_LOGTAG, message);
                     break;
                 case LOG:
-                    Log.i(CONSOLE_LOGTAG, message);
                     break;
                 case WARNING:
-                    Log.w(CONSOLE_LOGTAG, message);
                     break;
                 case ERROR:
-                    Log.e(CONSOLE_LOGTAG, message);
                     break;
                 case DEBUG:
-                    Log.d(CONSOLE_LOGTAG, message);
                     break;
             }
 
@@ -1077,9 +1070,6 @@ class Tab implements PictureListener {
         }
         @Override
         public void onCloseWindow(WebView window) {
-            if (window != mSubView) {
-                Log.e(LOGTAG, "Can't close the window");
-            }
             mWebViewController.dismissSubWindow(Tab.this);
         }
     }
@@ -1247,7 +1237,6 @@ class Tab implements PictureListener {
                 WebBackForwardList restoredState
                         = mMainView.restoreState(mSavedState);
                 if (restoredState == null || restoredState.getSize() == 0) {
-                    Log.w(LOGTAG, "Failed to restore WebView state!");
                     loadUrl(mCurrentState.mOriginalUrl, null);
                 }
                 mSavedState = null;
@@ -1660,10 +1649,6 @@ class Tab implements PictureListener {
 
         mSavedState = new Bundle();
         WebBackForwardList savedList = mMainView.saveState(mSavedState);
-        if (savedList == null || savedList.getSize() == 0) {
-            Log.w(LOGTAG, "Failed to save back/forward list for "
-                    + mCurrentState.mUrl);
-        }
 
         mSavedState.putLong(ID, mId);
         mSavedState.putString(CURRURL, mCurrentState.mUrl);

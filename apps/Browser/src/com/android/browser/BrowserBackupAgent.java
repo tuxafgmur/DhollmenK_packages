@@ -141,9 +141,7 @@ public class BrowserBackupAgent extends BackupAgent {
                             }
                             cursor.close();
                         }
-                        Log.i(TAG, "Restored " + nUnique + " of " + N + " bookmarks");
                     } catch (IOException ioe) {
-                        Log.w(TAG, "Bad backup data; not restoring");
                         crc = -1;
                     } finally {
                         if (in != null) {
