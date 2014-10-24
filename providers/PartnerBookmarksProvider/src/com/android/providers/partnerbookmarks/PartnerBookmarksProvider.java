@@ -215,23 +215,19 @@ public class PartnerBookmarksProvider extends ContentProvider {
                 final CharSequence[] bookmarks = res.getTextArray(R.array.bookmarks);
                 if (bookmarks.length >= 1) {
                     if (bookmarksFolderName.length() < 1) {
-                        Log.i(TAG, "bookmarks_folder_name was not specified; bailing out");
                         return false;
                     }
                     if (!addRootFolder(db,
                             FIXED_ID_PARTNER_BOOKMARKS_ROOT, bookmarksFolderName.toString())) {
-                        Log.i(TAG, "failed to insert root folder; bailing out");
                         return false;
                     }
                     if (!addDefaultBookmarks(db,
                             FIXED_ID_PARTNER_BOOKMARKS_ROOT, FIXED_ID_PARTNER_BOOKMARKS_ROOT + 1)) {
-                        Log.i(TAG, "failed to insert bookmarks; bailing out");
                         return false;
                     }
                 }
                 setActiveConfiguration(res.getConfiguration());
             } catch (android.content.res.Resources.NotFoundException e) {
-                Log.i(TAG, "failed to fetch resources; bailing out");
                 return false;
             }
             return true;
@@ -284,7 +280,6 @@ public class PartnerBookmarksProvider extends ContentProvider {
                         try {
                             favicon = readRaw(res, faviconId);
                         } catch (IOException e) {
-                            Log.i(TAG, "Failed to read favicon for " + bookmarkTitle, e);
                         }
                     }
                     byte[] touchicon = null;
@@ -293,7 +288,6 @@ public class PartnerBookmarksProvider extends ContentProvider {
                         try {
                             touchicon = readRaw(res, touchiconId);
                         } catch (IOException e) {
-                            Log.i(TAG, "Failed to read touchicon for " + bookmarkTitle, e);
                         }
                     }
                     insertHelper.prepareForInsert();
@@ -311,7 +305,6 @@ public class PartnerBookmarksProvider extends ContentProvider {
                     }
                     bookmarkId++;
                     if (insertHelper.execute() == -1) {
-                        Log.i(TAG, "Failed to insert bookmark " + bookmarkTitle);
                         return false;
                     }
                 }

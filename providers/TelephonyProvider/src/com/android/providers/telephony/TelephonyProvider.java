@@ -54,7 +54,7 @@ import java.io.IOException;
 public class TelephonyProvider extends ContentProvider
 {
     private static final String DATABASE_NAME = "telephony.db";
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
 
     private static final int DATABASE_VERSION = 9 << 16;
     private static final int URL_TELEPHONY = 1;
@@ -453,7 +453,6 @@ public class TelephonyProvider extends ContentProvider
                 c.close();
             }
         }
-        Log.d(TAG, "Preferred APN: " + id);
         return id;
     }
 
@@ -623,7 +622,6 @@ public class TelephonyProvider extends ContentProvider
                     notify = true;
                 }
 
-                if (false) Log.d(TAG, "inserted " + values.toString() + " rowID = " + rowID);
                 break;
             }
 
@@ -636,16 +634,6 @@ public class TelephonyProvider extends ContentProvider
                 int updated = db.update("carriers", s_currentSetMap,
                         "numeric = '" + numeric + "'", null);
 
-                if (updated > 0)
-                {
-                    if (false) {
-                        Log.d(TAG, "Setting numeric '" + numeric + "' to be the current operator");
-                    }
-                }
-                else
-                {
-                    Log.e(TAG, "Failed setting numeric '" + numeric + "' to the current operator");
-                }
                 break;
             }
 

@@ -13,5 +13,5 @@ LOCAL_STATIC_JAVA_LIBRARIES := guava
 
 include $(BUILD_PACKAGE)
 
-# build UI + tests
+# build UI
 include $(call all-makefiles-under,$(LOCAL_PATH))

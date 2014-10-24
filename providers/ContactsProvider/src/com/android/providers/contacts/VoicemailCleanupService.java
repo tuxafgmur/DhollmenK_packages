@@ -46,12 +46,9 @@ public class VoicemailCleanupService extends IntentService {
         if (intent.getAction().equals(Intent.ACTION_PACKAGE_REMOVED) &&
                 !intent.getBooleanExtra(Intent.EXTRA_REPLACING, false)) {
             String packageUninstalled = intent.getData().getSchemeSpecificPart();
-            Log.d(TAG, "Cleaning up data for package: " + packageUninstalled);
             // Delete both voicemail content and voicemail status entries for this package.
             contentResolver.delete(Voicemails.buildSourceUri(packageUninstalled), null, null);
             contentResolver.delete(Status.buildSourceUri(packageUninstalled), null, null);
-        } else {
-            Log.w(TAG, "Unexpected intent: " + intent);
         }
     }
 }

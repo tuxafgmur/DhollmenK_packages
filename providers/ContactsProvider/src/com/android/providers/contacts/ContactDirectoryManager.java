@@ -191,7 +191,6 @@ public class ContactDirectoryManager {
         int count = scanAllPackages();
         getDbHelper().setProperty(DbProperties.DIRECTORY_SCAN_COMPLETE, "1");
         final long end = SystemClock.elapsedRealtime();
-        Log.i(TAG, "Discovered " + count + " contact directories in " + (end - start) + "ms");
 
         // Announce the change to listeners of the contacts authority
         mContactsProvider.notifyChange(false);
@@ -293,8 +292,6 @@ public class ContactDirectoryManager {
 
         int deletedRows = db.delete(Tables.DIRECTORIES, deleteWhereBuilder.toString(),
                 deleteWhereArgs.toArray(new String[0]));
-        Log.i(TAG, "deleted " + deletedRows
-                + " stale rows which don't have any relevant directory");
         return count;
     }
 
@@ -417,9 +414,7 @@ public class ContactDirectoryManager {
         try {
             cursor = mContext.getContentResolver().query(
                     uri, DirectoryQuery.PROJECTION, null, null, null);
-            if (cursor == null) {
-                Log.i(TAG, providerDescription(provider) + " returned a NULL cursor.");
-            } else {
+            if (cursor != null) {
                 while (cursor.moveToNext()) {
                     DirectoryInfo info = new DirectoryInfo();
                     info.packageName = provider.packageName;

@@ -263,7 +263,6 @@ public class MediaProvider extends ContentProvider {
 
                                 // don't send objectRemoved events - MTP be sending StorageRemoved anyway
                                 mDisableMtpObjectCallbacks = true;
-                                Log.d(TAG, "deleting all entries for storage " + storage);
                                 SQLiteDatabase db = database.getWritableDatabase();
                                 // First clear the file path to disable the _DELETE_FILE database hook.
                                 // We do this to avoid deleting files if the volume is remounted while
@@ -317,7 +316,6 @@ public class MediaProvider extends ContentProvider {
             // do nothing if the operation originated from MTP
             if (mDisableMtpObjectCallbacks) return;
 
-            Log.d(TAG, "object removed " + args[0]);
             IMtpService mtpService = mMtpService;
             if (mtpService != null) {
                 try {
@@ -735,8 +733,6 @@ public class MediaProvider extends ContentProvider {
         if (fromVersion < 63 || (fromVersion >= 84 && fromVersion <= 89) ||
                     (fromVersion >= 92 && fromVersion <= 94)) {
             // Drop everything and start over.
-            Log.i(TAG, "Upgrading media database from version " +
-                    fromVersion + " to " + toVersion + ", which will destroy all old data");
             fromVersion = 63;
             db.execSQL("DROP TABLE IF EXISTS images");
             db.execSQL("DROP TRIGGER IF EXISTS images_cleanup");
@@ -1750,7 +1746,6 @@ public class MediaProvider extends ContentProvider {
         if (fromVersion < 510 && Environment.isExternalStorageEmulated()) {
             // File.fixSlashes() removes any trailing slashes
             final String externalStorage = Environment.getExternalStorageDirectory().toString();
-            Log.d(TAG, "Adjusting external storage paths to: " + externalStorage);
 
             final String[] tables = {
                     TABLE_FILES, TABLE_ALBUM_ART, TABLE_THUMBNAILS, TABLE_VIDEO_THUMBNAILS };
@@ -2233,7 +2228,6 @@ public class MediaProvider extends ContentProvider {
         int table = URI_MATCHER.match(uri);
         List<String> prependArgs = new ArrayList<String>();
 
-        // Log.v(TAG, "query: uri="+uri+", selection="+selection);
         // handle MEDIA_SCANNER before calling getDatabaseForUri()
         if (table == MEDIA_SCANNER) {
             if (mMediaScannerVolume == null) {
@@ -2328,7 +2322,6 @@ public class MediaProvider extends ContentProvider {
                           || selection.equalsIgnoreCase("is_podcast=1") )
                         && projectionIn[0].equalsIgnoreCase("count(*)")
                         && keywords != null) {
-                    //Log.i("@@@@", "taking fast path for counting songs");
                     qb.setTables("audio_meta");
                 } else {
                     qb.setTables("audio");
@@ -2509,7 +2502,6 @@ public class MediaProvider extends ContentProvider {
                         && (selection == null || selection.length() == 0)
                         && projectionIn[0].equalsIgnoreCase("count(*)")
                         && keywords != null) {
-                    //Log.i("@@@@", "taking fast path for counting artists");
                     qb.setTables("audio_meta");
                     projectionIn[0] = "count(distinct artist_id)";
                     qb.appendWhere("is_music=1");
@@ -2558,7 +2550,6 @@ public class MediaProvider extends ContentProvider {
                         && (selection == null || selection.length() == 0)
                         && projectionIn[0].equalsIgnoreCase("count(*)")
                         && keywords != null) {
-                    //Log.i("@@@@", "taking fast path for counting albums");
                     qb.setTables("audio_meta");
                     projectionIn[0] = "count(distinct album_id)";
                     qb.appendWhere("is_music=1");
@@ -2614,8 +2605,6 @@ public class MediaProvider extends ContentProvider {
                 throw new IllegalStateException("Unknown URL: " + uri.toString());
         }
 
-        // Log.v(TAG, "query = "+ qb.buildQuery(projectionIn, selection,
-        //        combine(prependArgs, selectionArgs), groupBy, null, sort, limit));
         Cursor c = qb.query(db, projectionIn, selection,
                 combine(prependArgs, selectionArgs), groupBy, null, sort, limit);
 
@@ -4122,7 +4111,6 @@ public class MediaProvider extends ContentProvider {
             String[] whereArgs) {
         uri = safeUncanonicalize(uri);
         int count;
-        // Log.v(TAG, "update for uri="+uri+", initValues="+initialValues);
         int match = URI_MATCHER.match(uri);
         DatabaseHelper helper = getDatabaseForUri(uri);
         if (helper == null) {
@@ -5254,8 +5242,6 @@ public class MediaProvider extends ContentProvider {
                             // that.  It may also indicate that FileUtils::getFatVolumeId is broken
                             // (missing ioctl), which is also impossible to disambiguate.
                             Log.e(TAG, "Can't obtain external volume ID even though it's mounted.");
-                        } else {
-                            Log.i(TAG, "External volume is not (yet) mounted, cannot attach.");
                         }
 
                         throw new IllegalArgumentException("Can't obtain external volume ID for " +
@@ -5293,8 +5279,6 @@ public class MediaProvider extends ContentProvider {
                         }
                         if (recentDbFile != null) {
                             if (recentDbFile.renameTo(dbFile)) {
-                                Log.d(TAG, "renamed database " + recentDbFile.getName() +
-                                        " to " + EXTERNAL_DATABASE_NAME);
                             } else {
                                 Log.e(TAG, "Failed to rename database " + recentDbFile.getName() +
                                         " to " + EXTERNAL_DATABASE_NAME);

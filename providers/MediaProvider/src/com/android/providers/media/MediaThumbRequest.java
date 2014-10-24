@@ -180,7 +180,6 @@ class MediaThumbRequest {
                         Images.Thumbnails.MINI_KIND);
             }
             if (bitmap == null) {
-                Log.w(TAG, "Can't create mini thumbnail for " + mPath);
                 return;
             }
 
@@ -226,8 +225,6 @@ class MediaThumbRequest {
                 values.put(ImageColumns.MINI_THUMB_MAGIC, magic);
                 mCr.update(mUri, values, null, null);
             }
-        } else {
-            Log.w(TAG, "can't create bitmap for thumbnail.");
         }
     }
 }

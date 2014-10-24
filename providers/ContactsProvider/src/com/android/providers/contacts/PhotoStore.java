@@ -146,7 +146,6 @@ public class PhotoStore {
         keysToRemove.addAll(mEntries.keySet());
         keysToRemove.removeAll(keysInUse);
         if (!keysToRemove.isEmpty()) {
-            Log.d(TAG, "cleanup removing " + keysToRemove.size() + " entries");
             for (long key : keysToRemove) {
                 remove(key);
             }
@@ -225,9 +224,6 @@ public class PhotoStore {
 
     private void cleanupFile(File file) {
         boolean deleted = file.delete();
-        if (!deleted) {
-            Log.d("Could not clean up file %s", file.getAbsolutePath());
-        }
     }
 
     /**

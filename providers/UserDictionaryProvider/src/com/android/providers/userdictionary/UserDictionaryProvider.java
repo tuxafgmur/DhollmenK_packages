@@ -99,8 +99,6 @@ public class UserDictionaryProvider extends ContentProvider {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             if (oldVersion == 1 && newVersion == 2) {
-                Log.i(TAG, "Upgrading database from version " + oldVersion
-                        + " to version 2: adding " + Words.SHORTCUT + " column");
                 db.execSQL("ALTER TABLE " + USERDICT_TABLE_NAME
                         + " ADD " + Words.SHORTCUT + " TEXT;");
             } else {

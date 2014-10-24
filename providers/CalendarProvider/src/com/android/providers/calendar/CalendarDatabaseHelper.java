@@ -357,7 +357,6 @@ import java.util.TimeZone;
                  + " FROM " + Tables.SYNC_STATE_META,
                  null);
         if (version == PRE_FROYO_SYNC_STATE_VERSION) {
-            Log.i(TAG, "Upgrading calendar sync state table");
             db.execSQL("CREATE TEMPORARY TABLE state_backup(_sync_account TEXT, "
                     + "_sync_account_type TEXT, data TEXT);");
             db.execSQL("INSERT INTO state_backup SELECT _sync_account, _sync_account_type, data"
@@ -386,8 +385,6 @@ import java.util.TimeZone;
     }
 
     private void bootstrapDB(SQLiteDatabase db) {
-        Log.i(TAG, "Bootstrapping database");
-
         mSyncState.createDatabase(db);
 
         createColorsTable(db);
@@ -1132,7 +1129,6 @@ import java.util.TimeZone;
 
             Cursor cursor = null;
             try {
-                Log.i(TAG, "Attendees orphans:");
                 cursor = db.rawQuery(SELECT_ATTENDEES_ORPHANS, null);
                 DatabaseUtils.dumpCursor(cursor);
             } finally {
@@ -1146,7 +1142,6 @@ import java.util.TimeZone;
                     " WHERE " + WHERE_REMINDERS_ORPHANS;
             cursor = null;
             try {
-                Log.i(TAG, "Reminders orphans:");
                 cursor = db.rawQuery(SELECT_REMINDERS_ORPHANS, null);
                 DatabaseUtils.dumpCursor(cursor);
             } finally {
@@ -1158,24 +1153,16 @@ import java.util.TimeZone;
             return;
         }
 
-        Log.d(TAG, "Checking for orphaned entries");
         int count;
 
         count = db.delete(Tables.ATTENDEES, WHERE_ATTENDEES_ORPHANS, null);
-        if (count != 0) {
-            Log.i(TAG, "Deleted " + count + " orphaned Attendees");
-        }
 
         count = db.delete(Tables.REMINDERS, WHERE_REMINDERS_ORPHANS, null);
-        if (count != 0) {
-            Log.i(TAG, "Deleted " + count + " orphaned Reminders");
-        }
     }
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.i(TAG, "Upgrading DB from version " + oldVersion + " to " + newVersion);
         long startWhen = System.nanoTime();
 
         if (oldVersion < 49) {
@@ -1438,7 +1425,6 @@ import java.util.TimeZone;
         }
 
         long endWhen = System.nanoTime();
-        Log.d(TAG, "Calendar upgrade took " + ((endWhen - startWhen) / 1000000) + "ms");
 
         /**
          * db versions < 100 correspond to Froyo and earlier. Gingerbread bumped
@@ -1450,7 +1436,6 @@ import java.util.TimeZone;
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.i(TAG, "Can't downgrade DB from version " + oldVersion + " to " + newVersion);
         dropTables(db);
         bootstrapDB(db);
         return;
@@ -3098,8 +3083,6 @@ import java.util.TimeZone;
     }
 
     private void dropTables(SQLiteDatabase db) {
-        Log.i(TAG, "Clearing database");
-
         String[] columns = {
                 "type", "name"
         };

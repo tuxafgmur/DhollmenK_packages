@@ -86,8 +86,8 @@ public class ContactAggregator {
 
     private static final String TAG = "ContactAggregator";
 
-    private static final boolean DEBUG_LOGGING = Log.isLoggable(TAG, Log.DEBUG);
-    private static final boolean VERBOSE_LOGGING = Log.isLoggable(TAG, Log.VERBOSE);
+    private static final boolean DEBUG_LOGGING = false;
+    private static final boolean VERBOSE_LOGGING = false;
 
     private static final String STRUCTURED_NAME_BASED_LOOKUP_SQL =
             NameLookupColumns.NAME_TYPE + " IN ("
@@ -614,8 +614,6 @@ public class ContactAggregator {
         }
 
         final long end = System.currentTimeMillis();
-        Log.i(TAG, "Marked all visible contacts for aggregation: " + count + " raw contacts, " +
-                (end - start) + " ms");
         return count;
     }
 

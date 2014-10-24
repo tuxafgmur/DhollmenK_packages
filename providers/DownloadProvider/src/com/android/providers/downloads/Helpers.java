@@ -390,8 +390,6 @@ public class Helpers {
         } catch (RuntimeException ex) {
             if (Constants.LOGV) {
                 Log.d(Constants.TAG, "invalid selection [" + selection + "] triggered " + ex);
-            } else if (false) {
-                Log.d(Constants.TAG, "invalid selection triggered " + ex);
             }
             throw ex;
         }

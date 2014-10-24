@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -25,6 +25,3 @@ LOCAL_SRC_FILES := $(call all-java-files-under, src)
 LOCAL_PACKAGE_NAME := PartnerBookmarksProvider
 
 include $(BUILD_PACKAGE)
-
-# additionally, build tests in sub-folders in a separate .apk
-include $(call all-makefiles-under,$(LOCAL_PATH))

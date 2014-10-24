@@ -175,7 +175,6 @@ public class DownloadThread implements Runnable {
         // probably started again while racing with UpdateThread.
         if (DownloadInfo.queryDownloadStatus(mContext.getContentResolver(), mInfo.mId)
                 == Downloads.Impl.STATUS_SUCCESS) {
-            Log.d(TAG, "Download " + mInfo.mId + " already finished; skipping");
             return;
         }
 
@@ -195,8 +194,6 @@ public class DownloadThread implements Runnable {
 
             // while performing download, register for rules updates
             netPolicy.registerListener(mPolicyListener);
-
-            Log.i(Constants.TAG, "Download " + mInfo.mId + " starting");
 
             // Remember which network this download started on; used to
             // determine if errors were due to network changes.
@@ -276,9 +273,6 @@ public class DownloadThread implements Runnable {
             cleanupDestination(state, finalStatus);
             notifyDownloadCompleted(state, finalStatus, errorMsg, numFailed);
 
-            Log.i(Constants.TAG, "Download " + mInfo.mId + " finished with status "
-                    + Downloads.Impl.statusToString(finalStatus));
-
             netPolicy.unregisterListener(mPolicyListener);
 
             if (wakeLock != null) {
@@ -299,8 +293,6 @@ public class DownloadThread implements Runnable {
 
         // skip when already finished; remove after fixing race in 5217390
         if (state.mCurrentBytes == state.mTotalBytes) {
-            Log.i(Constants.TAG, "Skipping initiating request for download " +
-                  mInfo.mId + "; already completed");
             return;
         }
 
@@ -715,7 +707,6 @@ public class DownloadThread implements Runnable {
         if (transferEncoding == null) {
             state.mContentLength = getHeaderFieldLong(conn, "Content-Length", -1);
         } else {
-            Log.i(TAG, "Ignoring Content-Length since Transfer-Encoding is also defined");
             state.mContentLength = -1;
         }
 

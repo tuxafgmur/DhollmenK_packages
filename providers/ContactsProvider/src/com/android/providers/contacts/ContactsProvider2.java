@@ -1694,8 +1694,6 @@ public class ContactsProvider2 extends AbstractContactsProvider
         // updating, there's nothing to do. A DB might require updating
         // as a result of a system upgrade.
         if (!locale.toString().equals(providerLocale)) {
-            Log.i(TAG, "Locale has changed from " + providerLocale
-                    + " to " + locale.toString());
             return true;
         }
         if (contactsHelper.needsToUpdateLocaleData(locale) ||
@@ -4702,11 +4700,8 @@ public class ContactsProvider2 extends AbstractContactsProvider
             return false;
         }
         if ("1".equals(SystemProperties.get(DEBUG_PROPERTY_KEEP_STALE_ACCOUNT_DATA))) {
-            Log.w(TAG, "Accounts changed, but not removing stale data for " +
-                    DEBUG_PROPERTY_KEEP_STALE_ACCOUNT_DATA);
             return true;
         }
-        Log.i(TAG, "Accounts changed");
 
         invalidateFastScrollingIndexCache();
 
@@ -4744,7 +4739,6 @@ public class ContactsProvider2 extends AbstractContactsProvider
 
             if (!accountsWithDataSetsToDelete.isEmpty()) {
                 for (AccountWithDataSet accountWithDataSet : accountsWithDataSetsToDelete) {
-                    Log.d(TAG, "removing data for removed account " + accountWithDataSet);
                     final Long accountIdOrNull = dbHelper.getAccountIdOrNull(accountWithDataSet);
 
                     // getAccountIdOrNull() really shouldn't return null here, but just in case...
@@ -8458,7 +8452,6 @@ public class ContactsProvider2 extends AbstractContactsProvider
     }
 
     protected void upgradeAggregationAlgorithmInBackground() {
-        Log.i(TAG, "Upgrading aggregation algorithm");
 
         final long start = SystemClock.elapsedRealtime();
         setProviderStatus(ProviderStatus.STATUS_UPGRADING);
@@ -8494,11 +8487,8 @@ public class ContactsProvider2 extends AbstractContactsProvider
                     db.endTransaction();
                 }
                 final long end = SystemClock.elapsedRealtime();
-                Log.i(TAG, "Aggregation algorithm upgraded for " + count + " raw contacts"
-                        + (success ? (" in " + (end - start) + "ms") : " failed"));
             }
         } catch (RuntimeException e) {
-            Log.e(TAG, "Failed to upgrade aggregation algorithm; continuing anyway.", e);
 
             // Got some exception during re-aggregation.  Re-aggregation isn't that important, so
             // just bump the aggregation algorithm version and let the provider start normally.

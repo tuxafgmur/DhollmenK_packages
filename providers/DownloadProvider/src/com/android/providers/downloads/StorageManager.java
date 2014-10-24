@@ -302,10 +302,6 @@ class StorageManager {
      * the total byte size is greater than targetBytes
      */
     private long discardPurgeableFiles(int destination, long targetBytes) {
-        if (true || Constants.LOGV) {
-            Log.i(Constants.TAG, "discardPurgeableFiles: destination = " + destination +
-                    ", targetBytes = " + targetBytes);
-        }
         String destStr  = (destination == Downloads.Impl.DESTINATION_SYSTEMCACHE_PARTITION) ?
                 String.valueOf(destination) :
                 String.valueOf(Downloads.Impl.DESTINATION_CACHE_PARTITION_PURGEABLE);
@@ -342,10 +338,6 @@ class StorageManager {
             }
         } finally {
             cursor.close();
-        }
-        if (true || Constants.LOGV) {
-            Log.i(Constants.TAG, "Purged files, freed " + totalFreed + " for " +
-                    targetBytes + " requested");
         }
         return totalFreed;
     }

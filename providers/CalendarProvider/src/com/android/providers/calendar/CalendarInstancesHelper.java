@@ -666,10 +666,6 @@ public class CalendarInstancesHelper {
             boolean affectsWindow = originalInstanceTime != null
                     && originalInstanceTime <= fields.maxInstance
                     && originalInstanceTime >= fields.minInstance - MAX_ASSUMED_DURATION;
-            if (CalendarProvider2.DEBUG_INSTANCES) {
-                Log.d(TAG + "-i", "Recurrence: inside=" + insideWindow +
-                        ", affects=" + affectsWindow);
-            }
             if (insideWindow || affectsWindow) {
                 updateRecurrenceInstancesLocked(values, rowId, db);
             }
@@ -802,9 +798,6 @@ public class CalendarInstancesHelper {
                     recurrenceSyncId, recurrenceSyncId
             });
         }
-
-        //Log.d(TAG, "Recurrence: deleted " + delCount + " instances");
-        //dumpInstancesTable(db);
 
         // Now do instance expansion
         // TODO: passing "rowId" is wrong if this is an exception - need originalId then

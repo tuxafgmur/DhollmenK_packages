@@ -40,7 +40,7 @@ import java.util.HashMap;
 
 public class MtpService extends Service {
     private static final String TAG = "MtpService";
-    private static final boolean LOGD = true;
+    private static final boolean LOGD = false;
 
     // We restrict PTP to these subdirectories
     private static final String[] PTP_DIRECTORIES = new String[] {
@@ -96,7 +96,6 @@ public class MtpService extends Service {
         @Override
         public void onStorageStateChanged(String path, String oldState, String newState) {
             synchronized (mBinder) {
-                Log.d(TAG, "onStorageStateChanged " + path + " " + oldState + " -> " + newState);
                 if (Environment.MEDIA_MOUNTED.equals(newState)) {
                     volumeMountedLocked(path);
                 } else if (Environment.MEDIA_MOUNTED.equals(oldState)) {
@@ -184,14 +183,12 @@ public class MtpService extends Service {
     private void manageServiceLocked() {
         final boolean isCurrentUser = UserHandle.myUserId() == ActivityManager.getCurrentUser();
         if (mServer == null && isCurrentUser) {
-            Log.d(TAG, "starting MTP server in " + (mPtpMode ? "PTP mode" : "MTP mode"));
             mServer = new MtpServer(mDatabase, mPtpMode);
             if (!mMtpDisabled) {
                 addStorageDevicesLocked();
             }
             mServer.start();
         } else if (mServer != null && !isCurrentUser) {
-            Log.d(TAG, "no longer current user; shutting down MTP server");
             // Internally, kernel will close our FD, and server thread will
             // handle cleanup.
             mServer = null;
@@ -249,7 +246,6 @@ public class MtpService extends Service {
         String path = storage.getPath();
         mStorageMap.put(path, storage);
 
-        Log.d(TAG, "addStorageLocked " + storage.getStorageId() + " " + path);
         if (mDatabase != null) {
             mDatabase.addStorage(storage);
         }
@@ -265,7 +261,6 @@ public class MtpService extends Service {
             return;
         }
 
-        Log.d(TAG, "removeStorageLocked " + storage.getStorageId() + " " + storage.getPath());
         if (mDatabase != null) {
             mDatabase.removeStorage(storage);
         }

@@ -1445,11 +1445,7 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
             ContentValues contentValues = new ContentValues();
             contentValues.put("seen", 1);
             int count = db.update("sms", contentValues, "read=1", null);
-            Log.d(TAG, "[MmsSmsDb] upgradeDatabaseToVersion51: updated " + count +
-                    " rows in sms table to have READ=1");
             count = db.update("pdu", contentValues, "read=1", null);
-            Log.d(TAG, "[MmsSmsDb] upgradeDatabaseToVersion51: updated " + count +
-                    " rows in pdu table to have READ=1");
         } catch (Exception ex) {
             Log.e(TAG, "[MmsSmsDb] upgradeDatabaseToVersion51 caught ", ex);
         }
@@ -1511,10 +1507,6 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
             boolean hasAutoIncrementAddresses = hasAutoIncrement(db, "canonical_addresses");
             boolean hasAutoIncrementPart = hasAutoIncrement(db, "part");
             boolean hasAutoIncrementPdu = hasAutoIncrement(db, "pdu");
-            Log.d(TAG, "[getWritableDatabase] hasAutoIncrementThreads: " + hasAutoIncrementThreads +
-                    " hasAutoIncrementAddresses: " + hasAutoIncrementAddresses +
-                    " hasAutoIncrementPart: " + hasAutoIncrementPart +
-                    " hasAutoIncrementPdu: " + hasAutoIncrementPdu);
             boolean autoIncrementThreadsSuccess = true;
             boolean autoIncrementAddressesSuccess = true;
             boolean autoIncrementPartSuccess = true;
@@ -1523,8 +1515,6 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
                 db.beginTransaction();
                 try {
                     if (false && sFakeLowStorageTest) {
-                        Log.d(TAG, "[getWritableDatabase] mFakeLowStorageTest is true " +
-                                " - fake exception");
                         throw new Exception("FakeLowStorageTest");
                     }
                     upgradeThreadsTableToAutoIncrement(db);     // a no-op if already upgraded
@@ -1540,8 +1530,6 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
                 db.beginTransaction();
                 try {
                     if (false && sFakeLowStorageTest) {
-                        Log.d(TAG, "[getWritableDatabase] mFakeLowStorageTest is true " +
-                        " - fake exception");
                         throw new Exception("FakeLowStorageTest");
                     }
                     upgradeAddressTableToAutoIncrement(db);     // a no-op if already upgraded
@@ -1558,8 +1546,6 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
                 db.beginTransaction();
                 try {
                     if (false && sFakeLowStorageTest) {
-                        Log.d(TAG, "[getWritableDatabase] mFakeLowStorageTest is true " +
-                        " - fake exception");
                         throw new Exception("FakeLowStorageTest");
                     }
                     upgradePartTableToAutoIncrement(db);     // a no-op if already upgraded
@@ -1576,8 +1562,6 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
                 db.beginTransaction();
                 try {
                     if (false && sFakeLowStorageTest) {
-                        Log.d(TAG, "[getWritableDatabase] mFakeLowStorageTest is true " +
-                        " - fake exception");
                         throw new Exception("FakeLowStorageTest");
                     }
                     upgradePduTableToAutoIncrement(db);     // a no-op if already upgraded
@@ -1596,7 +1580,6 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
                     autoIncrementPduSuccess) {
                 if (mLowStorageMonitor != null) {
                     // We've already updated the database. This receiver is no longer necessary.
-                    Log.d(TAG, "Unregistering mLowStorageMonitor - we've upgraded");
                     mContext.unregisterReceiver(mLowStorageMonitor);
                     mLowStorageMonitor = null;
                 }
@@ -1608,7 +1591,6 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
                 // We failed, perhaps because of low storage. Turn on a receiver to watch for
                 // storage space.
                 if (mLowStorageMonitor == null) {
-                    Log.d(TAG, "[getWritableDatabase] turning on storage monitor");
                     mLowStorageMonitor = new LowStorageMonitor();
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(Intent.ACTION_DEVICE_STORAGE_LOW);
@@ -1631,8 +1613,6 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
                 if (c.moveToFirst()) {
                     String schema = c.getString(0);
                     result = schema != null ? schema.contains("AUTOINCREMENT") : false;
-                    Log.d(TAG, "[MmsSmsDb] tableName: " + tableName + " hasAutoIncrement: " +
-                            schema + " result: " + result);
                 }
             } finally {
                 c.close();
@@ -1647,10 +1627,8 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
     // be called again next time the device is rebooted.
     private void upgradeThreadsTableToAutoIncrement(SQLiteDatabase db) {
         if (hasAutoIncrement(db, MmsSmsProvider.TABLE_THREADS)) {
-            Log.d(TAG, "[MmsSmsDb] upgradeThreadsTableToAutoIncrement: already upgraded");
             return;
         }
-        Log.d(TAG, "[MmsSmsDb] upgradeThreadsTableToAutoIncrement: upgrading");
 
         // Make the _id of the threads table autoincrement so we never re-use thread ids
         // Have to create a new temp threads table. Copy all the info from the old table.
@@ -1678,10 +1656,8 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
     // That's ok. This upgrade is optional. It'll be called again next time the device is rebooted.
     private void upgradeAddressTableToAutoIncrement(SQLiteDatabase db) {
         if (hasAutoIncrement(db, "canonical_addresses")) {
-            Log.d(TAG, "[MmsSmsDb] upgradeAddressTableToAutoIncrement: already upgraded");
             return;
         }
-        Log.d(TAG, "[MmsSmsDb] upgradeAddressTableToAutoIncrement: upgrading");
 
         // Make the _id of the canonical_addresses table autoincrement so we never re-use ids
         // Have to create a new temp canonical_addresses table. Copy all the info from the old
@@ -1700,10 +1676,8 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
     // That's ok. This upgrade is optional. It'll be called again next time the device is rebooted.
     private void upgradePartTableToAutoIncrement(SQLiteDatabase db) {
         if (hasAutoIncrement(db, "part")) {
-            Log.d(TAG, "[MmsSmsDb] upgradePartTableToAutoIncrement: already upgraded");
             return;
         }
-        Log.d(TAG, "[MmsSmsDb] upgradePartTableToAutoIncrement: upgrading");
 
         // Make the _id of the part table autoincrement so we never re-use ids
         // Have to create a new temp part table. Copy all the info from the old
@@ -1738,10 +1712,8 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
     // That's ok. This upgrade is optional. It'll be called again next time the device is rebooted.
     private void upgradePduTableToAutoIncrement(SQLiteDatabase db) {
         if (hasAutoIncrement(db, "pdu")) {
-            Log.d(TAG, "[MmsSmsDb] upgradePduTableToAutoIncrement: already upgraded");
             return;
         }
-        Log.d(TAG, "[MmsSmsDb] upgradePduTableToAutoIncrement: upgrading");
 
         // Make the _id of the part table autoincrement so we never re-use ids
         // Have to create a new temp part table. Copy all the info from the old
@@ -1798,8 +1770,6 @@ public class MmsSmsDatabaseHelper extends SQLiteOpenHelper {
 
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-
-            Log.d(TAG, "[LowStorageMonitor] onReceive intent " + action);
 
             if (Intent.ACTION_DEVICE_STORAGE_OK.equals(action)) {
                 sTriedAutoIncrement = false;    // try to upgrade on the next getWriteableDatabase

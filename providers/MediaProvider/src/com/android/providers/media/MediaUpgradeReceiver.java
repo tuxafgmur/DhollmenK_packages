@@ -70,7 +70,6 @@ public class MediaUpgradeReceiver extends BroadcastReceiver {
                     }
 
                     long startTime = System.currentTimeMillis();
-                    Slog.i(TAG, "---> Start upgrade of media database " + file);
                     SQLiteDatabase db = null;
                     try {
                         MediaProvider.DatabaseHelper helper = new MediaProvider.DatabaseHelper(
@@ -84,8 +83,6 @@ public class MediaUpgradeReceiver extends BroadcastReceiver {
                             db.close();
                         }
                     }
-                    Slog.i(TAG, "<--- Finished upgrade of media database " + file
-                            + " in " + (System.currentTimeMillis()-startTime) + "ms");
                 }
             }
         } catch (Throwable t) {

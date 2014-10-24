@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -38,6 +38,3 @@ LOCAL_PRIVILEGED_MODULE := true
 LOCAL_EMMA_COVERAGE_FILTER := +com.android.providers.calendar.*
 
 include $(BUILD_PACKAGE)
-
-# Use the following include to make our test apk.
-include $(call all-makefiles-under,$(LOCAL_PATH))

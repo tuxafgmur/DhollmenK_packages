@@ -1923,10 +1923,6 @@ public class CalendarProvider2 extends SQLiteContentProvider implements OnAccoun
                      * from the cursor, we just do the update with the new value set after
                      * removing the ORIGINAL_INSTANCE_TIME entry.
                      */
-                    if (canceling) {
-                        // TODO: should we just call deleteEventInternal?
-                        Log.d(TAG, "Note: canceling entire event via exception call");
-                    }
                     if (DEBUG_EXCEPTION) {
                         Log.d(TAG, "RE: updating full event");
                     }
@@ -2396,7 +2392,6 @@ public class CalendarProvider2 extends SQLiteContentProvider implements OnAccoun
         if (cmd.equals("start")) {
             // We'd like to reset the coverage data, but according to FAQ item 3.14 at
             // http://emma.sourceforge.net/faq.html, this isn't possible in 2.0.
-            Log.d(TAG, "Emma coverage testing started");
         } else if (cmd.equals("stop")) {
             // Call com.vladium.emma.rt.RT.dumpCoverageData() to cause a data dump.  We
             // may not have been built with EMMA, so we need to do this through reflection.
@@ -2410,7 +2405,6 @@ public class CalendarProvider2 extends SQLiteContentProvider implements OnAccoun
 
                 dumpCoverageMethod.invoke(null, coverageFile, false /*merge*/,
                         false /*stopDataCollection*/);
-                Log.d(TAG, "Emma coverage data written to " + filename);
             } catch (Exception e) {
                 throw new RuntimeException("Emma coverage dump failed", e);
             }
@@ -2500,7 +2494,6 @@ public class CalendarProvider2 extends SQLiteContentProvider implements OnAccoun
                         values.getAsString(Events.RRULE));
             }
             if (hasDtend || !hasDuration || hasOriginalEvent || hasOriginalInstanceTime) {
-                Log.d(TAG, "Scrubbing DTEND, ORIGINAL_SYNC_ID, ORIGINAL_INSTANCE_TIME");
                 if (Log.isLoggable(TAG, Log.DEBUG)) {
                     Log.d(TAG, "Invalid values for recurrence: " + values);
                 }
@@ -2523,7 +2516,6 @@ public class CalendarProvider2 extends SQLiteContentProvider implements OnAccoun
             // originalEvent is the _sync_id of the recurrence
             // originalInstanceTime is the start time of the event being replaced
             if (!hasDtend || hasDuration || !hasOriginalEvent || !hasOriginalInstanceTime) {
-                Log.d(TAG, "Scrubbing DURATION");
                 if (Log.isLoggable(TAG, Log.DEBUG)) {
                     Log.d(TAG, "Invalid values for recurrence exception: " + values);
                 }
@@ -2542,7 +2534,6 @@ public class CalendarProvider2 extends SQLiteContentProvider implements OnAccoun
             // originalEvent is null
             // originalInstanceTime is null
             if (!hasDtend || hasDuration) {
-                Log.d(TAG, "Scrubbing DURATION");
                 if (Log.isLoggable(TAG, Log.DEBUG)) {
                     Log.d(TAG, "Invalid values for event: " + values);
                 }

@@ -126,32 +126,6 @@ public class MmsProvider extends ContentProvider {
                 qb.appendWhere(Addr.MSG_ID + "=" + uri.getPathSegments().get(0));
                 break;
             case MMS_REPORT_STATUS:
-                /*
-                   SELECT DISTINCT address,
-                                   T.delivery_status AS delivery_status,
-                                   T.read_status AS read_status
-                   FROM addr
-                   INNER JOIN (SELECT P1._id AS id1, P2._id AS id2, P3._id AS id3,
-                                      ifnull(P2.st, 0) AS delivery_status,
-                                      ifnull(P3.read_status, 0) AS read_status
-                               FROM pdu P1
-                               INNER JOIN pdu P2
-                               ON P1.m_id = P2.m_id AND P2.m_type = 134
-                               LEFT JOIN pdu P3
-                               ON P1.m_id = P3.m_id AND P3.m_type = 136
-                               UNION
-                               SELECT P1._id AS id1, P2._id AS id2, P3._id AS id3,
-                                      ifnull(P2.st, 0) AS delivery_status,
-                                      ifnull(P3.read_status, 0) AS read_status
-                               FROM pdu P1
-                               INNER JOIN pdu P3
-                               ON P1.m_id = P3.m_id AND P3.m_type = 136
-                               LEFT JOIN pdu P2
-                               ON P1.m_id = P2.m_id AND P2.m_type = 134) T
-                   ON (msg_id = id2 AND type = 151)
-                   OR (msg_id = id3 AND type = 137)
-                   WHERE T.id1 = ?;
-                 */
                 qb.setTables("addr INNER JOIN (SELECT P1._id AS id1, P2._id" +
                              " AS id2, P3._id AS id3, ifnull(P2.st, 0) AS" +
                              " delivery_status, ifnull(P3.read_status, 0) AS" +
@@ -169,11 +143,6 @@ public class MmsProvider extends ContentProvider {
                 qb.setDistinct(true);
                 break;
             case MMS_REPORT_REQUEST:
-                /*
-                   SELECT address, d_rpt, rr
-                   FROM addr join pdu on pdu._id = addr.msg_id
-                   WHERE pdu._id = messageId AND addr.type = 151
-                 */
                 qb.setTables(TABLE_ADDR + " join " +
                         TABLE_PDU + " on pdu._id = addr.msg_id");
                 qb.appendWhere("pdu._id = " + uri.getLastPathSegment());

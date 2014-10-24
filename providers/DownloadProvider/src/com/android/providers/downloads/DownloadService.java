@@ -249,8 +249,6 @@ public class DownloadService extends Service {
                 // Dump speed and update details
                 mNotifier.dumpSpeeds();
 
-                Log.wtf(TAG, "Final update pass triggered, isActive=" + isActive
-                        + "; someone didn't update correctly.");
             }
 
             if (isActive) {
@@ -423,7 +421,6 @@ public class DownloadService extends Service {
             }
             final File file = new File(path);
             if (file.exists() && !file.delete()) {
-                Log.w(TAG, "file: '" + path + "' couldn't be deleted");
             }
         }
     }
