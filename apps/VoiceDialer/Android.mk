@@ -18,6 +18,3 @@ include external/srec/config/en.us/config.mk
 $(LOCAL_INSTALLED_MODULE) : | $(SREC_CONFIG_TARGET_FILES)
 # SREC_CONFIG_TARGET_FILES is from external/srec/config/en.us/config.mk and now can be cleaned up.
 SREC_CONFIG_TARGET_FILES :=
-
-# Use the following include to make our test apk.
-include $(call all-makefiles-under,$(LOCAL_PATH))

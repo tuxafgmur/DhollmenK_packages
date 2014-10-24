@@ -109,8 +109,6 @@ public class VoiceContact {
      * the contact list content provider.
      */
     public static List<VoiceContact> getVoiceContacts(Activity activity) {
-        if (false) Log.d(TAG, "VoiceContact.getVoiceContacts");
-
         List<VoiceContact> contacts = new ArrayList<VoiceContact>();
 
         String[] phonesProjection = new String[] {
@@ -157,18 +155,6 @@ public class VoiceContact {
             String labelAtCursor = cursor.getString(labelColumn);
             String nameAtCursor = cursor.getString(nameColumn);
             long personIdAtCursor = cursor.getLong(personIdColumn);
-
-            /*
-            if (false) {
-                Log.d(TAG, "phoneId=" + phoneIdAtCursor
-                        + " type=" + typeAtCursor
-                        + " isPrimary=" + isPrimaryAtCursor
-                        + " label=" + labelAtCursor
-                        + " name=" + nameAtCursor
-                        + " personId=" + personIdAtCursor
-                        );
-            }
-            */
 
             // encountered a new name, so generate current VoiceContact
             if (name != null && !name.equals(nameAtCursor)) {
@@ -254,8 +240,6 @@ public class VoiceContact {
         // clean up cursor
         cursor.close();
 
-        if (false) Log.d(TAG, "VoiceContact.getVoiceContacts " + contacts.size());
-
         return contacts;
     }
 
@@ -265,7 +249,6 @@ public class VoiceContact {
      * @return a List of {@link VoiceContact} in a File.
      */
     public static List<VoiceContact> getVoiceContactsFromFile(File contactsFile) {
-        if (false) Log.d(TAG, "getVoiceContactsFromFile " + contactsFile);
 
         List<VoiceContact> contacts = new ArrayList<VoiceContact>();
 
@@ -280,17 +263,13 @@ public class VoiceContact {
             }
         }
         catch (IOException e) {
-            if (false) Log.d(TAG, "getVoiceContactsFromFile failed " + e);
         }
         finally {
             try {
                 br.close();
             } catch (IOException e) {
-                if (false) Log.d(TAG, "getVoiceContactsFromFile failed during close " + e);
             }
         }
-
-        if (false) Log.d(TAG, "getVoiceContactsFromFile " + contacts.size());
 
         return contacts;
     }
@@ -313,8 +292,6 @@ public class VoiceContact {
             number = cursor.getString(column);
         }
         cursor.close();
-
-        if (false) Log.d(TAG, "redialNumber " + number);
 
         return number;
     }

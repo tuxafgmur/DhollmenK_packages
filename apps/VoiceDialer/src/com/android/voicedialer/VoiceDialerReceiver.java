@@ -29,7 +29,6 @@ public class VoiceDialerReceiver extends BroadcastReceiver {
     
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (false) Log.d(TAG, "onReceive " + intent);
 
         // fetch up useful stuff
         String action = intent.getAction();

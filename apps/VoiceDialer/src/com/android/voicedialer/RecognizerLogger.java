@@ -106,8 +106,6 @@ public class RecognizerLogger {
      * @param dataDir directory to contain the log files.
      */
     public RecognizerLogger(Context context) throws IOException {
-        if (false) Log.d(TAG, "RecognizerLogger");
-        
         // generate new root filename
         File dir = context.getDir(LOGDIR, 0);
         mDatedPath = dir.toString() + File.separator + "log_" +
@@ -141,7 +139,6 @@ public class RecognizerLogger {
      * Write a header for the NBest lines into the text log file.
      */
     public void logNbestHeader() {
-        logLine("Nbest *****************");
     }
     
     /**
@@ -149,7 +146,6 @@ public class RecognizerLogger {
      * @param contacts
      */
     public void logContacts(List<VoiceContact> contacts) {
-        logLine("Contacts *****************");
         for (VoiceContact vc : contacts) logLine(vc.toString());
         try {
             mWriter.flush();
@@ -164,7 +160,6 @@ public class RecognizerLogger {
      * @param intents
      */
     public void logIntents(ArrayList<Intent> intents) {
-        logLine("Intents *********************");
         StringBuffer sb = new StringBuffer();
         for (Intent intent : intents) {
             logLine(intent.toString() + " " + RecognizerEngine.SENTENCE_EXTRA + "=" +

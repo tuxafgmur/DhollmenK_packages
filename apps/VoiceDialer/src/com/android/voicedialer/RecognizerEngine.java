@@ -132,7 +132,6 @@ abstract public class RecognizerEngine {
             }
 
             // create a new recognizer
-            if (false) Log.d(TAG, "start new Recognizer");
             if (mSrec == null) {
                 String parFilePath = SREC_DIR + "/baseline11k.par";
                 if (sampleRate == 8000) {
@@ -143,12 +142,10 @@ abstract public class RecognizerEngine {
 
             // start audio input
             if (micFile != null) {
-                if (false) Log.d(TAG, "using mic file");
                 mic = new FileInputStream(micFile);
                 WaveHeader hdr = new WaveHeader();
                 hdr.read(mic);
             } else {
-                if (false) Log.d(TAG, "start new MicrophoneInputStream");
                 mic = new MicrophoneInputStream(sampleRate, sampleRate * 15);
             }
 
@@ -161,7 +158,6 @@ abstract public class RecognizerEngine {
             setupGrammar();
 
             // start the recognition process
-            if (false) Log.d(TAG, "start mSrec.start");
             mSrec.start();
             recognizerStarted = true;
 
@@ -171,9 +167,6 @@ abstract public class RecognizerEngine {
                 int event = mSrec.advance();
                 if (event != Recognizer.EVENT_INCOMPLETE &&
                         event != Recognizer.EVENT_NEED_MORE_AUDIO) {
-                    Log.d(TAG, "start advance()=" +
-                            Recognizer.eventToString(event) +
-                            " avail " + mic.available());
                 }
                 switch (event) {
                 case Recognizer.EVENT_INCOMPLETE:
@@ -188,7 +181,6 @@ abstract public class RecognizerEngine {
                     mSrec.putAudio(mic);
                     continue;
                 default:
-                    Log.d(TAG, "unknown event " + event);
                     recognizerClient.onRecognitionFailure(Recognizer.eventToString(event));
                     break;
                 }
@@ -196,16 +188,12 @@ abstract public class RecognizerEngine {
             }
 
         } catch (InterruptedException e) {
-            if (false) Log.d(TAG, "start interrupted " + e);
             recognizerClient.onRecognitionError(e.toString());
         } catch (IOException e) {
-            if (false) Log.d(TAG, "start new Srec failed " + e);
             recognizerClient.onRecognitionError(e.toString());
         } catch (Exception e) {
-            if (false) Log.d(TAG, "exception " + e);
             recognizerClient.onRecognitionError(e.toString());
         } finally {
-            if (false) Log.d(TAG, "start mSrec.stop");
             if (mSrec != null && recognizerStarted) mSrec.stop();
 
             // stop microphone
@@ -213,7 +201,6 @@ abstract public class RecognizerEngine {
                 if (mic != null) mic.close();
             }
             catch (IOException ex) {
-                if (false) Log.d(TAG, "start - mic.close failed - " + ex);
             }
             mic = null;
 
@@ -222,11 +209,9 @@ abstract public class RecognizerEngine {
                 if (mLogger != null) mLogger.close();
             }
             catch (IOException ex) {
-                if (false) Log.d(TAG, "start - mLoggger.close failed - " + ex);
             }
             mLogger = null;
         }
-        if (false) Log.d(TAG, "start bye");
     }
 
     protected static void addIntent(ArrayList<Intent> intents, Intent intent) {
