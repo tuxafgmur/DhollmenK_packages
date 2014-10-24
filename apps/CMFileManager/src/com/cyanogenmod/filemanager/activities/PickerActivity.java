@@ -188,14 +188,11 @@ public class PickerActivity extends Activity
 
         if (isFilePickIntent(intent)) {
             // ok
-            Log.d(TAG, "PickerActivity: got file pick intent: " + String.valueOf(intent)); //$NON-NLS-1$
             pickingDirectory = false;
         } else if (isDirectoryPickIntent(getIntent())) {
             // ok
-            Log.d(TAG, "PickerActivity: got folder pick intent: " + String.valueOf(intent)); //$NON-NLS-1$
             pickingDirectory = true;
         } else {
-            Log.d(TAG, "PickerActivity got unrecognized intent: " + String.valueOf(intent)); //$NON-NLS-1$
             setResult(Activity.RESULT_CANCELED);
             finish();
             return;
@@ -207,17 +204,12 @@ public class PickerActivity extends Activity
         String mimeType = getIntent().getType();
         if (mimeType != null) {
             if (!MimeTypeHelper.isMimeTypeKnown(this, mimeType)) {
-                Log.i(TAG,
-                        String.format(
-                                "Mime type %s unknown, falling back to wildcard.", //$NON-NLS-1$
-                                mimeType));
                 mimeType = MimeTypeHelper.ALL_MIME_TYPES;
             }
             restrictions.put(DisplayRestrictions.MIME_TYPE_RESTRICTION, mimeType);
         }
         // Other restrictions
         Bundle extras = getIntent().getExtras();
-        Log.d(TAG, "PickerActivity. extras: " + String.valueOf(extras)); //$NON-NLS-1$
         if (extras != null) {
             //-- File size
             if (extras.containsKey(android.provider.MediaStore.Audio.Media.EXTRA_MAX_BYTES)) {

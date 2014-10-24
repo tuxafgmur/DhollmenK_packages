@@ -230,10 +230,6 @@ public class EditorSHColorSchemePreferenceFragment extends TitlePreferenceFragme
             this.mColorScheme[pos].setColor(
                     ThemeManager.getCurrentTheme(
                             getActivity()).getColor(getActivity(), color.getResId()));
-            Log.w(TAG,
-                    String.format(
-                            "Color scheme value not found for \"%s\"", //$NON-NLS-1$
-                            color.getId()));
         }
     }
 
@@ -275,10 +271,6 @@ public class EditorSHColorSchemePreferenceFragment extends TitlePreferenceFragme
             try {
                 colors[i] = Integer.parseInt(values[i]);
             } catch (Exception e) {
-                Log.w(TAG,
-                        String.format(
-                                "Problem parsing color value \"%s\" on position %d", //$NON-NLS-1$
-                                values[i], Integer.valueOf(i)));
                 colors[i] = 0;
             }
         }

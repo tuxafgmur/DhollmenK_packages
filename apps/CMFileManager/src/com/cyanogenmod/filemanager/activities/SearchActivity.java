@@ -695,7 +695,6 @@ public class SearchActivity extends Activity
                     }
 
                     //Capture the exception
-                    Log.e(TAG, "Search failed", ex); //$NON-NLS-1$
                     DialogHelper.showToast(
                             SearchActivity.this,
                             R.string.search_error_msg, Toast.LENGTH_SHORT);

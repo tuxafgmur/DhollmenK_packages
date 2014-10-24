@@ -53,7 +53,6 @@ public class GeneralPreferenceFragment extends TitlePreferenceFragment {
     private CheckBoxPreference mUseFlinger;
     private ListPreference mAccessMode;
     private CheckBoxPreference mRestrictSecondaryUsersAccess;
-    private CheckBoxPreference mDebugTraces;
 
     /**
      * @hide
@@ -224,7 +223,7 @@ public class GeneralPreferenceFragment extends TitlePreferenceFragment {
         this.mOnChangeListener.onPreferenceChange(this.mAccessMode, value);
         updateAccessModeStatus();
 
-        // Capture Debug traces
+        // Secondary User
         this.mRestrictSecondaryUsersAccess =
                 (CheckBoxPreference)findPreference(
                         FileManagerSettings.SETTINGS_RESTRICT_SECONDARY_USERS_ACCESS.getId());
@@ -240,12 +239,6 @@ public class GeneralPreferenceFragment extends TitlePreferenceFragment {
                     FileManagerApplication.isRestrictSecondaryUsersAccess(getActivity()));
             this.mRestrictSecondaryUsersAccess.setOnPreferenceChangeListener(this.mOnChangeListener);
         }
-
-        // Capture Debug traces
-        this.mDebugTraces =
-                (CheckBoxPreference)findPreference(
-                        FileManagerSettings.SETTINGS_SHOW_TRACES.getId());
-        this.mDebugTraces.setOnPreferenceChangeListener(this.mOnChangeListener);
 
         // Loaded
         this.mLoaded = true;

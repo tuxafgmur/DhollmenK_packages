@@ -226,14 +226,6 @@ public abstract class ShellConsole extends Console implements Program.ProgramLis
             synchronized (this.mSync) {
                 this.mActive = true;
             }
-            if (isTrace()) {
-                Log.v(TAG,
-                        String.format("Create console %s, command: %s, args: %s, env: %s",  //$NON-NLS-1$
-                                this.mShell.getId(),
-                                this.mShell.getCommand(),
-                                this.mShell.getArguments(),
-                                Arrays.toString(this.mShell.getEnvironment())));
-            }
 
             //Allocate buffers
             this.mIn = this.mProc.getInputStream();
@@ -492,16 +484,6 @@ public abstract class ShellConsole extends Console implements Program.ProgramLis
             String cmd = program.getCommand();
             String args = program.getArguments();
 
-            //Audit command
-            if (isTrace()) {
-                Log.v(TAG,
-                        String.format("%s-%s, command: %s, args: %s",  //$NON-NLS-1$
-                                this.mShell.getId(),
-                                program.getId(),
-                                cmd,
-                                args));
-            }
-
             //Is asynchronous program? Then set asynchronous
             program.setProgramListener(this);
             if (program instanceof AsyncResultProgram) {
@@ -593,14 +575,6 @@ public abstract class ShellConsole extends Console implements Program.ProgramLis
                 synchronized (this.mPartialSync) {
                     ((AsyncResultProgram)program).onRequestExitCode(exitCode);
                 }
-            }
-            if (isTrace()) {
-                Log.v(TAG,
-                        String.format("%s-%s, command: %s, exitCode: %s",  //$NON-NLS-1$
-                                this.mShell.getId(),
-                                program.getId(),
-                                cmd,
-                                String.valueOf(exitCode)));
             }
 
             //Check if invocation was successfully or not
@@ -869,12 +843,6 @@ public abstract class ShellConsole extends Console implements Program.ProgramLis
      * @hide
      */
     void toStdIn(String stdin) {
-        //Audit (if not cancelled)
-        if (!this.mCancelled && isTrace() && stdin.length() > 0) {
-            Log.v(TAG,
-                    String.format(
-                            "stdin: %s", stdin)); //$NON-NLS-1$
-        }
     }
 
     /**
@@ -1001,12 +969,6 @@ public abstract class ShellConsole extends Console implements Program.ProgramLis
      * @hide
      */
     void toStdErr(String stderr) {
-        //Audit (if not cancelled)
-        if (!this.mCancelled && isTrace()) {
-            Log.v(TAG,
-                    String.format(
-                            "stderr: %s", stderr)); //$NON-NLS-1$
-        }
     }
 
     /**

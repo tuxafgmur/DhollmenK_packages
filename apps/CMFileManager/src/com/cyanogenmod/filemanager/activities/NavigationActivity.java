@@ -1382,7 +1382,6 @@ public class NavigationActivity extends Activity
         switch (item.getItemId()) {
             case R.id.mnu_actions_add_to_bookmarks_current_folder:
                 // TODO add bookmark
-                Log.d(TAG, "add bookmark");
                 return true;
             case R.id.mnu_clear_history:
                 clearHistory();

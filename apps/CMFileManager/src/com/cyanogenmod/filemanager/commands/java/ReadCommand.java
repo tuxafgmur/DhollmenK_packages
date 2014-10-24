@@ -71,28 +71,17 @@ public class ReadCommand extends Program implements ReadExecutable {
     @Override
     public void execute()
             throws InsufficientPermissionsException, NoSuchFileOrDirectory, ExecutionException {
-        if (isTrace()) {
-            Log.v(TAG,
-                    String.format("Reading file %s", this.mFile)); //$NON-NLS-1$
-
-        }
         if (this.mAsyncResultListener != null) {
             this.mAsyncResultListener.onAsyncStart();
         }
 
         File f = new File(this.mFile);
         if (!f.exists()) {
-            if (isTrace()) {
-                Log.v(TAG, "Result: FAIL. NoSuchFileOrDirectory"); //$NON-NLS-1$
-            }
             if (this.mAsyncResultListener != null) {
                 this.mAsyncResultListener.onException(new NoSuchFileOrDirectory(this.mFile));
             }
         }
         if (!f.isFile()) {
-            if (isTrace()) {
-                Log.v(TAG, "Result: FAIL. NoSuchFileOrDirectory"); //$NON-NLS-1$
-            }
             if (this.mAsyncResultListener != null) {
                 this.mAsyncResultListener.onException(
                         new ExecutionException("path exists but it's not a file")); //$NON-NLS-1$
@@ -109,9 +98,6 @@ public class ReadCommand extends Program implements ReadExecutable {
             this.mAsyncResultListener.onAsyncExitCode(0);
         }
 
-        if (isTrace()) {
-            Log.v(TAG, "Result: OK"); //$NON-NLS-1$
-        }
     }
 
     /**
@@ -145,9 +131,6 @@ public class ReadCommand extends Program implements ReadExecutable {
             }
 
         } catch (Exception e) {
-            if (isTrace()) {
-                Log.v(TAG, "Result: FAIL. InsufficientPermissionsException"); //$NON-NLS-1$
-            }
             if (this.mAsyncResultListener != null) {
                 this.mAsyncResultListener.onException(new InsufficientPermissionsException());
             }

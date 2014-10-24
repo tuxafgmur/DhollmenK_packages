@@ -1121,11 +1121,9 @@ public class EditorActivity extends Activity implements TextWatcher {
                         while ((line = reader.readLine()) != null) {
                             this.mReader.mBinaryBuffer.add(line);
                         }
-                        Log.i(TAG, "Bytes read: " + data.length()); //$NON-NLS-1$
                     } else {
                         final String data = new String(this.mReader.mByteBuffer.toByteArray());
                         this.mReader.mBuffer = new SpannableStringBuilder(data);
-                        Log.i(TAG, "Bytes read: " + data.getBytes().length); //$NON-NLS-1$
                     }
                     this.mReader.mByteBuffer = null;
 
@@ -1432,7 +1430,6 @@ public class EditorActivity extends Activity implements TextWatcher {
                     os.write(data, 0, read);
                     written += read;
                 }
-                Log.i(TAG, "Bytes written: " + written); //$NON-NLS-1$
             } finally {
                 try {
                     bais.close();

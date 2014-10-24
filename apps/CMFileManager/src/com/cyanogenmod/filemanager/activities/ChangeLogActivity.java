@@ -104,7 +104,6 @@ public class ChangeLogActivity extends Activity implements OnCancelListener, OnD
     private void init() {
         InputStream is = getApplicationContext().getResources().openRawResource(R.raw.changelog);
         if (is == null) {
-            Log.e(TAG, "Changelog file not exists"); //$NON-NLS-1$
             finish();
             return;
         }
@@ -127,7 +126,6 @@ public class ChangeLogActivity extends Activity implements OnCancelListener, OnD
             DialogHelper.delegateDialogShow(this, dialog);
 
         } catch (Exception e) {
-            Log.e(TAG, "Failed to read changelog file", e); //$NON-NLS-1$
             finish();
 
         } finally {

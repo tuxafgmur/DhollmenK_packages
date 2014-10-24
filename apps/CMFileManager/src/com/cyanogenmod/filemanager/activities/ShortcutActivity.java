@@ -140,10 +140,6 @@ public class ShortcutActivity extends Activity implements OnCancelListener, OnDi
             // Check that i have a valid information
             if (type == null || type.length() == 0 || path == null || path.length() == 0) {
                 // Something is wrong
-                Log.w(TAG,
-                        String.format(
-                            "The shortcut intent couldn't be handled. Intent: %s", //$NON-NLS-1$
-                            getIntent()));
                 DialogHelper.showToast(this, R.string.shortcut_failed_msg, Toast.LENGTH_SHORT);
                 finish();
                 return;
@@ -151,9 +147,6 @@ public class ShortcutActivity extends Activity implements OnCancelListener, OnDi
             if (type.compareTo(SHORTCUT_TYPE_NAVIGATE) != 0 &&
                 type.compareTo(SHORTCUT_TYPE_OPEN) != 0) {
                 // Something is wrong
-                Log.w(TAG,
-                        String.format(
-                                "The shortcut intent type is unknown: %s", type)); //$NON-NLS-1$
                 DialogHelper.showToast(this, R.string.shortcut_failed_msg, Toast.LENGTH_SHORT);
                 finish();
                 return;
@@ -167,9 +160,6 @@ public class ShortcutActivity extends Activity implements OnCancelListener, OnDi
                     CommandHelper.getFileInfo(getApplicationContext(), path, true, null);
             if (fso == null) {
                 // Something is wrong
-                Log.w(TAG,
-                        String.format(
-                                "The fso not exists: %s", path)); //$NON-NLS-1$
                 DialogHelper.showToast(this, R.string.shortcut_failed_msg, Toast.LENGTH_SHORT);
                 finish();
                 return;

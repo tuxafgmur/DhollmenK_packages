@@ -78,12 +78,6 @@ public class DiskUsageCommand extends Program implements DiskUsageExecutable {
     public void execute()
             throws InsufficientPermissionsException, NoSuchFileOrDirectory, ExecutionException {
 
-        if (isTrace()) {
-            Log.v(TAG,
-                    String.format("Getting usage for: %s", //$NON-NLS-1$
-                            this.mSrc == null ? "all" : this.mSrc)); //$NON-NLS-1$
-        }
-
         if (this.mSrc == null) {
             // Retrieve the mount points
             MountPointInfoCommand cmd = new MountPointInfoCommand(this.mMountsFile);
@@ -101,9 +95,6 @@ public class DiskUsageCommand extends Program implements DiskUsageExecutable {
             this.mDisksUsage.add(createDiskUsuage(new File(this.mSrc)));
         }
 
-        if (isTrace()) {
-            Log.v(TAG, "Result: OK"); //$NON-NLS-1$
-        }
     }
 
     /**
@@ -118,9 +109,6 @@ public class DiskUsageCommand extends Program implements DiskUsageExecutable {
                                 file.getTotalSpace(),
                                 file.getTotalSpace() - file.getFreeSpace(),
                                 file.getFreeSpace());
-        if (isTrace()) {
-            Log.v(TAG, du.toString());
-        }
         return du;
     }
 

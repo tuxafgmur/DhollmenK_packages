@@ -96,12 +96,5 @@
         android:persistent="false"
         android:defaultValue="false" />
 
-      <!-- Capture debug traces -->
-      <CheckBoxPreference
-        android:key="cm_filemanager_show_debug_traces"
-        android:title="@string/pref_debug_traces"
-        android:persistent="true"
-        android:defaultValue="false" />
-
     </PreferenceCategory>
 </PreferenceScreen>

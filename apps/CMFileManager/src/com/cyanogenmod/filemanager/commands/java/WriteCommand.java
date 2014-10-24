@@ -95,9 +95,6 @@ public class WriteCommand extends Program implements WriteExecutable {
                                     new File(this.mFile)), getBufferSize());
             return this.mBuffer;
         } catch (IOException ioEx) {
-            if (isTrace()) {
-                Log.e(TAG, "Result: FAILED. IOException", ioEx); //$NON-NLS-1$
-            }
             throw ioEx;
         }
     }
@@ -113,11 +110,6 @@ public class WriteCommand extends Program implements WriteExecutable {
             this.mSync.notify();
         }
 
-        if (isTrace()) {
-            Log.v(TAG,
-                    String.format("Writing file %s", this.mFile)); //$NON-NLS-1$
-
-        }
         if (this.mAsyncResultListener != null) {
             this.mAsyncResultListener.onAsyncStart();
         }
@@ -136,9 +128,6 @@ public class WriteCommand extends Program implements WriteExecutable {
             this.mAsyncResultListener.onAsyncExitCode(0);
         }
 
-        if (isTrace()) {
-            Log.v(TAG, "Result: OK"); //$NON-NLS-1$
-        }
     }
 
     /**

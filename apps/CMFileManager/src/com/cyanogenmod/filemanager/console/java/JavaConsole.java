@@ -74,12 +74,8 @@ public final class JavaConsole extends Console {
     @Override
     public void alloc() throws ConsoleAllocException {
         try {
-            if (isTrace()) {
-                Log.v(TAG, "Allocating Java console"); //$NON-NLS-1$
-            }
             this.mActive = true;
         } catch (Exception e) {
-            Log.e(TAG, "Failed to allocate Java console", e); //$NON-NLS-1$
             throw new ConsoleAllocException("failed to build console", e); //$NON-NLS-1$
         }
     }
@@ -89,9 +85,6 @@ public final class JavaConsole extends Console {
      */
     @Override
     public void dealloc() {
-        if (isTrace()) {
-            Log.v(TAG, "Deallocating Java console"); //$NON-NLS-1$
-        }
         this.mActive = true;
     }
 
@@ -168,12 +161,6 @@ public final class JavaConsole extends Console {
             throw new CommandNotFoundException("executable is not a program", e); //$NON-NLS-1$
         }
 
-        //Auditing program execution
-        if (isTrace()) {
-            Log.v(TAG, String.format("Executing program: %s", //$NON-NLS-1$
-                    executable.getClass().toString()));
-        }
-
         // Execute the program
         final Program program = (Program)executable;
         program.setTrace(isTrace());
@@ -187,9 +174,6 @@ public final class JavaConsole extends Console {
                         program.execute();
                     } catch (Exception e) {
                         // Program must use onException to communicate exceptions
-                        Log.v(TAG,
-                                String.format("Async execute failed program: %s", //$NON-NLS-1$
-                                program.getClass().toString()));
                     }
                 }
             };

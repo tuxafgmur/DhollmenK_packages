@@ -76,16 +76,8 @@ public class ChecksumCommand extends Program implements ChecksumExecutable {
     public void execute() throws InsufficientPermissionsException,
         NoSuchFileOrDirectory, ExecutionException {
 
-        if (isTrace()) {
-            Log.v(TAG,
-                    String.format("Calculating checksums of file %s", this.mSrc)); //$NON-NLS-1$
-        }
-
         // Check that the file exists
         if (!this.mSrc.exists()) {
-            if (isTrace()) {
-                Log.v(TAG, "Result: FAIL. NoSuchFileOrDirectory"); //$NON-NLS-1$
-            }
             throw new NoSuchFileOrDirectory(this.mSrc.getAbsolutePath());
         }
 
@@ -107,20 +99,12 @@ public class ChecksumCommand extends Program implements ChecksumExecutable {
                 this.mAsyncResultListener.onAsyncExitCode(0);
             }
 
-            if (isTrace()) {
-                Log.v(TAG, "Result: OK"); //$NON-NLS-1$
-            }
-
         } catch (InterruptedException ie) {
             if (this.mAsyncResultListener != null) {
                 this.mAsyncResultListener.onAsyncEnd(true);
             }
             if (this.mAsyncResultListener != null) {
                 this.mAsyncResultListener.onAsyncExitCode(143);
-            }
-
-            if (isTrace()) {
-                Log.v(TAG, "Result: CANCELLED"); //$NON-NLS-1$
             }
 
         } catch (Exception e) {
@@ -132,9 +116,6 @@ public class ChecksumCommand extends Program implements ChecksumExecutable {
                     e);
             if (this.mAsyncResultListener != null) {
                 this.mAsyncResultListener.onException(e);
-            }
-            if (isTrace()) {
-                Log.v(TAG, "Result: FAIL"); //$NON-NLS-1$
             }
         }
     }

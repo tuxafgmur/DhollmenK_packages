@@ -82,28 +82,17 @@ public class FolderUsageCommand extends Program implements FolderUsageExecutable
     @Override
     public void execute()
             throws InsufficientPermissionsException, NoSuchFileOrDirectory, ExecutionException {
-        if (isTrace()) {
-            Log.v(TAG,
-                    String.format("Computing folder usage for folder %s", //$NON-NLS-1$
-                            this.mDirectory));
-        }
         if (this.mAsyncResultListener != null) {
             this.mAsyncResultListener.onAsyncStart();
         }
 
         File f = new File(this.mDirectory);
         if (!f.exists()) {
-            if (isTrace()) {
-                Log.v(TAG, "Result: FAIL. NoSuchFileOrDirectory"); //$NON-NLS-1$
-            }
             if (this.mAsyncResultListener != null) {
                 this.mAsyncResultListener.onException(new NoSuchFileOrDirectory(this.mDirectory));
             }
         }
         if (!f.isDirectory()) {
-            if (isTrace()) {
-                Log.v(TAG, "Result: FAIL. NoSuchFileOrDirectory"); //$NON-NLS-1$
-            }
             if (this.mAsyncResultListener != null) {
                 this.mAsyncResultListener.onException(
                         new ExecutionException("path exists but it's not a folder")); //$NON-NLS-1$
@@ -125,9 +114,6 @@ public class FolderUsageCommand extends Program implements FolderUsageExecutable
             this.mAsyncResultListener.onAsyncExitCode(0);
         }
 
-        if (isTrace()) {
-            Log.v(TAG, "Result: OK"); //$NON-NLS-1$
-        }
     }
 
     /**
