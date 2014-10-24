@@ -37,9 +37,8 @@ import java.util.List;
 /* package */ class AudioRouter implements BluetoothIndicatorListener, WiredHeadsetListener {
 
     private static String LOG_TAG = AudioRouter.class.getSimpleName();
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
-    private static final boolean VDBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private static final boolean DBG = false;
+    private static final boolean VDBG = false;
 
     private static final boolean ON = true;
     private static final boolean OFF = false;
@@ -121,7 +120,6 @@ import java.util.List;
      * Sets the audio mode to the mode that is passed in.
      */
     public void setAudioMode(int mode) {
-        logD("setAudioMode " + AudioMode.toString(mode));
         boolean error = false;
 
         // changes WIRED_OR_EARPIECE to appropriate single entry WIRED_HEADSET or EARPIECE
@@ -129,7 +127,6 @@ import java.util.List;
 
         // If mode is unsupported, do nothing.
         if ((calculateSupportedModes() | mode) == 0) {
-            Log.wtf(LOG_TAG, "Asking to set to a mode that is unsupported: " + mode);
             return;
         }
 
@@ -167,9 +164,6 @@ import java.util.List;
 
         if (error) {
             mode = calculateModeFromCurrentState();
-            Log.e(LOG_TAG, "There was an error in setting new audio mode. " +
-                    "Resetting mode to " + AudioMode.toString(mode) + ".");
-
         }
 
         updateAudioModeTo(mode);
@@ -179,7 +173,6 @@ import java.util.List;
      * Turns on speaker.
      */
     public void setSpeaker(boolean on) {
-        logD("setSpeaker " + on);
 
         if (on) {
             setAudioMode(AudioMode.SPEAKER);
@@ -189,7 +182,6 @@ import java.util.List;
     }
 
     public void onMuteChange(boolean muted) {
-        logD("onMuteChange: " + muted);
 
         notifyListeners();
 
@@ -205,7 +197,6 @@ import java.util.List;
      */
     @Override
     public void onBluetoothIndicationChange(boolean isConnected, BluetoothManager btManager) {
-        logD("onBluetoothIndicationChange " + isConnected);
 
         // this will read the new bluetooth mode appropriately
         updateAudioModeTo(calculateModeFromCurrentState());
@@ -216,7 +207,6 @@ import java.util.List;
      */
     @Override
     public void onWiredHeadsetConnection(boolean pluggedIn) {
-        logD("onWireHeadsetConnection " + pluggedIn);
 
         // Since the presence of a wired headset or bluetooth affects the
         // speakerphone, update the "speaker" state.  We ONLY want to do
@@ -270,7 +260,6 @@ import java.util.List;
             mode = AudioMode.WIRED_OR_EARPIECE & mSupportedModes;
 
             if (mode == 0) {
-                Log.wtf(LOG_TAG, "One of wired headset or earpiece should always be valid.");
                 // assume earpiece in this case.
                 mode = AudioMode.EARPIECE;
             }
@@ -330,8 +319,6 @@ import java.util.List;
             mode = AudioMode.WIRED_HEADSET;
         }
 
-        logD("calculateModeFromCurrentState " + AudioMode.toString(mode));
-
         return mode;
     }
 
@@ -357,7 +344,6 @@ import java.util.List;
 
         // only update if it really changed.
         if (mAudioMode != mode) {
-            Log.i(LOG_TAG, "Audio mode changing to " + AudioMode.toString(mode));
             doNotify = true;
         }
 
@@ -395,9 +381,6 @@ import java.util.List;
     }
 
     private void notifyListeners() {
-        logD("AudioMode: " + AudioMode.toString(mAudioMode));
-        logD("Supported AudioMode: " + AudioMode.toString(mSupportedModes));
-
         for (int i = 0; i < mListeners.size(); i++) {
             mListeners.get(i).onAudioModeChange(mAudioMode, getMute());
             mListeners.get(i).onSupportedAudioModeChange(mSupportedModes);

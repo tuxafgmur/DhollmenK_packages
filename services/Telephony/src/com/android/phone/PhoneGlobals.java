@@ -99,9 +99,8 @@ public class PhoneGlobals extends ContextWrapper implements WiredHeadsetListener
      */
     /* package */ static final int DBG_LEVEL = 0;
 
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
-    private static final boolean VDBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private static final boolean DBG = false;
+    private static final boolean VDBG = false;
 
     // Message codes; see mHandler below.
     private static final int EVENT_SIM_NETWORK_LOCKED = 3;
@@ -278,13 +277,10 @@ public class PhoneGlobals extends ContextWrapper implements WiredHeadsetListener
                 case EVENT_SIM_NETWORK_LOCKED:
                     if (getResources().getBoolean(R.bool.ignore_sim_network_locked_events)) {
                         // Some products don't have the concept of a "SIM network lock"
-                        Log.i(LOG_TAG, "Ignoring EVENT_SIM_NETWORK_LOCKED event; "
-                              + "not showing 'SIM network unlock' PIN entry screen");
                     } else {
                         // Normal case: show the "SIM network unlock" PIN entry screen.
                         // The user won't be able to do anything else until
                         // they enter a valid SIM network PIN.
-                        Log.i(LOG_TAG, "show sim depersonal panel");
                         IccNetworkDepersonalizationPanel ndpPanel =
                                 new IccNetworkDepersonalizationPanel(PhoneGlobals.getInstance());
                         ndpPanel.show();
@@ -1062,13 +1058,11 @@ public class PhoneGlobals extends ContextWrapper implements WiredHeadsetListener
                         intent.getStringExtra(IccCardConstants.INTENT_KEY_ICC_STATE)));
             } else if (action.equals(TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED)) {
                 String newPhone = intent.getStringExtra(PhoneConstants.PHONE_NAME_KEY);
-                Log.d(LOG_TAG, "Radio technology switched. Now " + newPhone + " is active.");
                 initForNewRadioTechnology();
             } else if (action.equals(TelephonyIntents.ACTION_SERVICE_STATE_CHANGED)) {
                 handleServiceStateChanged(intent);
             } else if (action.equals(TelephonyIntents.ACTION_EMERGENCY_CALLBACK_MODE_CHANGED)) {
                 if (TelephonyCapabilities.supportsEcm(phone)) {
-                    Log.d(LOG_TAG, "Emergency Callback Mode arrived in PhoneApp.");
                     // Start Emergency Callback Mode service
                     if (intent.getBooleanExtra("phoneinECMState", false)) {
                         context.startService(new Intent(context,
@@ -1156,7 +1150,6 @@ public class PhoneGlobals extends ContextWrapper implements WiredHeadsetListener
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             // TODO: use "if (VDBG)" here.
-            Log.d(LOG_TAG, "Broadcast from Notification: " + action);
 
             if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
                 PhoneUtils.hangup(PhoneGlobals.getInstance().mCM);
@@ -1312,13 +1305,11 @@ public class PhoneGlobals extends ContextWrapper implements WiredHeadsetListener
 
         /** Handle the task of binding the local object to the service */
         public void onServiceConnected(ComponentName className, IBinder service) {
-            Log.i(LOG_TAG, "Headset phone created, binding local service.");
             mBluetoothPhone = IBluetoothHeadsetPhone.Stub.asInterface(service);
         }
 
         /** Handle the task of cleaning up the local binding */
         public void onServiceDisconnected(ComponentName className) {
-            Log.i(LOG_TAG, "Headset phone disconnected, cleaning local binding.");
             mBluetoothPhone = null;
         }
     };

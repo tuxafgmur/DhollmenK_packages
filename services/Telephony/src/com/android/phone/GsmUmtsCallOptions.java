@@ -27,7 +27,7 @@ import com.android.internal.telephony.PhoneConstants;
 
 public class GsmUmtsCallOptions extends PreferenceActivity {
     private static final String LOG_TAG = "GsmUmtsCallOptions";
-    private final boolean DBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private final boolean DBG = false;
 
     @Override
     protected void onCreate(Bundle icicle) {

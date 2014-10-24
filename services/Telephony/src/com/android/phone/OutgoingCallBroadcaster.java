@@ -67,8 +67,7 @@ public class OutgoingCallBroadcaster extends Activity
         implements DialogInterface.OnClickListener, DialogInterface.OnCancelListener {
 
     private static final String TAG = "OutgoingCallBroadcaster";
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
     // Do not check in with VDBG = true, since that may write PII to the system log.
     private static final boolean VDBG = false;
 
@@ -115,12 +114,9 @@ public class OutgoingCallBroadcaster extends Activity
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == EVENT_OUTGOING_CALL_TIMEOUT) {
-                Log.i(TAG, "Outgoing call takes too long. Showing the spinner.");
                 mWaitingSpinner.setVisibility(View.VISIBLE);
             } else if (msg.what == EVENT_DELAYED_FINISH) {
                 finish();
-            } else {
-                Log.wtf(TAG, "Unknown message id: " + msg.what);
             }
         }
     };
@@ -225,7 +221,6 @@ public class OutgoingCallBroadcaster extends Activity
                 } else if (isOtaCallActive) {
                     // The actual OTASP call is active.  Don't allow new
                     // outgoing calls at all from this state.
-                    Log.w(TAG, "OTASP call is active: disallowing a new outgoing call.");
                     return false;
                 }
             }
@@ -243,14 +238,12 @@ public class OutgoingCallBroadcaster extends Activity
                 // calls via the ACTION_CALL intent, we also don't allow 3rd
                 // party apps to use the NEW_OUTGOING_CALL broadcast to rewrite
                 // an outgoing call into an emergency number.
-                Log.w(TAG, "Cannot modify outgoing call to emergency number " + number + ".");
                 return false;
             }
 
             originalUri = intent.getStringExtra(
                     OutgoingCallBroadcaster.EXTRA_ORIGINAL_URI);
             if (originalUri == null) {
-                Log.e(TAG, "Intent is missing EXTRA_ORIGINAL_URI -- returning.");
                 return false;
             }
 
@@ -371,8 +364,6 @@ public class OutgoingCallBroadcaster extends Activity
             // run once (with icicle==null the first time), which means
             // that the NEW_OUTGOING_CALL broadcast for this new call has
             // already been sent.
-            Log.i(TAG, "onCreate: non-null icicle!  "
-                  + "Bailing out, not sending NEW_OUTGOING_CALL broadcast...");
 
             // No need to finish() here, since the OutgoingCallReceiver from
             // our original instance will do that.  (It'll actually call
@@ -434,7 +425,6 @@ public class OutgoingCallBroadcaster extends Activity
 
         // Outgoing phone calls are only allowed on "voice-capable" devices.
         if (!PhoneGlobals.sVoiceCapable) {
-            Log.i(TAG, "This device is detected as non-voice-capable device.");
             handleNonVoiceCapable(intent);
             return;
         }
@@ -448,8 +438,6 @@ public class OutgoingCallBroadcaster extends Activity
                 number = PhoneNumberUtils.convertKeypadLettersToDigits(number);
                 number = PhoneNumberUtils.stripSeparators(number);
             }
-        } else {
-            Log.w(TAG, "The number obtained from Intent is null.");
         }
 
         AppOpsManager appOps = (AppOpsManager)getSystemService(Context.APP_OPS_SERVICE);
@@ -466,8 +454,6 @@ public class OutgoingCallBroadcaster extends Activity
         }
         if (appOps.noteOpNoThrow(AppOpsManager.OP_CALL_PHONE, launchedFromUid, launchedFromPackage)
                 != AppOpsManager.MODE_ALLOWED) {
-            Log.w(TAG, "Rejecting call from uid " + launchedFromUid + " package "
-                    + launchedFromPackage);
             finish();
             return;
         }
@@ -483,7 +469,6 @@ public class OutgoingCallBroadcaster extends Activity
             // not one of its more privileged aliases, then make sure that
             // only the non-privileged actions are allowed.
             if (!Intent.ACTION_CALL.equals(intent.getAction())) {
-                Log.w(TAG, "Attempt to deliver non-CALL action; forcing to CALL");
                 intent.setAction(Intent.ACTION_CALL);
             }
         }
@@ -518,8 +503,6 @@ public class OutgoingCallBroadcaster extends Activity
             // CALL_EMERGENCY (since we *should* allow you to dial "91112345" from
             // the dialer if you really want to.)
             if (isPotentialEmergencyNumber) {
-                Log.i(TAG, "ACTION_CALL_PRIVILEGED is used while the number is a potential"
-                        + " emergency number. Use ACTION_CALL_EMERGENCY as an action instead.");
                 action = Intent.ACTION_CALL_EMERGENCY;
             } else {
                 action = Intent.ACTION_CALL;
@@ -530,10 +513,6 @@ public class OutgoingCallBroadcaster extends Activity
 
         if (Intent.ACTION_CALL.equals(action)) {
             if (isPotentialEmergencyNumber) {
-                Log.w(TAG, "Cannot call potential emergency number '" + number
-                        + "' with CALL Intent " + intent + ".");
-                Log.i(TAG, "Launching default dialer instead...");
-
                 Intent invokeFrameworkDialer = new Intent();
 
                 // TwelveKeyDialer is in a tab so we really want
@@ -563,9 +542,6 @@ public class OutgoingCallBroadcaster extends Activity
             // Make sure it's at least *possible* that this is really an
             // emergency number.
             if (!isPotentialEmergencyNumber) {
-                Log.w(TAG, "Cannot call non-potential-emergency number " + number
-                        + " with EMERGENCY_CALL Intent " + intent + "."
-                        + " Finish the Activity immediately.");
                 finish();
                 return;
             }
@@ -592,12 +568,10 @@ public class OutgoingCallBroadcaster extends Activity
         // number, so there's no point in allowing apps to modify the number.
         if (TextUtils.isEmpty(number)) {
             if (intent.getBooleanExtra(EXTRA_SEND_EMPTY_FLASH, false)) {
-                Log.i(TAG, "onCreate: SEND_EMPTY_FLASH...");
                 PhoneUtils.sendEmptyFlash(PhoneGlobals.getPhone());
                 finish();
                 return;
             } else {
-                Log.i(TAG, "onCreate: null or empty number, setting callNow=true...");
                 callNow = true;
             }
         }
@@ -606,8 +580,6 @@ public class OutgoingCallBroadcaster extends Activity
             // This is a special kind of call (most likely an emergency number)
             // that 3rd parties aren't allowed to intercept or affect in any way.
             // So initiate the outgoing call immediately.
-
-            Log.i(TAG, "onCreate(): callNow case! Calling placeCall(): " + intent);
 
             // Initiate the outgoing call, and simultaneously launch the
             // InCallScreen to display the in-call UI:
@@ -634,7 +606,6 @@ public class OutgoingCallBroadcaster extends Activity
         Uri uri = intent.getData();
         String scheme = uri.getScheme();
         if (Constants.SCHEME_SIP.equals(scheme) || PhoneNumberUtils.isUriNumber(number)) {
-            Log.i(TAG, "The requested number was detected as SIP call.");
             startSipCallOptionHandler(this, intent, uri, number);
             finish();
             return;
@@ -717,7 +688,6 @@ public class OutgoingCallBroadcaster extends Activity
                         .create();
                 break;
             default:
-                Log.w(TAG, "onCreateDialog: unexpected ID " + id);
                 dialog = null;
                 break;
         }

@@ -32,7 +32,7 @@ import android.util.Log;
 
 public class CdmaCallOptions extends PreferenceActivity {
     private static final String LOG_TAG = "CdmaCallOptions";
-    private final boolean DBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private final boolean DBG = false;
 
     private static final String BUTTON_VP_KEY = "button_voice_privacy_key";
     private CheckBoxPreference mButtonVoicePrivacy;

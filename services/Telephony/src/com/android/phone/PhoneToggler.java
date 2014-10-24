@@ -46,7 +46,7 @@ public class PhoneToggler extends BroadcastReceiver  {
             "com.android.phone.CHANGE_NETWORK_MODE";
 
     private static final String LOG_TAG = "PhoneToggler";
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
 
     private Phone mPhone;
     private MyHandler mHandler;
@@ -101,8 +101,6 @@ public class PhoneToggler extends BroadcastReceiver  {
                 if (networkModeOk) {
                     if (DBG) Log.d(LOG_TAG, "Changing network mode to " + networkMode);
                     changeNetworkMode(networkMode);
-                } else {
-                    Log.e(LOG_TAG,"Invalid network mode: "+networkMode);
                 }
             }
         } else if (ACTION_REQUEST_NETWORK_MODE.equals(action)) {

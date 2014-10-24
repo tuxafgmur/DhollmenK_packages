@@ -75,8 +75,7 @@ import java.util.ArrayList;
  */
 public class NotificationMgr {
     private static final String LOG_TAG = "NotificationMgr";
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
     // Do not check in with VDBG = true, since that may write PII to the system log.
     private static final boolean VDBG = false;
 
@@ -193,8 +192,6 @@ public class NotificationMgr {
                 sInstance = new NotificationMgr(app);
                 // Update the notifications that need to be touched at startup.
                 sInstance.updateNotificationsAtStartup();
-            } else {
-                Log.wtf(LOG_TAG, "init() called multiple times!  sInstance = " + sInstance);
             }
             return sInstance;
         }
@@ -954,11 +951,6 @@ public class NotificationMgr {
                     if (DBG) log("  - Retrying in " + VM_NUMBER_RETRY_DELAY_MILLIS + " msec...");
                     mApp.notifier.sendMwiChangedDelayed(VM_NUMBER_RETRY_DELAY_MILLIS);
                     return;
-                } else {
-                    Log.w(LOG_TAG, "NotificationMgr.updateMwi: getVoiceMailNumber() failed after "
-                          + MAX_VM_NUMBER_RETRIES + " retries; giving up.");
-                    // ...and continue with vmNumber==null, just as if the
-                    // phone had no VM number set up in the first place.
                 }
             }
 

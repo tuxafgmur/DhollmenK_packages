@@ -69,7 +69,7 @@ import java.util.Map;
  */
 public class PhoneInterfaceManager extends ITelephony.Stub implements CallModeler.Listener {
     private static final String LOG_TAG = "PhoneInterfaceManager";
-    private static final boolean DBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private static final boolean DBG = false;
     private static final boolean DBG_LOC = false;
 
     // Message codes used with mMainThreadHandler
@@ -197,7 +197,6 @@ public class PhoneInterfaceManager extends ITelephony.Stub implements CallModele
                     break;
 
                 default:
-                    Log.w(LOG_TAG, "MainThreadHandler: unexpected message code: " + msg.what);
                     break;
             }
         }
@@ -251,8 +250,6 @@ public class PhoneInterfaceManager extends ITelephony.Stub implements CallModele
             if (sInstance == null) {
                 sInstance = new PhoneInterfaceManager(app, phone, callHandlerService, callModeler,
                         dtmfTonePlayer);
-            } else {
-                Log.wtf(LOG_TAG, "init() called multiple times!  sInstance = " + sInstance);
             }
             return sInstance;
         }
@@ -575,7 +572,6 @@ public class PhoneInterfaceManager extends ITelephony.Stub implements CallModele
                         AsyncResult ar = (AsyncResult) msg.obj;
                         switch (msg.what) {
                             case SUPPLY_PIN_COMPLETE:
-                                Log.d(LOG_TAG, "SUPPLY_PIN_COMPLETE");
                                 synchronized (UnlockSim.this) {
                                     mRetryCount = msg.arg1;
                                     if (ar.exception != null) {
@@ -627,14 +623,12 @@ public class PhoneInterfaceManager extends ITelephony.Stub implements CallModele
 
             while (!mDone) {
                 try {
-                    Log.d(LOG_TAG, "wait for done");
                     wait();
                 } catch (InterruptedException e) {
                     // Restore the interrupted status
                     Thread.currentThread().interrupt();
                 }
             }
-            Log.d(LOG_TAG, "done");
             int[] resultArray = new int[2];
             resultArray[0] = mResult;
             resultArray[1] = mRetryCount;
@@ -1110,7 +1104,6 @@ public class PhoneInterfaceManager extends ITelephony.Stub implements CallModele
             IBinder listenerBinder = listener.asBinder();
             for (ITelephonyListener l : mListeners) {
                 if (l.asBinder().equals(listenerBinder)) {
-                    Log.w(LOG_TAG, "Listener already registered. Ignoring.");
                     return;
                 }
             }
@@ -1236,10 +1229,6 @@ public class PhoneInterfaceManager extends ITelephony.Stub implements CallModele
             synchronized (mListeners) {
                 if (mListeners.contains(mBinder)) {
                     mListeners.remove(mBinder);
-                    Log.w(LOG_TAG, "ITelephonyListener died. Removing.");
-                } else {
-                    Log.w(LOG_TAG, "TelephonyListener binder died but the listener " +
-                            "is not registered.");
                 }
             }
         }

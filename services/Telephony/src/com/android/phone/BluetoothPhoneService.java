@@ -54,9 +54,8 @@ import java.util.List;
  */
 public class BluetoothPhoneService extends Service {
     private static final String TAG = "BluetoothPhoneService";
-    private static final boolean DBG = (PhoneGlobals.DBG_LEVEL >= 1)
-            && (SystemProperties.getInt("ro.debuggable", 0) == 1);
-    private static final boolean VDBG = (PhoneGlobals.DBG_LEVEL >= 2);  // even more logging
+    private static final boolean DBG = false;
+    private static final boolean VDBG = false;
 
     private static final String MODIFY_PHONE_STATE = android.Manifest.permission.MODIFY_PHONE_STATE;
 
@@ -229,7 +228,6 @@ public class BluetoothPhoneService extends Service {
         /* if in transition, do not update */
         if (mForegroundCallState == Call.State.DISCONNECTING)
         {
-            Log.d(TAG, "handlePreciseCallStateChange. Call disconnecting, wait before update");
             return;
         }
         else
@@ -248,18 +246,12 @@ public class BluetoothPhoneService extends Service {
                 CdmaPhoneCallState.PhoneCallState prevCdmaThreeWayCallState =
                     app.cdmaPhoneCallState.getPreviousCallState();
 
-                log("CDMA call state: " + currCdmaThreeWayCallState + " prev state:" +
-                    prevCdmaThreeWayCallState);
-
                 if ((mBluetoothHeadset != null) &&
                     (mCdmaThreeWayCallState != currCdmaThreeWayCallState)) {
                     // In CDMA, the network does not provide any feedback
                     // to the phone when the 2nd MO call goes through the
                     // stages of DIALING > ALERTING -> ACTIVE we fake the
                     // sequence
-                    log("CDMA 3way call state change. mNumActive: " + mNumActive +
-                        " mNumHeld: " + mNumHeld + " IsThreeWayCallOrigStateDialing: " +
-                        app.cdmaPhoneCallState.IsThreeWayCallOrigStateDialing());
                     if ((currCdmaThreeWayCallState ==
                             CdmaPhoneCallState.PhoneCallState.THRWAY_ACTIVE)
                                 && app.cdmaPhoneCallState.IsThreeWayCallOrigStateDialing()) {
@@ -283,8 +275,6 @@ public class BluetoothPhoneService extends Service {
                             CdmaPhoneCallState.PhoneCallState.CONF_CALL &&
                             prevCdmaThreeWayCallState ==
                               CdmaPhoneCallState.PhoneCallState.THRWAY_ACTIVE) {
-                        log("CDMA 3way conf call. mNumActive: " + mNumActive +
-                            " mNumHeld: " + mNumHeld);
                         mBluetoothHeadset.phoneStateChanged(mNumActive, mNumHeld,
                             convertCallState(Call.State.IDLE, mForegroundCallState),
                             mRingNumber.mNumber, mRingNumber.mType);
@@ -370,8 +360,6 @@ public class BluetoothPhoneService extends Service {
             CdmaPhoneCallState.PhoneCallState prev3WayCallState =
                 app.cdmaPhoneCallState.getPreviousCallState();
 
-            log("CDMA call state: " + curr3WayCallState + " prev state:" +
-                prev3WayCallState);
             if (curr3WayCallState == CdmaPhoneCallState.PhoneCallState.CONF_CALL) {
                 if (prev3WayCallState == CdmaPhoneCallState.PhoneCallState.THRWAY_ACTIVE) {
                     numHeld = 0; //0: no calls held, as now *both* the caller are active
@@ -395,9 +383,6 @@ public class BluetoothPhoneService extends Service {
         // find phone number and type
         if (connection == null) {
             connection = call.getEarliestConnection();
-            if (connection == null) {
-                Log.e(TAG, "Could not get a handle on Connection object for the call");
-            }
         }
         if (connection != null) {
             number = connection.getAddress();
@@ -660,12 +645,7 @@ public class BluetoothPhoneService extends Service {
                 // If the current state is reached after merging two calls
                 // we set the multiparty call true.
                 mpty = true;
-            } // else
-                // CALL_CONF state is not from merging two calls, but from
-                // accepting the second call. In this case first will be on
-                // hold in most cases but in some cases its already merged.
-                // However, we will follow the common case and the test case
-                // as per Bluetooth SIG PTS
+            }
         }
 
         boolean isIncoming = connection.isIncoming();
@@ -787,7 +767,6 @@ public class BluetoothPhoneService extends Service {
                         cdmaSwapSecondCallState();
                         return true;
                     }
-                    Log.e(TAG, "CDMA fail to do hold active and accept held");
                     return false;
                 } else if (phoneType == PhoneConstants.PHONE_TYPE_GSM) {
                     PhoneUtils.switchHoldingAndActive(backgroundCall);
@@ -811,7 +790,6 @@ public class BluetoothPhoneService extends Service {
                         // TODO(BT)
                         return false;
                     }
-                    Log.e(TAG, "GSG no call to add conference");
                     return false;
                 } else if (phoneType == PhoneConstants.PHONE_TYPE_GSM) {
                     if (mCM.hasActiveFgCall() && mCM.hasActiveBgCall()) {
@@ -826,7 +804,6 @@ public class BluetoothPhoneService extends Service {
                     return false;
                 }
             } else {
-                Log.e(TAG, "bad CHLD value: " + chld);
                 return false;
             }
         }

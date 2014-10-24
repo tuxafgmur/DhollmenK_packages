@@ -109,10 +109,6 @@ public class SipSettings extends PreferenceActivity {
             int profileUid = mProfile.getCallingUid();
             boolean isPrimary = mProfile.getUriString().equals(
                     mSipSharedPreferences.getPrimaryAccount());
-            Log.v(TAG, "profile uid is " + profileUid + " isPrimary:"
-                    + isPrimary + " registration:" + registrationStatus
-                    + " Primary:" + mSipSharedPreferences.getPrimaryAccount()
-                    + " status:" + registrationStatus);
             String summary = "";
             if ((profileUid > 0) && (profileUid != mUid)) {
                 // from third party apps
@@ -190,18 +186,15 @@ public class SipSettings extends PreferenceActivity {
             public void run() {
                 try {
                     if (mProfile != null) {
-                        Log.v(TAG, "Removed Profile:" + mProfile.getProfileName());
                         deleteProfile(mProfile);
                     }
 
                     SipProfile profile = intent.getParcelableExtra(KEY_SIP_PROFILE);
                     if (resultCode == RESULT_OK) {
-                        Log.v(TAG, "New Profile Name:" + profile.getProfileName());
                         addProfile(profile);
                     }
                     updateProfilesStatus();
                 } catch (IOException e) {
-                    Log.v(TAG, "Can not handle the profile : " + e.getMessage());
                 }
             }
         }.start();
@@ -342,7 +335,6 @@ public class SipSettings extends PreferenceActivity {
 
     private void addPreferenceFor(SipProfile p) {
         String status;
-        Log.v(TAG, "addPreferenceFor profile uri" + p.getUri());
         SipPreference pref = new SipPreference(this, p);
         mSipPreferenceMap.put(p.getUriString(), pref);
         mSipListContainer.addPreference(pref);

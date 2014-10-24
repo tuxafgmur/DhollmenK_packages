@@ -44,9 +44,8 @@ import java.util.List;
  */
 public class BluetoothManager implements CallModeler.Listener {
     private static final String LOG_TAG = BluetoothManager.class.getSimpleName();
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
-    private static final boolean VDBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private static final boolean DBG = false;
+    private static final boolean VDBG = false;
 
     private final BluetoothAdapter mBluetoothAdapter;
     private final CallManager mCallManager;

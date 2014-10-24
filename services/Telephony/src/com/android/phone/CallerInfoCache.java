@@ -44,8 +44,7 @@ import java.util.Map.Entry;
  */
 public class CallerInfoCache {
     private static final String LOG_TAG = CallerInfoCache.class.getSimpleName();
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
 
     /** This must not be set to true when submitting changes. */
     private static final boolean VDBG = false;
@@ -175,7 +174,6 @@ public class CallerInfoCache {
         if (DBG) log("startAsyncCache");
 
         if (mCacheAsyncTask != null) {
-            Log.w(LOG_TAG, "Previous cache task is remaining.");
             mCacheAsyncTask.cancel(true);
         }
         mCacheAsyncTask = new CacheAsyncTask();
@@ -308,7 +306,6 @@ public class CallerInfoCache {
         if (mNumberToEntry == null) {
             // Very unusual state. This implies the cache isn't ready during the request, while
             // it should be prepared on the boot time (i.e. a way before even the first request).
-            Log.w(LOG_TAG, "Fallback cache isn't ready.");
             return null;
         }
 

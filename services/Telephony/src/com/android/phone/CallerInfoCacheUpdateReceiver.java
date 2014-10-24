@@ -30,8 +30,7 @@ import android.util.Log;
  */
 public class CallerInfoCacheUpdateReceiver extends BroadcastReceiver {
     private static final String LOG_TAG = CallerInfoCacheUpdateReceiver.class.getSimpleName();
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
 
     public static final String ACTION_UPDATE_CALLER_INFO_CACHE =
             "com.android.phone.UPDATE_CALLER_INFO_CACHE";

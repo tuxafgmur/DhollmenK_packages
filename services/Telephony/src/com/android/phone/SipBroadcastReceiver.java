@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class SipBroadcastReceiver extends BroadcastReceiver {
     private static final String TAG = SipBroadcastReceiver.class.getSimpleName();
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
     private SipSharedPreferences mSipSharedPreferences;
 
     @Override

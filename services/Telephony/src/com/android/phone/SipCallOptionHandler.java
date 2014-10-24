@@ -65,8 +65,7 @@ public class SipCallOptionHandler extends Activity implements
         DialogInterface.OnClickListener, DialogInterface.OnCancelListener,
         CompoundButton.OnCheckedChangeListener {
     static final String TAG = "SipCallOptionHandler";
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
 
     static final int DIALOG_SELECT_PHONE_TYPE = 0;
     static final int DIALOG_SELECT_OUTGOING_SIP_PHONE = 1;
@@ -96,8 +95,6 @@ public class SipCallOptionHandler extends Activity implements
         public void handleMessage(Message msg) {
             if (msg.what == EVENT_DELAYED_FINISH) {
                 finish();
-            } else {
-                Log.wtf(TAG, "Unknown message id: " + msg.what);
             }
         }
     };
@@ -112,8 +109,6 @@ public class SipCallOptionHandler extends Activity implements
         // This activity is only ever launched with the
         // ACTION_SIP_SELECT_PHONE action.
         if (!OutgoingCallBroadcaster.ACTION_SIP_SELECT_PHONE.equals(action)) {
-            Log.wtf(TAG, "onCreate: got intent action '" + action + "', expected "
-                    + OutgoingCallBroadcaster.ACTION_SIP_SELECT_PHONE);
             finish();
             return;
         }
@@ -389,7 +384,6 @@ public class SipCallOptionHandler extends Activity implements
                 Log.e(TAG, "cannot make sipphone profile" + p);
             }
         } catch (SipException e) {
-            Log.e(TAG, "cannot open sip profile" + p, e);
         }
     }
 

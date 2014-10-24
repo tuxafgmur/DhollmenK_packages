@@ -45,8 +45,7 @@ import com.android.internal.telephony.TelephonyCapabilities;
  */
 public class InCallScreenShowActivation extends Activity {
     private static final String LOG_TAG = "InCallScreenShowActivation";
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -63,7 +62,6 @@ public class InCallScreenShowActivation extends Activity {
         PhoneGlobals app = PhoneGlobals.getInstance();
         Phone phone = app.getPhone();
         if (!TelephonyCapabilities.supportsOtasp(phone)) {
-            Log.w(LOG_TAG, "CDMA Provisioning not supported on this device");
             setResult(RESULT_CANCELED);
             finish();
             return;
@@ -73,7 +71,6 @@ public class InCallScreenShowActivation extends Activity {
 
             boolean usesHfa = getResources().getBoolean(R.bool.config_use_hfa_for_provisioning);
             if (usesHfa) {
-                Log.d(LOG_TAG, "Starting Hfa from ACTION_PERFORM_CDMA_PROVISIONING");
                 startHfa();
                 finish();
                 return;
@@ -84,8 +81,6 @@ public class InCallScreenShowActivation extends Activity {
             // boolean interactiveMode = PhoneGlobals.sVoiceCapable;
             // TODO: Renable interactive mode for device provisioning.
             boolean interactiveMode = false;
-            Log.d(LOG_TAG, "ACTION_PERFORM_CDMA_PROVISIONING (interactiveMode = "
-                  + interactiveMode + ")...");
 
             // Testing: this intent extra allows test apps manually
             // enable/disable "interactive mode", regardless of whether
@@ -95,7 +90,6 @@ public class InCallScreenShowActivation extends Activity {
                     && (SystemProperties.getInt("ro.debuggable", 0) == 1)) {
                 interactiveMode =
                         intent.getBooleanExtra(OtaUtils.EXTRA_OVERRIDE_INTERACTIVE_MODE, false);
-                Log.d(LOG_TAG, "===> MANUALLY OVERRIDING interactiveMode to " + interactiveMode);
             }
 
             // We allow the caller to pass a PendingIntent (as the
@@ -138,7 +132,6 @@ public class InCallScreenShowActivation extends Activity {
                           + callStatus);
                     setResult(OtaUtils.RESULT_NONINTERACTIVE_OTASP_STARTED);
                 } else {
-                    Log.w(LOG_TAG, "Failure code from startNonInteractiveOtasp(): " + callStatus);
                     setResult(OtaUtils.RESULT_NONINTERACTIVE_OTASP_FAILED);
                 }
             }
@@ -193,7 +186,6 @@ public class InCallScreenShowActivation extends Activity {
             intent.putExtra(OtaUtils.EXTRA_OTASP_RESULT_CODE_PENDING_INTENT, otaResponseIntent);
         }
 
-        Log.v(LOG_TAG, "Starting hfa activation activity");
         if (showUi) {
             intent.setClassName(this, HfaActivity.class.getName());
             startActivity(intent);

@@ -27,7 +27,7 @@ import android.view.WindowManager;
  */
 public class CdmaDisplayInfo {
     private static final String LOG_TAG = "CdmaDisplayInfo";
-    private static final boolean DBG = (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
 
     /** CDMA DisplayInfo dialog */
     private static AlertDialog sDisplayInfoDialog = null;

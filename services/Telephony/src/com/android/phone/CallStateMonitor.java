@@ -40,8 +40,7 @@ import java.util.List;
  */
 class CallStateMonitor extends Handler {
     private static final String LOG_TAG = CallStateMonitor.class.getSimpleName();
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
 
     // Events from the Phone object:
     public static final int PHONE_STATE_CHANGED = 1;

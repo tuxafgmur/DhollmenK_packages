@@ -82,8 +82,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CallModeler extends Handler {
 
     private static final String TAG = CallModeler.class.getSimpleName();
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
 
     private static final int CALL_ID_START_VALUE = 1;
 
@@ -274,9 +273,7 @@ public class CallModeler extends Handler {
             switch (state) {
                 case WAIT:
                     final Call call = getCallFromMap(mCallMap, c, false);
-                    if (call == null) {
-                        Log.i(TAG, "Call no longer exists. Skipping onPostDialWait().");
-                    } else {
+                    if (call != null) {
                         for (Listener mListener : mListeners) {
                             mListener.onPostDialAction(state, call.getCallId(),
                                     c.getRemainingPostDialString(), ch);
@@ -295,7 +292,6 @@ public class CallModeler extends Handler {
     }
 
     /* package */ Call onNewRingingConnection(Connection conn) {
-        Log.i(TAG, "onNewRingingConnection");
         final Call call = getCallFromMap(mCallMap, conn, true);
 
         if (call != null) {
@@ -317,7 +313,6 @@ public class CallModeler extends Handler {
     }
 
     private void onDisconnect(Connection conn) {
-        Log.i(TAG, "onDisconnect");
         final Call call = getCallFromMap(mCallMap, conn, false);
 
         if (call != null) {
@@ -346,7 +341,6 @@ public class CallModeler extends Handler {
      * Called when the phone state changes.
      */
     private void onPhoneStateChanged(AsyncResult r) {
-        Log.i(TAG, "onPhoneStateChanged: ");
         final List<Call> updatedCalls = Lists.newArrayList();
         doUpdate(false, updatedCalls);
 
@@ -362,8 +356,6 @@ public class CallModeler extends Handler {
     private void onSuppServiceNotification(AsyncResult r) {
         SuppServiceNotification notification = (SuppServiceNotification) r.result;
         Phone gsmPhone = PhoneUtils.getGsmPhone(mCallManager);
-
-        Log.d(TAG, "SS Notification: " + notification);
 
         if (notification.notificationType != SuppServiceNotification.NOTIFICATION_TYPE_MT) {
             return;

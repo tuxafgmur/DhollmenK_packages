@@ -118,10 +118,6 @@ public class SipEditor extends PreferenceActivity
             if (preference instanceof EditTextPreference) {
                 String oldValue = getValue();
                 ((EditTextPreference) preference).setText(value);
-                if (this != Password) {
-                    Log.v(TAG, this + ": setValue() " + value + ": " + oldValue
-                            + " --> " + getValue());
-                }
             } else if (preference instanceof ListPreference) {
                 ((ListPreference) preference).setValue(value);
             }
@@ -155,7 +151,6 @@ public class SipEditor extends PreferenceActivity
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.v(TAG, "start profile editor");
         super.onCreate(savedInstanceState);
 
         mSipManager = SipManager.newInstance(this);
@@ -187,7 +182,6 @@ public class SipEditor extends PreferenceActivity
 
     @Override
     public void onPause() {
-        Log.v(TAG, "SipEditor onPause(): finishing? " + isFinishing());
         if (!isFinishing()) {
             mHomeButtonClicked = true;
             validateAndSetResult();
@@ -289,7 +283,6 @@ public class SipEditor extends PreferenceActivity
 
     private void showAlert(final String message) {
         if (mHomeButtonClicked) {
-            Log.v(TAG, "Home button clicked, don't show dialog: " + message);
             return;
         }
         runOnUiThread(new Runnable() {
@@ -374,10 +367,8 @@ public class SipEditor extends PreferenceActivity
 
     private void unregisterOldPrimaryAccount() {
         String primaryAccountUri = mSharedPreferences.getPrimaryAccount();
-        Log.v(TAG, "old primary: " + primaryAccountUri);
         if ((primaryAccountUri != null)
                 && !mSharedPreferences.isReceivingCallsEnabled()) {
-            Log.v(TAG, "unregister old primary: " + primaryAccountUri);
             unregisterProfile(primaryAccountUri);
         }
     }
@@ -469,7 +460,6 @@ public class SipEditor extends PreferenceActivity
 
     private void loadPreferencesFromProfile(SipProfile p) {
         if (p != null) {
-            Log.v(TAG, "Edit the existing profile : " + p.getProfileName());
             try {
                 Class profileClass = SipProfile.class;
                 for (PreferenceKey key : PreferenceKey.values()) {
@@ -491,7 +481,6 @@ public class SipEditor extends PreferenceActivity
                 Log.e(TAG, "Can not load pref from profile", e);
             }
         } else {
-            Log.v(TAG, "Edit a new profile");
             for (PreferenceKey key : PreferenceKey.values()) {
                 key.preference.setOnPreferenceChangeListener(this);
 
@@ -535,7 +524,6 @@ public class SipEditor extends PreferenceActivity
         String displayName = PreferenceKey.DisplayName.getValue();
         mDisplayNameSet = !TextUtils.isEmpty(displayName)
                 && !displayName.equals(getDefaultDisplayName());
-        Log.d(TAG, "displayName set? " + mDisplayNameSet);
         if (mDisplayNameSet) {
             PreferenceKey.DisplayName.preference.setSummary(displayName);
         } else {
@@ -569,10 +557,6 @@ public class SipEditor extends PreferenceActivity
                     && mSharedPreferences.isPrimaryAccount(
                             profile.getUriString());
 
-            Log.v(TAG, " noPrimaryAccountSet: " + noPrimaryAccountSet);
-            Log.v(TAG, " editNewProfile: " + editNewProfile);
-            Log.v(TAG, " mWasPrimaryAccount: " + mWasPrimaryAccount);
-
             mCheckbox.setChecked(mWasPrimaryAccount
                     || (editNewProfile && noPrimaryAccountSet));
         }
@@ -588,8 +572,6 @@ public class SipEditor extends PreferenceActivity
             } else if (mWasPrimaryAccount) {
                 mSharedPreferences.unsetPrimaryAccount();
             }
-            Log.d(TAG, " primary account changed to : "
-                    + mSharedPreferences.getPrimaryAccount());
         }
     }
 
@@ -631,7 +613,6 @@ public class SipEditor extends PreferenceActivity
             PreferenceGroup screen = (PreferenceGroup) getPreferenceScreen();
             for (Preference pref : mPreferences) {
                 screen.addPreference(pref);
-                Log.v(TAG, "add pref " + pref.getKey() + ": order=" + pref.getOrder());
             }
         }
 
@@ -645,7 +626,6 @@ public class SipEditor extends PreferenceActivity
         }
 
         public boolean onPreferenceClick(Preference preference) {
-            Log.v(TAG, "optional settings clicked");
             if (!mShowing) {
                 show();
             } else {

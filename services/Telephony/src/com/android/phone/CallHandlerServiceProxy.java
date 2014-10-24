@@ -52,8 +52,7 @@ public class CallHandlerServiceProxy extends Handler
         implements CallModeler.Listener, AudioModeListener {
 
     private static final String TAG = CallHandlerServiceProxy.class.getSimpleName();
-    private static final boolean DBG = (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt(
-            "ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
 
     public static final int RETRY_DELAY_MILLIS = 2000;
     public static final int RETRY_DELAY_LONG_MILLIS = 30 * 1000; // 30 seconds
@@ -91,7 +90,6 @@ public class CallHandlerServiceProxy extends Handler
                 removeMessages(BIND_TIME_OUT);
                 synchronized (mServiceAndQueueLock) {
                     if(mCallHandlerServiceGuarded == null) {
-                        Log.w(TAG, "Binding time out. InCallUI did not respond in time.");
                         try {
                             mContext.unbindService(mConnection);
                         } catch(Exception e) {
@@ -137,7 +135,6 @@ public class CallHandlerServiceProxy extends Handler
     }
 
     private void wakeUpScreen() {
-        Log.d(TAG, "wakeUpScreen()");
         final PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         pm.wakeUp(SystemClock.uptimeMillis());
     }
@@ -269,10 +266,6 @@ public class CallHandlerServiceProxy extends Handler
                 }
             }
 
-            // Just do a simple log for now.
-            Log.i(TAG, "Updating with new audio mode: " + AudioMode.toString(newMode) +
-                    " with mute " + muted);
-
             mCallHandlerServiceGuarded.onAudioModeChange(newMode, muted);
         } catch (Exception e) {
             Log.e(TAG, "Remote exception handling onAudioModeChange", e);
@@ -319,7 +312,6 @@ public class CallHandlerServiceProxy extends Handler
         }
 
         @Override public void onServiceDisconnected (ComponentName className){
-            Log.i(TAG, "Disconnected from UI service.");
             synchronized (mServiceAndQueueLock) {
                 // Technically, unbindService is un-necessary since the framework will schedule and
                 // restart the crashed service.  But there is a exponential backoff for the restart.
@@ -419,8 +411,6 @@ public class CallHandlerServiceProxy extends Handler
                 } else {
                     enqueueConnectRetry(BIND_TIME_OUT);
                 }
-            } else {
-                Log.d(TAG, "Service connection to in call service already started.");
             }
         }
     }
@@ -441,7 +431,6 @@ public class CallHandlerServiceProxy extends Handler
     private void handleConnectRetry() {
         // Something else triggered the connection, cancel.
         if (mConnection != null) {
-            Log.i(TAG, "Retry: already connected.");
             return;
         }
 
@@ -450,10 +439,8 @@ public class CallHandlerServiceProxy extends Handler
             // retry is queued up.
             incrementRetryCount();
 
-            Log.i(TAG, "Retrying connection: " + mBindRetryCount);
             setupServiceConnection();
         } else {
-            Log.i(TAG, "Canceling connection retry since there are no calls.");
             // We are not currently connected and there is no call so lets not bother
             // with the retry. Also, empty the queue of pending messages to send
             // to the UI.

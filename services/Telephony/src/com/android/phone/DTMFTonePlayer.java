@@ -42,7 +42,7 @@ import java.util.Queue;
  */
 public class DTMFTonePlayer implements CallModeler.Listener {
     private static final String LOG_TAG = DTMFTonePlayer.class.getSimpleName();
-    private static final boolean DBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private static final boolean DBG = false;
 
     private static final int DTMF_SEND_CNF = 100;
     private static final int DTMF_STOP = 101;
@@ -90,12 +90,10 @@ public class DTMFTonePlayer implements CallModeler.Listener {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case DTMF_SEND_CNF:
-                    logD("dtmf confirmation received from FW.");
                     // handle burst dtmf confirmation
                     handleBurstDtmfConfirmation();
                     break;
                 case DTMF_STOP:
-                    logD("dtmf stop received");
                     stopDtmfTone();
                     break;
             }
@@ -110,7 +108,6 @@ public class DTMFTonePlayer implements CallModeler.Listener {
 
     @Override
     public void onDisconnect(Call call) {
-        logD("Call disconnected");
         checkCallState();
     }
 
@@ -120,7 +117,6 @@ public class DTMFTonePlayer implements CallModeler.Listener {
 
     @Override
     public void onUpdate(List<Call> calls) {
-        logD("Call updated");
         checkCallState();
     }
 
@@ -159,7 +155,6 @@ public class DTMFTonePlayer implements CallModeler.Listener {
      * resources.
      */
     public void startDialerSession() {
-        logD("startDialerSession()... this = " + this);
 
         // see if we need to play local tones.
         if (PhoneGlobals.getInstance().getResources().getBoolean(R.bool.allow_local_dtmf_tones)) {
@@ -169,8 +164,6 @@ public class DTMFTonePlayer implements CallModeler.Listener {
         } else {
             mLocalToneEnabled = false;
         }
-        logD("- startDialerSession: mLocalToneEnabled = " + mLocalToneEnabled);
-
         // create the tone generator
         // if the mToneGenerator creation fails, just continue without it.  It is
         // a local audio signal, and is not as important as the dtmf tone itself.
@@ -237,14 +230,12 @@ public class DTMFTonePlayer implements CallModeler.Listener {
         }
 
         mShortTone = useShortDtmfTones(phone, phone.getContext());
-        logD("startDtmfTone()...");
 
         // For Short DTMF we need to play the local tone for fixed duration
         if (mShortTone) {
             sendShortDtmfToNetwork(c);
         } else {
             // Pass as a char to be sent to network
-            logD("send long dtmf for " + c);
             mCallManager.startDtmf(c);
 
             // If it is a timed tone, queue up the stop command in DTMF_DURATION_MS.
@@ -306,10 +297,7 @@ public class DTMFTonePlayer implements CallModeler.Listener {
     private void startLocalToneIfNeeded(char c) {
         if (mLocalToneEnabled) {
             synchronized (mToneGeneratorLock) {
-                if (mToneGenerator == null) {
-                    logD("startDtmfTone: mToneGenerator == null, tone: " + c);
-                } else {
-                    logD("starting local tone " + c);
+                if (mToneGenerator != null) {
                     int toneDuration = -1;
                     if (mShortTone) {
                         toneDuration = DTMF_DURATION_MS;
@@ -326,13 +314,9 @@ public class DTMFTonePlayer implements CallModeler.Listener {
     public void stopLocalToneIfNeeded() {
         if (!mShortTone) {
             // if local tone playback is enabled, stop it.
-            logD("trying to stop local tone...");
             if (mLocalToneEnabled) {
                 synchronized (mToneGeneratorLock) {
-                    if (mToneGenerator == null) {
-                        logD("stopLocalTone: mToneGenerator == null");
-                    } else {
-                        logD("stopping local tone.");
+                    if (mToneGenerator != null) {
                         mToneGenerator.stopTone();
                     }
                 }
@@ -389,7 +373,6 @@ public class DTMFTonePlayer implements CallModeler.Listener {
      * resources for playing DTMF tone, otherwise release them.
      */
     private void checkCallState() {
-        logD("checkCallState");
         if (mCallModeler.hasOutstandingActiveOrDialingCall()) {
             startDialerSession();
         } else {

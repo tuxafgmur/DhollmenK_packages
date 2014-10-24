@@ -105,7 +105,7 @@ public class CallFeaturesSetting extends PreferenceActivity
         EditPhoneNumberPreference.OnDialogClosedListener,
         EditPhoneNumberPreference.GetDefaultNumberListener{
     private static final String LOG_TAG = "CallFeaturesSetting";
-    private static final boolean DBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private static final boolean DBG = false;
 
     /**
      * Intent action to bring up Voicemail Provider settings.
@@ -675,7 +675,6 @@ public class CallFeaturesSetting extends PreferenceActivity
 
             if (newProviderSettings == null) {
                 // Force the user into a configuration of the chosen provider
-                Log.w(LOG_TAG, "Saved preferences not found - invoking config");
                 mVMProviderSettingsForced = true;
                 simulatePreferenceClick(mVoicemailSettings);
             } else {
@@ -781,8 +780,6 @@ public class CallFeaturesSetting extends PreferenceActivity
                         loadSettingsForVoiceMailProvider(mPreviousVMProviderKey);
                 if (prevSettings == null) {
                     // prevSettings never becomes null since it should be already loaded!
-                    Log.e(LOG_TAG, "VoiceMailProviderSettings for the key \""
-                            + mPreviousVMProviderKey + "\" becomes null, which is unexpected.");
                     if (DBG) {
                         Log.e(LOG_TAG,
                                 "mVMChangeCompletedSuccessfully: " + mVMChangeCompletedSuccessfully
@@ -791,15 +788,12 @@ public class CallFeaturesSetting extends PreferenceActivity
                 }
                 if (mVMChangeCompletedSuccessfully) {
                     mNewVMNumber = prevSettings.voicemailNumber;
-                    Log.i(LOG_TAG, "VM change is already completed successfully."
-                            + "Have to revert VM back to " + mNewVMNumber + " again.");
                     mPhone.setVoiceMailNumber(
                             mPhone.getVoiceMailAlphaTag().toString(),
                             mNewVMNumber,
                             Message.obtain(mRevertOptionComplete, EVENT_VOICEMAIL_CHANGED));
                 }
                 if (mFwdChangesRequireRollback) {
-                    Log.i(LOG_TAG, "Requested to rollback Fwd changes.");
                     final CallForwardInfo[] prevFwdSettings =
                         prevSettings.forwardingSettings;
                     if (prevFwdSettings != null) {
@@ -1226,10 +1220,7 @@ public class CallFeaturesSetting extends PreferenceActivity
                     break;
                 case EVENT_FORWARDING_CHANGED:
                     mForwardingChangeResults.put(msg.arg1, result);
-                    if (result.exception != null) {
-                        Log.w(LOG_TAG, "Error in setting fwd# " + msg.arg1 + ": " +
-                                result.exception.getMessage());
-                    } else {
+                    if (result.exception == null) {
                         if (DBG) log("Success in setting fwd# " + msg.arg1);
                     }
                     final boolean completed = checkForwardingCompleted();
@@ -1238,8 +1229,6 @@ public class CallFeaturesSetting extends PreferenceActivity
                             if (DBG) log("Overall fwd changes completed ok, starting vm change");
                             setVMNumberWithCarrier();
                         } else {
-                            Log.w(LOG_TAG, "Overall fwd changes completed in failure. " +
-                                    "Check if we need to try rollback for some settings.");
                             mFwdChangesRequireRollback = false;
                             Iterator<Map.Entry<Integer,AsyncResult>> it =
                                 mForwardingChangeResults.entrySet().iterator();
@@ -1247,13 +1236,9 @@ public class CallFeaturesSetting extends PreferenceActivity
                                 Map.Entry<Integer,AsyncResult> entry = it.next();
                                 if (entry.getValue().exception == null) {
                                     // If at least one succeeded we have to revert
-                                    Log.i(LOG_TAG, "Rollback will be required");
                                     mFwdChangesRequireRollback = true;
                                     break;
                                 }
-                            }
-                            if (!mFwdChangesRequireRollback) {
-                                Log.i(LOG_TAG, "No rollback needed.");
                             }
                             done = true;
                         }
@@ -1388,10 +1373,8 @@ public class CallFeaturesSetting extends PreferenceActivity
             handleVMAndFwdSetSuccess(MSG_VM_OK);
         } else {
             if (fwdFailure) {
-                Log.w(LOG_TAG, "Failed to change fowarding setting. Reason: " + exceptionMessage);
                 handleVMOrFwdSetError(MSG_FW_SET_EXCEPTION);
             } else {
-                Log.w(LOG_TAG, "Failed to change voicemail. Reason: " + exceptionMessage);
                 handleVMOrFwdSetError(MSG_VM_EXCEPTION);
             }
         }
@@ -2476,8 +2459,6 @@ public class CallFeaturesSetting extends PreferenceActivity
         final String vmNumberSetting = mPerProviderSavedVMNumbers.getString(key + VM_NUMBER_TAG,
                 null);
         if (vmNumberSetting == null) {
-            Log.w(LOG_TAG, "VoiceMailProvider settings for the key \"" + key + "\""
-                    + " was not found. Returning null.");
             return null;
         }
 

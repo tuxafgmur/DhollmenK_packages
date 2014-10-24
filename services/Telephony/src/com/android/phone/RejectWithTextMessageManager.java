@@ -45,7 +45,7 @@ import java.util.ArrayList;
  */
 public class RejectWithTextMessageManager {
     private static final String TAG = RejectWithTextMessageManager.class.getSimpleName();
-    private static final boolean DBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private static final boolean DBG = false;
 
     /** SharedPreferences file name for our persistent settings. */
     private static final String SHARED_PREFERENCES_NAME = "respond_via_sms_prefs";
@@ -184,7 +184,6 @@ public class RejectWithTextMessageManager {
 
         // First some basic sanity checks:
         if (call == null) {
-            Log.w(TAG, "allowRespondViaSmsForCall: null ringingCall!");
             return false;
         }
         if (!(call.getState() == com.android.services.telephony.common.Call.State.INCOMING) &&
@@ -194,8 +193,6 @@ public class RejectWithTextMessageManager {
             // (This should almost never happen, but it *could*
             // conceivably happen if the ringing call got disconnected by
             // the network just *after* we got it from the CallManager.)
-            Log.w(TAG, "allowRespondViaSmsForCall: ringingCall not ringing! state = "
-                    + call.getState());
             return false;
         }
 
@@ -203,7 +200,6 @@ public class RejectWithTextMessageManager {
             // The call doesn't have any connections! (Again, this can
             // happen if the ringing call disconnects at the exact right
             // moment, but should almost never happen in practice.)
-            Log.w(TAG, "allowRespondViaSmsForCall: null Connection!");
             return false;
         }
 
@@ -211,7 +207,6 @@ public class RejectWithTextMessageManager {
         final String number = conn.getAddress();
         if (DBG) log("- number: '" + number + "'");
         if (TextUtils.isEmpty(number)) {
-            Log.w(TAG, "allowRespondViaSmsForCall: no incoming number!");
             return false;
         }
         if (PhoneNumberUtils.isUriNumber(number)) {
@@ -220,7 +215,6 @@ public class RejectWithTextMessageManager {
             // SIP addresses.
             // (TODO: That might still be possible eventually, though. Is
             // there some SIP-specific equivalent to sending a text message?)
-            Log.i(TAG, "allowRespondViaSmsForCall: incoming 'number' is a SIP address.");
             return false;
         }
 
@@ -231,7 +225,6 @@ public class RejectWithTextMessageManager {
             // PRESENTATION_RESTRICTED means "caller-id blocked".
             // The user isn't allowed to see the number in the first
             // place, so obviously we can't let you send an SMS to it.
-            Log.i(TAG, "allowRespondViaSmsForCall: PRESENTATION_RESTRICTED.");
             return false;
         }
 

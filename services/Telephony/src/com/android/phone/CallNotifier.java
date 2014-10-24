@@ -69,9 +69,8 @@ import java.util.HashSet;
 public class CallNotifier extends Handler
         implements CallerInfoAsyncQuery.OnQueryCompleteListener {
     private static final String LOG_TAG = "CallNotifier";
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
-    private static final boolean VDBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private static final boolean DBG = false;
+    private static final boolean VDBG = false;
 
     // Maximum time we allow the CallerInfo query to run,
     // before giving up and falling back to the default ringtone.
@@ -192,8 +191,6 @@ public class CallNotifier extends Handler
             if (sInstance == null) {
                 sInstance = new CallNotifier(app, phone, ringer, callLogger, callStateMonitor,
                         bluetoothManager, callModeler);
-            } else {
-                Log.wtf(LOG_TAG, "init() called multiple times!  sInstance = " + sInstance);
             }
             return sInstance;
         }
@@ -240,14 +237,9 @@ public class CallNotifier extends Handler
             try {
                 mSignalInfoToneGenerator = new ToneGenerator(AudioManager.STREAM_VOICE_CALL,
                         TONE_RELATIVE_VOLUME_SIGNALINFO);
-                Log.d(LOG_TAG, "CallNotifier: mSignalInfoToneGenerator created when toneplay");
             } catch (RuntimeException e) {
-                Log.w(LOG_TAG, "CallNotifier: Exception caught while creating " +
-                        "mSignalInfoToneGenerator: " + e);
                 mSignalInfoToneGenerator = null;
             }
-        } else {
-            Log.d(LOG_TAG, "mSignalInfoToneGenerator created already, hence skipping");
         }
     }
 
@@ -255,7 +247,6 @@ public class CallNotifier extends Handler
     public void handleMessage(Message msg) {
         switch (msg.what) {
             case CallStateMonitor.PHONE_NEW_RINGING_CONNECTION:
-                log("RINGING... (new)");
                 onNewRingingConnection((AsyncResult) msg.obj);
                 mSilentRingerRequested = false;
                 break;
@@ -303,12 +294,10 @@ public class CallNotifier extends Handler
                 break;
 
             case CDMA_CALL_WAITING_REJECT:
-                Log.i(LOG_TAG, "Received CDMA_CALL_WAITING_REJECT event");
                 onCdmaCallWaitingReject();
                 break;
 
             case CALLWAITING_CALLERINFO_DISPLAY_DONE:
-                Log.i(LOG_TAG, "Received CALLWAITING_CALLERINFO_DISPLAY_DONE event");
                 mCallWaitingTimeOut = true;
                 onCdmaCallWaitingReject();
                 break;
@@ -397,7 +386,6 @@ public class CallNotifier extends Handler
      */
     private void onNewRingingConnection(AsyncResult r) {
         Connection c = (Connection) r.result;
-        log("onNewRingingConnection(): state = " + mCM.getState() + ", conn = { " + c + " }");
         Call ringing = c.getCall();
         Phone phone = ringing.getPhone();
 
@@ -412,7 +400,6 @@ public class CallNotifier extends Handler
         }
 
         if (!c.isRinging()) {
-            Log.i(LOG_TAG, "CallNotifier.onNewRingingConnection(): connection not ringing!");
             // This is a very strange case: an incoming call that stopped
             // ringing almost instantly after the onNewRingingConnection()
             // event.  There's nothing we can do here, so just bail out
@@ -520,7 +507,6 @@ public class CallNotifier extends Handler
             // ...but still log a warning, since we shouldn't have gotten this
             // event in the first place!  (Incoming calls *should* be blocked at
             // the telephony layer on non-voice-capable capable devices.)
-            Log.w(LOG_TAG, "Got onNewRingingConnection() on non-voice-capable device! Ignoring...");
             return true;
         }
 
@@ -536,7 +522,6 @@ public class CallNotifier extends Handler
         boolean provisioned = Settings.Global.getInt(mApplication.getContentResolver(),
             Settings.Global.DEVICE_PROVISIONED, 0) != 0;
         if (!provisioned) {
-            Log.i(LOG_TAG, "Ignoring incoming call: not provisioned");
             return true;
         }
 
@@ -549,7 +534,6 @@ public class CallNotifier extends Handler
             boolean spcState = mApplication.cdmaOtaProvisionData.inOtaSpcState;
 
             if (spcState) {
-                Log.i(LOG_TAG, "Ignoring incoming call: OTA call is active");
                 return true;
             } else if (activateState || dialogState) {
                 // We *are* allowed to receive incoming calls at this point.
@@ -650,7 +634,6 @@ public class CallNotifier extends Handler
         if (isQueryExecutionTimeExpired) {
             // There may be a problem with the query here, since the
             // default ringtone is playing instead of the custom one.
-            Log.w(LOG_TAG, "CallerInfo query took too long; falling back to default ringtone");
             EventLog.writeEvent(EventLogTags.PHONE_UI_RINGER_QUERY_ELAPSED);
         }
 
@@ -667,7 +650,6 @@ public class CallNotifier extends Handler
         // to our handler.  (And we will correctly stop the ringer when we
         // process that event.)
         if (mCM.getState() != PhoneConstants.State.RINGING) {
-            Log.i(LOG_TAG, "onCustomRingQueryComplete: No incoming call! Bailing out...");
             // Don't start the ringer *or* bring up the "incoming call" UI.
             // Just bail out.
             return;
@@ -926,18 +908,12 @@ public class CallNotifier extends Handler
     private void onCustomRingtoneQueryTimeout(Connection c) {
         // First of all, this case itself should be rare enough, though we cannot avoid it in
         // some situations (e.g. IPC is slow due to system overload, database is in sync, etc.)
-        Log.w(LOG_TAG, "CallerInfo query took too long; look up local fallback cache.");
-
-        // This method is intentionally verbose for now to detect possible bad side-effect for it.
-        // TODO: Remove the verbose log when it looks stable and reliable enough.
-
 
         if (c != null) {
             final CallerInfoCache.CacheEntry entry =
                     mApplication.callerInfoCache.getCacheEntry(c.getAddress());
             if (entry != null) {
                 if (entry.sendToVoicemail) {
-                    log("send to voicemail flag detected (in fallback cache). hanging up.");
                     if (mCM.getFirstActiveRingingCall().getLatestConnection() == c) {
                         PhoneUtils.hangupRingingCall(mCM.getFirstActiveRingingCall());
                         return;
@@ -945,16 +921,8 @@ public class CallNotifier extends Handler
                 }
 
                 if (entry.customRingtone != null) {
-                    log("custom ringtone found (in fallback cache), setting up ringer: "
-                            + entry.customRingtone);
                     this.mRinger.setCustomRingtoneUri(Uri.parse(entry.customRingtone));
                 }
-            } else {
-                // In this case we call onCustomRingQueryComplete(), just
-                // like if the query had completed normally.  (But we're
-                // going to get the default ringtone, since we never got
-                // the chance to call Ringer.setCustomRingtoneUri()).
-                log("Failed to find fallback cache. Use default ringer tone.");
             }
         }
 
@@ -966,13 +934,6 @@ public class CallNotifier extends Handler
 
         mVoicePrivacyState = false;
         Connection c = (Connection) r.result;
-        if (c != null) {
-            log("onDisconnect: cause = " + c.getDisconnectCause()
-                  + ", incoming = " + c.isIncoming()
-                  + ", date = " + c.getCreateTime());
-        } else {
-            Log.w(LOG_TAG, "onDisconnect: null connection");
-        }
 
         boolean disconnectedDueToBlacklist = false;
         if (c != null) {
@@ -1247,7 +1208,6 @@ public class CallNotifier extends Handler
             // (PhoneStateListener.LISTEN_MESSAGE_WAITING_INDICATOR events
             // *should* be blocked at the telephony layer on non-voice-capable
             // capable devices.)
-            Log.w(LOG_TAG, "Got onMwiChanged() on non-voice-capable device! Ignoring...");
             return;
         }
 
@@ -1376,8 +1336,6 @@ public class CallNotifier extends Handler
 
         @Override
         public void run() {
-            log("InCallTonePlayer.run(toneId = " + mToneId + ")...");
-
             int toneType = 0;  // passed to ToneGenerator.startTone()
             int toneVolume;  // passed to the ToneGenerator constructor
             int toneLengthMillis;
@@ -1546,8 +1504,6 @@ public class CallNotifier extends Handler
                         try {
                             wait(toneLengthMillis + TONE_TIMEOUT_BUFFER);
                         } catch  (InterruptedException e) {
-                            Log.w(LOG_TAG,
-                                  "InCallTonePlayer stopped: " + e);
                         }
                         if (needToStopTone) {
                             toneGenerator.stopTone();
@@ -1622,8 +1578,6 @@ public class CallNotifier extends Handler
 
         @Override
         public void run() {
-            log("SignalInfoTonePlayer.run(toneId = " + mToneId + ")...");
-
             if (mSignalInfoToneGenerator != null) {
                 //First stop any ongoing SignalInfo tone
                 mSignalInfoToneGenerator.stopTone();
@@ -1640,7 +1594,6 @@ public class CallNotifier extends Handler
     private void onSignalInfo(AsyncResult r) {
         // Signal Info are totally ignored on non-voice-capable devices.
         if (!PhoneGlobals.sVoiceCapable) {
-            Log.w(LOG_TAG, "Got onSignalInfo() on non-voice-capable device! Ignoring...");
             return;
         }
 
@@ -1839,10 +1792,6 @@ public class CallNotifier extends Handler
                 mApplication.notificationMgr.notifyMissedCall(name, number, ci.numberPresentation,
                         ci.phoneLabel, ci.cachedPhoto, ci.cachedPhotoIcon, date);
             }
-        } else {
-            // getCallerInfo() can return null in rare cases, like if we weren't
-            // able to get a valid phone number out of the specified Connection.
-            Log.w(LOG_TAG, "showMissedCallNotification: got null CallerInfo for Connection " + c);
         }
     }
 
@@ -1888,7 +1837,6 @@ public class CallNotifier extends Handler
                     mCurrentEmergencyToneState = EMERGENCY_TONE_ALERT;
                 }
             } else if (mIsEmergencyToneOn == EMERGENCY_TONE_VIBRATE) {
-                log("EmergencyTonePlayerVibrator.start(): emergency vibrate...");
                 if (mEmgVibrator != null) {
                     mEmgVibrator.vibrate(mVibratePattern, 0);
                     mCurrentEmergencyToneState = EMERGENCY_TONE_VIBRATE;

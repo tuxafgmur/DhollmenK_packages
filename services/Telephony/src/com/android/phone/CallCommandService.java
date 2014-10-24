@@ -35,8 +35,7 @@ import com.android.services.telephony.common.ICallCommandService;
  */
 class CallCommandService extends ICallCommandService.Stub {
     private static final String TAG = CallCommandService.class.getSimpleName();
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
 
     private final Context mContext;
     private final CallManager mCallManager;
@@ -85,7 +84,6 @@ class CallCommandService extends ICallCommandService.Stub {
             if (result != null) {
                 phoneNumber = result.getConnection().getAddress();
 
-                Log.v(TAG, "Hanging up");
                 PhoneUtils.hangupRingingCall(result.getConnection().getCall());
             }
 

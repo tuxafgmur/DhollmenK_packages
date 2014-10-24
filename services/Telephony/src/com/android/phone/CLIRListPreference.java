@@ -20,7 +20,7 @@ import android.util.Log;
  */
 public class CLIRListPreference extends ListPreference {
     private static final String LOG_TAG = "CLIRListPreference";
-    private final boolean DBG = (PhoneGlobals.DBG_LEVEL >= 2);
+    private final boolean DBG = false;
 
     private final MyHandler mHandler = new MyHandler();
     private final Phone mPhone;

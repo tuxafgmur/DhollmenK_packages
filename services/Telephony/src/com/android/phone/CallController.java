@@ -59,8 +59,7 @@ import android.util.Log;
  */
 public class CallController extends Handler {
     private static final String TAG = "CallController";
-    private static final boolean DBG =
-            (PhoneGlobals.DBG_LEVEL >= 1) && (SystemProperties.getInt("ro.debuggable", 0) == 1);
+    private static final boolean DBG = false;
     // Do not check in with VDBG = true, since that may write PII to the system log.
     private static final boolean VDBG = false;
 
@@ -106,8 +105,6 @@ public class CallController extends Handler {
         synchronized (CallController.class) {
             if (sInstance == null) {
                 sInstance = new CallController(app, callLogger, callGatewayManager);
-            } else {
-                Log.wtf(TAG, "init() called multiple times!  sInstance = " + sInstance);
             }
             return sInstance;
         }
@@ -144,7 +141,6 @@ public class CallController extends Handler {
                 break;
 
             default:
-                Log.wtf(TAG, "handleMessage: unexpected code: " + msg);
                 break;
         }
     }
@@ -186,7 +182,6 @@ public class CallController extends Handler {
      *      it's visible.
      */
     public void placeCall(Intent intent) {
-        log("placeCall()...  intent = " + intent);
         if (VDBG) log("                extras = " + intent.getExtras());
 
         // TODO: Do we need to hold a wake lock while this method runs?
@@ -194,14 +189,12 @@ public class CallController extends Handler {
         //       in this sequence (like when we first received the CALL intent?)
 
         if (intent == null) {
-            Log.wtf(TAG, "placeCall: called with null intent");
             throw new IllegalArgumentException("placeCall: called with null intent");
         }
 
         String action = intent.getAction();
         Uri uri = intent.getData();
         if (uri == null) {
-            Log.wtf(TAG, "placeCall: intent had no data");
             throw new IllegalArgumentException("placeCall: intent had no data");
         }
 
@@ -220,7 +213,6 @@ public class CallController extends Handler {
         if (!(Intent.ACTION_CALL.equals(action)
               || Intent.ACTION_CALL_EMERGENCY.equals(action)
               || Intent.ACTION_CALL_PRIVILEGED.equals(action))) {
-            Log.wtf(TAG, "placeCall: unexpected intent action " + action);
             throw new IllegalArgumentException("Unexpected action: " + action);
         }
 
@@ -253,7 +245,6 @@ public class CallController extends Handler {
 
             default:
                 // Any other status code is a failure.
-                log("==> placeCall(): failure code from placeCallInternal(): " + status);
                 // Handle the various error conditions that can occur when
                 // initiating an outgoing call, typically by directing the
                 // InCallScreen to display a diagnostic message (via the
@@ -344,7 +335,6 @@ public class CallController extends Handler {
         }
 
         if (number == null) {
-            Log.w(TAG, "placeCall: couldn't get a phone number from Intent " + intent);
             return CallStatusCode.NO_PHONE_NUMBER_SUPPLIED;
         }
 
@@ -391,8 +381,6 @@ public class CallController extends Handler {
             // If this is an emergency call, launch the EmergencyCallHelperService
             // to turn on the radio and retry the call.
             if (isEmergencyNumber && (okToCallStatus == CallStatusCode.POWER_OFF)) {
-                Log.i(TAG, "placeCall: Trying to make emergency call while POWER_OFF!");
-
                 // If needed, lazily instantiate an EmergencyCallHelper instance.
                 synchronized (this) {
                     if (mEmergencyCallHelper == null) {
@@ -471,7 +459,6 @@ public class CallController extends Handler {
                 // (See InCallScreen.showExitingECMDialog() for more info.)
                 boolean exitedEcm = false;
                 if (PhoneUtils.isPhoneInEcm(phone) && !isEmergencyNumber) {
-                    Log.i(TAG, "About to exit ECM because of an outgoing non-emergency call");
                     exitedEcm = true;  // this will cause us to return EXITED_ECM from this method
                 }
 
@@ -521,8 +508,6 @@ public class CallController extends Handler {
                 return CallStatusCode.DIALED_MMI;
 
             case PhoneUtils.CALL_STATUS_FAILED:
-                Log.w(TAG, "placeCall: PhoneUtils.placeCall() FAILED for number '"
-                      + number + "'.");
                 // We couldn't successfully place the call; there was some
                 // failure in the telephony layer.
 
@@ -533,8 +518,6 @@ public class CallController extends Handler {
                 return CallStatusCode.CALL_FAILED;
 
             default:
-                Log.wtf(TAG, "placeCall: unknown callStatus " + callStatus
-                        + " from PhoneUtils.placeCall() for number '" + number + "'.");
                 return CallStatusCode.SUCCESS;  // Try to continue anyway...
         }
     }
@@ -599,7 +582,6 @@ public class CallController extends Handler {
             case SUCCESS:
                 // This case shouldn't happen; you're only supposed to call
                 // handleOutgoingCallError() if there was actually an error!
-                Log.wtf(TAG, "handleOutgoingCallError: SUCCESS isn't an error");
                 break;
 
             case CALL_FAILED:
@@ -667,7 +649,6 @@ public class CallController extends Handler {
                 mApp.startActivity(mmiIntent);
                 return;
             default:
-                Log.wtf(TAG, "handleOutgoingCallError: unexpected status code " + status);
                 // Show a generic "call failed" error.
                 errorMessageId = R.string.incall_error_call_failed;
                 break;
@@ -686,7 +667,6 @@ public class CallController extends Handler {
      */
     private void checkForOtaspCall(Intent intent) {
         if (OtaUtils.isOtaspCallIntent(intent)) {
-            Log.i(TAG, "checkForOtaspCall: handling OTASP intent! " + intent);
 
             // ("OTASP-specific setup" basically means creating and initializing
             // the OtaUtils instance.  Note that this setup needs to be here in
