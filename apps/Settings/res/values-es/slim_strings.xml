@@ -514,7 +514,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="shortcuts_color_mode_summary">Cambiar modo de color del icono de accesos directos</string>
 
     <!-- Notification drawer settings  -->
-    <string name="notification_drawer_qs_title">Panel de notificaciones &amp; ajustes rápidos</string>
+    <string name="qs_title">Quick settings</string>
     <string name="notification_drawer_title">Panel de notificaciones</string>
     <string name="notification_shortcuts_settings_title">Accesos directos</string>
     <string name="notification_shortcuts_settings_summary">Mostrar accesos directos en el panel de notificaciones</string>
@@ -1117,6 +1117,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="advanced_reboot_hide_on_keyguard">Ocultar en pantalla de bloqueo</string>
     <string name="advanced_reboot_show_always">Mostrar siempre</string>
 
+    <string name="lockscreen_settings_title">Pantalla de bloqueo</string>
+
     <!-- Keyguard allow rotation -->
     <string name="lockscreen_rotation_title">Rotación de bloqueo de pantalla</string>
     <string name="lockscreen_rotation_portrait">Sólo vertical</string>
@@ -1274,5 +1276,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Device specific settings -->
     <string name="screen_off_gesture_settings_title">Gestos con pantalla apagada</string>
+
+    <!-- Proximity wake -->
+    <string name="proximity_wake_title">Prevenir despertar accidental</string>
+    <string name="proximity_wake_summary">Comprobar el sensor de proximidad antes de despertar la pantalla.</string>
 
 </resources>

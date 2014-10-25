@@ -56,6 +56,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_LIGHT_OPTIONS = "category_light_options";
+    private static final String KEY_PROXIMITY_WAKE = "proximity_on_wake";
+
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_NOTIFICATION_LIGHT = "notification_light";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
@@ -88,6 +90,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private ListPreference mListViewInterpolator;
     private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
     private PreferenceCategory mWakeUpOptions;
+    private CheckBoxPreference mProximityWake;
 
     private final Configuration mCurConfig = new Configuration();
 
@@ -185,6 +188,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                         Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
                 mVolumeWake.setOnPreferenceChangeListener(this);
             }
+        }
+
+        mProximityWake = (CheckBoxPreference) findPreference(KEY_PROXIMITY_WAKE);
+        if(!getResources().getBoolean(
+                com.android.internal.R.bool.config_proximityCheckOnWake)) {
+                mWakeUpOptions.removePreference(mProximityWake);
+                counter++;
+        } else {
+            mProximityWake.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.PROXIMITY_ON_WAKE, 0) == 1);
+            mProximityWake.setOnPreferenceChangeListener(this);
         }
 
         mWakeUpWhenPluggedOrUnplugged =
@@ -522,7 +536,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,
                     (Boolean) objValue ? 1 : 0);
         }
-
+        if (KEY_PROXIMITY_WAKE.equals(key)) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.PROXIMITY_ON_WAKE,
+                    ((Boolean) objValue).booleanValue() ? 1 : 0);
+        }
         return true;
     }
 

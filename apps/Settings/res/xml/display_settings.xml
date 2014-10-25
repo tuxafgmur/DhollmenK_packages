@@ -23,11 +23,6 @@
                 android:persistent="false"/>
 
         <PreferenceScreen
-                android:key="wallpaper"
-                android:title="@string/wallpaper_settings_title"
-                android:fragment="com.android.settings.WallpaperTypeSettings" />
-
-        <PreferenceScreen
                 android:key="display_rotation"
                 android:fragment="com.android.settings.slim.DisplayRotation"
                 android:title="@string/display_rotation_title" />
@@ -126,6 +121,12 @@
                 android:key="pref_volume_wake"
                 android:title="@string/pref_volume_wake_title"
                 android:summary="@string/pref_volume_wake_summary" />
+
+            <CheckBoxPreference
+                android:key="proximity_on_wake"
+                android:title="@string/proximity_wake_title"
+                android:summary="@string/proximity_wake_summary"
+                android:defaultValue="true" />
 
             <CheckBoxPreference
                 android:key="wakeup_when_plugged_unplugged"
