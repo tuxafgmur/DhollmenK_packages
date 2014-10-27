@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
-**
 ** Copyright 2008, The Android Open Source Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,18 +38,17 @@
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
         android:protectionLevel="normal"
         android:label="@string/permlab_read_settings"
-        android:description="@string/permdesc_read_settings"/>
+        android:description="@string/permdesc_read_settings" />
     <permission
         android:name="com.slim.slimlauncher.permission.WRITE_SETTINGS"
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
         android:protectionLevel="normal"
         android:label="@string/permlab_write_settings"
-        android:description="@string/permdesc_write_settings"/>
+        android:description="@string/permdesc_write_settings" />
 
     <permission
         android:name="com.slim.slimlauncher.permission.RECEIVE_LAUNCH_BROADCASTS"
-        android:protectionLevel="signature"
-        />
+        android:protectionLevel="signature" />
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
@@ -127,6 +125,16 @@
             </intent-filter>
         </activity>
         
+        <activity android:name=".settings.HiddenAppsActivity"
+            android:label="@string/hidden_apps_title"
+            android:exported="false"
+            android:theme="@style/SettingsTheme">
+            <intent-filter>
+                <action android:name=".settings.HiddenAppsActivity"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="com.slim.slimlauncher.settings.SettingsActivity"
             android:theme="@style/SettingsTheme" />
 
@@ -218,6 +226,6 @@
             android:readPermission="com.slim.slimlauncher.permission.READ_SETTINGS" />
 
         <meta-data android:name="android.nfc.disable_beam_default"
-                       android:value="true" />
+	    android:value="true" />
     </application>
 </manifest>

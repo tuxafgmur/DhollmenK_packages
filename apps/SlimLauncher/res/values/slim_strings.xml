@@ -16,7 +16,7 @@
 <resources>
 
     <string name="slim_application_name">SlimLauncher</string>
-    <string name="slim_application_version" translatable="false">1.0</string>
+    <string name="slim_application_version" translatable="false">1.0 - Dhollmen</string>
     <string name="slim_application_copyright">Copyright \u00A9 SlimRoms 2014</string>
 
     <string name="google_title">Google</string>
@@ -107,5 +107,11 @@
     <string name="folder_background_color_title">Background Color</string>
     <string name="hide_folder_name_title">Hide folder name</string>
     <string name="hide_folder_name_summary">When a folder is open do not show its name</string>
+
+    <!-- Hidden apps -->
+    <string name="hidden_apps_title">Hidden apps</string>
+    <string name="hidden_apps_summary">Hide apps from the drawer</string>
+    <string name="hidden_apps_shortcuts_title">Remove shortcuts</string>
+    <string name="hidden_apps_widgets_title">Remove widgets</string>
 
 </resources>

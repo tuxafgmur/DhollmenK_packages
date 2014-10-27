@@ -96,4 +96,10 @@
     <string name="folder_background_color_title">Color de fondo</string>
     <string name="hide_folder_name_title">Ocultar el nombre</string>
     <string name="hide_folder_name_summary">No mostrar el nombre de la carpeta cuando está abierta.</string>
+
+    <!-- Hidden apps -->
+    <string name="hidden_apps_title">Aplicaciones ocultas</string>
+    <string name="hidden_apps_summary">Ocultar iconos en el cajón de aplicaciones</string>
+    <string name="hidden_apps_shortcuts_title">Ocultar aplicaciones</string>
+    <string name="hidden_apps_widgets_title">Ocultar widgets</string>
 </resources>

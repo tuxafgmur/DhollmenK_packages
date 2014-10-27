@@ -8,7 +8,7 @@
         android:title="@string/icon_size_title"
         launcher:max="110"
         launcher:min="80"
-        launcher:defaultValue="100"/>
+        launcher:defaultValue="95"/>
 
     <Preference
         android:key="icon_pack"

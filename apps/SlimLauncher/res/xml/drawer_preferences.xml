@@ -20,4 +20,10 @@
         android:summary="@string/hide_icon_labels_drawer_summary"
         android:defaultValue="false" />
 
+    <Preference
+        android:title="@string/hidden_apps_title"
+        android:summary="@string/hidden_apps_summary">
+        <intent android:action=".settings.HiddenAppsActivity" />
+    </Preference>
+
 </PreferenceScreen>
