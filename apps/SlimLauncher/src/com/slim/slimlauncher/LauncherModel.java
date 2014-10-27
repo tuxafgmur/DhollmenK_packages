@@ -494,8 +494,6 @@ public class LauncherModel extends BroadcastReceiver {
             if (stackTrace != null) {
                 e.setStackTrace(stackTrace);
             }
-            // TODO: something breaks this in the upgrade path
-            //throw e;
         }
     }
 
@@ -562,18 +560,6 @@ public class LauncherModel extends BroadcastReceiver {
         // Lock on mBgLock *after* the db operation
         synchronized (sBgLock) {
             checkItemInfoLocked(itemId, item, stackTrace);
-
-            if (item.container != LauncherSettings.Favorites.CONTAINER_DESKTOP &&
-                    item.container != LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
-                // Item is in a folder, make sure this folder exists
-                if (!sBgFolders.containsKey(item.container)) {
-                    // An items container is being set to a that of an item which is not in
-                    // the list of Folders.
-                    String msg = "item: " + item + " container being set to: " +
-                            item.container + ", not in the list of folders";
-                    Log.e(TAG, msg);
-                }
-            }
 
             // Items are added/removed from the corresponding FolderInfo elsewhere, such
             // as in Workspace.onDrop. Here, we just add/remove them from the list of items
@@ -878,13 +864,6 @@ public class LauncherModel extends BroadcastReceiver {
                             if (item.container == LauncherSettings.Favorites.CONTAINER_DESKTOP ||
                                     item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
                                 sBgWorkspaceItems.add(item);
-                            } else {
-                                if (!sBgFolders.containsKey(item.container)) {
-                                    // Adding an item to a folder that doesn't exist.
-                                    String msg = "adding item: " + item + " to a folder that " +
-                                            " doesn't exist";
-                                    Log.e(TAG, msg);
-                                }
                             }
                             break;
                         case LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET:
@@ -925,13 +904,6 @@ public class LauncherModel extends BroadcastReceiver {
                         case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
                             sBgFolders.remove(item.id);
                             for (ItemInfo info: sBgItemsIdMap.values()) {
-                                if (info.container == item.id) {
-                                    // We are deleting a folder which still contains items that
-                                    // think they are contained by that folder.
-                                    String msg = "deleting a folder (" + item + ") which still " +
-                                            "contains items (" + info + ")";
-                                    Log.e(TAG, msg);
-                                }
                             }
                             sBgWorkspaceItems.remove(item);
                             break;
@@ -1097,8 +1069,6 @@ public class LauncherModel extends BroadcastReceiver {
              // above for ACTION_LOCALE_CHANGED
              Configuration currentConfig = context.getResources().getConfiguration();
              if (mPreviousConfigMcc != currentConfig.mcc) {
-                   Log.d(TAG, "Reload apps on config change. curr_mcc:"
-                       + currentConfig.mcc + " prevmcc:" + mPreviousConfigMcc);
                    forceReload();
              }
              // Update previousConfig
@@ -1231,7 +1201,6 @@ public class LauncherModel extends BroadcastReceiver {
                     int rank = sc.getInt(rankIndex);
                     orderedScreens.put(rank, screenId);
                 } catch (Exception e) {
-                    Launcher.addDumpLog(TAG, "Desktop items loading interrupted - invalid screens: " + e, true);
                 }
             }
         } finally {
@@ -1483,7 +1452,6 @@ public class LauncherModel extends BroadcastReceiver {
                     return null;
                 }
                 if (callbacks == null) {
-                    Log.w(TAG, "no mCallbacks");
                     return null;
                 }
 
@@ -1502,9 +1470,8 @@ public class LauncherModel extends BroadcastReceiver {
                     tmpInfos = getItemInfoForComponentName(app.componentName);
                     if (tmpInfos.isEmpty()) {
                         // We are missing an application icon, so add this to the workspace
-                        added.add(app);
                         // This is a rare event, so lets log it
-                        Log.e(TAG, "Missing Application on load: " + app);
+                        added.add(app);
                     }
                 }
             }
@@ -1533,11 +1500,6 @@ public class LauncherModel extends BroadcastReceiver {
                 if (occupied.containsKey((long) LauncherSettings.Favorites.CONTAINER_HOTSEAT)) {
                     if (occupied.get((long) LauncherSettings.Favorites.CONTAINER_HOTSEAT)
                             [(int) item.screenId][0] != null) {
-                        Log.e(TAG, "Error loading shortcut into hotseat " + item
-                                + " into position (" + item.screenId + ":" + item.cellX + ","
-                                + item.cellY + ") occupied by "
-                                + occupied.get((long) LauncherSettings.Favorites.CONTAINER_HOTSEAT)
-                                [(int) item.screenId][0]);
                         return false;
                     } else {
                         ItemInfo[][] hotseatItems = occupied.get(
@@ -1566,11 +1528,6 @@ public class LauncherModel extends BroadcastReceiver {
             for (int x = item.cellX; x < (item.cellX+item.spanX); x++) {
                 for (int y = item.cellY; y < (item.cellY+item.spanY); y++) {
                     if (screens[x][y] != null) {
-                        Log.e(TAG, "Error loading shortcut " + item
-                                + " into cell (" + containerIndex + "-" + item.screenId + ":"
-                                + x + "," + y
-                                + ") occupied by "
-                                + screens[x][y]);
                         return false;
                     }
                 }
@@ -1661,9 +1618,6 @@ public class LauncherModel extends BroadcastReceiver {
                             (LauncherSettings.Favorites.SPANX);
                     final int spanYIndex = c.getColumnIndexOrThrow(
                             LauncherSettings.Favorites.SPANY);
-                    //final int uriIndex = c.getColumnIndexOrThrow(LauncherSettings.Favorites.URI);
-                    //final int displayModeIndex = c.getColumnIndexOrThrow(
-                    //        LauncherSettings.Favorites.DISPLAY_MODE);
 
                     ShortcutInfo info;
                     String intentDescription;
@@ -1689,22 +1643,12 @@ public class LauncherModel extends BroadcastReceiver {
                                         ComponentName cn = intent.getComponent();
                                         if (cn != null && !isValidPackageComponent(manager, cn)) {
                                             if (!mAppsCanBeOnRemoveableStorage) {
-                                               // Log the invalid package, and remove it from the db
-                                                Launcher.addDumpLog(TAG,
-                                                        "Invalid package removed: " + cn, true);
+                                               // Remove the invalid package from the db
                                                 itemsToRemove.add(id);
-                                            } else {
-                                                // If apps can be on external storage, then we just
-                                                // leave them for the user to remove (maybe add
-                                                // visual treatment to it)
-                                                Launcher.addDumpLog(TAG,
-                                                        "Invalid package found: " + cn, true);
                                             }
                                             continue;
                                         }
                                     } catch (URISyntaxException e) {
-                                        Launcher.addDumpLog(TAG,
-                                                "Invalid uri: " + intentDescription, true);
                                         continue;
                                     }
                                 }
@@ -1747,10 +1691,6 @@ public class LauncherModel extends BroadcastReceiver {
                                     // Skip loading items that are out of bounds
                                     if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
                                         if (checkItemDimensions(info)) {
-                                            Launcher.addDumpLog(TAG,
-                                                    "Skipped loading out of bounds shortcut: "
-                                                    + info + ", " + grid.numColumns + "x"
-                                                            + grid.numRows, true);
                                             continue;
                                         }
                                     }
@@ -1801,7 +1741,6 @@ public class LauncherModel extends BroadcastReceiver {
                                 // Skip loading items that are out of bounds
                                 if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
                                     if (checkItemDimensions(folderInfo)) {
-                                        Log.d(TAG, "Skipped loading out of bounds folder");
                                         continue;
                                     }
                                 }
@@ -1839,7 +1778,6 @@ public class LauncherModel extends BroadcastReceiver {
                                         provider.provider.getPackageName() == null)) {
                                     String log = "Deleting widget that isn't installed anymore: id="
                                         + id + " appWidgetId=" + appWidgetId;
-                                    Log.e(TAG, log);
                                     Launcher.addDumpLog(TAG, log, false);
                                     itemsToRemove.add(id);
                                 } else {
@@ -1858,8 +1796,6 @@ public class LauncherModel extends BroadcastReceiver {
                                     container = c.getInt(containerIndex);
                                     if (container != LauncherSettings.Favorites.CONTAINER_DESKTOP &&
                                         container != LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
-                                        Log.e(TAG, "Widget found where container != " +
-                                            "CONTAINER_DESKTOP nor CONTAINER_HOTSEAT - ignoring!");
                                         continue;
                                     }
 
@@ -1867,7 +1803,6 @@ public class LauncherModel extends BroadcastReceiver {
                                     // Skip loading items that are out of bounds
                                     if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
                                         if (checkItemDimensions(appWidgetInfo)) {
-                                            Log.d(TAG, "Skipped loading out of bounds app widget");
                                             continue;
                                         }
                                     }
@@ -1922,7 +1857,6 @@ public class LauncherModel extends BroadcastReceiver {
                             client.delete(LauncherSettings.Favorites.getContentUri(id, false),
                                     null, null);
                         } catch (RemoteException e) {
-                            Log.w(TAG, "Could not remove id = " + id);
                         }
                     }
                 }
@@ -2214,7 +2148,6 @@ public class LauncherModel extends BroadcastReceiver {
             final Callbacks oldCallbacks = mCallbacks.get();
             if (oldCallbacks == null) {
                 // This launcher has exited and nobody bothered to tell us.  Just bail.
-                Log.w(TAG, "LoaderTask running with no launcher");
                 return;
             }
 
@@ -2337,7 +2270,6 @@ public class LauncherModel extends BroadcastReceiver {
             final Callbacks oldCallbacks = mCallbacks.get();
             if (oldCallbacks == null) {
                 // This launcher has exited and nobody bothered to tell us.  Just bail.
-                Log.w(TAG, "LoaderTask running with no launcher (onlyBindAllApps)");
                 return;
             }
 
@@ -2372,7 +2304,6 @@ public class LauncherModel extends BroadcastReceiver {
             final Callbacks oldCallbacks = mCallbacks.get();
             if (oldCallbacks == null) {
                 // This launcher has exited and nobody bothered to tell us.  Just bail.
-                Log.w(TAG, "LoaderTask running with no launcher (loadAllApps)");
                 return;
             }
 
@@ -2427,8 +2358,6 @@ public class LauncherModel extends BroadcastReceiver {
                             Log.d(TAG, "bound " + added.size() + " apps in "
                                 + (SystemClock.uptimeMillis() - bindTime) + "ms");
                         }
-                    } else {
-                        Log.i(TAG, "not binding apps: no Launcher activity");
                     }
                 }
             });
@@ -2520,7 +2449,6 @@ public class LauncherModel extends BroadcastReceiver {
 
             final Callbacks callbacks = mCallbacks != null ? mCallbacks.get() : null;
             if (callbacks == null) {
-                Log.w(TAG, "Nobody to tell about the new app.  Launcher is probably loading.");
                 return;
             }
 
@@ -2674,15 +2602,12 @@ public class LauncherModel extends BroadcastReceiver {
         ComponentName componentName = intent.getComponent();
         final ShortcutInfo info = new ShortcutInfo();
         if (componentName != null && !isValidPackageComponent(manager, componentName)) {
-            Log.d(TAG, "Invalid package found in getShortcutInfo: " + componentName);
             return null;
         } else {
             try {
                 PackageInfo pi = manager.getPackageInfo(componentName.getPackageName(), 0);
                 info.initFlagsAndFirstInstallTime(pi);
             } catch (NameNotFoundException e) {
-                Log.d(TAG, "getPackInfo failed for package " +
-                        componentName.getPackageName());
             }
         }
 
@@ -2899,10 +2824,6 @@ public class LauncherModel extends BroadcastReceiver {
     Bitmap getIconFromCursor(Cursor c, int iconIndex, Context context) {
         @SuppressWarnings("all") // suppress dead code warning
         final boolean debug = false;
-        if (debug) {
-            Log.d(TAG, "getIconFromCursor app="
-                    + c.getString(c.getColumnIndexOrThrow(LauncherSettings.Favorites.TITLE)));
-        }
         byte[] data = c.getBlob(iconIndex);
         try {
             return Utilities.createIconBitmap(
@@ -3006,7 +2927,6 @@ public class LauncherModel extends BroadcastReceiver {
                     icon = Utilities.createIconBitmap(
                             mIconCache.getFullResIcon(resources, id), context);
                 } catch (Exception e) {
-                    Log.w(TAG, "Could not load shortcut icon: " + extra);
                 }
             }
         }
@@ -3063,7 +2983,6 @@ public class LauncherModel extends BroadcastReceiver {
             needSave = true;
         }
         if (needSave) {
-            Log.d(TAG, "going to save icon bitmap for info=" + info);
             // This is slower than is ideal, but this only happens once
             // or when the app is updated with a new icon.
             updateItemInDatabase(context, info);

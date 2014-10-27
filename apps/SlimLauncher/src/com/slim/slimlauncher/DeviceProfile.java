@@ -169,26 +169,10 @@ public class DeviceProfile {
         textPaint.setTextSize(iconTextSizePx);
         Paint.FontMetrics fm = textPaint.getFontMetrics();
         cellWidthPx = iconSizePx;
-        cellHeightPx = iconSizePx + (int) Math.ceil(fm.bottom - fm.top);
-
-        // At this point, if the cells do not fit into the available height, then we need
-        // to shrink the icon size
-        /*
-        Rect padding = getWorkspacePadding(isLandscape ?
-                CellLayout.LANDSCAPE : CellLayout.PORTRAIT);
-        int h = (int) (numRows * cellHeightPx) + padding.top + padding.bottom;
-        if (h > availableHeightPx) {
-            float delta = h - availableHeightPx;
-            int deltaPx = (int) Math.ceil(delta / numRows);
-            iconSizePx -= deltaPx;
-            iconSize = DynamicGrid.dpiFromPx(iconSizePx, dm);
-            cellWidthPx = iconSizePx;
-            cellHeightPx = iconSizePx + (int) Math.ceil(fm.bottom - fm.top);
-        }
-        */
+        cellHeightPx = iconSizePx + 16 + (int) Math.ceil(fm.bottom - fm.top);
 
         // Hotseat
-        hotseatBarHeightPx = iconSizePx + 4 * edgeMarginPx;
+        hotseatBarHeightPx = iconSizePx + 4;
         hotseatCellWidthPx = iconSizePx;
         hotseatCellHeightPx = iconSizePx;
 
@@ -217,7 +201,7 @@ public class DeviceProfile {
         showSearchBar = SettingsProvider.getBoolean(context,
                 SettingsProvider.KEY_SHOW_SEARCH_BAR, true);
 
-        searchBarSpaceHeightPx = searchBarHeightPx + (showSearchBar ? 2 * edgeMarginPx : 0);
+        searchBarSpaceHeightPx = searchBarHeightPx + edgeMarginPx;
 
         int prefNumRows = SettingsProvider.getCellCountY(
                 context, SettingsProvider.KEY_HOMESCREEN_GRID, 4);
@@ -234,14 +218,13 @@ public class DeviceProfile {
         int prefIconSize = SettingsProvider.getInt(context, SettingsProvider.KEY_ICON_SIZE, 0);
         if (prefIconSize > 0) {
             iconSizePx = (int) ((double) prefIconSize / 100.0 * iconSizeOriginal);
-            hotseatIconSizePx = (int) ((double) prefIconSize / 100.0 * originalHotseatIconSizePx);
             folderIconSizePx = iconSizePx + 2 * -folderBackgroundOffset;
             Paint textPaint = new Paint();
             textPaint.setTextSize(iconTextSizePx);
 
             Paint.FontMetrics fm = textPaint.getFontMetrics();
             cellWidthPx = iconSizePx;
-            cellHeightPx = iconSizePx + (int) Math.ceil(fm.bottom - fm.top);
+            cellHeightPx = iconSizePx + 16 + (int) Math.ceil(fm.bottom - fm.top);
             folderCellWidthPx = cellWidthPx + 3 * edgeMarginPx;
             folderCellHeightPx = cellHeightPx + (int) ((3f/2f) * edgeMarginPx);
         }
@@ -416,18 +399,13 @@ public class DeviceProfile {
             lp.gravity = Gravity.TOP | Gravity.LEFT;
             lp.width = searchBarSpaceHeightPx;
             lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
-            searchBar.setPadding(
-                    0, 2 * edgeMarginPx, 0,
-                    2 * edgeMarginPx);
+            searchBar.setPadding(0, 2 * edgeMarginPx, 0, 2 * edgeMarginPx);
         } else {
             // Horizontal search bar
             lp.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
             lp.width = searchBarSpaceWidthPx;
             lp.height = searchBarSpaceHeightPx;
-            searchBar.setPadding(
-                    2 * edgeMarginPx,
-                    2 * edgeMarginPx,
-                    2 * edgeMarginPx, 0);
+            searchBar.setPadding(2 * edgeMarginPx, edgeMarginPx,2 * edgeMarginPx, 0);
         }
         searchBar.setLayoutParams(lp);
 
@@ -484,9 +462,7 @@ public class DeviceProfile {
             lp.gravity = Gravity.BOTTOM;
             lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
             lp.height = hotseatBarHeightPx;
-            hotseat.setPadding(2 * edgeMarginPx + gridGap + hotseatGap, 0,
-                    2 * edgeMarginPx + gridGap + hotseatGap,
-                    2 * edgeMarginPx);
+            hotseat.setPadding(2 * edgeMarginPx , 0, 2 * edgeMarginPx, 0);
         } else {
             // For phones, layout the hotseat without any bottom margin
             // to ensure that we have space for the folders

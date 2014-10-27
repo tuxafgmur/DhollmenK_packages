@@ -22,7 +22,6 @@
         <com.slim.slimlauncher.DeleteDropTarget
             style="@style/DropTargetButton"
             android:id="@+id/delete_target_text"
-            android:text="@string/delete_zone_label_workspace"
             android:drawableStart="@drawable/remove_target_selector" />
     </FrameLayout>
     <FrameLayout
@@ -33,7 +32,6 @@
         <com.slim.slimlauncher.InfoDropTarget
             style="@style/DropTargetButton"
             android:id="@+id/info_target_text"
-            android:text="@string/info_target_label"
             android:drawableStart="@drawable/info_target_selector" />
     </FrameLayout>
 </merge>

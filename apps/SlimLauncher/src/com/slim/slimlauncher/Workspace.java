@@ -382,7 +382,6 @@ public class Workspace extends SmoothPagedView
 
             @Override
             public boolean onDoubleTapEvent(MotionEvent e) {
-                Log.d(TAG, "onDoubleTapEvent : action=" + e.getAction());
                 return false;
             }
         });
@@ -946,14 +945,6 @@ public class Workspace extends SmoothPagedView
         if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
             layout = mLauncher.getHotseat().getLayout();
             child.setOnKeyListener(null);
-
-            boolean dockHideLabels = SettingsProvider.getBoolean(mLauncher,
-                    SettingsProvider.KEY_DOCK_HIDE_LABELS, true);
-
-            // Hide folder title in the hotseat
-            if (child instanceof FolderIcon) {
-                ((FolderIcon) child).setTextVisible(!dockHideLabels);
-            }
 
             if (computeXYFromRank) {
                 x = mLauncher.getHotseat().getCellXFromOrder((int) screenId);
@@ -3903,7 +3894,6 @@ public class Workspace extends SmoothPagedView
 
         // In the case where we've prebound the widget, we remove it from the DragLayer
         if (finalView instanceof AppWidgetHostView && external) {
-            Log.d(TAG, "6557954 Animate widget drop, final view is appWidgetHostView");
             mLauncher.getDragLayer().removeView(finalView);
         }
         if ((animationType == ANIMATE_INTO_POSITION_AND_RESIZE || external) && finalView != null) {
@@ -4038,7 +4028,9 @@ public class Workspace extends SmoothPagedView
             } else {
                 cellLayout = getScreenWithId(mDragInfo.screenId);
             }
-            cellLayout.onDropChild(mDragInfo.cell);
+            if (cellLayout != null) {
+		cellLayout.onDropChild(mDragInfo.cell);
+	    }
         }
         if ((d.cancelled || (beingCalledAfterUninstall && !mUninstallSuccessful))
                 && mDragInfo.cell != null) {
@@ -4696,7 +4688,6 @@ public class Workspace extends SmoothPagedView
     }
 
     private void performGestureAction(String gestureAction, String gesture) {
-        Log.d(TAG, "gestureAction=" + gestureAction + " : gesture=" + gesture);
         if (gestureAction.equals("default_homescreen")) {
             setCurrentPage(getPageIndexForScreenId(mDefaultScreenId));
         } else if (gestureAction.equals("open_app_drawer")) {

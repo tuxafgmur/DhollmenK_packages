@@ -171,7 +171,6 @@ public class Hotseat extends FrameLayout {
             for (AppInfo info: allApps) {
                 ComponentName cn = info.intent.getComponent();
                 if (!onWorkspace.contains(cn)) {
-                    Log.d(TAG, "Adding to 'more apps': " + info.intent);
                     ShortcutInfo si = info.makeShortcut();
                     fi.add(si);
                 }

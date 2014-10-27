@@ -9,12 +9,6 @@
         android:title="@string/dock_icons_title"
         android:summary="@string/dock_icons_summary"
         launcher:min="1"
-        launcher:max="7" />
-
-    <CheckBoxPreference
-        android:key="dock_hide_icon_labels"
-        android:title="@string/hide_icon_labels_title"
-        android:summary="@string/hide_icon_labels_dock_summary"
-        android:defaultValue="true" />
+        launcher:max="9" />
 
 </PreferenceScreen>

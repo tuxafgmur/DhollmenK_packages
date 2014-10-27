@@ -6,8 +6,8 @@
     <com.slim.slimlauncher.preference.SeekBarDialogPreference
         android:key="icon_size"
         android:title="@string/icon_size_title"
-        launcher:max="130"
-        launcher:min="70"
+        launcher:max="110"
+        launcher:min="80"
         launcher:defaultValue="100"/>
 
     <Preference

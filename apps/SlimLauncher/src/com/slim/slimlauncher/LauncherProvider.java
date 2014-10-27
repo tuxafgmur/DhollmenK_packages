@@ -271,15 +271,11 @@ public class LauncherProvider extends ContentProvider {
             if (workspaceResId == 0) {
                 TelephonyManager tm = (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
                 if (tm.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE) {
-                    if (areGAppsInstalled()) {
-                        workspaceResId = sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,
-                                R.xml.default_workspace_no_telephony_gapps);
-                    } else {
-                        workspaceResId = sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,
-                                R.xml.default_workspace_no_telephony);
-                    }
+		    workspaceResId = sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,
+			R.xml.default_workspace_no_telephony);
                 } else {
-                    workspaceResId = sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID, R.xml.default_workspace);
+                    workspaceResId = sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,
+			R.xml.default_workspace);
                 }
             }
 
@@ -293,25 +289,6 @@ public class LauncherProvider extends ContentProvider {
             mOpenHelper.loadFavorites(mOpenHelper.getWritableDatabase(), workspaceResId);
             mOpenHelper.setFlagJustLoadedOldDb();
             editor.commit();
-        }
-    }
-
-    private boolean areGAppsInstalled() {
-        PackageManager pm = getContext().getPackageManager();
-        try {
-            PackageInfo info = pm.getPackageInfo(
-                    "com.google.android.gsf",PackageManager.GET_META_DATA);
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-        return true;
-    }
-
-    private int getDefaultWorkspaceResourceId() {
-        if (areGAppsInstalled()){
-            return R.xml.default_workspace_gapps;
-        } else {
-            return R.xml.default_workspace;
         }
     }
 
@@ -803,8 +780,6 @@ public class LauncherProvider extends ContentProvider {
         }
 
         private void normalizeIcons(SQLiteDatabase db) {
-            Log.d(TAG, "normalizing icons");
-
             db.beginTransaction();
             Cursor c = null;
             SQLiteStatement update = null;

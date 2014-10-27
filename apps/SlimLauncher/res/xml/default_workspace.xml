@@ -15,51 +15,7 @@
      limitations under the License.
 -->
 <favorites xmlns:launcher="http://schemas.android.com/apk/res/com.slim.slimlauncher">
-    <!-- Screen [1] -->
-    <appwidget
-        launcher:packageName="net.nurik.roman.dashclock"
-        launcher:className="com.google.android.apps.dashclock.WidgetProvider"
-        launcher:screen="1"
-        launcher:x="0"
-        launcher:y="0"
-        launcher:spanX="4"
-        launcher:spanY="2" />
-    <favorite
-        launcher:packageName="com.android.vending"
-        launcher:className="com.android.vending.AssetBrowserActivity"
-        launcher:screen="1"
-        launcher:x="3"
-        launcher:y="3" />
-    <favorite
-        launcher:packageName="com.bel.android.dspmanager"
-        launcher:className="com.bel.android.dspmanager.activity.DSPManager"
-        launcher:screen="1"
-        launcher:x="3"
-        launcher:y="3" />
 
-    <!-- Screen [2] -->
-    <appwidget
-        launcher:packageName="com.android.mms"
-        launcher:className="com.android.mms.widget.MmsWidgetProvider"
-        launcher:screen="2"
-        launcher:x="0"
-        launcher:y="0"
-        launcher:spanX="4"
-        launcher:spanY="2" />
-    <favorite
-        launcher:packageName="com.android.gallery3d"
-        launcher:className="com.android.gallery3d.app.Gallery"
-        launcher:screen="2"
-        launcher:x="0"
-        launcher:y="3" />
-    <favorite
-        launcher:packageName="com.android.settings"
-        launcher:className="com.android.settings.Settings"
-        launcher:screen="2"
-        launcher:x="3"
-        launcher:y="3" />
-
-    <!-- Hotseat (We use the screen as the position of the item in the hotseat) -->
     <favorite
         launcher:packageName="com.android.dialer"
         launcher:className="com.android.dialer.DialtactsActivity"
@@ -96,4 +52,5 @@
         launcher:screen="4"
         launcher:x="4"
         launcher:y="0" />
+
 </favorites>

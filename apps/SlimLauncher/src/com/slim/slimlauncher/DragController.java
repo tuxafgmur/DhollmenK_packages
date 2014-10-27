@@ -275,7 +275,6 @@ public class DragController {
         v.buildDrawingCache();
         Bitmap cacheBitmap = v.getDrawingCache();
         if (cacheBitmap == null) {
-            Log.e(TAG, "failed getViewBitmap(" + v + ")", new RuntimeException());
             return null;
         }
 
@@ -415,10 +414,6 @@ public class DragController {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         @SuppressWarnings("all") // suppress dead code warning
         final boolean debug = false;
-        if (debug) {
-            Log.d(Launcher.TAG, "DragController.onInterceptTouchEvent " + ev + " mDragging="
-                    + mDragging);
-        }
 
         // Update the velocity tracker
         acquireVelocityTrackerAndAddMovement(ev);

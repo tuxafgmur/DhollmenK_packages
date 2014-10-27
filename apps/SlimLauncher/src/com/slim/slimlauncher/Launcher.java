@@ -153,7 +153,7 @@ public class Launcher extends Activity
     static final String EXTRA_SHORTCUT_DUPLICATE = "duplicate";
 
     static final int SCREEN_COUNT = 5;
-    static final int DEFAULT_SCREEN = 2;
+    static final int DEFAULT_SCREEN = 3;
 
     private static final String PREFERENCES = "launcher.preferences";
     // To turn on these properties, type
@@ -1284,7 +1284,6 @@ public class Launcher extends Activity
         }
 
         if (getResources().getBoolean(R.bool.debug_memory_enabled)) {
-            Log.v(TAG, "adding WeightWatcher");
             mWeightWatcher = new WeightWatcher(this);
             mWeightWatcher.setAlpha(0.5f);
             ((FrameLayout) mLauncherView).addView(mWeightWatcher,
@@ -2537,7 +2536,6 @@ public class Launcher extends Activity
             success = startActivity(v, intent, tag);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "Unable to launch. tag=" + tag + " intent=" + intent, e);
         }
         return success;
     }
@@ -2549,8 +2547,6 @@ public class Launcher extends Activity
         // If the folder info reports that the associated folder is open, then verify that
         // it is actually opened. There have been a few instances where this gets out of sync.
         if (info.opened && openFolder == null) {
-            Log.d(TAG, "Folder info marked as open, but associated folder is not open. Screen: "
-                    + info.screenId + " (" + info.cellX + ", " + info.cellY + ")");
             info.opened = false;
         }
 

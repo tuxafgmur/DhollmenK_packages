@@ -13,7 +13,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 LOCAL_PATH := $(call my-dir)
 
@@ -40,5 +39,3 @@ LOCAL_OVERRIDES_PACKAGES := Launcher3 Launcher2
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
 include $(BUILD_PACKAGE)
-
-include $(call all-makefiles-under,$(LOCAL_PATH))

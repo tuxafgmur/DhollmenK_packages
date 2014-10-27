@@ -772,10 +772,7 @@ public class WallpaperPickerActivity extends WallpaperCropActivity {
                     ResourceWallpaperInfo wallpaperInfo =
                             new ResourceWallpaperInfo(res, resId, res.getDrawable(thumbRes));
                     bundledWallpapers.add(wallpaperInfo);
-                    // Log.d(TAG, "add: [" + packageName + "]: " + extra + " (" + res + ")");
                 }
-            } else {
-                Log.e(TAG, "Couldn't find wallpaper " + extra);
             }
         }
         return bundledWallpapers;
