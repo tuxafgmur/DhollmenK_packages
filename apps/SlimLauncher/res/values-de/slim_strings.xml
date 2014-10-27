@@ -15,7 +15,6 @@
  -->
 
 <resources>
-
     <string name="default_string">Standard</string>
     <string name="reset_string">Zurücksetzen</string>
     <string name="set_string">Einstellen</string>
@@ -94,5 +93,4 @@
     <string name="folder_background_color_title">Hintergrundfarbe</string>
     <string name="hide_folder_name_title">Ordnernamen ausblenden</string>
     <string name="hide_folder_name_summary">Ordnernamen bei geöffnetem Ordner ausblenden</string>
-
 </resources>

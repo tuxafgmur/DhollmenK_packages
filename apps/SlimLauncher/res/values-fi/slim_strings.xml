@@ -85,7 +85,7 @@
     <string name="press_color_to_apply">Paina väriä alla valitaksesi</string>
     <string name="set">Aseta</string>
 
-    <!-- Folder -->
+    <!-- Folders -->
     <string name="folder_title">Kansio</string>
     <string name="folder_background_color_title">Taustan väri</string>
     <string name="hide_folder_name_title">Piilota kansion nimi</string>

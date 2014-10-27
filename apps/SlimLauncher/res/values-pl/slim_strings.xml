@@ -16,7 +16,6 @@
 -->
 
 <resources>
-
     <string name="default_string">Domyślnie</string>
     <string name="reset_string">Przywróć</string>
     <string name="set_string">Ustaw</string>
@@ -28,7 +27,7 @@
     <string name="error_message_title">Błąd</string>
 
     <string name="scroll_wallpaper_title">Przewijanie tapety</string>
-    <string name="scroll_wallpaper_summary">Przesuwaj tapetę podczas przesuwania pulpitów</string>
+    <string name="scroll_wallpaper_summary">Przewijaj tapetę podczas przesuwania pulpitów</string>
 
     <string name="shortcut_picker_title">Skróty SlimLauncher</string>
 
@@ -72,8 +71,8 @@
     <string name="gestures_up_gesture_title">Przesunięcie w górę</string>
     <string name="gestures_down_gesture_title">Przesunięcie w dół</string>
     <string name="gestures_pinch_gesture_title">Uszczypnięcie</string>
-    <string name="gestures_spread_gesture_title">Rozsunięcie</string>
-    <string name="gestures_double_tap_gesture_title">Dotknij dwukrotnie</string>
+    <string name="gestures_spread_gesture_title">Rozszerzenie</string>
+    <string name="gestures_double_tap_gesture_title">Dwukrotne dotknięcie</string>
 
     <string name="gesture_target_nothing">Nic</string>
     <string name="gesture_target_homescreen">Przejdź do pulpitu domyślnego</string>
@@ -94,10 +93,9 @@
     <string name="press_color_to_apply">Dotknij koloru aby go zastosować</string>
     <string name="set">Ustaw</string>
 
-    <!-- Folder -->
+    <!-- Folders -->
     <string name="folder_title">Folder</string>
     <string name="folder_background_color_title">Kolor tła</string>
     <string name="hide_folder_name_title">Ukryj nazwę folderu</string>
     <string name="hide_folder_name_summary">Nie pokazuj nazwy folderu gdy jest otwarty</string>
-
 </resources>

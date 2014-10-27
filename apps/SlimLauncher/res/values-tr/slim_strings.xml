@@ -15,7 +15,6 @@
  -->
 
 <resources>
-
     <string name="default_string">Varsayılan</string>
     <string name="reset_string">Reset</string>
     <string name="set_string">Ayarla</string>
@@ -58,6 +57,13 @@
 
     <string name="icon_size_title">Simge Boyutu</string>
 
+    <!-- Icon Pack -->
+    <string name="dialog_pick_iconpack_title">Simge Paketi Seç</string>
+    <string name="default_iconpack_title">Varsayılan Simgeler</string>
+    <string name="icon_packs_title">Simge Paketleri</string>
+    <string name="no_iconpacks_summary">Herhangi Bir Simge Paketi Yüklenmedi</string>
+    <string name="pref_icon_pack_title">Simge Paketi</string>
+
     <!-- Gestures -->
     <string name="gestures_title">Hareketler</string>
     <string name="gesture_default">Hiçbir şey</string>
@@ -86,10 +92,9 @@
     <string name="press_color_to_apply">Uygulamak için alttaki rengi seç</string>
     <string name="set">Set</string>
 
-    <!-- Folder -->
+    <!-- Folders -->
     <string name="folder_title">Klasör</string>
     <string name="folder_background_color_title">Arkaplan Rengi</string>
     <string name="hide_folder_name_title">Klasör ismini Gizle</string>
     <string name="hide_folder_name_summary">Klasör Açıkken Klasör Ismini Gösterme</string>
-
 </resources>

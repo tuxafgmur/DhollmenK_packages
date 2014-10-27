@@ -30,6 +30,11 @@
 
     <string name="shortcut_picker_title">Raccourcis SlimLauncher</string>
 
+    <string name="shortcut_action_launcher_apps">Toutes les applications</string>
+    <string name="shortcut_action_launcher_overview">Mode de présentation</string>
+    <string name="shortcut_action_launcher_settings">Paramètre s du lanceur</string>
+    <string name="shortcut_action_launcher_homescreen">Écran par défaut</string>
+
     <!-- Homescreen -->
     <string name="homescreen_title">Écran d\'accueil</string>
     <string name="general_title">Général</string>
@@ -51,6 +56,13 @@
     <string name="homescreen_workspace_columns_title">Colonnes</string>
 
     <string name="icon_size_title">Taille d\'icônes</string>
+
+    <!-- Icon Pack -->
+    <string name="dialog_pick_iconpack_title">Choissir un pack d\'icônes</string>
+    <string name="default_iconpack_title">Icônes par défaut</string>
+    <string name="icon_packs_title">pack d\'icônes</string>
+    <string name="no_iconpacks_summary">Il n\'y a pas de pack d\'icônes d\'installé</string>
+    <string name="pref_icon_pack_title">pack d\'icônes</string>
 
     <!-- Gestures -->
     <string name="gestures_title">Gestes</string>
@@ -80,7 +92,7 @@
     <string name="press_color_to_apply">Appuyez sur la couleur ci-dessous pour appliquer</string>
     <string name="set">Définir</string>
 
-    <!-- Folder -->
+    <!-- Folders -->
     <string name="folder_title">Dossier</string>
     <string name="folder_background_color_title">Couleur de fond</string>
     <string name="hide_folder_name_title">Masquer le nom du dossier</string>

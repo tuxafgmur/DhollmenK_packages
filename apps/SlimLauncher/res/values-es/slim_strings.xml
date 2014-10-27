@@ -91,7 +91,7 @@
     <string name="press_color_to_apply">Pulsa abajo para aplicar el color</string>
     <string name="set">Aplicar</string>
 
-    <!-- Folder -->
+    <!-- Folders -->
     <string name="folder_title">Carpeta</string>
     <string name="folder_background_color_title">Color de fondo</string>
     <string name="hide_folder_name_title">Ocultar el nombre</string>
