@@ -111,7 +111,6 @@ public class ArtistAlbumBrowserActivity extends ExpandableListActivity
 
         mAdapter = (ArtistAlbumListAdapter) getLastNonConfigurationInstance();
         if (mAdapter == null) {
-            //Log.i("@@@", "starting query");
             mAdapter = new ArtistAlbumListAdapter(
                     getApplication(),
                     this,
@@ -332,7 +331,6 @@ public class ArtistAlbumBrowserActivity extends ExpandableListActivity
         if (itemtype == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
             if (gpos == -1) {
                 // this shouldn't happen
-                Log.d("Artist/Album", "no group");
                 return;
             }
             gpos = gpos - getExpandableListView().getHeaderViewsCount();
@@ -353,7 +351,6 @@ public class ArtistAlbumBrowserActivity extends ExpandableListActivity
         } else if (itemtype == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
             if (cpos == -1) {
                 // this shouldn't happen
-                Log.d("Artist/Album", "no child");
                 return;
             }
             Cursor c = (Cursor) getExpandableListAdapter().getChild(gpos, cpos);
@@ -581,7 +578,6 @@ public class ArtistAlbumBrowserActivity extends ExpandableListActivity
             
             @Override
             protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                //Log.i("@@@", "query complete");
                 mActivity.init(cursor);
             }
         }

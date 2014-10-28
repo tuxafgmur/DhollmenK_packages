@@ -99,9 +99,7 @@ public class PlaylistBrowserActivity extends ListActivity
             public void onServiceConnected(ComponentName classname, IBinder obj) {
                 if (Intent.ACTION_VIEW.equals(action)) {
                     Bundle b = intent.getExtras();
-                    if (b == null) {
-                        Log.w(TAG, "Unexpected:getExtras() returns null.");
-                    } else {
+                    if (b != null) {
                         try {
                             long id = Long.parseLong(b.getString("playlist"));
                             if (id == RECENTLY_ADDED_PLAYLIST) {
@@ -117,7 +115,6 @@ public class PlaylistBrowserActivity extends ListActivity
                                 MusicUtils.playPlaylist(PlaylistBrowserActivity.this, id);
                             }
                         } catch (NumberFormatException e) {
-                            Log.w(TAG, "Playlist id missing or broken");
                         }
                     }
                     finish();
@@ -145,7 +142,6 @@ public class PlaylistBrowserActivity extends ListActivity
 
         mAdapter = (PlaylistListAdapter) getLastNonConfigurationInstance();
         if (mAdapter == null) {
-            //Log.i("@@@", "starting query");
             mAdapter = new PlaylistListAdapter(
                     getApplication(),
                     this,
@@ -344,8 +340,6 @@ public class PlaylistBrowserActivity extends ListActivity
                     intent.setClass(this, WeekSelector.class);
                     startActivityForResult(intent, CHANGE_WEEKS);
                     return true;
-                } else {
-                    Log.e(TAG, "should not be here");
                 }
                 break;
             case RENAME_PLAYLIST:
@@ -507,7 +501,6 @@ public class PlaylistBrowserActivity extends ListActivity
         }
         if (c instanceof MergeCursor) {
             // this shouldn't happen, but fail gracefully
-            Log.d("PlaylistBrowserActivity", "Already wrapped");
             return c;
         }
         MatrixCursor autoplaylistscursor = new MatrixCursor(mCols);
@@ -556,7 +549,6 @@ public class PlaylistBrowserActivity extends ListActivity
             
             @Override
             protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                //Log.i("@@@", "query complete: " + cursor.getCount() + "   " + mActivity);
                 if (cursor != null) {
                     cursor = mActivity.mergedCursor(cursor);
                 }

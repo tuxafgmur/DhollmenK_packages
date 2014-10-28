@@ -227,7 +227,6 @@ public class MediaPlaybackService extends Service {
                     // handles fade-in
                     switch (msg.arg1) {
                         case AudioManager.AUDIOFOCUS_LOSS:
-                            Log.v(LOGTAG, "AudioFocus: received AUDIOFOCUS_LOSS");
                             if(isPlaying()) {
                                 mPausedByTransientLossOfFocus = false;
                             }
@@ -238,14 +237,12 @@ public class MediaPlaybackService extends Service {
                             mMediaplayerHandler.sendEmptyMessage(FADEDOWN);
                             break;
                         case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                            Log.v(LOGTAG, "AudioFocus: received AUDIOFOCUS_LOSS_TRANSIENT");
                             if(isPlaying()) {
                                 mPausedByTransientLossOfFocus = true;
                             }
                             pause();
                             break;
                         case AudioManager.AUDIOFOCUS_GAIN:
-                            Log.v(LOGTAG, "AudioFocus: received AUDIOFOCUS_GAIN");
                             if(!isPlaying() && mPausedByTransientLossOfFocus) {
                                 mPausedByTransientLossOfFocus = false;
                                 mCurrentVolume = 0f;
@@ -256,8 +253,6 @@ public class MediaPlaybackService extends Service {
                                 mMediaplayerHandler.sendEmptyMessage(FADEUP);
                             }
                             break;
-                        default:
-                            Log.e(LOGTAG, "Unknown audio focus change code");
                     }
                     break;
 
@@ -369,9 +364,6 @@ public class MediaPlaybackService extends Service {
     @Override
     public void onDestroy() {
         // Check that we're not being destroyed while something is still playing.
-        if (isPlaying()) {
-            Log.e(LOGTAG, "Service being destroyed while still playing.");
-        }
         // release all MediaPlayer resources, including the native player and wakelocks
         Intent i = new Intent(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION);
         i.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, getAudioSessionId());
@@ -440,7 +432,6 @@ public class MediaPlaybackService extends Service {
                     q.append(";");
                 }
             }
-            //Log.i("@@@@ service", "created queue string in " + (System.currentTimeMillis() - start) + " ms");
             ed.putString("queue", q.toString());
             ed.putInt("cardid", mCardId);
             if (mShuffleMode != SHUFFLE_NONE) {
@@ -471,7 +462,6 @@ public class MediaPlaybackService extends Service {
         ed.putInt("shufflemode", mShuffleMode);
         SharedPreferencesCompat.apply(ed);
 
-        //Log.i("@@@@ service", "saved state in " + (System.currentTimeMillis() - start) + " ms");
     }
 
     private void reloadQueue() {
@@ -490,7 +480,6 @@ public class MediaPlaybackService extends Service {
         }
         int qlen = q != null ? q.length() : 0;
         if (qlen > 1) {
-            //Log.i("@@@@ service", "loaded queue: " + q);
             int plen = 0;
             int n = 0;
             int shift = 0;
@@ -566,9 +555,6 @@ public class MediaPlaybackService extends Service {
             
             long seekpos = mPreferences.getLong("seekpos", 0);
             seek(seekpos >= 0 && seekpos < duration() ? seekpos : 0);
-            Log.d(LOGTAG, "restored queue, currently at position "
-                    + position() + "/" + duration()
-                    + " (requested " + seekpos + ")");
             
             int repmode = mPreferences.getInt("repeatmode", REPEAT_NONE);
             if (repmode != REPEAT_ALL && repmode != REPEAT_CURRENT) {
@@ -1063,7 +1049,6 @@ public class MediaPlaybackService extends Service {
                     if (!mQuietMode) {
                         Toast.makeText(this, R.string.playback_failed, Toast.LENGTH_SHORT).show();
                     }
-                    Log.d(LOGTAG, "Failed to open file for playback");
                     gotoIdleState();
                     if (mIsSupposedToBePlaying) {
                         mIsSupposedToBePlaying = false;
@@ -1406,7 +1391,6 @@ public class MediaPlaybackService extends Service {
     public void gotoNext(boolean force) {
         synchronized (this) {
             if (mPlayListLen <= 0) {
-                Log.d(LOGTAG, "No play queue");
                 return;
             }
 
@@ -1512,7 +1496,6 @@ public class MediaPlaybackService extends Service {
 
         int histsize = mHistory.size();
         if (histsize < lookbacksize) {
-            Log.d(LOGTAG, "lookback too big");
             lookbacksize = histsize;
         }
         int maxidx = histsize - 1;
@@ -1992,7 +1975,6 @@ public class MediaPlaybackService extends Service {
                     mHandler.sendMessageDelayed(mHandler.obtainMessage(SERVER_DIED), 2000);
                     return true;
                 default:
-                    Log.d("MultiPlayer", "Error: " + what + "," + extra);
                     break;
                 }
                 return false;

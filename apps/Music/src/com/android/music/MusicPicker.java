@@ -426,7 +426,6 @@ public class MusicPicker extends ListActivity
         } else {
             mBaseUri = getIntent().getData();
             if (mBaseUri == null) {
-                Log.w("MusicPicker", "No data URI given to PICK action");
                 finish();
                 return;
             }
@@ -648,7 +647,6 @@ public class MusicPicker extends ListActivity
                 mPlayingId = newId;
                 getListView().invalidateViews();
             } catch (IOException e) {
-                Log.w("MusicPicker", "Unable to play track", e);
             }
         } else if (mMediaPlayer != null) {
             stopMediaPlayer();

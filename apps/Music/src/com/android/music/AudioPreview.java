@@ -114,7 +114,6 @@ public class AudioPreview extends Activity implements OnPreparedListener, OnErro
                 // content URI, another content provider's URI, a file URI,
                 // an http URI, and there are different exceptions associated
                 // with failure to open each of those.
-                Log.d(TAG, "Failed to open file: " + ex);
                 Toast.makeText(this, R.string.playback_failed, Toast.LENGTH_SHORT).show();
                 finish();
                 return;
@@ -151,12 +150,7 @@ public class AudioPreview extends Activity implements OnPreparedListener, OnErro
                     } else if (displaynameIdx >= 0) {
                         String name = cursor.getString(displaynameIdx);
                         mTextLine1.setText(name);
-                    } else {
-                        // Couldn't find anything to display, what to do now?
-                        Log.w(TAG, "Cursor had no names for us");
                     }
-                } else {
-                    Log.w(TAG, "empty cursor");
                 }
 
                 if (cursor != null) {

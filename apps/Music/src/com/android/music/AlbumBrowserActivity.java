@@ -115,7 +115,6 @@ public class AlbumBrowserActivity extends ListActivity
 
         mAdapter = (AlbumListAdapter) getLastNonConfigurationInstance();
         if (mAdapter == null) {
-            //Log.i("@@@", "starting query");
             mAdapter = new AlbumListAdapter(
                     getApplication(),
                     this,
@@ -521,7 +520,6 @@ public class AlbumBrowserActivity extends ListActivity
             
             @Override
             protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                //Log.i("@@@", "query complete");
                 mActivity.init(cursor);
             }
         }

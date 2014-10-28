@@ -182,13 +182,11 @@ public class MusicUtils {
 
     public static void unbindFromService(ServiceToken token) {
         if (token == null) {
-            Log.e("MusicUtils", "Trying to unbind with null token");
             return;
         }
         ContextWrapper cw = token.mWrappedContext;
         ServiceBinder sb = sConnectionMap.remove(cw);
         if (sb == null) {
-            Log.e("MusicUtils", "Trying to unbind for unknown Context");
             return;
         }
         cw.unbindService(sb);
@@ -498,11 +496,6 @@ public class MusicUtils {
                 String name = c.getString(1);
                 File f = new File(name);
                 try {  // File.delete can throw a security exception
-                    if (!f.delete()) {
-                        // I'm not sure if we'd ever get here (deletion would
-                        // have to fail, but no exception thrown)
-                        Log.e("MusicUtils", "Failed to delete file " + name);
-                    }
                     c.moveToNext();
                 } catch (SecurityException ex) {
                     c.moveToNext();
@@ -562,11 +555,7 @@ public class MusicUtils {
     }
     
     public static void addToPlaylist(Context context, long [] ids, long playlistid) {
-        if (ids == null) {
-            // this shouldn't happen (the menuitems shouldn't be visible
-            // unless the selected item represents something playable
-            Log.e("MusicBase", "ListSelection null");
-        } else {
+        if (ids != null) {
             int size = ids.length;
             ContentResolver resolver = context.getContentResolver();
             // need to determine the number of items currently in the playlist,
@@ -694,7 +683,6 @@ public class MusicUtils {
             a.startActivityForResult(intent, Defs.SCAN_DONE);
         } else if (!TextUtils.equals(mLastSdStatus, status)) {
             mLastSdStatus = status;
-            Log.d(TAG, "sd card: " + status);
         }
 
         a.setTitle(title);
@@ -791,7 +779,6 @@ public class MusicUtils {
     
     private static void playAll(Context context, long [] list, int position, boolean force_shuffle) {
         if (list.length == 0 || sService == null) {
-            Log.d("MusicUtils", "attempt to play empty song list");
             // Don't try to play empty playlists. Nothing good will come of it.
             String message = context.getString(R.string.emptyplaylist, list.length);
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -1111,7 +1098,6 @@ public class MusicUtils {
             resolver.update(ringUri, values, null, null);
         } catch (UnsupportedOperationException ex) {
             // most likely the card just got unmounted
-            Log.e(TAG, "couldn't set ringtone flag for id " + id);
             return;
         }
 

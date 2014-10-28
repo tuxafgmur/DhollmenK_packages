@@ -120,7 +120,6 @@ public class SortCursor extends AbstractCursor
             int which = mCursorCache[cache_entry];
             mCursor = mCursors[which];
             if (mCursor == null) {
-                Log.w(TAG, "onMove: cache results in a null cursor.");
                 return false;
             }
             mCursor.moveToPosition(mCurRowNumCache[cache_entry][which]);

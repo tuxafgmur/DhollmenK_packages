@@ -983,8 +983,6 @@ public class MediaPlaybackActivity extends Activity implements MusicUtils.Defs,
                     shuffle == MediaPlaybackService.SHUFFLE_AUTO) {
                 mService.setShuffleMode(MediaPlaybackService.SHUFFLE_NONE);
                 showToast(R.string.shuffle_off_notif);
-            } else {
-                Log.e("MediaPlaybackActivity", "Invalid shuffle mode: " + shuffle);
             }
             setShuffleButtonImage();
         } catch (RemoteException ex) {
@@ -1047,7 +1045,6 @@ public class MediaPlaybackActivity extends Activity implements MusicUtils.Defs,
                 mService.play();
                 setIntent(new Intent());
             } catch (Exception ex) {
-                Log.d("MediaPlaybackActivity", "couldn't start playback: " + ex);
             }
         }
 
@@ -1131,9 +1128,9 @@ public class MediaPlaybackActivity extends Activity implements MusicUtils.Defs,
     private void setPauseButtonImage() {
         try {
             if (mService != null && mService.isPlaying()) {
-                mPauseButton.setImageResource(android.R.drawable.ic_media_pause);
+                mPauseButton.setImageResource(R.drawable.ic_media_pause);
             } else {
-                mPauseButton.setImageResource(android.R.drawable.ic_media_play);
+                mPauseButton.setImageResource(R.drawable.ic_media_play);
             }
         } catch (RemoteException ex) {
         }

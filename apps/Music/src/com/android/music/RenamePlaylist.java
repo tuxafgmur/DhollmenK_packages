@@ -69,7 +69,6 @@ public class RenamePlaylist extends Activity
         String defaultname = icicle != null ? icicle.getString("defaultname") : mOriginalName;
         
         if (mRenameId < 0 || mOriginalName == null || defaultname == null) {
-            Log.i("@@@@", "Rename failed: " + mRenameId + "/" + defaultname);
             finish();
             return;
         }

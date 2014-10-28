@@ -76,7 +76,6 @@ public class TrackBrowserActivity extends ListActivity
     private static final int REMOVE = CHILD_MENU_BASE + 5;
     private static final int SEARCH = CHILD_MENU_BASE + 6;
 
-
     private static final String LOGTAG = "TrackBrowser";
 
     private String[] mCursorCols;
@@ -198,7 +197,6 @@ public class TrackBrowserActivity extends ListActivity
         registerReceiver(mScanListener, f);
 
         if (mAdapter == null) {
-            //Log.i("@@@", "starting query");
             mAdapter = new TrackListAdapter(
                     getApplication(), // need to use application context to avoid leaks
                     this,
@@ -546,7 +544,6 @@ public class TrackBrowserActivity extends ListActivity
     private void removePlaylistItem(int which) {
         View v = mTrackList.getChildAt(which - mTrackList.getFirstVisiblePosition());
         if (v == null) {
-            Log.d(LOGTAG, "No view when removing playlist item " + which);
             return;
         }
         try {
@@ -1152,7 +1149,6 @@ public class TrackBrowserActivity extends ListActivity
                     long trackid = mNowPlaying[i];
                     int crsridx = Arrays.binarySearch(mCursorIdxs, trackid);
                     if (crsridx < 0) {
-                        //Log.i("@@@@@", "item no longer exists in db: " + trackid);
                         removed += mService.removeTrack(trackid);
                     }
                 }
@@ -1233,7 +1229,6 @@ public class TrackBrowserActivity extends ListActivity
                 }
             }
             where += ")";
-            Log.i("NowPlayingCursor: ", where);
         }
 
         @Override
@@ -1393,7 +1388,6 @@ public class TrackBrowserActivity extends ListActivity
 
             @Override
             protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                //Log.i("@@@", "query complete: " + cursor.getCount() + "   " + mActivity);
                 mActivity.init(cursor, cookie != null);
                 if (token == 0 && cookie != null && cursor != null && cursor.getCount() >= 100) {
                     QueryArgs args = (QueryArgs) cookie;
