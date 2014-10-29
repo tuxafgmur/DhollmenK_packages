@@ -37,18 +37,22 @@ public class GestureFragment extends SettingsPreferenceFragment
 
         addPreferencesFromResource(R.xml.gesture_fragment);
 
-        mGestureLeftUp = (ListPreference) findPreference(SettingsProvider.LEFT_UP_GESTURE_ACTION);
+        mGestureLeftUp = (ListPreference)
+		findPreference(SettingsProvider.LEFT_UP_GESTURE_ACTION);
         mGestureMiddleUp = (ListPreference)
                 findPreference(SettingsProvider.MIDDLE_UP_GESTURE_ACTION);
-        mGestureRightUp = (ListPreference) findPreference(SettingsProvider.RIGHT_UP_GESTURE_ACTION);
+        mGestureRightUp = (ListPreference)
+		findPreference(SettingsProvider.RIGHT_UP_GESTURE_ACTION);
         mGestureLeftDown = (ListPreference)
                 findPreference(SettingsProvider.LEFT_DOWN_GESTURE_ACTION);
         mGestureMiddleDown = (ListPreference)
                 findPreference(SettingsProvider.MIDDLE_DOWN_GESTURE_ACTION);
         mGestureRightDown = (ListPreference)
                 findPreference(SettingsProvider.RIGHT_DOWN_GESTURE_ACTION);
-        mGesturePinch = (ListPreference) findPreference(SettingsProvider.PINCH_GESTURE_ACTION);
-        mGestureSpread = (ListPreference) findPreference(SettingsProvider.SPREAD_GESTURE_ACTION);
+        mGesturePinch = (ListPreference)
+		findPreference(SettingsProvider.PINCH_GESTURE_ACTION);
+        mGestureSpread = (ListPreference)
+		findPreference(SettingsProvider.SPREAD_GESTURE_ACTION);
         mGestureDoubleTap = (ListPreference)
                 findPreference(SettingsProvider.DOUBLE_TAP_GESTURE_ACTION);
 
