@@ -50,6 +50,8 @@
         android:name="com.slim.slimlauncher.permission.RECEIVE_LAUNCH_BROADCASTS"
         android:protectionLevel="signature" />
 
+    <uses-permission android:name="android.permission.BIND_APPWIDGET" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
@@ -130,6 +132,16 @@
             android:exported="false"
             android:theme="@style/SettingsTheme">
             <intent-filter>
+                <action android:name=".settings.HiddenAppsActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".settings.HiddenAppsActivity"
+            android:label="@string/hidden_apps_title"
+            android:exported="false"
+            android:theme="@style/SettingsTheme">
+            <intent-filter>
                 <action android:name=".settings.HiddenAppsActivity"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -144,7 +156,7 @@
             android:icon="@mipmap/ic_launcher_home"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
             android:excludeFromRecents="true"
-            android:configChanges="orientation|keyboardHidden|screenSize" >
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />

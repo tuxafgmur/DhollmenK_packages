@@ -93,4 +93,10 @@
     <string name="folder_background_color_title">Hintergrundfarbe</string>
     <string name="hide_folder_name_title">Ordnernamen ausblenden</string>
     <string name="hide_folder_name_summary">Ordnernamen bei geöffnetem Ordner ausblenden</string>
+
+    <!-- Hidden apps -->
+    <string name="hidden_apps_title">Versteckte Apps</string>
+    <string name="hidden_apps_summary">Apps im Drawer ausblenden</string>
+    <string name="hidden_apps_shortcuts_title">Verknüpfungen entfernen</string>
+    <string name="hidden_apps_widgets_title">Widgets entfernen</string>
 </resources>

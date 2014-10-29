@@ -52,6 +52,7 @@
     <string name="hide_icon_labels_homescreen_summary">Hide icon labels on homescreen</string>
     <string name="hide_icon_labels_dock_summary">Hide icon labels in dock</string>
 
+    <string name="hide_dock_title">Hide dock</string>
     <string name="dock_icons_title">Dock icons</string>
     <string name="dock_icons_summary">Number of icons in the dock</string>
 
@@ -60,6 +61,8 @@
     <string name="grid_size_summary">Choose the number of rows/columns</string>
     <string name="homescreen_workspace_rows_title">Rows</string>
     <string name="homescreen_workspace_columns_title">Columns</string>
+
+    <string name="hide_scroll_indicator_title">Hide scroll indicator</string>
 
     <string name="icon_size_title">Icon size</string>
 
@@ -73,17 +76,23 @@
     <!-- Gestures -->
     <string name="gestures_title">Gestures</string>
     <string name="gesture_default">nothing</string>
-    <string name="gestures_up_gesture_title">Swipe up</string>
-    <string name="gestures_down_gesture_title">Swipe down</string>
+    <string name="gestures_left_up_gesture_title">Swipe up left</string>
+    <string name="gestures_middle_up_gesture_title">Swipe up middle</string>
+    <string name="gestures_right_up_gesture_title">Swipe up right</string>
+    <string name="gestures_left_down_gesture_title">Swipe down left</string>
+    <string name="gestures_middle_down_gesture_title">Swipe down middle</string>
+    <string name="gestures_right_down_gesture_title">Swipe down right</string>
     <string name="gestures_pinch_gesture_title">Pinch</string>
     <string name="gestures_spread_gesture_title">Spread</string>
     <string name="gestures_double_tap_gesture_title">Double tap</string>
+    <string name="no_last_app">Last app not found.</string>
 
     <string name="gesture_target_nothing">Nothing</string>
     <string name="gesture_target_homescreen">Go to default homescreen</string>
     <string name="gesture_target_drawer">Open app drawer</string>
     <string name="gesture_target_previews">Show previews</string>
     <string name="gesture_target_settings">Open launcher settings</string>
+    <string name="gesture_target_last_app">Last app</string>
     <string name="gesture_target_custom">Custom</string>
 
     <string name="profile_applist_title">Apps</string>

@@ -14,13 +14,21 @@ public interface SettingsKeys {
 
     public static final String KEY_ICON_PACK = "icon_pack";
 
+    public static final String KEY_HIDE_DOCK = "hide_dock";
+
     public static final String KEY_SCROLL_WALLPAPER = "scroll_wallpaper";
 
     public static final String KEY_HIDDEN_APPS = "hidden_apps";
 
+    public static final String KEY_HOMESCREEN_HIDE_INDICATOR = "hide_homescreen_page_indicator";
+
     // Gestures
-    public static final String UP_GESTURE_ACTION = "up_gesture_action";
-    public static final String DOWN_GESTURE_ACTION = "down_gesture_action";
+    public static final String LEFT_UP_GESTURE_ACTION = "left_up_gesture_action";
+    public static final String MIDDLE_UP_GESTURE_ACTION = "middle_up_gesture_action";
+    public static final String RIGHT_UP_GESTURE_ACTION = "right_up_gesture_action";
+    public static final String LEFT_DOWN_GESTURE_ACTION = "left_down_gesture_action";
+    public static final String MIDDLE_DOWN_GESTURE_ACTION = "middle_down_gesture_action";
+    public static final String RIGHT_DOWN_GESTURE_ACTION = "right_down_gesture_action";
     public static final String PINCH_GESTURE_ACTION = "pinch_gesture_action";
     public static final String SPREAD_GESTURE_ACTION = "spread_gesture_action";
     public static final String DOUBLE_TAP_GESTURE_ACTION = "double_tap_gesture_action";
