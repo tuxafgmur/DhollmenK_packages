@@ -1502,8 +1502,6 @@ public class LauncherModel extends BroadcastReceiver {
                                            AtomicBoolean deleteOnItemOverlap) {
             LauncherAppState app = LauncherAppState.getInstance();
             DeviceProfile grid = app.getDynamicGrid().getDeviceProfile();
-            final int countX = (int) grid.numColumns;
-            final int countY = (int) grid.numRows;
 
             long containerIndex = item.screenId;
             if (item.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
@@ -1518,7 +1516,7 @@ public class LauncherModel extends BroadcastReceiver {
                         return true;
                     }
                 } else {
-                    ItemInfo[][] items = new ItemInfo[countX + 1][countY + 1];
+                    ItemInfo[][] items = new ItemInfo[(int) grid.numHotseatIcons][1];
                     items[(int) item.screenId][0] = item;
                     occupied.put((long) LauncherSettings.Favorites.CONTAINER_HOTSEAT, items);
                     return true;
@@ -1527,6 +1525,9 @@ public class LauncherModel extends BroadcastReceiver {
                 // Skip further checking if it is not the hotseat or workspace container
                 return true;
             }
+
+	    final int countX = (int) grid.numColumns;
+	    final int countY = (int) grid.numRows;
 
             if (!occupied.containsKey(item.screenId)) {
                 ItemInfo[][] items = new ItemInfo[countX + 1][countY + 1];

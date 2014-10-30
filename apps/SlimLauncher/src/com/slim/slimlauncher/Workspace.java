@@ -454,25 +454,20 @@ public class Workspace extends SmoothPagedView
     public Gestures identifyGesture(float upX, float upY, float downX, float downY) {
 
         if (isSwipeDOWN(upY, downY)) {
-
-            if (isSwipeLEFT(upX, downX, true)) {
+            if (isSwipeLEFT(downX)) {
                 return Gestures.DOWN_LEFT;
-            } else if (isSwipeRIGHT(upX, downX, true)) {
+            } else if (isSwipeRIGHT(downX)) {
                 return Gestures.DOWN_RIGHT;
-            } else if (isSwipeMIDDLE(upX, downX, true)) {
+            } else if (isSwipeMIDDLE(downX)) {
                 return Gestures.DOWN_MIDDLE;
-            } else {
-                // wait, what??
             }
         } else if (isSwipeUP(upY, downY)) {
-            if (isSwipeLEFT(upX, downX, false)) {
+            if (isSwipeLEFT(downX)) {
                 return Gestures.UP_LEFT;
-            } else if (isSwipeRIGHT(upX, downX, false)) {
+            } else if (isSwipeRIGHT(downX)) {
                 return Gestures.UP_RIGHT;
-            } else if (isSwipeMIDDLE(upX, downX, false)) {
+            } else if (isSwipeMIDDLE(downX)) {
                 return Gestures.UP_MIDDLE;
-            } else {
-                // wait, what??
             }
         }
 
@@ -487,37 +482,15 @@ public class Workspace extends SmoothPagedView
         return ((upY - downY) < -MIN_UP_DOWN_GESTURE_DISTANCE);
     }
 
-    static boolean isSwipeLEFT(float upX, float downX, boolean isUP) {
-
-        if (isUP) {
-            if (false) {
-                return downX < (width / 2);
-            }
-        } else {
-            if (false) {
-                return downX < (width / 2);
-            }
-        }
-
+    static boolean isSwipeLEFT(float downX) {
         return downX < sector;
     }
 
-    static boolean isSwipeMIDDLE(float upX, float downX, boolean isUP) {
+    static boolean isSwipeMIDDLE(float downX) {
         return downX > sector && downX < (sector * 2);
     }
 
-    static boolean isSwipeRIGHT(float upX, float downX, boolean isUP) {
-
-        if (isUP) {
-            if (true) {
-                return downX > (width / 2);
-            }
-        } else {
-            if (true) {
-                return downX > (width / 2);
-            }
-        }
-
+    static boolean isSwipeRIGHT(float downX) {
         return downX > (sector * 2);
     }
 
@@ -4165,7 +4138,7 @@ public class Workspace extends SmoothPagedView
                 // be done post drop animation.
                 stripEmptyScreens();
             }
-        } else if (mDragInfo != null) {
+        } else if (mDragInfo != null && (!(target instanceof InfoDropTarget))) {
             CellLayout cellLayout;
             if (mLauncher.isHotseatLayout(target)) {
                 cellLayout = mLauncher.getHotseat().getLayout();
@@ -4176,7 +4149,7 @@ public class Workspace extends SmoothPagedView
 		cellLayout.onDropChild(mDragInfo.cell);
 	    }
         }
-        if ((d.cancelled || (beingCalledAfterUninstall && !mUninstallSuccessful))
+        if ((d.cancelled || target instanceof InfoDropTarget || (beingCalledAfterUninstall && !mUninstallSuccessful))
                 && mDragInfo.cell != null) {
             mDragInfo.cell.setVisibility(VISIBLE);
         }
