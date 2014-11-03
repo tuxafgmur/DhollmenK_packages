@@ -20,7 +20,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.slim.slimlauncher"
     android:versionName="@string/slim_application_version"
-    android:versionCode="1000">
+    android:versionCode="1000" >
 
     <supports-screens
         android:anyDensity="true"
@@ -45,7 +45,6 @@
         android:protectionLevel="normal"
         android:label="@string/permlab_write_settings"
         android:description="@string/permdesc_write_settings" />
-
     <permission
         android:name="com.slim.slimlauncher.permission.RECEIVE_LAUNCH_BROADCASTS"
         android:protectionLevel="signature" />
@@ -71,7 +70,7 @@
         android:hardwareAccelerated="true"
         android:largeHeap="@bool/config_largeHeap"
         android:requiredForAllUsers="true"
-        android:supportsRtl="true">
+        android:supportsRtl="true" >
         <activity
             android:name="com.slim.slimlauncher.Launcher"
             android:launchMode="singleTask"
@@ -79,12 +78,12 @@
             android:stateNotNeeded="true"
             android:theme="@style/Theme"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="nosensor">
+            android:screenOrientation="nosensor" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.MONKEY"/>
+                <category android:name="android.intent.category.MONKEY" />
             </intent-filter>
         </activity>
 
@@ -92,7 +91,7 @@
             android:name="com.slim.slimlauncher.ToggleWeightWatcher"
             android:label="@string/toggle_weight_watcher"
             android:enabled="@bool/debug_memory_enabled"
-            android:icon="@mipmap/ic_launcher_home">
+            android:icon="@mipmap/ic_launcher_home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -106,7 +105,7 @@
             android:label="@string/pick_wallpaper"
             android:icon="@mipmap/ic_launcher_wallpaper"
             android:finishOnCloseSystemDialogs="true"
-            android:process=":wallpaper_chooser">
+            android:process=":wallpaper_chooser" >
             <intent-filter>
                 <action android:name="android.intent.action.SET_WALLPAPER" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -119,7 +118,7 @@
             android:label="@string/crop_wallpaper"
             android:icon="@mipmap/ic_launcher_wallpaper"
             android:finishOnCloseSystemDialogs="true"
-            android:process=":wallpaper_chooser">
+            android:process=":wallpaper_chooser" >
             <intent-filter>
                 <action android:name="android.service.wallpaper.CROP_AND_SET_WALLPAPER" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -130,7 +129,7 @@
         <activity android:name=".settings.HiddenAppsActivity"
             android:label="@string/hidden_apps_title"
             android:exported="false"
-            android:theme="@style/SettingsTheme">
+            android:theme="@style/SettingsTheme" >
             <intent-filter>
                 <action android:name=".settings.HiddenAppsActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -140,9 +139,9 @@
         <activity android:name=".settings.HiddenAppsActivity"
             android:label="@string/hidden_apps_title"
             android:exported="false"
-            android:theme="@style/SettingsTheme">
+            android:theme="@style/SettingsTheme" >
             <intent-filter>
-                <action android:name=".settings.HiddenAppsActivity"/>
+                <action android:name=".settings.HiddenAppsActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -156,7 +155,7 @@
             android:icon="@mipmap/ic_launcher_home"
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
             android:excludeFromRecents="true"
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:configChanges="orientation|keyboardHidden|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -180,14 +179,13 @@
         </activity>
 
         <service android:name="com.slim.slimlauncher.MemoryTracker"
-            android:enabled="@bool/debug_memory_enabled"
-            >
+            android:enabled="@bool/debug_memory_enabled" >
         </service>
 
         <!-- Intent received used to prepopulate the default workspace. -->
         <receiver
             android:name="com.slim.slimlauncher.PreloadReceiver"
-            android:permission="com.slim.slimlauncher.permission.PRELOAD_WORKSPACE">
+            android:permission="com.slim.slimlauncher.permission.PRELOAD_WORKSPACE" >
             <intent-filter>
                 <action android:name="com.slim.slimlauncher.action.PRELOAD_WORKSPACE" />
             </intent-filter>
@@ -196,7 +194,7 @@
         <!-- Intent received used to install shortcuts from other applications -->
         <receiver
             android:name="com.slim.slimlauncher.InstallShortcutReceiver"
-            android:permission="com.android.launcher.permission.INSTALL_SHORTCUT">
+            android:permission="com.android.launcher.permission.INSTALL_SHORTCUT" >
             <intent-filter>
                 <action android:name="com.android.launcher.action.INSTALL_SHORTCUT" />
             </intent-filter>
@@ -205,7 +203,7 @@
         <!-- Intent received used to uninstall shortcuts from other applications -->
         <receiver
             android:name="com.slim.slimlauncher.UninstallShortcutReceiver"
-            android:permission="com.android.launcher.permission.UNINSTALL_SHORTCUT">
+            android:permission="com.android.launcher.permission.UNINSTALL_SHORTCUT" >
             <intent-filter>
                 <action android:name="com.android.launcher.action.UNINSTALL_SHORTCUT" />
             </intent-filter>
@@ -214,7 +212,7 @@
         <!-- New user initialization; set up initial wallpaper -->
         <receiver
             android:name="com.slim.slimlauncher.UserInitializeReceiver"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="android.intent.action.USER_INITIALIZE" />
             </intent-filter>
@@ -222,9 +220,9 @@
 
         <receiver android:name="com.slim.slimlauncher.PackageChangedReceiver" >
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_CHANGED"/>
-                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <action android:name="android.intent.action.PACKAGE_CHANGED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
                 <data android:scheme="package"></data>
             </intent-filter>
         </receiver>
@@ -237,7 +235,6 @@
             android:writePermission="com.slim.slimlauncher.permission.WRITE_SETTINGS"
             android:readPermission="com.slim.slimlauncher.permission.READ_SETTINGS" />
 
-        <meta-data android:name="android.nfc.disable_beam_default"
-	    android:value="true" />
+        <meta-data android:name="android.nfc.disable_beam_default" android:value="true" />
     </application>
 </manifest>

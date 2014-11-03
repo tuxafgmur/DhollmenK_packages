@@ -271,11 +271,11 @@ public class LauncherProvider extends ContentProvider {
             if (workspaceResId == 0) {
                 TelephonyManager tm = (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
                 if (tm.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE) {
-		    workspaceResId = sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,
-			R.xml.default_workspace_no_telephony);
+			workspaceResId = sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,
+				R.xml.default_workspace_no_telephony);
                 } else {
-                    workspaceResId = sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,
-			R.xml.default_workspace);
+			workspaceResId = sp.getInt(DEFAULT_WORKSPACE_RESOURCE_ID,
+				R.xml.default_workspace);
                 }
             }
 
@@ -691,7 +691,6 @@ public class LauncherProvider extends ContentProvider {
             }
 
             if (version != DATABASE_VERSION) {
-                Log.w(TAG, "Destroying all old data.");
                 db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
                 db.execSQL("DROP TABLE IF EXISTS " + TABLE_WORKSPACE_SCREENS);
 
@@ -767,7 +766,6 @@ public class LauncherProvider extends ContentProvider {
 
                 db.setTransactionSuccessful();
             } catch (SQLException ex) {
-                Log.w(TAG, "Problem while upgrading contacts", ex);
                 return false;
             } finally {
                 db.endTransaction();
@@ -811,17 +809,10 @@ public class LauncherProvider extends ContentProvider {
                             bitmap.recycle();
                         }
                     } catch (Exception e) {
-                        if (!logged) {
-                            Log.e(TAG, "Failed normalizing icon " + id, e);
-                        } else {
-                            Log.e(TAG, "Also failed normalizing icon " + id);
-                        }
-                        logged = true;
                     }
                 }
                 db.setTransactionSuccessful();
             } catch (SQLException ex) {
-                Log.w(TAG, "Problem while allocating appWidgetIds for existing widgets", ex);
             } finally {
                 db.endTransaction();
                 if (update != null) {
@@ -982,7 +973,6 @@ public class LauncherProvider extends ContentProvider {
 
                 db.setTransactionSuccessful();
             } catch (SQLException ex) {
-                Log.w(TAG, "Problem while allocating appWidgetIds for existing widgets", ex);
             } finally {
                 db.endTransaction();
                 if (c != null) {
@@ -1059,8 +1049,6 @@ public class LauncherProvider extends ContentProvider {
                             i += loadFavorites(db, resId);
                             added = false;
                             mMaxItemId = -1;
-                        } else {
-                            Log.w(TAG, String.format("Skipping <include workspace=0x%08x>", resId));
                         }
 
                         a.recycle();
@@ -1177,11 +1165,8 @@ public class LauncherProvider extends ContentProvider {
                     a.recycle();
                 }
             } catch (XmlPullParserException e) {
-                Log.w(TAG, "Got exception parsing favorites.", e);
             } catch (IOException e) {
-                Log.w(TAG, "Got exception parsing favorites.", e);
             } catch (RuntimeException e) {
-                Log.w(TAG, "Got exception parsing favorites.", e);
             }
 
             // Update the max item id after we have loaded the database
@@ -1223,8 +1208,6 @@ public class LauncherProvider extends ContentProvider {
                     return -1;
                 }
             } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, "Unable to add favorite: " + packageName +
-                        "/" + className, e);
             }
             return id;
         }

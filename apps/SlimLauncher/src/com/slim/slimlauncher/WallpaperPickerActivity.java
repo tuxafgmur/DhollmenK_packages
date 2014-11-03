@@ -640,8 +640,6 @@ public class WallpaperPickerActivity extends WallpaperCropActivity {
             image.setImageBitmap(thumb);
             Drawable thumbDrawable = image.getDrawable();
             thumbDrawable.setDither(true);
-        } else {
-            Log.e(TAG, "Error loading thumbnail for uri=" + uri);
         }
         mWallpapersView.addView(pickedImageThumbnail, 0);
 
@@ -827,9 +825,6 @@ public class WallpaperPickerActivity extends WallpaperCropActivity {
 
         public View getView(int position, View convertView, ViewGroup parent) {
             Drawable thumb = mWallpapers.get(position).mThumb;
-            if (thumb == null) {
-                Log.e(TAG, "Error decoding thumbnail for wallpaper #" + position);
-            }
             return createImageTileView(mLayoutInflater, position, convertView, parent, thumb);
         }
     }

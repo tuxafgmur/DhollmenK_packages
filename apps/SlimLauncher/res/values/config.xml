@@ -27,7 +27,7 @@
     <integer name="config_appsCustomizeZoomOutTime">300</integer>
     <integer name="config_appsCustomizeZoomScaleFactor">7</integer>
     <integer name="config_appsCustomizeFadeInTime">150</integer>
-    <integer name="config_appsCustomizeFadeOutTime">300</integer>
+    <integer name="config_appsCustomizeFadeOutTime">100</integer>
     <integer name="config_appsCustomizeWorkspaceShrinkTime">300</integer>
     <integer name="config_appsCustomizeWorkspaceAnimationStagger">40</integer>
     <integer name="config_workspaceAppsCustomizeAnimationStagger">100</integer>
@@ -52,7 +52,7 @@
 
     <!-- The duration (in ms) of the fade animation on the object outlines, used when
          we are dragging objects around on the home screen. -->
-    <integer name="config_dragOutlineFadeTime">800</integer>
+    <integer name="config_dragOutlineFadeTime">700</integer>
 
     <!-- The alpha value at which to show the most recent drop visualization outline. -->
     <integer name="config_dragOutlineMaxAlpha">128</integer>

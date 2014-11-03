@@ -22,7 +22,7 @@
 
     <Preference
         android:title="@string/hidden_apps_title"
-        android:summary="@string/hidden_apps_summary">
+        android:summary="@string/hidden_apps_summary" >
         <intent android:action=".settings.HiddenAppsActivity" />
     </Preference>
 

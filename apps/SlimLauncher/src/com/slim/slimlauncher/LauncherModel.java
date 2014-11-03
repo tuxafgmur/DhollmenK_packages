@@ -465,8 +465,7 @@ public class LauncherModel extends BroadcastReceiver {
         }
     }
 
-    static void checkItemInfoLocked(
-            final long itemId, final ItemInfo item, StackTraceElement[] stackTrace) {
+    static void checkItemInfoLocked(final long itemId, final ItemInfo item)  {
         ItemInfo modelItem = sBgItemsIdMap.get(itemId);
         if (modelItem != null && item != modelItem) {
             // check all the data is consistent
@@ -501,19 +500,15 @@ public class LauncherModel extends BroadcastReceiver {
                     ((modelItem != null) ? modelItem.toString() : "null") +
                     "Error: ItemInfo passed to checkItemInfo doesn't match original";
             RuntimeException e = new RuntimeException(msg);
-            if (stackTrace != null) {
-                e.setStackTrace(stackTrace);
-            }
         }
     }
 
     static void checkItemInfo(final ItemInfo item) {
-        final StackTraceElement[] stackTrace = new Throwable().getStackTrace();
         final long itemId = item.id;
         Runnable r = new Runnable() {
             public void run() {
                 synchronized (sBgLock) {
-                    checkItemInfoLocked(itemId, item, stackTrace);
+                    checkItemInfoLocked(itemId, item);
                 }
             }
         };
@@ -526,11 +521,10 @@ public class LauncherModel extends BroadcastReceiver {
         final Uri uri = LauncherSettings.Favorites.getContentUri(itemId, false);
         final ContentResolver cr = context.getContentResolver();
 
-        final StackTraceElement[] stackTrace = new Throwable().getStackTrace();
         Runnable r = new Runnable() {
             public void run() {
                 cr.update(uri, values, null, null);
-                updateItemArrays(item, itemId, stackTrace);
+                updateItemArrays(item, itemId);
             }
         };
         runOnWorkerThread(r);
@@ -540,7 +534,6 @@ public class LauncherModel extends BroadcastReceiver {
             final ArrayList<ItemInfo> items, final String callingFunction) {
         final ContentResolver cr = context.getContentResolver();
 
-        final StackTraceElement[] stackTrace = new Throwable().getStackTrace();
         Runnable r = new Runnable() {
             public void run() {
                 ArrayList<ContentProviderOperation> ops =
@@ -553,23 +546,22 @@ public class LauncherModel extends BroadcastReceiver {
                     ContentValues values = valuesList.get(i);
 
                     ops.add(ContentProviderOperation.newUpdate(uri).withValues(values).build());
-                    updateItemArrays(item, itemId, stackTrace);
+                    updateItemArrays(item, itemId);
 
                 }
                 try {
                     cr.applyBatch(LauncherProvider.AUTHORITY, ops);
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         };
         runOnWorkerThread(r);
     }
 
-    static void updateItemArrays(ItemInfo item, long itemId, StackTraceElement[] stackTrace) {
+    static void updateItemArrays(ItemInfo item, long itemId) {
         // Lock on mBgLock *after* the db operation
         synchronized (sBgLock) {
-            checkItemInfoLocked(itemId, item, stackTrace);
+            checkItemInfoLocked(itemId, item);
 
             // Items are added/removed from the corresponding FolderInfo elsewhere, such
             // as in Workspace.onDrop. Here, we just add/remove them from the list of items
@@ -862,7 +854,7 @@ public class LauncherModel extends BroadcastReceiver {
 
                 // Lock on mBgLock *after* the db operation
                 synchronized (sBgLock) {
-                    checkItemInfoLocked(item.id, item, null);
+                    checkItemInfoLocked(item.id, item);
                     sBgItemsIdMap.put(item.id, item);
                     switch (item.itemType) {
                         case LauncherSettings.Favorites.ITEM_TYPE_FOLDER:
@@ -1211,6 +1203,7 @@ public class LauncherModel extends BroadcastReceiver {
                     int rank = sc.getInt(rankIndex);
                     orderedScreens.put(rank, screenId);
                 } catch (Exception e) {
+                    Launcher.addDumpLog(TAG, "Desktop items loading interrupted - invalid screens: " + e, true);
                 }
             }
         } finally {
@@ -1480,7 +1473,6 @@ public class LauncherModel extends BroadcastReceiver {
                     tmpInfos = getItemInfoForComponentName(app.componentName);
                     if (tmpInfos.isEmpty()) {
                         // We are missing an application icon, so add this to the workspace
-                        // This is a rare event, so lets log it
                         added.add(app);
                     }
                 }
@@ -1526,8 +1518,8 @@ public class LauncherModel extends BroadcastReceiver {
                 return true;
             }
 
-	    final int countX = (int) grid.numColumns;
-	    final int countY = (int) grid.numRows;
+            final int countX = (int) grid.numColumns;
+            final int countY = (int) grid.numRows;
 
             if (!occupied.containsKey(item.screenId)) {
                 ItemInfo[][] items = new ItemInfo[countX + 1][countY + 1];
@@ -1629,6 +1621,9 @@ public class LauncherModel extends BroadcastReceiver {
                             (LauncherSettings.Favorites.SPANX);
                     final int spanYIndex = c.getColumnIndexOrThrow(
                             LauncherSettings.Favorites.SPANY);
+                    //final int uriIndex = c.getColumnIndexOrThrow(LauncherSettings.Favorites.URI);
+                    //final int displayModeIndex = c.getColumnIndexOrThrow(
+                    //        LauncherSettings.Favorites.DISPLAY_MODE);
 
                     ShortcutInfo info;
                     String intentDescription;
@@ -1654,12 +1649,22 @@ public class LauncherModel extends BroadcastReceiver {
                                         ComponentName cn = intent.getComponent();
                                         if (cn != null && !isValidPackageComponent(manager, cn)) {
                                             if (!mAppsCanBeOnRemoveableStorage) {
-                                               // Remove the invalid package from the db
+                                               // Log the invalid package, and remove it from the db
+                                                Launcher.addDumpLog(TAG,
+                                                        "Invalid package removed: " + cn, true);
                                                 itemsToRemove.add(id);
+                                            } else {
+                                                // If apps can be on external storage, then we just
+                                                // leave them for the user to remove (maybe add
+                                                // visual treatment to it)
+                                                Launcher.addDumpLog(TAG,
+                                                        "Invalid package found: " + cn, true);
                                             }
                                             continue;
                                         }
                                     } catch (URISyntaxException e) {
+                                        Launcher.addDumpLog(TAG,
+                                                "Invalid uri: " + intentDescription, true);
                                         continue;
                                     }
                                 }
@@ -1702,6 +1707,10 @@ public class LauncherModel extends BroadcastReceiver {
                                     // Skip loading items that are out of bounds
                                     if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
                                         if (checkItemDimensions(info)) {
+                                            Launcher.addDumpLog(TAG,
+                                                    "Skipped loading out of bounds shortcut: "
+                                                    + info + ", " + grid.numColumns + "x"
+                                                            + grid.numRows, true);
                                             continue;
                                         }
                                     }
@@ -1787,9 +1796,6 @@ public class LauncherModel extends BroadcastReceiver {
 
                                 if (!isSafeMode && (provider == null || provider.provider == null ||
                                         provider.provider.getPackageName() == null)) {
-                                    String log = "Deleting widget that isn't installed anymore: id="
-                                        + id + " appWidgetId=" + appWidgetId;
-                                    Launcher.addDumpLog(TAG, log, false);
                                     itemsToRemove.add(id);
                                 } else {
                                     appWidgetInfo = new LauncherAppWidgetInfo(appWidgetId,
@@ -2834,7 +2840,6 @@ public class LauncherModel extends BroadcastReceiver {
 
     Bitmap getIconFromCursor(Cursor c, int iconIndex, Context context) {
         @SuppressWarnings("all") // suppress dead code warning
-        final boolean debug = false;
         byte[] data = c.getBlob(iconIndex);
         try {
             return Utilities.createIconBitmap(
@@ -2915,7 +2920,6 @@ public class LauncherModel extends BroadcastReceiver {
 
         if (intent == null) {
             // If the intent is null, we can't construct a valid ShortcutInfo, so we return null
-            Log.e(TAG, "Can't construct ShorcutInfo with null intent");
             return null;
         }
 

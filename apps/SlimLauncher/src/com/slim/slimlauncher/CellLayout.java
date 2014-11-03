@@ -262,6 +262,9 @@ public class CellLayout extends ViewGroup {
                     if (outline == null) {
                         @SuppressWarnings("all") // suppress dead code warning
                         final boolean debug = false;
+                        if (debug) {
+                            Object val = animation.getAnimatedValue();
+                        }
                         // Try to prevent it from continuing to run
                         animation.cancel();
                     } else {
@@ -602,10 +605,15 @@ public class CellLayout extends ViewGroup {
         final LayoutParams lp = params;
 
         // Hotseat icons
+        boolean hideDockLabels = SettingsProvider.getBoolean(mLauncher,
+                SettingsProvider.KEY_DOCK_HIDE_LABELS, true);
         boolean hideHomescreenLabels = SettingsProvider.getBoolean(mLauncher,
                 SettingsProvider.KEY_HOMESCREEN_HIDE_LABELS, false);
         if (child instanceof BubbleTextView) {
-            if (!mIsHotseat) {
+            if (mIsHotseat) {
+                BubbleTextView bubbleChild = (BubbleTextView) child;
+                bubbleChild.setTextVisibility(!hideDockLabels);
+            } else {
                 BubbleTextView bubbleChild = (BubbleTextView) child;
                 bubbleChild.setTextVisibility(!hideHomescreenLabels);
             }

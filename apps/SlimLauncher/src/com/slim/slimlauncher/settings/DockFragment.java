@@ -24,11 +24,15 @@ public class DockFragment extends SettingsPreferenceFragment {
         final CheckBoxPreference hideDock = (CheckBoxPreference)
                 findPreference(SettingsProvider.KEY_HIDE_DOCK);
 
+        final CheckBoxPreference hideLabels = (CheckBoxPreference)
+                findPreference(SettingsProvider.KEY_DOCK_HIDE_LABELS);
+
         Preference.OnPreferenceChangeListener onPreferenceChangeListener =
                 new Preference.OnPreferenceChangeListener() {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object o) {
                         dockIcons.setEnabled(hideDock.isChecked());
+                        hideLabels.setEnabled(hideDock.isChecked());
                         return true;
                     }
                 };
@@ -36,6 +40,7 @@ public class DockFragment extends SettingsPreferenceFragment {
         hideDock.setOnPreferenceChangeListener(onPreferenceChangeListener);
 
         dockIcons.setEnabled(!hide);
+        hideLabels.setEnabled(!hide);
 
         if (mProfile != null) {
             if (SettingsProvider.getInt(getActivity(),

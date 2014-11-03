@@ -49,8 +49,8 @@ public class DragController {
     /** Indicates the drag is a copy.  */
     public static int DRAG_ACTION_COPY = 1;
 
-    private static final int SCROLL_DELAY = 500;
-    private static final int RESCROLL_DELAY = PagedView.PAGE_SNAP_ANIMATION_DURATION + 150;
+    private static final int SCROLL_DELAY = 450;
+    private static final int RESCROLL_DELAY = PagedView.PAGE_SNAP_ANIMATION_DURATION + 100;
 
     private static final boolean PROFILE_DRAWING_DURING_DRAG = false;
 
@@ -414,6 +414,10 @@ public class DragController {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         @SuppressWarnings("all") // suppress dead code warning
         final boolean debug = false;
+        if (debug) {
+            Log.d(Launcher.TAG, "DragController.onInterceptTouchEvent " + ev + " mDragging="
+                    + mDragging);
+        }
 
         // Update the velocity tracker
         acquireVelocityTrackerAndAddMovement(ev);

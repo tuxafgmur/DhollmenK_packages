@@ -2526,10 +2526,6 @@ public class Launcher extends Activity
             return true;
         } catch (SecurityException e) {
             Toast.makeText(this, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "Launcher does not have the permission to launch " + intent +
-                    ". Make sure to create a MAIN intent-filter for the corresponding activity " +
-                    "or use the exported attribute for this activity. "
-                    + "tag="+ tag + " intent=" + intent, e);
         }
         return false;
     }
@@ -2696,9 +2692,6 @@ public class Launcher extends Activity
         if (folder.getParent() == null) {
             mDragLayer.addView(folder);
             mDragController.addDropTarget((DropTarget) folder);
-        } else {
-            Log.w(TAG, "Opening folder (" + folder + ") which already has a parent (" +
-                    folder.getParent() + ").");
         }
         folder.animateOpen();
         growAndFadeOutFolderIcon(folderIcon);
@@ -3676,7 +3669,6 @@ public class Launcher extends Activity
      */
     private boolean waitUntilResume(Runnable run, boolean deletePreviousRunnables) {
         if (mPaused) {
-            Log.i(TAG, "Deferring update until onResume");
             if (deletePreviousRunnables) {
                 while (mBindOnResumeCallbacks.remove(run)) {
                 }
@@ -3712,7 +3704,6 @@ public class Launcher extends Activity
      */
     public boolean setLoadOnResume() {
         if (mPaused) {
-            Log.i(TAG, "setLoadOnResume");
             mOnResumeNeedsLoad = true;
             return true;
         } else {

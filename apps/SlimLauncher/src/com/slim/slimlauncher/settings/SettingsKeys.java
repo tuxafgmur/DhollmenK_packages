@@ -16,6 +16,8 @@ public interface SettingsKeys {
 
     public static final String KEY_HIDE_DOCK = "hide_dock";
 
+    public static final String KEY_DOCK_HIDE_LABELS = "dock_hide_icon_labels";
+
     public static final String KEY_SCROLL_WALLPAPER = "scroll_wallpaper";
 
     public static final String KEY_HIDDEN_APPS = "hidden_apps";

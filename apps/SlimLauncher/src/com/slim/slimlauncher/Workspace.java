@@ -454,6 +454,7 @@ public class Workspace extends SmoothPagedView
     public Gestures identifyGesture(float upX, float upY, float downX, float downY) {
 
         if (isSwipeDOWN(upY, downY)) {
+
             if (isSwipeLEFT(downX)) {
                 return Gestures.DOWN_LEFT;
             } else if (isSwipeRIGHT(downX)) {
@@ -1047,7 +1048,6 @@ public class Workspace extends SmoothPagedView
             boolean insert, boolean computeXYFromRank) {
         if (container == LauncherSettings.Favorites.CONTAINER_DESKTOP) {
             if (getScreenWithId(screenId) == null) {
-                Log.e(TAG, "Skipping child, screenId " + screenId + " not found");
                 // DEBUGGING - Print out the stack trace to see where we are adding from
                 new Throwable().printStackTrace();
                 return;
@@ -1062,6 +1062,14 @@ public class Workspace extends SmoothPagedView
         if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
             layout = mLauncher.getHotseat().getLayout();
             child.setOnKeyListener(null);
+
+            boolean dockHideLabels = SettingsProvider.getBoolean(mLauncher,
+                    SettingsProvider.KEY_DOCK_HIDE_LABELS, true);
+
+            // Hide folder title in the hotseat
+            if (child instanceof FolderIcon) {
+                ((FolderIcon) child).setTextVisible(!dockHideLabels);
+            }
 
             if (computeXYFromRank) {
                 x = mLauncher.getHotseat().getCellXFromOrder((int) screenId);
@@ -1388,7 +1396,6 @@ public class Workspace extends SmoothPagedView
                                 mWallpaperOffset.getCurrX(), 0.5f);
                         setWallpaperOffsetSteps();
                     } catch (IllegalArgumentException e) {
-                        Log.e(TAG, "Error updating wallpaper offset: " + e);
                     }
                 }
             }
@@ -2321,8 +2328,8 @@ public class Workspace extends SmoothPagedView
             }
         }
 
-	boolean hidePageIndicator = SettingsProvider.getBoolean(mLauncher,
-		SettingsProvider.KEY_HOMESCREEN_HIDE_INDICATOR, false);
+        boolean hidePageIndicator = SettingsProvider.getBoolean(mLauncher,
+                SettingsProvider.KEY_HOMESCREEN_HIDE_INDICATOR, false);
 
         final View searchBar = mLauncher.getQsbBar();
         final View overviewPanel = mLauncher.getOverviewPanel();
@@ -4148,9 +4155,7 @@ public class Workspace extends SmoothPagedView
             } else {
                 cellLayout = getScreenWithId(mDragInfo.screenId);
             }
-            if (cellLayout != null) {
-		cellLayout.onDropChild(mDragInfo.cell);
-	    }
+            cellLayout.onDropChild(mDragInfo.cell);
         }
         if ((d.cancelled || target instanceof InfoDropTarget || (beingCalledAfterUninstall && !mUninstallSuccessful))
                 && mDragInfo.cell != null) {

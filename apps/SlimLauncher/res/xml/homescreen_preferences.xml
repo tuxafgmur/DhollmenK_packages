@@ -16,17 +16,6 @@
         launcher:pickerTitle2="@string/homescreen_workspace_columns_title" />
 
     <CheckBoxPreference
-        android:key="show_search_bar"
-        android:title="@string/show_search_bar_title"
-        android:defaultValue="true" />
-
-    <CheckBoxPreference
-        android:key="scroll_wallpaper"
-        android:title="@string/scroll_wallpaper_title"
-        android:summary="@string/scroll_wallpaper_summary"
-        android:defaultValue="true"/>
-
-    <CheckBoxPreference
         android:key="homescreen_hide_icon_labels"
         android:title="@string/hide_icon_labels_title"
         android:summary="@string/hide_icon_labels_homescreen_summary"
@@ -36,5 +25,16 @@
         android:key="hide_homescreen_page_indicator"
         android:title="@string/hide_scroll_indicator_title"
         android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="scroll_wallpaper"
+        android:title="@string/scroll_wallpaper_title"
+        android:summary="@string/scroll_wallpaper_summary"
+        android:defaultValue="true" />
+
+    <CheckBoxPreference
+        android:key="show_search_bar"
+        android:title="@string/show_search_bar_title"
+        android:defaultValue="true" />
 
 </PreferenceScreen>
