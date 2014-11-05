@@ -16,7 +16,7 @@
 <resources>
 
     <string name="slim_application_name">SlimLauncher</string>
-    <string name="slim_application_version" translatable="false">1.0 - Dhollmen</string>
+    <string name="slim_application_version" translatable="false">1.0</string>
     <string name="slim_application_copyright" translatable="false">Copyright \u00A9 SlimRoms 2014</string>
 
     <string name="google_title">Google</string>
@@ -24,6 +24,7 @@
     <string name="default_string">Default</string>
     <string name="reset_string">Reset</string>
     <string name="set_string">Set</string>
+    <string name="off_string">Off</string>
 
     <!-- Text for default screen button -->
     <string name="default_screen_button_text">Default Screen</string>
@@ -113,7 +114,12 @@
 
     <!-- Folders -->
     <string name="folder_title">Folders</string>
+    <string name="smart_folder_title">Smart folder</string>
+    <string name="smart_folder_summary_one">Swipe - launch first app \nTouch - open folder</string>
+    <string name="smart_folder_summart_two">Swipe - open folder \nTouch - launch first app</string>
     <string name="folder_background_color_title">Background Color</string>
+    <string name="folder_icon_text_color_title">Icon text color</string>
+    <string name="folder_preview_color_title">Preview color</string>
     <string name="hide_folder_name_title">Hide folder name</string>
     <string name="hide_folder_name_summary">When a folder is open do not show its name</string>
 

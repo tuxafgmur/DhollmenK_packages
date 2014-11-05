@@ -419,9 +419,6 @@ public class Launcher extends Activity
 
         setupViews();
 
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .registerOnSharedPreferenceChangeListener(mSharedPreferencesObserver);
-
         registerContentObservers();
 
         lockAllApps();
@@ -880,6 +877,10 @@ public class Launcher extends Activity
             Log.v(TAG, "Launcher.onResume()");
         }
         super.onResume();
+
+        if (LauncherAppState.getSettingsChanged()) {
+            updateDynamicGrid();
+        }
 
         if (!mPaused) {
             return;
@@ -1857,25 +1858,9 @@ public class Launcher extends Activity
         }
     }
 
-    private final SharedPreferences.OnSharedPreferenceChangeListener mSharedPreferencesObserver =
-            new SharedPreferences.OnSharedPreferenceChangeListener() {
-                @Override
-                public void onSharedPreferenceChanged(
-                        SharedPreferences prefs, String key) {
-                    if (!isFinishing()) {
-                        if (SettingsProvider.shouldFinish(key)) {
-                            updateDynamicGrid();
-                        }
-                    }
-                }
-            };
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .unregisterOnSharedPreferenceChangeListener(mSharedPreferencesObserver);
 
         // Remove all pending runnables
         mHandler.removeMessages(ADVANCE_MSG);
@@ -2362,7 +2347,7 @@ public class Launcher extends Activity
         } else if (tag instanceof FolderInfo) {
             if (v instanceof FolderIcon) {
                 FolderIcon fi = (FolderIcon) v;
-                handleFolderClick(fi);
+                handleFolderClick(fi, false);
             }
         } else if (v == mAllAppsButton) {
             if (isAllAppsVisible()) {
@@ -2540,9 +2525,18 @@ public class Launcher extends Activity
         return success;
     }
 
-    private void handleFolderClick(FolderIcon folderIcon) {
+    void handleFolderClick(FolderIcon folderIcon, boolean swipe) {
         final FolderInfo info = folderIcon.getFolderInfo();
         Folder openFolder = mWorkspace.getFolderForTag(info);
+
+        int smartFolderMode = Integer.parseInt(SettingsProvider.getString(this,
+                SettingsProvider.KEY_SMART_FOLDER, "0"));
+
+        if ((smartFolderMode == 1 && swipe) || (smartFolderMode == 2 && !swipe)) {
+            startActivity(((ShortcutInfo) folderIcon.getFolder()
+                    .getItemsInReadingOrder().get(0).getTag()).getIntent());
+            return;
+        }
 
         // If the folder info reports that the associated folder is open, then verify that
         // it is actually opened. There have been a few instances where this gets out of sync.
@@ -2812,7 +2806,7 @@ public class Launcher extends Activity
         }
     }
 
-    Workspace getWorkspace() {
+    public Workspace getWorkspace() {
         return mWorkspace;
     }
 
@@ -3234,7 +3228,7 @@ public class Launcher extends Activity
     public void onWorkspaceShown(boolean animated) {
     }
 
-    void showAllApps(boolean animated, AppsCustomizePagedView.ContentType contentType,
+    public void showAllApps(boolean animated, AppsCustomizePagedView.ContentType contentType,
                      boolean resetPageToZero) {
         if (mState != State.WORKSPACE) return;
 

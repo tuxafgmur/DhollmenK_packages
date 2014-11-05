@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="drvinst_prefer">
+    <item>Süper Ses Kalitesi</item>
+    <item>Yüksek Ses Kalitesi</item>
+    <item>Güç Tasarrufu</item>
+  </string-array>
+  <string-array name="drvinst_prefer_values">
+    <item>sq</item>
+    <item>hq</item>
+    <item>lq</item>
+  </string-array>
+  <string-array name="ui_prefer">
+    <item>Acemi</item>
+    <item>Asistan</item>
+    <item>Uzman</item>
+  </string-array>
+  <string-array name="compatible_mode">
+    <item>Normal</item>
+    <item>Uyumlu</item>
+  </string-array>
+  <string-array name="compatible_mode_values">
+    <item>global</item>
+    <item>local</item>
+  </string-array>
+  <string-array name="colorfulmusic_coeffs">
+    <item>Az</item>
+    <item>Level 1</item>
+    <item>Level 2</item>
+    <item>Level 3</item>
+    <item>Level 4</item>
+    <item>Level 5</item>
+    <item>Level 6</item>
+    <item>Level 7</item>
+    <item>Aşırı</item>
+  </string-array>
+  <string-array name="colorfulmusic_midimage">
+    <item>Az</item>
+    <item>Level 1</item>
+    <item>Level 2</item>
+    <item>Level 3</item>
+    <item>Level 4</item>
+    <item>Level 5</item>
+    <item>Level 6</item>
+    <item>Level 7</item>
+    <item>Level 8</item>
+    <item>Level 9</item>
+    <item>Aşırı</item>
+  </string-array>
+  <string-array name="conv_cross_channel">
+    <item>Yüzde 0</item>
+    <item>Yüzde 5</item>
+    <item>Yüzde 10</item>
+    <item>Yüzde 15</item>
+    <item>Yüzde 20</item>
+    <item>Yüzde 25</item>
+    <item>Yüzde 30</item>
+    <item>Yüzde 35</item>
+    <item>Yüzde 40</item>
+    <item>Yüzde 45</item>
+    <item>Yüzde 50</item>
+    <item>Yüzde 55</item>
+    <item>Yüzde 60</item>
+    <item>Yüzde 70</item>
+    <item>Yüzde 80</item>
+  </string-array>
+  <string-array name="diffsurround_delay">
+    <item>2 ms</item>
+    <item>5 ms</item>
+    <item>8 ms</item>
+    <item>10 ms</item>
+    <item>12 ms</item>
+    <item>14 ms</item>
+    <item>16 ms</item>
+    <item>18 ms</item>
+    <item>20 ms</item>
+  </string-array>
+  <string-array name="reverb_roomsize">
+    <item>25 m2</item>
+    <item>36 m2</item>
+    <item>49 m2</item>
+    <item>64 m2</item>
+    <item>81 m2</item>
+    <item>100 m2</item>
+    <item>121 m2</item>
+    <item>203 m2</item>
+    <item>347 m2</item>
+    <item>652 m2</item>
+    <item>1200 m2</item>
+  </string-array>
+  <string-array name="reverb_roomwidth">
+    <item>5 m</item>
+    <item>6 m</item>
+    <item>7 m</item>
+    <item>8 m</item>
+    <item>9 m</item>
+    <item>10 m</item>
+    <item>11 m</item>
+    <item>14 m</item>
+    <item>19 m</item>
+    <item>26 m</item>
+    <item>36 m</item>
+  </string-array>
+  <string-array name="reverb_percent">
+    <item>Yüzde 0</item>
+    <item>Yüzde 10</item>
+    <item>Yüzde 20</item>
+    <item>Yüzde 30</item>
+    <item>Yüzde 40</item>
+    <item>Yüzde 50</item>
+    <item>Yüzde 60</item>
+    <item>Yüzde 70</item>
+    <item>Yüzde 80</item>
+    <item>Yüzde 90</item>
+    <item>Yüzde 100</item>
+  </string-array>
+  <string-array name="cure_crossfeed">
+    <item>Az</item>
+    <item>Orta</item>
+    <item>Aşırı</item>
+  </string-array>
+  <string-array name="playbackgain_ratio">
+    <item>Az</item>
+    <item>Orta</item>
+    <item>Aşırı</item>
+  </string-array>
+  <string-array name="dynamicsystem_bass">
+    <item>Yüzde 0</item>
+    <item>Yüzde 1</item>
+    <item>Yüzde 2</item>
+    <item>Yüzde 3</item>
+    <item>Yüzde 4</item>
+    <item>Yüzde 5</item>
+    <item>Yüzde 6</item>
+    <item>Yüzde 7</item>
+    <item>Yüzde 8</item>
+    <item>Yüzde 9</item>
+    <item>Yüzde 10</item>
+    <item>Yüzde 12</item>
+    <item>Yüzde 14</item>
+    <item>Yüzde 16</item>
+    <item>Yüzde 18</item>
+    <item>Yüzde 20</item>
+    <item>Yüzde 22</item>
+    <item>Yüzde 24</item>
+    <item>Yüzde 26</item>
+    <item>Yüzde 28</item>
+    <item>Yüzde 30</item>
+    <item>Yüzde 33</item>
+    <item>Yüzde 36</item>
+    <item>Yüzde 40</item>
+    <item>Yüzde 45</item>
+    <item>Yüzde 50</item>
+    <item>Yüzde 55</item>
+    <item>Yüzde 60</item>
+    <item>Yüzde 70</item>
+    <item>Yüzde 80</item>
+    <item>Yüzde 90</item>
+    <item>Yüzde 100</item>
+  </string-array>
+  <string-array name="dynamicsystem_outputs">
+    <item>Aşırı İyi Kulaklık (Baş) (v2)</item>
+    <item>High-end Kulaklık (Baş) (v2)</item>
+    <item>Normal Kulaklık (Baş)(v2)</item>
+    <item>Low-end Kulaklık (Baş) (v2)</item>
+    <item>Normal Kulaklık (Kulak) (v2)</item>
+    <item>Aşırı İyi Kulaklık (Baş) (v1)</item>
+    <item>High-end Kulaklık (Baş) (v1)</item>
+    <item>Normal Kulaklık (Baş) (v1)</item>
+    <item>Normal Kulaklık (Kulak) (v1)</item>
+    <item>Apple Kulaklık (Kulak)</item>
+    <item>Monster Kulaklık (Kulak)</item>
+    <item>Moto Kulaklık (Kulak)</item>
+    <item>Philips Kulaklık (Kulak)</item>
+    <item>SHP2000</item>
+    <item>SHP9000</item>
+    <item>Bilinmeyen Tür I</item>
+    <item>Bilinmeyen Tür II</item>
+    <item>Bilinmeyen Tür III</item>
+    <item>Bilinmeyen Tür IV</item>
+  </string-array>
+  <string-array name="vbass_mode">
+    <item>Doğal Bas</item>
+    <item>Pure Bass+</item>
+    <item>Subwoofer (Düşük Hz lerde çalışır)</item>
+  </string-array>
+  <string-array name="vclarity_mode">
+    <item>Doğal</item>
+    <item>OZone+</item>
+    <item>XHiFi</item>
+  </string-array>
+</resources>
