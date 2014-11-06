@@ -30,10 +30,6 @@ import android.text.TextUtils;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
-import static com.google.android.apps.dashclock.LogUtils.LOGE;
-import static com.google.android.apps.dashclock.LogUtils.LOGW;
-
 /**
  * Unread SMS and MMS's extension.
  */
@@ -90,8 +86,6 @@ public class SmsExtension extends DashClockExtension {
                 }
             }
             cursor.close();
-
-            LOGD(TAG, "Unread thread IDs: [" + TextUtils.join(", ", unreadThreadIds) + "]");
         }
 
         int unreadConversations = 0;
@@ -110,8 +104,6 @@ public class SmsExtension extends DashClockExtension {
                     // this supposedly unread message's thread isn't in the list. This message is
                     // likely an orphaned message whose thread was deleted. Not skipping it is
                     // likely the cause of http://code.google.com/p/dashclock/issues/detail?id=8
-                    LOGD(TAG, "Skipping probably orphaned message " + id + " with thread ID "
-                            + threadId);
                     continue;
                 }
 
@@ -220,7 +212,6 @@ public class SmsExtension extends DashClockExtension {
         } catch (Exception e) {
             // Catch all exceptions because the SMS provider is crashy
             // From developer console: "SQLiteException: table spam_filter already exists"
-            LOGE(TAG, "Error accessing conversations cursor in SMS/MMS provider", e);
             return null;
         }
     }
@@ -238,7 +229,6 @@ public class SmsExtension extends DashClockExtension {
                     null);
 
         } catch (Exception e) {
-            LOGW(TAG, "Error accessing simple SMS threads cursor", e);
             return null;
         }
     }
@@ -254,7 +244,6 @@ public class SmsExtension extends DashClockExtension {
                     null);
 
         } catch (Exception e) {
-            LOGE(TAG, "Error accessing canonical addresses cursor", e);
             return null;
         }
     }
@@ -274,7 +263,6 @@ public class SmsExtension extends DashClockExtension {
         } catch (Exception e) {
             // Catch all exceptions because the SMS provider is crashy
             // From developer console: "SQLiteException: table spam_filter already exists"
-            LOGE(TAG, "Error accessing MMS addresses cursor", e);
             return null;
         }
     }
@@ -291,7 +279,6 @@ public class SmsExtension extends DashClockExtension {
                     null);
 
         } catch (Exception e) {
-            LOGE(TAG, "Error accessing contacts provider", e);
             return null;
         }
     }
@@ -309,7 +296,6 @@ public class SmsExtension extends DashClockExtension {
         } catch (Exception e) {
             // Can be called by the content provider (from Google Play crash/ANR console)
             // java.lang.IllegalArgumentException: URI: content://com.android.contacts/phone_lookup/
-            LOGW(TAG, "Error looking up contact name", e);
             return null;
         }
     }

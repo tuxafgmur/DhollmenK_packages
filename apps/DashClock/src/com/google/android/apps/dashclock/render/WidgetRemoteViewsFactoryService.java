@@ -29,8 +29,6 @@ import android.widget.RemoteViewsService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
-
 /**
  * This is the service that provides the factory to be bound to the collection. Basically the
  * {@link android.widget.Adapter} for expanded DashClock extensions.
@@ -49,7 +47,6 @@ public class WidgetRemoteViewsFactoryService extends RemoteViewsService {
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        LOGD(TAG, "Instantiating a remote views factory.");
         int target = intent.getIntExtra(EXTRA_TARGET, DashClockRenderer.Options.TARGET_HOME_SCREEN);
         boolean isMini = intent.getBooleanExtra(EXTRA_IS_MINI, false);
         return new WidgetRemoveViewsFactory(this, target, isMini);

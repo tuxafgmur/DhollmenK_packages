@@ -37,7 +37,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
 import static com.google.android.apps.dashclock.LogUtils.LOGE;
 import static com.google.android.apps.dashclock.LogUtils.LOGW;
 
@@ -71,7 +70,6 @@ class YahooWeatherApiClient {
         // Loop through the woeids (they're in descending precision order) until weather data
         // is found.
         for (String woeid : locationInfo.woeids) {
-            LOGD(TAG, "Trying WOEID: " + woeid);
             WeatherData data = YahooWeatherApiClient.getWeatherForWoeid(woeid, locationInfo.town);
             if (data != null
                     && data.conditionCode != WeatherData.INVALID_CONDITION
@@ -279,8 +277,6 @@ class YahooWeatherApiClient {
     private static final int PARSE_STATE_ADMIN1 = 5;
 
     public static List<LocationSearchResult> findLocationsAutocomplete(String startsWith) {
-        LOGD(TAG, "Autocompleting locations starting with '" + startsWith + "'");
-
         List<LocationSearchResult> results = new ArrayList<LocationSearchResult>();
 
         HttpURLConnection connection = null;

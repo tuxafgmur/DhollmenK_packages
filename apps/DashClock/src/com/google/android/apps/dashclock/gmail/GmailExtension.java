@@ -40,10 +40,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
-import static com.google.android.apps.dashclock.LogUtils.LOGE;
-import static com.google.android.apps.dashclock.LogUtils.LOGW;
-
 /**
  * Gmail unread count extension.
  */
@@ -114,7 +110,6 @@ public class GmailExtension extends DashClockExtension {
         for (String account : selectedAccounts) {
             Cursor cursor = tryOpenLabelsCursor(account);
             if (cursor == null || cursor.isAfterLast()) {
-                LOGD(TAG, "No Gmail inbox information found for account.");
                 if (cursor != null) {
                     cursor.close();
                 }
@@ -170,7 +165,6 @@ public class GmailExtension extends DashClockExtension {
                     throw new IllegalStateException("Gmail can't open this label directly.");
                 }
             } catch (Exception e) {
-                LOGW(TAG, "Can't open Gmail label directly.", e);
                 clickIntent = null;
             }
         }
@@ -204,7 +198,6 @@ public class GmailExtension extends DashClockExtension {
             // From developer console: "Permission Denial: opening provider com.google.android.gsf..
             // From developer console: "SQLiteException: no such table: labels"
             // From developer console: "NullPointerException"
-            LOGE(TAG, "Error opening Gmail labels", e);
             return null;
         }
     }

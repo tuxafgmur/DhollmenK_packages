@@ -47,10 +47,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
-import static com.google.android.apps.dashclock.LogUtils.LOGE;
-import static com.google.android.apps.dashclock.LogUtils.LOGW;
-
 /**
  * A singleton class in charge of extension registration, activation (change in user-specified
  * 'active' extensions), and data caching.
@@ -102,8 +98,6 @@ public class ExtensionManager {
         for (ExtensionListing listing : getAvailableExtensions()) {
             // Ensure the extension protocol version is supported. If it isn't, don't allow its use.
             if (!ExtensionHost.supportsProtocolVersion(listing.protocolVersion)) {
-                LOGW(TAG, "Extension '" + listing.title + "' using unsupported protocol version "
-                        + listing.protocolVersion + ".");
                 continue;
             }
             availableExtensions.add(listing.componentName);
@@ -195,7 +189,6 @@ public class ExtensionManager {
 
         List<ComponentName> activeExtensionNames = getActiveExtensionNames();
         if (activeExtensionNames.equals(extensionNames)) {
-            LOGD(TAG, "No change to list of active extensions.");
             return;
         }
 
@@ -235,7 +228,6 @@ public class ExtensionManager {
         }
 
         if (saveAndNotify) {
-            LOGD(TAG, "List of active extensions has changed.");
             saveActiveExtensionList();
             notifyOnChangeListeners(null);
         }
@@ -264,8 +256,6 @@ public class ExtensionManager {
             try {
                 extensionData.deserialize((JSONObject) new JSONTokener(val).nextValue());
             } catch (JSONException e) {
-                LOGE(TAG, "Error loading extension data cache for " + componentName + ".",
-                        e);
             }
         }
         return extensionData;
@@ -278,7 +268,6 @@ public class ExtensionManager {
                             extensionData.serialize().toString())
                     .commit();
         } catch (JSONException e) {
-            LOGE(TAG, "Error storing extension data cache for " + componentName + ".", e);
         }
     }
 

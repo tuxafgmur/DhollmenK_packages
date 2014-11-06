@@ -46,7 +46,6 @@ import com.google.android.apps.dashclock.api.DashClockExtension;
 
 import net.nurik.roman.dashclock.R;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
 import static com.google.android.apps.dashclock.LogUtils.FORCE_DEBUG;
 /**
  * The primary widget configuration activity. Serves as an interstitial when adding the widget, and
@@ -314,7 +313,6 @@ public class ConfigurationActivity extends Activity {
         // Update all widgets, including a new one if it was just added
         // We can't only update the new one because settings affecting all widgets may have
         // been changed.
-        LOGD(TAG, "Updating all widgets");
 
         Intent widgetUpdateIntent = new Intent(this, DashClockService.class);
         widgetUpdateIntent.setAction(DashClockService.ACTION_UPDATE_WIDGETS);

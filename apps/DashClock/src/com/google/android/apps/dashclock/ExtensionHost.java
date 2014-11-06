@@ -51,7 +51,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
 import static com.google.android.apps.dashclock.LogUtils.LOGE;
 
 /**
@@ -101,8 +100,6 @@ public class ExtensionHost {
 
         mChangeListener.onExtensionsChanged(null);
         mExtensionManager.cleanupExtensions();
-
-        LOGD(TAG, "ExtensionHost initialized.");
     }
 
     public void destroy() {
@@ -151,8 +148,6 @@ public class ExtensionHost {
     }
 
     private Connection createConnection(final ComponentName cn, final boolean isReconnect) {
-        LOGD(TAG, "createConnection for " + cn + "; isReconnect=" + isReconnect);
-
         final Connection conn = new Connection();
         conn.componentName = cn;
         conn.contentObserver = new ContentObserver(mClientThreadHandler) {
@@ -255,7 +250,6 @@ public class ExtensionHost {
                 }
 
                 // TODO: this needs to be thread-safe
-                LOGD(TAG, "publishUpdate received for extension " + conn.componentName);
                 mExtensionManager.updateExtensionData(conn.componentName, data);
             }
 
@@ -327,7 +321,6 @@ public class ExtensionHost {
                 // extensions added or removed).
                 return;
             }
-            LOGD(TAG, "onExtensionsChanged; calling establishAndDestroyConnections.");
             establishAndDestroyConnections(mExtensionManager.getActiveExtensionNames());
         }
     };
@@ -396,8 +389,6 @@ public class ExtensionHost {
             if (conn != null) {
                 mExtensionConnections.put(cn, conn);
             } else {
-                LOGE(TAG, "Couldn't connect to extension to perform operation; operation "
-                        + "canceled.");
                 return;
             }
         }

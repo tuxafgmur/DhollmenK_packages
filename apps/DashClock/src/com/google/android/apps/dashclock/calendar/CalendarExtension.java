@@ -42,8 +42,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
-import static com.google.android.apps.dashclock.LogUtils.LOGE;
 import static com.google.android.apps.dashclock.Utils.HOURS_MILLIS;
 import static com.google.android.apps.dashclock.Utils.MINUTES_MILLIS;
 
@@ -88,7 +86,6 @@ public class CalendarExtension extends DashClockExtension {
                 cursor.close();
             }
         } catch (SecurityException e) {
-            LOGE(TAG, "Error querying calendar API", e);
             return null;
         }
 
@@ -140,7 +137,6 @@ public class CalendarExtension extends DashClockExtension {
 
         Cursor cursor = tryOpenEventsCursor(showAllDay);
         if (cursor == null) {
-            LOGE(TAG, "Null events cursor, short-circuiting.");
             return;
         }
 
@@ -181,8 +177,6 @@ public class CalendarExtension extends DashClockExtension {
             // Skip over events that are not ALL_DAY but span multiple days, including
             // the next 6 hours. An example is an event that starts at 4pm yesterday
             // day and ends 6pm tomorrow.
-            LOGD(TAG, "Skipping over event with start timestamp " + nextTimestamp + ". "
-                    + "Current timestamp " + currentTimestamp);
         }
 
         if (allDayPosition >= 0) {
@@ -197,13 +191,10 @@ public class CalendarExtension extends DashClockExtension {
 
                 nextTimestamp = allDayTimestampLocalMidnight;
                 timeUntilNextAppointent = nextTimestamp - currentTimestamp;
-                LOGD(TAG, "Showing an all day event because either no regular event was found or "
-                        + "it's a full day later than the all-day event.");
             }
         }
 
         if (cursor.isAfterLast()) {
-            LOGD(TAG, "No upcoming appointments found.");
             cursor.close();
             publishUpdate(new ExtensionData());
             return;
@@ -341,7 +332,6 @@ public class CalendarExtension extends DashClockExtension {
                 calendarsSelectionArgs,
                 CalendarContract.Instances.BEGIN);
         } catch (Exception e) {
-            LOGE(TAG, "Error querying calendar API", e);
             return null;
         }
     }

@@ -25,7 +25,6 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 
 import com.google.android.apps.dashclock.api.DashClockExtension;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
 import static com.google.android.apps.dashclock.Utils.MINUTES_MILLIS;
 
 /**
@@ -51,7 +50,6 @@ public class PeriodicExtensionRefreshReceiver extends WakefulBroadcastReceiver {
     }
 
     private static Intent getUpdateAllExtensionsIntent(Context context, int reason) {
-        LOGD(TAG, "getUpdateAllExtensionsIntent, reason=" + reason);
         return new Intent(context, DashClockService.class)
                 .setAction(DashClockService.ACTION_UPDATE_EXTENSIONS)
                 .putExtra(DashClockService.EXTRA_UPDATE_REASON, reason);
@@ -61,7 +59,6 @@ public class PeriodicExtensionRefreshReceiver extends WakefulBroadcastReceiver {
      * Sets the refresh schedule if one isn't set already.
      */
     public static void updateExtensionsAndEnsurePeriodicRefresh(final Context context) {
-        LOGD(TAG, "updateExtensionsAndEnsurePeriodicRefresh");
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         // Update all extensions now.

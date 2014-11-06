@@ -25,8 +25,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
-
 /**
  * Broadcast receiver used to watch for changes to installed packages on the device. This triggers
  * a cleanup of extensions (in case one was uninstalled), or a data update request to an extension
@@ -39,7 +37,6 @@ public class ExtensionPackageChangeReceiver extends WakefulBroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         ExtensionManager extensionManager = ExtensionManager.getInstance(context);
         if (extensionManager.cleanupExtensions()) {
-            LOGD(TAG, "Extension cleanup performed and action taken.");
 
             Intent widgetUpdateIntent = new Intent(context, DashClockService.class);
             widgetUpdateIntent.setAction(DashClockService.ACTION_UPDATE_WIDGETS);
@@ -59,7 +56,6 @@ public class ExtensionPackageChangeReceiver extends WakefulBroadcastReceiver {
             List<ComponentName> activeExtensions = extensionManager.getActiveExtensionNames();
             for (ComponentName cn : activeExtensions) {
                 if (packageName.equals(cn.getPackageName())) {
-                    LOGD(TAG, "Package for extension " + cn + " changed; asking it for an update.");
                     Intent extensionUpdateIntent = new Intent(context, DashClockService.class);
                     extensionUpdateIntent.setAction(DashClockService.ACTION_UPDATE_EXTENSIONS);
                     // TODO: UPDATE_REASON_PACKAGE_CHANGED

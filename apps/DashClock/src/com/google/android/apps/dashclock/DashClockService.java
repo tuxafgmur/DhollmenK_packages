@@ -33,7 +33,6 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
 import static com.google.android.apps.dashclock.Utils.SECONDS_MILLIS;
 
 /**
@@ -89,7 +88,6 @@ public class DashClockService extends Service implements ExtensionManager.OnChan
     @Override
     public void onCreate() {
         super.onCreate();
-        LOGD(TAG, "onCreate");
 
         mExtensionManager = ExtensionManager.getInstance(this);
         mExtensionManager.addOnChangeListener(this);
@@ -99,7 +97,6 @@ public class DashClockService extends Service implements ExtensionManager.OnChan
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LOGD(TAG, "onDestroy");
 
         mUpdateHandler.removeCallbacksAndMessages(null);
         mExtensionManager.removeOnChangeListener(this);
@@ -108,8 +105,6 @@ public class DashClockService extends Service implements ExtensionManager.OnChan
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        LOGD(TAG, "onStartCommand: " + (intent != null ? intent.toString() : "no intent"));
-
         if (intent != null) {
             String action = intent.getAction();
             if (ACTION_UPDATE_WIDGETS.equals(action)) {
@@ -137,8 +132,6 @@ public class DashClockService extends Service implements ExtensionManager.OnChan
     private Handler mUpdateHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            LOGD(TAG, "onExtensionsChanged from "
-                    + (msg.obj != null ? "extension " + msg.obj : "DashClock"));
             sendBroadcast(new Intent(ACTION_EXTENSIONS_CHANGED));
             handleUpdateWidgets(new Intent());
             WidgetRenderer.notifyDataSetChanged(DashClockService.this);
@@ -164,8 +157,6 @@ public class DashClockService extends Service implements ExtensionManager.OnChan
         for (int appWidgetId : appWidgetIds) {
             sb.append(appWidgetId).append(" ");
         }
-        LOGD(TAG, "Rendering widgets with appWidgetId(s): " + sb);
-
         WidgetRenderer.renderWidgets(this, appWidgetIds);
     }
 

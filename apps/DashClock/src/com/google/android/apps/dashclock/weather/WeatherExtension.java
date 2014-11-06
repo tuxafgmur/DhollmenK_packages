@@ -53,10 +53,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.google.android.apps.dashclock.LogUtils.FORCE_DEBUG;
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
-import static com.google.android.apps.dashclock.LogUtils.LOGE;
-import static com.google.android.apps.dashclock.LogUtils.LOGW;
 import static com.google.android.apps.dashclock.Utils.MINUTES_MILLIS;
 import static com.google.android.apps.dashclock.Utils.MILLIS_NANOS;
 import static com.google.android.apps.dashclock.Utils.SECONDS_MILLIS;
@@ -124,7 +120,6 @@ public class WeatherExtension extends DashClockExtension {
                 ? lastBackoffMillis * 2
                 : INITIAL_BACKOFF_MILLIS;
         sp.edit().putInt(STATE_WEATHER_LAST_BACKOFF_MILLIS, backoffMillis).apply();
-        LOGD(TAG, "Scheduling weather retry in " + (backoffMillis / SECONDS_MILLIS) + " second(s)");
         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
         am.set(AlarmManager.ELAPSED_REALTIME,
                 SystemClock.elapsedRealtime() + backoffMillis,
@@ -145,16 +140,12 @@ public class WeatherExtension extends DashClockExtension {
         long nowElapsedMillis = SystemClock.elapsedRealtime();
         if (reason != UPDATE_REASON_INITIAL && reason != UPDATE_REASON_MANUAL &&
                 nowElapsedMillis < lastUpdateElapsedMillis + UPDATE_THROTTLE_MILLIS) {
-            LOGD(TAG, "Throttling weather update attempt.");
             return;
         }
-
-        LOGD(TAG, "Attempting weather update; reason=" + reason);
 
         NetworkInfo ni = ((ConnectivityManager) getSystemService(
                 Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         if (ni == null || !ni.isConnected()) {
-            LOGD(TAG, "No network connection; not attempting to update weather.");
             return;
         }
 
@@ -185,8 +176,6 @@ public class WeatherExtension extends DashClockExtension {
         if (lastLocation == null ||
                 (SystemClock.elapsedRealtimeNanos() - lastLocation.getElapsedRealtimeNanos())
                         >= STALE_LOCATION_NANOS) {
-            LOGW(TAG, "Stale or missing last-known location; requesting single coarse location "
-                    + "update.");
             disableOneTimeLocationListener();
             mOneTimeLocationListenerActive = true;
             lm.requestSingleUpdate(provider, mOneTimeLocationListener, null);
@@ -196,7 +185,6 @@ public class WeatherExtension extends DashClockExtension {
             mTimeoutHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    LOGE(TAG, "Location request timed out.");
                     disableOneTimeLocationListener();
                     scheduleRetry();
                 }
@@ -217,7 +205,6 @@ public class WeatherExtension extends DashClockExtension {
     private LocationListener mOneTimeLocationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            LOGD(TAG, "Got network location update");
             mTimeoutHandler.removeCallbacksAndMessages(null);
             tryPublishWeatherUpdateFromGeolocation(location);
             disableOneTimeLocationListener();
@@ -225,7 +212,6 @@ public class WeatherExtension extends DashClockExtension {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-            LOGD(TAG, "Network location provider status change: " + status);
             if (status == LocationProvider.TEMPORARILY_UNAVAILABLE) {
                 scheduleRetry();
                 disableOneTimeLocationListener();
@@ -249,7 +235,6 @@ public class WeatherExtension extends DashClockExtension {
 
     private void tryPublishWeatherUpdateFromGeolocation(Location location) {
         try {
-            LOGD(TAG, "Using location: " + location.getLatitude() + "," + location.getLongitude());
             tryPublishWeatherUpdateFromLocationInfo(getLocationInfo(location));
         } catch (CantGetWeatherException e) {
             publishErrorUpdate(e);
@@ -271,7 +256,6 @@ public class WeatherExtension extends DashClockExtension {
     }
 
     private void publishErrorUpdate(CantGetWeatherException e) {
-        LOGE(TAG, "Showing a weather extension error", e);
         publishUpdate(new ExtensionData()
                 .visible(true)
                 .clickIntent(sWeatherIntent)
@@ -310,11 +294,6 @@ public class WeatherExtension extends DashClockExtension {
             expandedBody.append("\n");
         }
         expandedBody.append(weatherData.location);
-
-        if (FORCE_DEBUG) {
-            expandedBody.append("\n")
-                    .append(SimpleDateFormat.getDateTimeInstance().format(new Date()));
-        }
 
         publishUpdate(new ExtensionData()
                 .visible(true)

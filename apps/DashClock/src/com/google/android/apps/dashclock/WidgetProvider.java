@@ -25,8 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import static com.google.android.apps.dashclock.LogUtils.LOGD;
-
 /**
  * The DashClock {@link AppWidgetProvider}, which just forwards commands to {@link
  * DashClockService}.
@@ -54,15 +52,12 @@ public class WidgetProvider extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             sb.append(appWidgetId).append(" ");
         }
-        LOGD(TAG, "onUpdate for appWidgetId(s): " + sb);
     }
 
     @Override
     public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager,
             int appWidgetId, Bundle newOptions) {
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions);
-
-        LOGD(TAG, "onAppWidgetOptionsChanged for appWidgetId: " + appWidgetId);
 
         Intent widgetUpdateIntent = new Intent(context, DashClockService.class);
         widgetUpdateIntent.setAction(DashClockService.ACTION_UPDATE_WIDGETS);
@@ -73,7 +68,6 @@ public class WidgetProvider extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
         super.onDisabled(context);
-        LOGD(TAG, "onDisabled; stopping DashClockService.");
         context.stopService(new Intent(context, DashClockService.class));
     }
 
@@ -83,10 +77,7 @@ public class WidgetProvider extends AppWidgetProvider {
         int[] remainingIds = AppWidgetManager.getInstance(context).getAppWidgetIds(
                 new ComponentName(context, WidgetProvider.class));
         if (remainingIds == null || remainingIds.length == 0) {
-            LOGD(TAG, "Widget deleted, none remaining; stopping DashClockService.");
             context.stopService(new Intent(context, DashClockService.class));
-        } else {
-            LOGD(TAG, "Widget deleted, " + remainingIds.length + " remaining.");
         }
     }
 }
