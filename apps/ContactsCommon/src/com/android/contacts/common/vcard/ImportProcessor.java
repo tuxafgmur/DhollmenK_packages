@@ -45,7 +45,7 @@ import java.util.List;
  */
 public class ImportProcessor extends ProcessorBase implements VCardEntryHandler {
     private static final String LOG_TAG = "VCardImport";
-    private static final boolean DEBUG = VCardService.DEBUG;
+    private static final boolean DEBUG = false;
 
     private final VCardService mService;
     private final ContentResolver mResolver;
@@ -120,10 +120,8 @@ public class ImportProcessor extends ProcessorBase implements VCardEntryHandler 
     }
 
     private void runInternal() {
-        Log.i(LOG_TAG, String.format("vCard import (id: %d) has started.", mJobId));
         final ImportRequest request = mImportRequest;
         if (isCancelled()) {
-            Log.i(LOG_TAG, "Canceled before actually handling parameter (" + request.uri + ")");
             return;
         }
         final int[] possibleVCardVersions;
@@ -159,10 +157,8 @@ public class ImportProcessor extends ProcessorBase implements VCardEntryHandler 
         boolean successful = false;
         try {
             if (uri != null) {
-                Log.i(LOG_TAG, "start importing one vCard (Uri: " + uri + ")");
                 is = mResolver.openInputStream(uri);
             } else if (request.data != null){
-                Log.i(LOG_TAG, "start importing one vCard (byte[])");
                 is = new ByteArrayInputStream(request.data);
             }
 
@@ -188,10 +184,8 @@ public class ImportProcessor extends ProcessorBase implements VCardEntryHandler 
             // TODO: successful becomes true even when cancelled. Should return more appropriate
             // value
             if (isCancelled()) {
-                Log.i(LOG_TAG, "vCard import has been canceled (uri: " + uri + ")");
                 // Cancel notification will be done outside this method.
             } else {
-                Log.i(LOG_TAG, "Successfully finished importing one vCard file: " + uri);
                 List<Uri> uris = committer.getCreatedUris();
                 if (mListener != null) {
                     if (uris != null && uris.size() > 0) {
@@ -199,15 +193,11 @@ public class ImportProcessor extends ProcessorBase implements VCardEntryHandler 
                         mListener.onImportFinished(mImportRequest, mJobId, uris.get(0));
                     } else {
                         // Not critical, but suspicious.
-                        Log.w(LOG_TAG,
-                                "Created Uris is null or 0 length " +
-                                "though the creation itself is successful.");
                         mListener.onImportFinished(mImportRequest, mJobId, null);
                     }
                 }
             }
         } else {
-            Log.w(LOG_TAG, "Failed to read one vCard file: " + uri);
             mFailedUris.add(uri);
         }
     }
@@ -234,8 +224,6 @@ public class ImportProcessor extends ProcessorBase implements VCardEntryHandler 
                             new VCardParser_V30(vcardType) :
                                 new VCardParser_V21(vcardType));
                     if (isCancelled()) {
-                        Log.i(LOG_TAG, "ImportProcessor already recieves cancel request, so " +
-                                "send cancel request to vCard parser too.");
                         mVCardParser.cancel();
                     }
                 }
@@ -244,26 +232,10 @@ public class ImportProcessor extends ProcessorBase implements VCardEntryHandler 
                 successful = true;
                 break;
             } catch (IOException e) {
-                Log.e(LOG_TAG, "IOException was emitted: " + e.getMessage());
             } catch (VCardNestedException e) {
-                // This exception should not be thrown here. We should instead handle it
-                // in the preprocessing session in ImportVCardActivity, as we don't try
-                // to detect the type of given vCard here.
-                //
-                // TODO: Handle this case appropriately, which should mean we have to have
-                // code trying to auto-detect the type of given vCard twice (both in
-                // ImportVCardActivity and ImportVCardService).
-                Log.e(LOG_TAG, "Nested Exception is found.");
             } catch (VCardNotSupportedException e) {
-                Log.e(LOG_TAG, e.toString());
             } catch (VCardVersionException e) {
-                if (i == length - 1) {
-                    Log.e(LOG_TAG, "Appropriate version for this vCard is not found.");
-                } else {
-                    // We'll try the other (v30) version.
-                }
             } catch (VCardException e) {
-                Log.e(LOG_TAG, e.toString());
             } finally {
                 if (is != null) {
                     try {

@@ -410,7 +410,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
             final String type = sync.accountType;
             final AuthenticatorDescription auth = findAuthenticator(auths, type);
             if (auth == null) {
-                Log.w(TAG, "No authenticator found for type=" + type + ", ignoring it.");
                 continue;
             }
 
@@ -421,8 +420,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
                 accountType = new ExchangeAccountType(mContext, auth.packageName, type);
             } else {
                 // TODO: use syncadapter package instead, since it provides resources
-                Log.d(TAG, "Registering external account type=" + type
-                        + ", packageName=" + auth.packageName);
                 accountType = new ExternalAccountType(mContext, auth.packageName, false);
             }
             if (!accountType.isInitialized()) {
@@ -448,7 +445,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
 
         // If any extension packages were specified, process them as well.
         if (!extensionPackages.isEmpty()) {
-            Log.d(TAG, "Registering " + extensionPackages.size() + " extension packages");
             for (String extensionPackage : extensionPackages) {
                 ExternalAccountType accountType =
                     new ExternalAccountType(mContext, extensionPackage, true);
@@ -457,20 +453,11 @@ class AccountTypeManagerImpl extends AccountTypeManager
                     continue;
                 }
                 if (!accountType.hasContactsMetadata()) {
-                    Log.w(TAG, "Skipping extension package " + extensionPackage + " because"
-                            + " it doesn't have the CONTACTS_STRUCTURE metadata");
                     continue;
                 }
                 if (TextUtils.isEmpty(accountType.accountType)) {
-                    Log.w(TAG, "Skipping extension package " + extensionPackage + " because"
-                            + " the CONTACTS_STRUCTURE metadata doesn't have the accountType"
-                            + " attribute");
                     continue;
                 }
-                Log.d(TAG, "Registering extension package account type="
-                        + accountType.accountType + ", dataSet=" + accountType.dataSet
-                        + ", packageName=" + extensionPackage);
-
                 addAccountType(accountType, accountTypesByTypeAndDataSet, accountTypesByType);
             }
         }
@@ -520,10 +507,6 @@ class AccountTypeManagerImpl extends AccountTypeManager
         timings.dumpToLog();
         final long endTimeWall = SystemClock.elapsedRealtime();
         final long endTime = SystemClock.currentThreadTimeMillis();
-
-        Log.i(TAG, "Loaded meta-data for " + mAccountTypesWithDataSets.size() + " account types, "
-                + mAccounts.size() + " accounts in " + (endTimeWall - startTimeWall) + "ms(wall) "
-                + (endTime - startTime) + "ms(cpu)");
 
         if (mInitializationLatch != null) {
             mInitializationLatch.countDown();

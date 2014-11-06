@@ -187,22 +187,17 @@ public class ImportVCardActivity extends Activity {
         private VCardService mService;
 
         public void sendImportRequest(final List<ImportRequest> requests) {
-            Log.i(LOG_TAG, "Send an import request");
             mService.handleImportRequest(requests, mListener);
         }
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder binder) {
             mService = ((VCardService.MyBinder) binder).getService();
-            Log.i(LOG_TAG,
-                    String.format("Connected to VCardService. Kick a vCard cache thread (uri: %s)",
-                            Arrays.toString(mVCardCacheThread.getSourceUris())));
             mVCardCacheThread.start();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.i(LOG_TAG, "Disconnected from VCardService");
         }
     }
 
@@ -238,14 +233,12 @@ public class ImportVCardActivity extends Activity {
         @Override
         public void finalize() {
             if (mWakeLock != null && mWakeLock.isHeld()) {
-                Log.w(LOG_TAG, "WakeLock is being held.");
                 mWakeLock.release();
             }
         }
 
         @Override
         public void run() {
-            Log.i(LOG_TAG, "vCard cache thread starts running.");
             if (mConnection == null) {
                 throw new NullPointerException("vCard cache thread must be launched "
                         + "after a service connection is established");
@@ -254,7 +247,6 @@ public class ImportVCardActivity extends Activity {
             mWakeLock.acquire();
             try {
                 if (mCanceled == true) {
-                    Log.i(LOG_TAG, "vCard cache operation is canceled.");
                     return;
                 }
 
@@ -297,11 +289,9 @@ public class ImportVCardActivity extends Activity {
                         }
                         final Uri localDataUri = copyTo(sourceUri, filename);
                         if (mCanceled) {
-                            Log.i(LOG_TAG, "vCard cache operation is canceled.");
                             break;
                         }
                         if (localDataUri == null) {
-                            Log.w(LOG_TAG, "destUri is null");
                             break;
                         }
 
@@ -314,10 +304,6 @@ public class ImportVCardActivity extends Activity {
                                     new String[] { OpenableColumns.DISPLAY_NAME },
                                     null, null, null);
                             if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
-                                if (cursor.getCount() > 1) {
-                                    Log.w(LOG_TAG, "Unexpected multiple rows: "
-                                            + cursor.getCount());
-                                }
                                 int index = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
                                 if (index >= 0) {
                                     displayName = cursor.getString(index);
@@ -345,7 +331,6 @@ public class ImportVCardActivity extends Activity {
                             return;
                         }
                         if (mCanceled) {
-                            Log.i(LOG_TAG, "vCard cache operation is canceled.");
                             return;
                         }
                         requests.add(request);
@@ -353,8 +338,6 @@ public class ImportVCardActivity extends Activity {
                 }
                 if (!requests.isEmpty()) {
                     mConnection.sendImportRequest(requests);
-                } else {
-                    Log.w(LOG_TAG, "Empty import requests. Ignore it.");
                 }
             } catch (OutOfMemoryError e) {
                 Log.e(LOG_TAG, "OutOfMemoryError occured during caching vCard");
@@ -366,7 +349,6 @@ public class ImportVCardActivity extends Activity {
                 runOnUiThread(new DialogDisplayer(
                         getString(R.string.fail_reason_io_error)));
             } finally {
-                Log.i(LOG_TAG, "Finished caching vCard.");
                 mWakeLock.release();
                 unbindService(mConnection);
                 mProgressDialogForCachingVCard.dismiss();
@@ -379,8 +361,6 @@ public class ImportVCardActivity extends Activity {
          * Copy the content of sourceUri to the destination.
          */
         private Uri copyTo(final Uri sourceUri, String filename) throws IOException {
-            Log.i(LOG_TAG, String.format("Copy a Uri to app local storage (%s -> %s)",
-                    sourceUri, filename));
             final Context context = ImportVCardActivity.this;
             final ContentResolver resolver = context.getContentResolver();
             ReadableByteChannel inputChannel = null;
@@ -393,7 +373,6 @@ public class ImportVCardActivity extends Activity {
                 final ByteBuffer buffer = ByteBuffer.allocateDirect(8192);
                 while (inputChannel.read(buffer) != -1) {
                     if (mCanceled) {
-                        Log.d(LOG_TAG, "Canceled during caching " + sourceUri);
                         return null;
                     }
                     buffer.flip();
@@ -409,14 +388,12 @@ public class ImportVCardActivity extends Activity {
                     try {
                         inputChannel.close();
                     } catch (IOException e) {
-                        Log.w(LOG_TAG, "Failed to close inputChannel.");
                     }
                 }
                 if (outputChannel != null) {
                     try {
                         outputChannel.close();
                     } catch(IOException e) {
-                        Log.w(LOG_TAG, "Failed to close outputChannel");
                     }
                 }
             }
@@ -488,7 +465,6 @@ public class ImportVCardActivity extends Activity {
 
                 vcardVersion = shouldUseV30 ? VCARD_VERSION_V30 : VCARD_VERSION_V21;
             } catch (VCardNestedException e) {
-                Log.w(LOG_TAG, "Nested Exception is found (it may be false-positive).");
                 // Go through without throwing the Exception, as we may be able to detect the
                 // version before it
             }
@@ -512,7 +488,6 @@ public class ImportVCardActivity extends Activity {
 
         @Override
         public void onCancel(DialogInterface dialog) {
-            Log.i(LOG_TAG, "Cancel request has come. Abort caching vCard.");
             cancel();
         }
     }
@@ -675,9 +650,6 @@ public class ImportVCardActivity extends Activity {
                 final String currentDirectoryPath = directory.getCanonicalPath();
                 final String secureDirectoryPath =
                         mRootDirectory.getCanonicalPath().concat(SECURE_DIRECTORY_NAME);
-                if (!TextUtils.equals(currentDirectoryPath, secureDirectoryPath)) {
-                    Log.w(LOG_TAG, "listFiles() returned null (directory: " + directory + ")");
-                }
                 return;
             }
             for (File file : directory.listFiles()) {
@@ -867,9 +839,6 @@ public class ImportVCardActivity extends Activity {
                         intent.getStringExtra(SelectAccountActivity.DATA_SET));
                 startImport();
             } else {
-                if (resultCode != Activity.RESULT_CANCELED) {
-                    Log.w(LOG_TAG, "Result code was not OK nor CANCELED: " + resultCode);
-                }
                 finish();
             }
         }
@@ -880,10 +849,8 @@ public class ImportVCardActivity extends Activity {
         // Handle inbound files
         Uri uri = intent.getData();
         if (uri != null) {
-            Log.i(LOG_TAG, "Starting vCard import using Uri " + uri);
             importVCard(uri);
         } else {
-            Log.i(LOG_TAG, "Start vCard without Uri. The user will select vCard manually.");
             doScanExternalStorageAndImportVCard();
         }
     }
@@ -979,7 +946,6 @@ public class ImportVCardActivity extends Activity {
     /* package */ void startVCardService() {
         mConnection = new ImportRequestConnection();
 
-        Log.i(LOG_TAG, "Bind to VCardService.");
         // We don't want the service finishes itself just after this connection.
         Intent intent = new Intent(this, VCardService.class);
         startService(intent);
@@ -991,7 +957,6 @@ public class ImportVCardActivity extends Activity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (mProgressDialogForCachingVCard != null) {
-            Log.i(LOG_TAG, "Cache thread is still running. Show progress dialog again.");
             showDialog(R.id.dialog_cache_vcard);
         }
     }

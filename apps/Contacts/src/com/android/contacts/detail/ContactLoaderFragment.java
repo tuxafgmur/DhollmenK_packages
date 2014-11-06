@@ -193,7 +193,6 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
         @Override
         public void onLoadFinished(Loader<Contact> loader, Contact data) {
             if (!mLookupUri.equals(data.getRequestedUri())) {
-                Log.e(TAG, "Different URI: requested=" + mLookupUri + "  actual=" + data);
                 return;
             }
 
@@ -202,7 +201,6 @@ public class ContactLoaderFragment extends Fragment implements FragmentKeyListen
                 // should log the actual exception.
                 throw new IllegalStateException("Failed to load contact", data.getException());
             } else if (data.isNotFound()) {
-                Log.i(TAG, "No contact found: " + ((ContactLoader)loader).getLookupUri());
                 mContactData = null;
             } else {
                 mContactData = data;

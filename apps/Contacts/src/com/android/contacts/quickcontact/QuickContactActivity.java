@@ -617,7 +617,6 @@ public class QuickContactActivity extends Activity {
                 throw new IllegalStateException("Failed to load contact", data.getException());
             }
             if (data.isNotFound()) {
-                Log.i(TAG, "No contact found: " + ((ContactLoader)loader).getLookupUri());
                 Toast.makeText(QuickContactActivity.this, R.string.invalidContactMessage,
                         Toast.LENGTH_LONG).show();
                 close(false);
@@ -652,9 +651,6 @@ public class QuickContactActivity extends Activity {
 
         @Override
         public Loader<Contact> onCreateLoader(int id, Bundle args) {
-            if (mLookupUri == null) {
-                Log.wtf(TAG, "Lookup uri wasn't initialized. Loader was started too early");
-            }
             return new ContactLoader(getApplicationContext(), mLookupUri,
                     false /*loadGroupMetaData*/, false /*loadInvitableAccountTypes*/,
                     false /*postViewNotification*/, true /*computeFormattedPhoneNumber*/);

@@ -47,7 +47,7 @@ import java.io.File;
 public class ExportVCardActivity extends Activity implements ServiceConnection,
         DialogInterface.OnClickListener, DialogInterface.OnCancelListener {
     private static final String LOG_TAG = "VCardExport";
-    private static final boolean DEBUG = VCardService.DEBUG;
+    private static final boolean DEBUG = false;
 
     /**
      * Handler used when some Message has come from {@link VCardService}.
@@ -58,7 +58,6 @@ public class ExportVCardActivity extends Activity implements ServiceConnection,
             if (DEBUG) Log.d(LOG_TAG, "IncomingHandler received message.");
 
             if (msg.arg1 != 0) {
-                Log.i(LOG_TAG, "Message returned from vCard server contains error code.");
                 if (msg.obj != null) {
                     mErrorReason = (String)msg.obj;
                 }

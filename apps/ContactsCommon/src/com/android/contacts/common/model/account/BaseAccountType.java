@@ -657,8 +657,6 @@ public abstract class BaseAccountType extends AccountType {
                 for (DataKind kind : KindParser.INSTANCE.parseDataKindTag(context, parser, attrs)) {
                     addKind(kind);
                 }
-            } else {
-                Log.w(TAG, "Skipping unknown tag " + tag);
             }
         }
     }

@@ -44,7 +44,7 @@ import java.io.Writer;
  */
 public class ExportProcessor extends ProcessorBase {
     private static final String LOG_TAG = "VCardExport";
-    private static final boolean DEBUG = VCardService.DEBUG;
+    private static final boolean DEBUG = false;
 
     private final VCardService mService;
     private final ContentResolver mResolver;
@@ -103,7 +103,6 @@ public class ExportProcessor extends ProcessorBase {
         boolean successful = false;
         try {
             if (isCancelled()) {
-                Log.i(LOG_TAG, "Export request is cancelled before handling the request");
                 return;
             }
             final Uri uri = request.destUri;
@@ -111,7 +110,6 @@ public class ExportProcessor extends ProcessorBase {
             try {
                 outputStream = mResolver.openOutputStream(uri);
             } catch (FileNotFoundException e) {
-                Log.w(LOG_TAG, "FileNotFoundException thrown", e);
                 // Need concise title.
 
                 final String errorReason =
@@ -167,7 +165,6 @@ public class ExportProcessor extends ProcessorBase {
             int current = 1;  // 1-origin
             while (!composer.isAfterLast()) {
                 if (isCancelled()) {
-                    Log.i(LOG_TAG, "Export request is cancelled during composing vCard");
                     return;
                 }
                 try {
@@ -191,7 +188,6 @@ public class ExportProcessor extends ProcessorBase {
                 }
                 current++;
             }
-            Log.i(LOG_TAG, "Successfully finished exporting vCard " + request.destUri);
 
             if (DEBUG) {
                 Log.d(LOG_TAG, "Ask MediaScanner to scan the file: " + request.destUri.getPath());
@@ -211,7 +207,6 @@ public class ExportProcessor extends ProcessorBase {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    Log.w(LOG_TAG, "IOException is thrown during close(). Ignored. " + e);
                 }
             }
             mService.handleFinishExportNotification(mJobId, successful);

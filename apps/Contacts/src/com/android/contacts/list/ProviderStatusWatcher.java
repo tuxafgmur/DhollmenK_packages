@@ -154,7 +154,6 @@ public class ProviderStatusWatcher extends ContentObserver {
      */
     public void stop() {
         if (!isStarted()) {
-            Log.e(TAG, "Already stopped");
             return;
         }
         if (--mStartRequestedCount == 0) {
@@ -277,9 +276,6 @@ public class ProviderStatusWatcher extends ContentObserver {
     public void onChange(boolean selfChange, Uri uri) {
         if (!ProviderStatus.CONTENT_URI.equals(uri)) return;
 
-        // Provider status change is rare, so okay to log.
-        Log.i(TAG, "Provider status changed.");
-
         mHandler.removeCallbacks(mStartLoadingRunnable); // Remove one in the queue, if any.
         mHandler.post(mStartLoadingRunnable);
     }
@@ -288,7 +284,6 @@ public class ProviderStatusWatcher extends ContentObserver {
      * Sends a provider status update, which will trigger a retry of database upgrade
      */
     public static void retryUpgrade(final Context context) {
-        Log.i(TAG, "retryUpgrade");
         final AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {

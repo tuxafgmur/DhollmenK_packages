@@ -57,8 +57,6 @@ public class ContactsIntentResolver {
 
         String action = intent.getAction();
 
-        Log.i(TAG, "Called with action: " + action);
-
         if (UI.LIST_DEFAULT.equals(action) ) {
             request.setActionCode(ContactsRequest.ACTION_DEFAULT);
         } else if (UI.LIST_ALL_CONTACTS_ACTION.equals(action)) {

@@ -76,7 +76,7 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
 
     private static final String TAG = ContactLoader.class.getSimpleName();
 
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+    private static final boolean DEBUG = false;
 
     /** A short-lived cache that can be set by {@link #cacheResult()} */
     private static Contact sCachedResult = null;
@@ -743,8 +743,6 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
                         Resources resources = pm.getResourcesForApplication(packageName);
                         directoryType = resources.getString(typeResourceId);
                     } catch (NameNotFoundException e) {
-                        Log.w(TAG, "Contact directory resource not found: "
-                                + packageName + "." + typeResourceId);
                     }
                 }
 
@@ -854,7 +852,6 @@ public class ContactLoader extends AsyncTaskLoader<Contact> {
             mLookupUri = result.getLookupUri();
 
             if (!result.isDirectoryEntry()) {
-                Log.i(TAG, "Registering content observer for " + mLookupUri);
                 if (mObserver == null) {
                     mObserver = new ForceLoadContentObserver();
                 }

@@ -80,7 +80,6 @@ public class StopWatch {
             sb.append(" ");
             last = current;
         }
-        Log.v(TAG, sb.toString());
     }
 
     /**

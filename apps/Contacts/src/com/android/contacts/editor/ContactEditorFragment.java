@@ -512,7 +512,6 @@ public class ContactEditorFragment extends Fragment implements
 
         // If we have already loaded data, we do not want to change it here to not confuse the user
         if (!mState.isEmpty()) {
-            Log.v(TAG, "Ignoring background change. This will have to be rebased later");
             return;
         }
 
@@ -698,7 +697,6 @@ public class ContactEditorFragment extends Fragment implements
                 newAccount.type, newAccount.dataSet);
 
         if (newAccountType.getCreateContactActivityClassName() != null) {
-            Log.w(TAG, "external activity called in rebind situation");
             if (mListener != null) {
                 mListener.onCustomCreateContactActivityRequested(newAccount, mIntentExtras);
             }
@@ -1270,8 +1268,6 @@ public class ContactEditorFragment extends Fragment implements
                 mStatus = Status.CLOSING;
                 if (mListener != null) {
                     mListener.onContactSplit(contactLookupUri);
-                } else {
-                    Log.d(TAG, "No listener registered, can not call onSplitFinished");
                 }
                 break;
         }
@@ -1737,15 +1733,8 @@ public class ContactEditorFragment extends Fragment implements
     private void setPhoto(long rawContact, Bitmap photo, Uri photoUri) {
         BaseRawContactEditorView requestingEditor = getRawContactEditorView(rawContact);
 
-        if (photo == null || photo.getHeight() < 0 || photo.getWidth() < 0) {
-            // This is unexpected.
-            Log.w(TAG, "Invalid bitmap passed to setPhoto()");
-        }
-
         if (requestingEditor != null) {
             requestingEditor.setPhotoBitmap(photo);
-        } else {
-            Log.w(TAG, "The contact that requested the photo is no longer present.");
         }
 
         mUpdatedPhotos.putParcelable(String.valueOf(rawContact), photoUri);
@@ -1813,10 +1802,8 @@ public class ContactEditorFragment extends Fragment implements
         @Override
         public void onLoadFinished(Loader<Contact> loader, Contact data) {
             final long loaderCurrentTime = SystemClock.elapsedRealtime();
-            Log.v(TAG, "Time needed for loading: " + (loaderCurrentTime-mLoaderStartTime));
             if (!data.isLoaded()) {
                 // Item has been deleted
-                Log.i(TAG, "No contact found. Closing activity");
                 if (mListener != null) mListener.onContactNotFound();
                 return;
             }
@@ -1827,7 +1814,6 @@ public class ContactEditorFragment extends Fragment implements
             setData(data);
             final long setDataEndTime = SystemClock.elapsedRealtime();
 
-            Log.v(TAG, "Time needed for setting UI: " + (setDataEndTime-setDataStartTime));
         }
 
         @Override

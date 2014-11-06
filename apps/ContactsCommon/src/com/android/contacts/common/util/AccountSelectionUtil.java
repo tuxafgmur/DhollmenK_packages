@@ -59,9 +59,6 @@ public class AccountSelectionUtil {
 
         public AccountSelectedListener(Context context, List<AccountWithDataSet> accountList,
                 int resId) {
-            if (accountList == null || accountList.size() == 0) {
-                Log.e(LOG_TAG, "The size of Account list is 0.");
-            }
             mContext = context;
             mAccountList = accountList;
             mResId = resId;
@@ -91,8 +88,6 @@ public class AccountSelectionUtil {
             DialogInterface.OnCancelListener onCancelListener) {
         final AccountTypeManager accountTypes = AccountTypeManager.getInstance(context);
         final List<AccountWithDataSet> writableAccountList = accountTypes.getAccounts(true);
-
-        Log.i(LOG_TAG, "The number of available accounts: " + writableAccountList.size());
 
         // Assume accountList.size() > 1
 

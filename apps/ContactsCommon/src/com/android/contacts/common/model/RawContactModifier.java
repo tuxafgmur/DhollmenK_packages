@@ -1377,10 +1377,6 @@ public class RawContactModifier {
             }
         }
 
-        if (defaultType == null) {
-            Log.w(TAG, "Default type isn't available for mimetype " + newDataKind.mimeType);
-        }
-
         final int typeOverallMax = newDataKind.typeOverallMax;
 
         // key: type, value: the number of current entries.

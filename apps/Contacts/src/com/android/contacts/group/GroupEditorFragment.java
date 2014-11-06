@@ -472,7 +472,6 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
 
     private void bindGroupMetaData(Cursor cursor) {
         if (!cursor.moveToFirst()) {
-            Log.i(TAG, "Group not found with URI: " + mGroupUri + " Closing activity now.");
             if (mListener != null) {
                 mListener.onGroupNotFound();
             }
@@ -626,7 +625,6 @@ public class GroupEditorFragment extends Fragment implements SelectAccountDialog
 
     public void onSaveCompleted(boolean hadChanges, Uri groupUri) {
         boolean success = groupUri != null;
-        Log.d(TAG, "onSaveCompleted(" + groupUri + ")");
         if (hadChanges) {
             Toast.makeText(mContext, success ? R.string.groupSavedToast :
                     R.string.groupSavedErrorToast, Toast.LENGTH_SHORT).show();

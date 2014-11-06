@@ -112,7 +112,6 @@ public class FloatingChildLayout extends FrameLayout {
      */
     @Override
     public void setBackground(Drawable background) {
-        Log.wtf(TAG, "don't setBackground(), it is managed internally");
     }
 
     /**

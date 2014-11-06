@@ -106,7 +106,7 @@ public class ConfirmAddDetailActivity extends Activity implements
         DialogManager.DialogShowingViewActivity {
 
     private static final String TAG = "ConfirmAdd"; // The class name is too long to be a tag.
-    private static final boolean VERBOSE_LOGGING = Log.isLoggable(TAG, Log.VERBOSE);
+    private static final boolean VERBOSE_LOGGING = false;
 
     private LayoutInflater mInflater;
     private View mRootView;
@@ -292,7 +292,6 @@ public class ConfirmAddDetailActivity extends Activity implements
         if (DialogManager.isManagedId(id)) return mDialogManager.onCreateDialog(id, args);
 
         // Nobody knows about the Dialog
-        Log.w(TAG, "Unknown dialog requested, id: " + id + ", args: " + args);
         return null;
     }
 
@@ -437,7 +436,6 @@ public class ConfirmAddDetailActivity extends Activity implements
                 return;
             }
             if ((entityList == null) || (entityList.size() == 0)) {
-                Log.e(TAG, "Contact not found.");
                 activityTarget.finish();
                 return;
             }
@@ -456,7 +454,6 @@ public class ConfirmAddDetailActivity extends Activity implements
         protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
             try {
                 if (this != mQueryHandler) {
-                    Log.d(TAG, "onQueryComplete: discard result, the query handler is reset!");
                     return;
                 }
                 if (ConfirmAddDetailActivity.this.isFinishing()) {

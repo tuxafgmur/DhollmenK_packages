@@ -44,7 +44,7 @@ import java.util.Iterator;
  */
 public class RawContactDeltaList extends ArrayList<RawContactDelta> implements Parcelable {
     private static final String TAG = RawContactDeltaList.class.getSimpleName();
-    private static final boolean VERBOSE_LOGGING = Log.isLoggable(TAG, Log.VERBOSE);
+    private static final boolean VERBOSE_LOGGING = false;
 
     private boolean mSplitRawContacts;
     private long[] mJoinWithRawContactIds;

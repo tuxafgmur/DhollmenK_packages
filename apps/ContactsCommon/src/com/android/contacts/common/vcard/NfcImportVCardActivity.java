@@ -121,7 +121,6 @@ public class NfcImportVCardActivity extends Activity implements ServiceConnectio
             Log.e(TAG, "Failed reading vcard data", e);
             return null;
         } catch (VCardNestedException e) {
-            Log.w(TAG, "Nested Exception is found (it may be false-positive).");
             // Go through without throwing the Exception, as we may be able to detect the
             // version before it
         } catch (VCardException e) {
@@ -151,7 +150,6 @@ public class NfcImportVCardActivity extends Activity implements ServiceConnectio
 
         Intent intent = getIntent();
         if (!NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
-            Log.w(TAG, "Unknowon intent " + intent);
             finish();
             return;
         }
@@ -159,7 +157,6 @@ public class NfcImportVCardActivity extends Activity implements ServiceConnectio
         String type = intent.getType();
         if (type == null ||
                 (!"text/x-vcard".equals(type) && !"text/vcard".equals(type))) {
-            Log.w(TAG, "Not a vcard");
             //setStatus(getString(R.string.fail_reason_not_supported));
             finish();
             return;
@@ -218,7 +215,6 @@ public class NfcImportVCardActivity extends Activity implements ServiceConnectio
     @Override
     public void onImportFinished(ImportRequest request, int jobId, Uri uri) {
         if (isFinishing()) {
-            Log.i(TAG, "Late import -- ignoring");
             return;
         }
 
@@ -233,7 +229,6 @@ public class NfcImportVCardActivity extends Activity implements ServiceConnectio
     @Override
     public void onImportFailed(ImportRequest request) {
         if (isFinishing()) {
-            Log.i(TAG, "Late import failure -- ignoring");
             return;
         }
         // TODO: report failure

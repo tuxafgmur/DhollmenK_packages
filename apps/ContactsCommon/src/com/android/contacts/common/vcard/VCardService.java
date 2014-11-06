@@ -235,9 +235,6 @@ public class VCardService extends Service {
             final String path = request.destUri.getEncodedPath();
             if (DEBUG) Log.d(LOG_TAG, "Reserve the path " + path);
             if (!mReservedDestination.add(path)) {
-                Log.w(LOG_TAG,
-                        String.format("The path %s is already reserved. Reject export request",
-                                path));
                 if (listener != null) {
                     listener.onExportFailed(request);
                 }
@@ -269,7 +266,6 @@ public class VCardService extends Service {
             mRunningJobMap.put(mCurrentJobId, processor);
             return true;
         } catch (RejectedExecutionException e) {
-            Log.w(LOG_TAG, "Failed to excetute a job.", e);
             return false;
         }
     }
@@ -291,14 +287,7 @@ public class VCardService extends Service {
             if (type == TYPE_EXPORT) {
                 final String path =
                         ((ExportProcessor)processor).getRequest().destUri.getEncodedPath();
-                Log.i(LOG_TAG,
-                        String.format("Cancel reservation for the path %s if appropriate", path));
-                if (!mReservedDestination.remove(path)) {
-                    Log.w(LOG_TAG, "Not reserved.");
-                }
             }
-        } else {
-            Log.w(LOG_TAG, String.format("Tried to remove unknown job (id: %d)", jobId));
         }
         stopServiceIfAppropriate();
     }
@@ -318,7 +307,6 @@ public class VCardService extends Service {
         try {
             messenger.send(message);
         } catch (RemoteException e) {
-            Log.w(LOG_TAG, "Failed to send reply for available export destination request.", e);
         }
     }
 
@@ -344,7 +332,6 @@ public class VCardService extends Service {
                 final int jobId = mRunningJobMap.keyAt(i);
                 final ProcessorBase processor = mRunningJobMap.valueAt(i);
                 if (!processor.isDone()) {
-                    Log.i(LOG_TAG, String.format("Found unfinished job (id: %d)", jobId));
 
                     // Remove processors which are already "done", all of which should be before
                     // processors which aren't done yet.
@@ -363,11 +350,9 @@ public class VCardService extends Service {
         }
 
         if (!mRemainingScannerConnections.isEmpty()) {
-            Log.i(LOG_TAG, "MediaScanner update is in progress.");
             return;
         }
 
-        Log.i(LOG_TAG, "No unfinished job. Stop this service.");
         mExecutorService.shutdown();
         stopSelf();
     }
@@ -378,8 +363,6 @@ public class VCardService extends Service {
         }
 
         if (mExecutorService.isShutdown()) {
-            Log.w(LOG_TAG, "MediaScanner update is requested after executor's being shut down. " +
-                    "Ignoring the update request");
             return;
         }
         final CustomMediaScannerConnectionClient client =
@@ -416,10 +399,7 @@ public class VCardService extends Service {
         final ProcessorBase job = mRunningJobMap.get(jobId);
         mRunningJobMap.remove(jobId);
         if (job == null) {
-            Log.w(LOG_TAG, String.format("Tried to remove unknown job (id: %d)", jobId));
         } else if (!(job instanceof ExportProcessor)) {
-            Log.w(LOG_TAG,
-                    String.format("Removed job (id: %s) isn't ExportProcessor", jobId));
         } else {
             final String path = ((ExportProcessor)job).getRequest().destUri.getEncodedPath();
             if (DEBUG) Log.d(LOG_TAG, "Remove reserved path " + path);
@@ -450,7 +430,6 @@ public class VCardService extends Service {
         for (final String fileName : fileList()) {
             if (fileName.startsWith(CACHE_FILE_PREFIX)) {
                 // We don't want to keep all the caches so we remove cache files old enough.
-                Log.i(LOG_TAG, "Remove a temporary file: " + fileName);
                 deleteFile(fileName);
             }
         }
@@ -497,10 +476,8 @@ public class VCardService extends Service {
             final String possibleBody =
                     String.format(bodyFormat, mFileNamePrefix, 1, mFileNameSuffix);
             if (possibleBody.length() > 8 || mFileNameExtension.length() > 3) {
-                Log.e(LOG_TAG, "This code does not allow any long file name.");
                 mErrorReason = getString(R.string.fail_reason_too_long_filename,
                         String.format("%s.%s", possibleBody, mFileNameExtension));
-                Log.w(LOG_TAG, "File name becomes too long.");
                 return null;
             }
         }
@@ -534,7 +511,6 @@ public class VCardService extends Service {
             }
         }
 
-        Log.w(LOG_TAG, "Reached vCard number limit. Maybe there are too many vCard in the storage");
         mErrorReason = getString(R.string.fail_reason_too_many_vcard);
         return null;
     }

@@ -60,7 +60,6 @@ public class SelectAccountActivity extends Activity {
         final AccountTypeManager accountTypes = AccountTypeManager.getInstance(this);
         final List<AccountWithDataSet> accountList = accountTypes.getAccounts(true);
         if (accountList.size() == 0) {
-            Log.w(LOG_TAG, "Account does not exist");
             finish();
             return;
         } else if (accountList.size() == 1) {
@@ -73,8 +72,6 @@ public class SelectAccountActivity extends Activity {
             finish();
             return;
         }
-
-        Log.i(LOG_TAG, "The number of available accounts: " + accountList.size());
 
         // Multiple accounts. Let users to select one.
         mAccountSelectionListener =

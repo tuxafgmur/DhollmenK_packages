@@ -73,8 +73,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public abstract class ContactPhotoManager implements ComponentCallbacks2 {
     static final String TAG = "ContactPhotoManager";
-    static final boolean DEBUG = false; // Don't submit with true
-    static final boolean DEBUG_SIZES = false; // Don't submit with true
+    static final boolean DEBUG = false; 	// Don't submit with true
+    static final boolean DEBUG_SIZES = false; 	// Don't submit with true
 
     /** Contact type constants used for default letter images */
     public static final int TYPE_PERSON = LetterTileDrawable.TYPE_PERSON;
@@ -178,8 +178,6 @@ public abstract class ContactPhotoManager implements ComponentCallbacks2 {
                 request.offset = Float.valueOf(offset);
             }
         } catch (NumberFormatException e) {
-            Log.w(TAG, "Invalid DefaultImageRequest image parameters provided, ignoring and using "
-                    + "defaults.");
         }
 
         return request;
@@ -592,7 +590,6 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
             }
         };
         mBitmapHolderCacheRedZoneBytes = (int) (holderCacheSize * 0.75);
-        Log.i(TAG, "Cache adj: " + cacheSizeAdjustment);
         if (DEBUG) {
             Log.d(TAG, "Cache size: " + btk(mBitmapHolderCache.maxSize())
                     + " + " + btk(mBitmapCache.maxSize()));
@@ -1194,9 +1191,6 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
                 mPreloadStatus = PRELOAD_STATUS_DONE;
             }
 
-            Log.v(TAG, "Preloaded " + count + " photos.  Cached bytes: "
-                    + mBitmapHolderCache.size());
-
             requestPreloading();
         }
 
@@ -1346,11 +1340,9 @@ class ContactPhotoManagerImpl extends ContactPhotoManager implements Callback {
                                 uriRequest.getRequestedExtent());
                         mMainThreadHandler.sendEmptyMessage(MESSAGE_PHOTOS_LOADED);
                     } else {
-                        Log.v(TAG, "Cannot load photo " + uri);
                         cacheBitmap(uri, null, false, uriRequest.getRequestedExtent());
                     }
                 } catch (Exception ex) {
-                    Log.v(TAG, "Cannot load photo " + uri, ex);
                     cacheBitmap(uri, null, false, uriRequest.getRequestedExtent());
                 }
             }

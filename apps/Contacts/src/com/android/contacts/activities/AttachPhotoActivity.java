@@ -211,7 +211,6 @@ public class AttachPhotoActivity extends ContactsActivity {
         RawContactDeltaList deltaList = contact.createRawContactDeltaList();
         RawContactDelta raw = deltaList.getFirstWritableRawContact(this);
         if (raw == null) {
-            Log.w(TAG, "no writable raw-contact found");
             return;
         }
 
@@ -221,18 +220,15 @@ public class AttachPhotoActivity extends ContactsActivity {
         try {
             bitmap = ContactPhotoUtils.getBitmapFromUri(this, mCroppedPhotoUri);
         } catch (FileNotFoundException e) {
-            Log.w(TAG, "Could not find bitmap");
             return;
         }
         if (bitmap == null) {
-            Log.w(TAG, "Could not decode bitmap");
             return;
         }
 
         final Bitmap scaled = Bitmap.createScaledBitmap(bitmap, size, size, false);
         final byte[] compressed = ContactPhotoUtils.compressBitmap(scaled);
         if (compressed == null) {
-            Log.w(TAG, "could not create scaled and compressed Bitmap");
             return;
         }
         // Add compressed bitmap to entity-delta... this allows us to save to
@@ -243,13 +239,11 @@ public class AttachPhotoActivity extends ContactsActivity {
         ValuesDelta values =
                 RawContactModifier.ensureKindExists(raw, account, Photo.CONTENT_ITEM_TYPE);
         if (values == null) {
-            Log.w(TAG, "cannot attach photo to this account type");
             return;
         }
         values.setPhoto(compressed);
 
         // Finally, invoke the ContactSaveService.
-        Log.v(TAG, "all prerequisites met, about to save photo to contact");
         Intent intent = ContactSaveService.createSaveContactIntent(
                 this,
                 deltaList,

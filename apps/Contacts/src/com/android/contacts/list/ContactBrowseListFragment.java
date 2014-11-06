@@ -204,8 +204,6 @@ public abstract class ContactBrowseListFragment extends
             return;
         }
 
-        Log.v(TAG, "New filter: " + filter);
-
         mFilter = filter;
         mLastSelectedPosition = -1;
         saveFilter();

@@ -112,7 +112,6 @@ public class ContactPhotoUtils {
             out.close();
             return out.toByteArray();
         } catch (IOException e) {
-            Log.w(TAG, "Unable to serialize photo: " + e.toString());
             return null;
         }
     }
@@ -160,7 +159,6 @@ public class ContactPhotoUtils {
                 outputStream.write(buffer, 0, length);
                 totalLength += length;
             }
-            Log.v(TAG, "Wrote " + totalLength + " bytes for photo " + inputUri.toString());
         } catch (IOException e) {
             Log.e(TAG, "Failed to write photo: " + inputUri.toString() + " because: " + e);
             return false;

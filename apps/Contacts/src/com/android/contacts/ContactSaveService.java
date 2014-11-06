@@ -399,8 +399,6 @@ public class ContactSaveService extends IntentService {
                                     rawContactId);
                     lookupUri = RawContacts.getContactLookupUri(resolver, rawContactUri);
                 }
-                Log.v(TAG, "Saved contact. New URI: " + lookupUri);
-
                 // We can change this back to false later, if we fail to save the contact photo.
                 succeeded = true;
                 break;
@@ -768,14 +766,9 @@ public class ContactSaveService extends IntentService {
                 }
             } catch (RemoteException e) {
                 // Something went wrong, bail without success
-                Log.e(TAG, "Problem persisting user edits for raw contact ID " +
-                        String.valueOf(rawContactId), e);
             } catch (OperationApplicationException e) {
                 // The assert could have failed because the contact is already in the group,
                 // just continue to the next contact
-                Log.w(TAG, "Assert failed in adding raw contact ID " +
-                        String.valueOf(rawContactId) + ". Already exists in group " +
-                        String.valueOf(groupId), e);
             }
         }
     }
