@@ -403,7 +403,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="shortcut_action_search">Search in app</string>
     <string name="shortcut_action_voice_search">Voice search</string>
     <string name="shortcut_action_screenshot">Screenshot</string>
-    <string name="shortcut_action_screenrecord">Screen record</string>
     <string name="shortcut_action_menu">Menu</string>
     <string name="shortcut_action_ime">Open IME Switcher</string>
     <string name="shortcut_action_kill">Kill app</string>

@@ -13,8 +13,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
  -->
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Screen recording  -->
+    <string name="shortcut_action_screenrecord">Screen record</string>
+	
     <!-- Performance settings  -->
     <string name="performance_settings_title">Performance</string>
     <!-- Performance Settings : Processor settings sub items -->
@@ -35,4 +38,5 @@
     <string name="performance_set_on_boot_summary">Restore the settings on boot</string>
     <!-- Performance Disclaimer : Set on boot option -->
     <string name="performance_disclaimer">Changing these values, you recognize be only responsible for unwanted effects or device damage.</string>
+
 </resources>
