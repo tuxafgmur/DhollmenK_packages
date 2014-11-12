@@ -16,6 +16,7 @@
 
 package com.cyanogenmod.filemanager.console.shell;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.cyanogenmod.filemanager.FileManagerApplication;
@@ -278,7 +279,7 @@ public abstract class ShellConsole extends Console implements Program.ProgramLis
             //Retrieve identity
             IdentityExecutable identityCmd =
                     getExecutableFactory().newCreator().createIdentityExecutable();
-            execute(identityCmd);
+            execute(identityCmd, null);
             this.mIdentity = identityCmd.getResult();
             // Identity command is required for root console detection,
             // but Groups command is not used for now. Also, this command is causing
@@ -289,7 +290,7 @@ public abstract class ShellConsole extends Console implements Program.ProgramLis
                     //Try with groups
                     GroupsExecutable groupsCmd =
                             getExecutableFactory().newCreator().createGroupsExecutable();
-                    execute(groupsCmd);
+                    execute(groupsCmd, null);
                     this.mIdentity.setGroups(groupsCmd.getResult());
                 }
             } catch (Exception ex) {
@@ -364,10 +365,10 @@ public abstract class ShellConsole extends Console implements Program.ProgramLis
      * {@inheritDoc}
      */
     @Override
-    public final synchronized void execute(final Executable executable)
-            throws ConsoleAllocException, InsufficientPermissionsException,
-            CommandNotFoundException, NoSuchFileOrDirectory,
-            OperationTimeoutException, ExecutionException, ReadOnlyFilesystemException {
+    public synchronized void execute(Executable executable, Context ctx)
+            throws ConsoleAllocException, InsufficientPermissionsException, NoSuchFileOrDirectory,
+            OperationTimeoutException, ExecutionException, CommandNotFoundException,
+            ReadOnlyFilesystemException {
         execute(executable, false);
     }
 
@@ -1154,7 +1155,7 @@ public abstract class ShellConsole extends Console implements Program.ProgramLis
                 return false;
             }
 
-            if (this.mActiveCommand.getCommand() != null) {
+            if (this.mActiveCommand != null && this.mActiveCommand.getCommand() != null) {
                 try {
                     boolean isCancellable = true;
                     if (this.mActiveCommand instanceof AsyncResultProgram) {

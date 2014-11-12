@@ -226,6 +226,8 @@
     <string name="volume_overlay_expanded">Expanded</string>
     <string name="volume_overlay_disable">Disable</string>
     <string name="volume_panel_bg_color_title">Volume panel BG color</string>
+    <string name="volume_panel_timeout_title">Volume panel timeout</string>
+    <string name="volume_panel_timeout_summary">Time that the volume panel displays after adjusting the volume</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="camera_sounds_title">Camera shutter sound</string>
@@ -607,7 +609,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="navigation_bar_width_title">Navigation bar width</string>
     <string name="navigation_bar_width_summary">Navigation bar height if the bar is along a side</string>
     <string name="navbar_can_move">Show landscape</string>
-    <string name="navbar_can_move_summary">Shows navigation bar in lanscape on the bottom</string>
+    <string name="navbar_can_move_summary">Shows navigation bar in landscape on the bottom</string>
     <string name="navbar_style_dimen_title">Dimensions</string>
     <string name="navbar_button_title">Buttons</string>
     <string name="navbar_targets_title">Ring targets</string>

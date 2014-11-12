@@ -124,7 +124,7 @@
   <string name="fso_properties_dialog_tab_info">Informação</string>
   <string name="fso_properties_dialog_tab_permissions">Permissões</string>
   <string name="fso_properties_dialog_name">Nome:</string>
-  <string name="fso_properties_dialog_parent">Pai:</string>
+  <string name="fso_properties_dialog_parent">Localização:</string>
   <string name="fso_properties_dialog_type">Tipo:</string>
   <string name="fso_properties_dialog_category">Categoria:</string>
   <string name="fso_properties_dialog_link">Ligação:</string>
@@ -136,7 +136,7 @@
   <string name="fso_properties_dialog_owner">Dono:</string>
   <string name="fso_properties_dialog_group">Grupo:</string>
   <string name="fso_properties_dialog_others">Outros:</string>
-  <string name="fso_properties_dialog_include_in_media_scan">Saltar pesquisa Multimedia:</string>
+  <string name="fso_properties_dialog_include_in_media_scan">Saltar pesquisa multimédia:</string>
   <string name="fso_failed_to_allow_media_scan">Falha de permissão na pesquisa multimédia</string>
   <string name="fso_failed_to_prevent_media_scan">Falha ao cancelar pesquisa multimédia</string>
   <string name="fso_delete_nomedia_dir_title">Eliminar pasta .nomedia</string>
@@ -239,6 +239,7 @@
   <string name="actions_menu_add_shortcut">Adicionar atalho</string>
   <string name="actions_menu_open_parent_folder">Abrir pasta mãe</string>
   <string name="actions_menu_compute_checksum">Calcular verificação</string>
+  <string name="actions_menu_print">Imprimir</string>
   <string name="actions_ask_undone_operation_msg">
     Esta operação não poderá ser desfeita. Deseja continuar?</string>
   <string name="input_name_dialog_label">Nome:</string>
@@ -364,6 +365,10 @@
   <string name="ash_keyword">Palavra-chave</string>
   <string name="ash_quoted_string">frase mencionada</string>
   <string name="ash_variable">Variável</string>
+  <string name="print_unsupported_document">Formato de documento não suportado</string>
+  <string name="print_unsupported_image">Formato de imagem não suportado</string>
+  <string name="print_document_header">Documento: <xliff:g id="document_name">%1$s</xliff:g></string>
+  <string name="print_document_footer">Página <xliff:g id="page_number">%1$s</xliff:g></string>
   <string name="security_warning_extract">Aviso!\n\n
       Extrair um ficheiro de sistema com pastas absolutas ou relativas pode causar problemas no seu dispositivo
       ao substituir ficheiros de sistema.\n\n

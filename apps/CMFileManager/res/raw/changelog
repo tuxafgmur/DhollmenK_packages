@@ -1,9 +1,14 @@
-CyanogenMod File Manager
-========================
+F i l e   M a n a g e r
+=======================
+
+Version 2.0.0
+-------------
+* Secure storage support
+* Print support
 
 Version 1.0.2
 -------------
-* move bookmarks and history into a navigation drawer (by Florian Edelmann)
+* Drawer navigation support (by Florian Edelmann)
 
 Version 1.0.1
 -------------
@@ -38,4 +43,3 @@ Features:
 * Open and Open With
 * Send to
 * Internal editor
-
