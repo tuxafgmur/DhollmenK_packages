@@ -417,8 +417,6 @@ public class NavigationActivity extends Activity
     private boolean mExitFlag = false;
     private long mExitBackTimeout = -1;
 
-    private View mOptionsAnchorView;
-
     private int mOrientation;
 
     /**
@@ -589,6 +587,17 @@ public class NavigationActivity extends Activity
         super.onConfigurationChanged(newConfig);
         onLayoutChanged();
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+          return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -875,7 +884,7 @@ public class NavigationActivity extends Activity
         mDrawerHistory.addView(view, 0);
 
         // Show clear button if history tab is selected
-        mClearHistory.setVisibility(mHistoryTab.getVisibility());
+        mClearHistory.setVisibility(mHistoryTab.isSelected() ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -1535,7 +1544,11 @@ public class NavigationActivity extends Activity
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            showOverflowPopUp(this.mOptionsAnchorView);
+            if (mDrawerLayout.isDrawerOpen(mDrawer)) {
+                mDrawerLayout.closeDrawer(mDrawer);
+            } else {
+                mDrawerLayout.openDrawer(mDrawer);
+            }
             return true;
         }
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -1630,10 +1643,6 @@ public class NavigationActivity extends Activity
 
             case R.id.ab_search:
                 openSearch();
-                break;
-
-            case R.id.ab_overflow:
-                showOverflowPopUp(view);
                 break;
 
             default:
@@ -1852,56 +1861,6 @@ public class NavigationActivity extends Activity
     }
 
     /**
-     * Method that shows a popup with the activity main menu.
-     *
-     * @param anchor The action button that was pressed
-     */
-    private void showOverflowPopUp(View anchor) {
-        SimpleMenuListAdapter adapter =
-                new HighlightedSimpleMenuListAdapter(this, R.menu.navigation);
-        Menu menu = adapter.getMenu();
-        int cc = this.mActionBar.getChildCount();
-        for (int i = 0, j = this.mActionBar.getChildCount() - 1; i < cc; i++, j--) {
-            View child = this.mActionBar.getChildAt(i);
-            boolean visible = child.getVisibility() == View.VISIBLE;
-            if (visible) {
-                menu.removeItem(menu.getItem(j).getItemId());
-            }
-        }
-
-        final ListPopupWindow popup = DialogHelper.createListPopupWindow(this, adapter, anchor);
-        popup.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(
-                    final AdapterView<?> parent, final View v, final int position, final long id) {
-
-                final int itemId = (int)id;
-                NavigationActivity.this.mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        popup.dismiss();
-                        switch (itemId) {
-                            case R.id.mnu_settings:
-                                //Settings
-                                openSettings();
-                                break;
-
-                            case R.id.mnu_search:
-                                //Search
-                                openSearch();
-                                popup.dismiss();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                });
-            }
-        });
-        popup.show();
-    }
-
-    /**
      * Method that show the information of a filesystem mount point.
      *
      * @param mp The mount point info
@@ -2051,6 +2010,8 @@ public class NavigationActivity extends Activity
             }
 
             //Navigate
+            boolean clearHistory = mHistoryTab.isSelected() && mHistory.size() > 0;
+            mClearHistory.setVisibility(clearHistory ? View.VISIBLE : View.GONE);
             return true;
 
         } catch (Throwable ex) {
@@ -2105,13 +2066,13 @@ public class NavigationActivity extends Activity
             }
         }
 
-        //Extract a history from the
+        //Navigate to history
         if (this.mHistory.size() > 0) {
-            //Navigate to history
             return navigateToHistory(this.mHistory.get(this.mHistory.size() - 1));
         }
 
         //Nothing to apply
+        mClearHistory.setVisibility(View.GONE);
         return false;
     }
 

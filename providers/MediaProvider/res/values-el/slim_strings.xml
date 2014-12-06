@@ -16,4 +16,5 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="ask_scan_title">Σάρωση για νέα μέσα;</string>
+  <string name="ask_scan_text">Κάντε κλικ για μη αυτόματο τρόπο σάρωσης μέσων</string>
 </resources>

@@ -236,7 +236,7 @@
 
     <!-- Safe headset volume restore checkbox -->
     <string name="safe_headset_volume_title">Safe headset volume</string>
-    <string name="safe_headset_volume_summary">Prevent loud volume levels when headset is first plugged in</string>
+    <string name="safe_headset_volume_summary">Prevents loud volume levels when headset is first plugged in</string>
     <string name="safe_headset_volume_warning_dialog_text">Listening at high volume for long periods may damage your hearing. Disable it with caution.</string>
 
     <!-- Display : Animation options -->
@@ -894,7 +894,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="title_tile_sleep">Go to sleep</string>
     <string name="title_tile_location">Location</string>
     <string name="title_tile_torch">Torch</string>
-    <string name="title_tile_lockscreen">Lock screen</string>
+    <string name="title_tile_lockscreen">Lockscreen</string>
     <string name="title_tile_lte">LTE</string>
     <string name="title_tile_mobiledata">Mobile data</string>
     <string name="title_tile_autorotate">Orientation</string>
@@ -1120,7 +1120,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="advanced_reboot_summary">Include options in the power menu for rebooting into recovery and bootloader</string>
     <string name="advanced_reboot_dialog_title">Advanced reboot menu</string>
     <string name="advanced_reboot_disabled">Disable</string>
-    <string name="advanced_reboot_hide_on_keyguard">Hide on lock screen</string>
+    <string name="advanced_reboot_hide_on_keyguard">Hide on secured lockscreen</string>
     <string name="advanced_reboot_show_always">Show always</string>
 
     <string name="lockscreen_settings_title">Lockscreen</string>

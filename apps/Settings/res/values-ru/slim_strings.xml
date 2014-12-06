@@ -179,6 +179,8 @@
   <string name="volume_overlay_expanded">Расширенная</string>
   <string name="volume_overlay_disable">Нет</string>
   <string name="volume_panel_bg_color_title">Цвет фона панели громкости</string>
+  <string name="volume_panel_timeout_title">Тайм-аут панели громкости</string>
+  <string name="volume_panel_timeout_summary">Длительность показа панель громкости</string>
   <string name="camera_sounds_title">Звук затвора камеры</string>
   <string name="camera_sounds_summary">ВНИМАНИЕ: отключение звука затвора камеры иногда незаконно!</string>
   <string name="camera_sound_warning_dialog_text">Отключение звука камеры в некоторых странах незаконно!</string>
@@ -937,7 +939,7 @@
   <string name="advanced_reboot_summary">Включить отображение в меню управления питанием настроек для загрузки в рекавери и бутлоадер</string>
   <string name="advanced_reboot_dialog_title">Расширенное меню перезагрузки</string>
   <string name="advanced_reboot_disabled">Выключено</string>
-  <string name="advanced_reboot_hide_on_keyguard">Скрывать на экране блокировки</string>
+  <string name="advanced_reboot_hide_on_keyguard">Скрывать на защищенном экране блокировки</string>
   <string name="advanced_reboot_show_always">Всегда показывать</string>
   <string name="lockscreen_settings_title">Экран блокировки</string>
   <string name="lockscreen_rotation_title">Вращение экрана блокировки</string>
