@@ -74,14 +74,14 @@ public class NavigationBarTablet extends NavigationBarBase implements StateListe
 
     private void init(Context context) {
         Resources resources = context.getResources();
-        mStopDrawable = resources.getDrawable(R.drawable.ic_stop_holo_dark);
-        mReloadDrawable = resources.getDrawable(R.drawable.ic_refresh_holo_dark);
+        mStopDrawable = resources.getDrawable(R.drawable.ic_stop_holo);
+        mReloadDrawable = resources.getDrawable(R.drawable.ic_refresh_holo);
         mStopDescription = resources.getString(R.string.accessibility_button_stop);
         mRefreshDescription = resources.getString(R.string.accessibility_button_refresh);
         mFocusDrawable = resources.getDrawable(
-                R.drawable.textfield_active_holo_dark);
+                R.drawable.textfield_active_holo);
         mUnfocusDrawable = resources.getDrawable(
-                R.drawable.textfield_default_holo_dark);
+                R.drawable.textfield_default_holo);
         mHideNavButtons = resources.getBoolean(R.bool.hide_nav_buttons);
     }
 
@@ -140,11 +140,11 @@ public class NavigationBarTablet extends NavigationBarBase implements StateListe
     void updateNavigationState(Tab tab) {
         if (tab != null) {
             mBackButton.setImageResource(tab.canGoBack()
-                    ? R.drawable.ic_back_holo_dark
-                    : R.drawable.ic_back_disabled_holo_dark);
+                    ? R.drawable.ic_back_holo
+                    : R.drawable.ic_back_disabled_holo);
             mForwardButton.setImageResource(tab.canGoForward()
-                    ? R.drawable.ic_forward_holo_dark
-                    : R.drawable.ic_forward_disabled_holo_dark);
+                    ? R.drawable.ic_forward_holo
+                    : R.drawable.ic_forward_disabled_holo);
         }
         updateUrlIcon();
     }
@@ -204,7 +204,7 @@ public class NavigationBarTablet extends NavigationBarBase implements StateListe
 
     void updateUrlIcon() {
         if (mUrlInput.hasFocus()) {
-            mUrlIcon.setImageResource(R.drawable.ic_search_holo_dark);
+            mUrlIcon.setImageResource(R.drawable.ic_search_holo);
         } else {
             if (mFaviconDrawable == null) {
                 mFaviconDrawable = mBaseUi.getFaviconDrawable(null);
@@ -222,7 +222,7 @@ public class NavigationBarTablet extends NavigationBarBase implements StateListe
             }
             mSearchButton.setVisibility(View.GONE);
             mStar.setVisibility(View.GONE);
-            mUrlIcon.setImageResource(R.drawable.ic_search_holo_dark);
+            mUrlIcon.setImageResource(R.drawable.ic_search_holo);
         } else {
             if (mHideNavButtons) {
                 showNavButtons();

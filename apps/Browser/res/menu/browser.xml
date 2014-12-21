@@ -31,22 +31,22 @@
         <item
             android:id="@+id/new_tab_menu_id"
             android:title="@string/new_tab"
-            android:icon="@drawable/ic_new_window_holo_dark"
+            android:icon="@drawable/ic_new_window_holo"
             android:showAsAction="never"
             android:alphabeticShortcut="n" />
         <item
             android:id="@+id/incognito_menu_id"
             android:title="@string/new_incognito_tab"
-            android:icon="@drawable/ic_new_incognito_holo_dark" />
+            android:icon="@drawable/ic_new_incognito_holo" />
         <item
             android:id="@+id/bookmarks_menu_id"
             android:title="@string/bookmarks"
-            android:icon="@drawable/ic_bookmarks_holo_dark"
+            android:icon="@drawable/ic_bookmarks_holo"
             android:showAsAction="never" />
         <item
             android:id="@+id/add_bookmark_menu_id"
             android:title="@string/save_to_bookmarks"
-            android:icon="@drawable/ic_bookmark_on_holo_dark"
+            android:icon="@drawable/ic_bookmark_on_holo"
             android:alphabeticShortcut="d"
             android:visible="@bool/menu_show_bookmarks" />
         <group
@@ -54,7 +54,7 @@
             <item
                 android:id="@+id/share_page_menu_id"
                 android:title="@string/share_page"
-                android:icon="@drawable/ic_share_holo_dark"
+                android:icon="@drawable/ic_share_holo"
                 android:alphabeticShortcut="s" />
             <item
                 android:id="@+id/find_menu_id"
@@ -89,7 +89,7 @@
         <item
             android:id="@+id/preferences_menu_id"
             android:title="@string/menu_preferences"
-            android:icon="@drawable/ic_settings_holo_dark"
+            android:icon="@drawable/ic_settings_holo"
             android:alphabeticShortcut="p" />
         <!-- followings are debug only -->
         <item

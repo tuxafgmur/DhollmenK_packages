@@ -83,11 +83,11 @@ public class NavigationBarPhone extends NavigationBarBase implements
         mTitleContainer = findViewById(R.id.title_bg);
         setFocusState(false);
         Resources res = getContext().getResources();
-        mStopDrawable = res.getDrawable(R.drawable.ic_stop_holo_dark);
-        mRefreshDrawable = res.getDrawable(R.drawable.ic_refresh_holo_dark);
+        mStopDrawable = res.getDrawable(R.drawable.ic_stop_holo);
+        mRefreshDrawable = res.getDrawable(R.drawable.ic_refresh_holo);
         mStopDescription = res.getString(R.string.accessibility_button_stop);
         mRefreshDescription = res.getString(R.string.accessibility_button_refresh);
-        mTextfieldBgDrawable = res.getDrawable(R.drawable.textfield_active_holo_dark);
+        mTextfieldBgDrawable = res.getDrawable(R.drawable.textfield_active_holo);
         mUrlInput.setContainer(this);
         mUrlInput.setStateListener(this);
         mIncognitoIcon = findViewById(R.id.incognito_icon);

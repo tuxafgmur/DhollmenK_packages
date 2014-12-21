@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="4dip"
             android:visibility="gone"
-            android:src="@drawable/ic_incognito_holo_dark" />
+            android:src="@drawable/ic_incognito_holo" />
         <FrameLayout
             android:id="@+id/iconcombo"
             android:layout_width="44dip"
@@ -69,7 +69,7 @@
             android:layout_gravity="center_vertical"
             android:paddingLeft="4dip"
             android:contentDescription="@string/accessibility_button_stop"
-            android:src="@drawable/ic_stop_holo_dark"
+            android:src="@drawable/ic_stop_holo"
             style="@style/HoloButton" />
         <com.android.browser.UrlInputView
             android:id="@+id/url"
@@ -95,7 +95,7 @@
             android:layout_height="match_parent"
             android:paddingRight="4dip"
             android:contentDescription="@string/accessibility_button_voice"
-            android:src="@drawable/ic_voice_search_holo_dark"
+            android:src="@drawable/ic_voice_search_holo"
             style="@style/HoloButton"
             android:visibility="gone" />
         <ImageView
@@ -104,7 +104,7 @@
             android:layout_height="match_parent"
             android:paddingRight="4dip"
             android:contentDescription="@string/accessibility_button_clear"
-            android:src="@drawable/ic_close_window_holo_dark"
+            android:src="@drawable/ic_close_window_holo"
             style="@style/HoloButton"
             android:visibility="gone" />
     </LinearLayout>
@@ -113,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
             android:contentDescription="@string/accessibility_button_navscreen"
-        android:src="@drawable/ic_windows_holo_dark"
+        android:src="@drawable/ic_windows_holo"
         style="@style/HoloButton" />
     <ImageButton
         android:id="@+id/more"
