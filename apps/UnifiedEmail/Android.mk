@@ -22,8 +22,6 @@ photo_dir := ../../../frameworks/opt/photoviewer/res ../../../frameworks/opt/pho
 gridlayout_dir := ../../../frameworks/support/v7/gridlayout/res
 res_dirs := res $(chips_dir) $(photo_dir) $(gridlayout_dir)
 
-
-##################################################
 # Build APK
 include $(CLEAR_VARS)
 
@@ -49,9 +47,5 @@ LOCAL_AAPT_FLAGS += --extra-packages com.android.ex.chips:com.android.ex.photo:a
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
 include $(BUILD_PACKAGE)
-
-
-##################################################
-# Build all sub-directories
 
 include $(call all-makefiles-under,$(LOCAL_PATH))

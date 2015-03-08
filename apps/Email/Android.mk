@@ -14,9 +14,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-# Build the Email application itself, along with its tests and tests for the emailcommon
-# static library.  All tests can be run via runtest email
-
 include $(CLEAR_VARS)
 
 # Include res dir from chips, unified, emailcommon, and photoviewer
@@ -57,6 +54,5 @@ include $(BUILD_PACKAGE)
 
 # only include rules to build other stuff for the original package, not the derived package.
 ifeq ($(strip $(LOCAL_PACKAGE_OVERRIDES)),)
-# additionally, build unit tests in a separate .apk
 include $(call all-makefiles-under,$(LOCAL_PATH))
 endif
