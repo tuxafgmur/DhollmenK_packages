@@ -15,13 +15,6 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_SRC_FILES := $(call all-java-files-under,$(src_dirs))
 
-# bundled
-#LOCAL_STATIC_JAVA_LIBRARIES += \
-#        android-common \
-#        android-common-chips \
-#        calendar-common
-
-# unbundled
 LOCAL_STATIC_JAVA_LIBRARIES := \
         android-common \
         android-common-chips \
@@ -48,5 +41,3 @@ LOCAL_AAPT_FLAGS += --extra-packages com.android.timezonepicker
 
 include $(BUILD_PACKAGE)
 
-# Use the following include to make our test apk.
-include $(call all-makefiles-under,$(LOCAL_PATH))
