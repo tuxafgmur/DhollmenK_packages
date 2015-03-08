@@ -60,20 +60,19 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingLeft="2dp"
             android:focusable="true"
             android:gravity="left|bottom"
             android:textAppearance="?android:attr/textAppearanceSmallInverse"
             android:textColor="#000"
+            android:textStyle="bold"
             android:singleLine="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:layout_marginTop="-20dp"
             android:textAppearance="?android:attr/textAppearanceSmallInverse"
-            android:textColor="#ccc"
-            android:shadowColor="#000"
-            android:shadowRadius="5"
+            android:textColor="#000"
             android:textStyle="bold"
             android:singleLine="true"
             android:text="@string/memory" />
@@ -82,10 +81,12 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingRight="4dp"
             android:focusable="true"
             android:gravity="right|bottom"
             android:textAppearance="?android:attr/textAppearanceSmallInverse"
-            android:textColor="#000"
+            android:textColor="#fff"
+            android:textStyle="bold"
             android:singleLine="true" />
     </view>
 </LinearLayout>

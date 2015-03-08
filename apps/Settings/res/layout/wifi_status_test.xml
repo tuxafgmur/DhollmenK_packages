@@ -17,7 +17,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-
     <LinearLayout style="@style/info_layout">
 
         <!-- Update Button -->
@@ -64,7 +63,6 @@
             <TextView android:text="@string/ssid_label" style="@style/info_label" />
             <TextView android:id="@+id/ssid" style="@style/info_value" />
         </LinearLayout>
-
 
         <!--Hidden SSID Value-->
         <LinearLayout style="@style/entry_layout">

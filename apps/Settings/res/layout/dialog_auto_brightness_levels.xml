@@ -46,7 +46,7 @@
                 android:id="@+id/more"
                 android:layout_width="@dimen/auto_brightness_dialog_more_button_size"
                 android:layout_height="@dimen/auto_brightness_dialog_more_button_size"
-                android:src="@*android:drawable/ic_menu_moreoverflow_holo_dark"
+		android:src="@*android:drawable/ic_menu_moreoverflow_holo_dark"
                 android:background="?android:attr/actionBarItemBackground"
                 android:contentDescription="@string/wifi_menu_more_options" />
 

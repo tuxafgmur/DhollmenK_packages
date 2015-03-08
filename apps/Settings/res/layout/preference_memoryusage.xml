@@ -30,7 +30,7 @@
         android:clickable="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:src="@drawable/ic_menu_refresh_holo_dark"
+        android:src="@drawable/ic_sync_green_holo"
         android:background="@*android:drawable/list_selector_holo_dark"
         android:contentDescription="@string/storage_rescan_media"/>
 

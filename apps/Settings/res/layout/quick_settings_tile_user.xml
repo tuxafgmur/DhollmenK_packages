@@ -45,8 +45,8 @@
 
     <ImageView
         android:id="@+id/settings"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:paddingTop="2dp"

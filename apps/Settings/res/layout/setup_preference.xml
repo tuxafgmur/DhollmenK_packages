@@ -51,7 +51,7 @@
                 android:layout_marginStart="8dip"
                 android:layout_marginEnd="8dip"
                 android:layout_marginBottom="8dip"
-                android:src="?attr/ic_menu_moreoverflow"
+		android:src="?attr/ic_menu_moreoverflow"
                 android:background="?android:attr/actionBarItemBackground"
                 android:contentDescription="@string/wifi_menu_more_options" />
 

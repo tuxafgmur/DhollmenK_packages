@@ -56,7 +56,6 @@
         <item name="android:layout_width">match_parent</item>
     </style>
 
-
     <style name="TextAppearance" parent="android:TextAppearance">
     </style>
 
@@ -75,11 +74,8 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="TallTitleBarTheme" parent="android:Theme.NoTitleBar">
+    <style name="TallTitleBarTheme" parent="android:Theme.Light.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <style name="Theme.CreateShortCut" parent="android:Theme.Holo.DialogWhenLarge">
     </style>
 
     <style name="PreferenceHeaderPanelSinglePane">
@@ -192,18 +188,18 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Holo.NoActionBar">
+    <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">
         <item name="android:background">#ff000000</item>
     </style>
 
-    <style name="SecurityPreferenceButtonContainer" parent="@android:style/Holo.SegmentedButton">
+    <style name="SecurityPreferenceButtonContainer" parent="@android:style/Holo.Light.SegmentedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:weightSum">2</item>
         <item name="android:dividerPadding">8dip</item>
     </style>
 
-    <style name="SecurityPreferenceButton" parent="@android:style/Widget.Holo.Button.Borderless">
+    <style name="SecurityPreferenceButton" parent="@*android:style/Widget.Holo.Light.Button.Borderless">
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
@@ -229,11 +225,11 @@
         <item name="android:widgetLayout">@layout/preference_inputmethod_widget</item>
     </style>
 
-    <style name="TextAppearance.Switch" parent="@*android:style/TextAppearance.Holo.Widget.Switch">
+    <style name="TextAppearance.Switch" parent="@*android:style/TextAppearance.Holo.Light.Widget.Switch">
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.DeviceDefault.Small">
+    <style name="TextAppearance.PagerTabs" parent="@*android:style/TextAppearance.DeviceDefault.Light.Small">
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
     </style>

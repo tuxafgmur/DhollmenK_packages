@@ -384,7 +384,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         if (mSetupWizardMode) {
             getView().setSystemUiVisibility(
-//                    View.STATUS_BAR_DISABLE_BACK |
                     View.STATUS_BAR_DISABLE_HOME |
                     View.STATUS_BAR_DISABLE_RECENT |
                     View.STATUS_BAR_DISABLE_NOTIFICATION_ALERTS |

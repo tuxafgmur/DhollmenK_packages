@@ -232,7 +232,7 @@ public class QuickSettingsTiles extends Fragment implements View.OnClickListener
                 addTile(tile.getTitleResId(), tile.getIcon(), 0, false);
             }
         }
-        addTile(R.string.add, null, R.drawable.ic_menu_add_dark, false);
+        addTile(R.string.add, null, R.drawable.ic_menu_add_light, false);
     }
 
     /**

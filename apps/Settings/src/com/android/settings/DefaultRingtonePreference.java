@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
