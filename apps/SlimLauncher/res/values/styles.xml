@@ -228,7 +228,7 @@
     </style>
 
     <style name="SettingsActionBarTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="SettingsDialogPreferenceTheme">

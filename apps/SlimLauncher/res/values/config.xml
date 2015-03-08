@@ -12,7 +12,7 @@
 
 <!-- AllApps/Customize/AppsCustomize -->
     <!-- The alpha of the AppsCustomize bg in spring loaded mode -->
-    <integer name="config_appsCustomizeSpringLoadedBgAlpha">65</integer>
+    <integer name="config_appsCustomizeSpringLoadedBgAlpha">40</integer>
     <integer name="config_workspaceUnshrinkTime">300</integer>
     <integer name="config_overviewTransitionTime">250</integer>
 
