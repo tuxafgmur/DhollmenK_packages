@@ -27,7 +27,7 @@
     <dimen name="matrix_edit_text_padding">17dp</dimen>
     <dimen name="button_hint_offset_x">10dp</dimen>
     <dimen name="button_hint_offset_y">20dp</dimen>
-    <dimen name="button_hint_exponent_jump">10dp</dimen>
+    <dimen name="button_hint_exponent_jump">6dp</dimen>
     <dimen name="app_defaultsize_w">632.0dip</dimen>
     <dimen name="app_defaultsize_h">598.0dip</dimen>
     <dimen name="app_minimumsize_w">370dp</dimen>
@@ -42,6 +42,7 @@
 
     <style name="button_style">
        <item name="android:textSize">40sp</item>
+       <item name="android:textColor">#ffffffff</item>
        <item name="android:layout_width">match_parent</item>
        <item name="android:layout_height">match_parent</item>
        <item name="android:layout_weight">1</item>
@@ -64,10 +65,10 @@
 
     <style name="display_style">
        <item name="android:textSize">@dimen/display_text_size</item>
-	   <item name="android:background">@drawable/display_holo</item>
+       <item name="android:background">@drawable/display_holo</item>
        <item name="android:inputType">text|textNoSuggestions</item>
        <item name="android:gravity">right|center_vertical</item>
-       <item name="android:textColor">#ffffff</item>
+       <item name="android:textColor">#fffadc</item>
        <item name="android:maxLines">1</item>
        <item name="android:scrollbars">none</item>
        <item name="android:scrollHorizontally">true</item>
@@ -75,7 +76,7 @@
        <item name="android:layout_height">match_parent</item>
        <item name="android:paddingTop">8dp</item>
        <item name="android:paddingLeft">8dp</item>
-       <item name="android:paddingRight">8dp</item>
+       <item name="android:paddingRight">12dp</item>
        <item name="android:paddingBottom">8dp</item>
        <item name="max_height">@dimen/max_display_height</item>
     </style>
@@ -114,7 +115,8 @@
     </style>
 
     <style name="btn_clear">
-	   <item name="android:background">@drawable/btn_function</item>
+       <item name="android:background">@drawable/btn_function</item>
+       <item name="android:textColor">#ffffffff</item>
        <item name="android:textSize">@dimen/btn_clear_text_size</item>
     </style>
 

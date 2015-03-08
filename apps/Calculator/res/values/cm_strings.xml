@@ -17,7 +17,7 @@
     <!-- App copyright -->
     <string name="application_copyright">Copyright \u00A9 2013 CyanogenMod</string>
     <!-- App version -->
-    <string name="application_version" translatable="false">v3.3.2-Tuxafgmur</string>
+    <string name="application_version" translatable="false">v3.3.3-Dhollmen</string>
 
     <!-- Displayed letters for the hex digit buttons -->
     <string name="A" translatable="false">A</string>
