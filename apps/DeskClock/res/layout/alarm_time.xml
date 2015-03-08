@@ -103,6 +103,7 @@
             <CheckBox
                 android:id="@+id/repeat_onoff"
                 android:text="@string/alarm_repeat"
+		android:button="@drawable/red_checkbox"
                 android:layout_height="48dp"
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -163,6 +164,7 @@
                 <CheckBox
                     android:id="@+id/increasing_volume_onoff"
                     android:text="@string/alarm_increasing_volume"
+		    android:button="@drawable/red_checkbox"
                     android:includeFontPadding="false"
                     android:textColor="@color/clock_gray"
                     android:layout_height="wrap_content"
@@ -175,6 +177,7 @@
                 <CheckBox
                     android:id="@+id/vibrate_onoff"
                     android:text="@string/alarm_vibrate"
+		    android:button="@drawable/red_checkbox"
                     android:includeFontPadding="false"
                     android:textColor="@color/clock_gray"
                     android:layout_height="wrap_content"

@@ -27,6 +27,7 @@
         <item name="android:actionBarTabStyle">@style/DeskClockTabStyle</item>
         <item name="android:actionBarStyle">@style/DeskClockBarStyle</item>
         <item name="android:actionBarTabBarStyle">@style/DeskClockTabBarStyle</item>
+	<item name="android:actionOverflowButtonStyle">@style/ActionButtonOverflow</item>
         <item name="android:dropDownListViewStyle">@style/DeskClockDropDownListView</item>
         <item name="android:selectableItemBackground">@drawable/item_background</item>
     </style>
@@ -69,6 +70,9 @@
     </style>
 
     <style name="CitiesTheme" parent="SettingsTheme">
+        <item name="android:actionBarStyle">@style/DeskClockBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+	<item name="android:actionOverflowButtonStyle">@style/ActionButtonOverflow</item>
         <item name="android:fastScrollThumbDrawable">@drawable/red_fastscroll_thumb</item>
     </style>
 
@@ -265,7 +269,8 @@
 
     <style name="dialpad">
         <item name="android:textSize">@dimen/dialpad_font_size</item>
-        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white</item>
+	<item name="android:textAllCaps">true</item>
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
@@ -327,6 +332,10 @@
         <item name="android:visibility">gone</item>
         <item name="android:alpha">0</item>
         <item name="android:clickable">true</item>
+    </style>
+
+    <style name="ActionButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">
+	<item name="android:src">@*android:drawable/ic_menu_moreoverflow_normal_holo_dark</item>
     </style>
 
 </resources>

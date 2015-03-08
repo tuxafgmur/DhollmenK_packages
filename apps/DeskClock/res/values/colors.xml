@@ -26,7 +26,7 @@
 
     <color name="black">#ff000000</color>
     <!-- If this color is changed or no longer used as the primary background, ensure that blackish_trans is changed as well. -->
-    <color name="blackish">#ff1c1e20</color>
+    <color name="blackish">#ff8f9898</color>
     <color name="blackish_selected">#0cffffff</color>
     <!-- Transparent background for use in the footer. 80% opacity -->
     <color name="blackish_trans">#cc3C4046</color>

@@ -75,6 +75,7 @@
             android:gravity="center_vertical"
             android:paddingRight="16dip"
             android:paddingEnd="16dip"
+	    android:textColor="#ffffffff"
             android:textAllCaps="true" />
     </LinearLayout>
 

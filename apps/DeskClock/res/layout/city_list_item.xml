@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"/>
     <ImageView
         android:id="@+id/city_remove"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:src="@drawable/ic_x_normal"
         android:background="@drawable/item_background"
         android:layout_marginRight="4dip"
         android:gravity="center_vertical"
