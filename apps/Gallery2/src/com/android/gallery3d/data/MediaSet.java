@@ -290,7 +290,6 @@ public abstract class MediaSet extends MediaObject {
             synchronized (this) {
                 for (int i = 0, n = sets.length; i < n; ++i) {
                     mFutures[i] = sets[i].requestSync(this);
-                    Log.d(TAG, "  request sync: " + Utils.maskDebugInfo(sets[i].getName()));
                 }
             }
         }
@@ -324,7 +323,6 @@ public abstract class MediaSet extends MediaObject {
             try {
                 while (!isDone()) wait();
             } catch (InterruptedException e) {
-                Log.d(TAG, "waitDone() interrupted");
             }
         }
 
@@ -339,8 +337,6 @@ public abstract class MediaSet extends MediaObject {
                     listener = mListener;
                     notifyAll();
                 }
-                Log.d(TAG, "onSyncDone: " + Utils.maskDebugInfo(mediaSet.getName())
-                        + " #pending=" + mPendingCount);
             }
             if (listener != null) listener.onSyncDone(MediaSet.this, mResult);
         }

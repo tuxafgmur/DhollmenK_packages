@@ -689,8 +689,6 @@ public class AlbumPage extends ActivityState implements GalleryActionBar.Cluster
 
     @Override
     public void onSyncDone(final MediaSet mediaSet, final int resultCode) {
-        Log.d(TAG, "onSyncDone: " + Utils.maskDebugInfo(mediaSet.getName()) + " result="
-                + resultCode);
         ((Activity) mActivity).runOnUiThread(new Runnable() {
             @Override
             public void run() {

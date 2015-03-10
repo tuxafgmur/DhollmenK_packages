@@ -42,7 +42,6 @@ public class DisableCameraReceiver extends BroadcastReceiver {
             : hasCamera();
 
         if (!needCameraActivity) {
-            Log.i(TAG, "disable all camera activities");
             for (int i = 0; i < ACTIVITIES.length; i++) {
                 disableComponent(context, ACTIVITIES[i]);
             }
@@ -54,7 +53,6 @@ public class DisableCameraReceiver extends BroadcastReceiver {
 
     private boolean hasCamera() {
         int n = android.hardware.Camera.getNumberOfCameras();
-        Log.i(TAG, "number of camera: " + n);
         return (n > 0);
     }
 
@@ -64,11 +62,9 @@ public class DisableCameraReceiver extends BroadcastReceiver {
         for (int i = 0; i < n; i++) {
             android.hardware.Camera.getCameraInfo(i, info);
             if (info.facing == CameraInfo.CAMERA_FACING_BACK) {
-                Log.i(TAG, "back camera found: " + i);
                 return true;
             }
         }
-        Log.i(TAG, "no back camera");
         return false;
     }
 

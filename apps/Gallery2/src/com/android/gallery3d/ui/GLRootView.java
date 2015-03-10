@@ -262,13 +262,9 @@ public class GLRootView extends GLSurfaceView
             w = h;
             h = tmp;
         }
-        Log.i(TAG, "layout content pane " + w + "x" + h
-                + " (compensation " + mCompensation + ")");
         if (mContentView != null && w != 0 && h != 0) {
             mContentView.layout(0, 0, w, h);
         }
-        // Uncomment this to dump the view hierarchy.
-        //mContentView.dumpTree("");
     }
 
     @Override
@@ -284,10 +280,6 @@ public class GLRootView extends GLSurfaceView
     @Override
     public void onSurfaceCreated(GL10 gl1, EGLConfig config) {
         GL11 gl = (GL11) gl1;
-        if (mGL != null) {
-            // The GL Object has changed
-            Log.i(TAG, "GLObject has changed from " + mGL + " to " + gl);
-        }
         mRenderLock.lock();
         try {
             mGL = gl;
@@ -311,8 +303,6 @@ public class GLRootView extends GLSurfaceView
     // This is a GLSurfaceView.Renderer callback
     @Override
     public void onSurfaceChanged(GL10 gl1, int width, int height) {
-        Log.i(TAG, "onSurfaceChanged: " + width + "x" + height
-                + ", gl10: " + gl1.toString());
         Process.setThreadPriority(Process.THREAD_PRIORITY_DISPLAY);
         GalleryUtils.setRenderThread();
         if (DEBUG_PROFILE) {
@@ -330,8 +320,6 @@ public class GLRootView extends GLSurfaceView
         if (mFrameCountingStart == 0) {
             mFrameCountingStart = now;
         } else if ((now - mFrameCountingStart) > 1000000000) {
-            Log.d(TAG, "fps: " + (double) mFrameCount
-                    * 1000000000 / (now - mFrameCountingStart));
             mFrameCountingStart = now;
             mFrameCount = 0;
         }
@@ -389,8 +377,6 @@ public class GLRootView extends GLSurfaceView
             mLastDrawFinishTime = t;
 
             if (durationInMs > 34) {  // 34ms -> we skipped at least 2 frames
-                Log.v(TAG, "----- SLOW (" + durationDrawInMs + "/" +
-                        durationInMs + ") -----");
                 Profile.commit();
             } else {
                 Profile.drop();

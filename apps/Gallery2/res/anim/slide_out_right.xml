@@ -18,4 +18,4 @@
            android:fromXDelta="0"
            android:toXDelta="-100%"
            android:interpolator="@android:anim/decelerate_interpolator"
-           android:duration="250"/>
+           android:duration="150"/>

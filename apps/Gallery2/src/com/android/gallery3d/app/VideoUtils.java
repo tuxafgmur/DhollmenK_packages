@@ -198,18 +198,15 @@ public class VideoUtils {
                 bufferInfo.offset = offset;
                 bufferInfo.size = extractor.readSampleData(dstBuf, offset);
                 if (bufferInfo.size < 0) {
-                    Log.d(LOGTAG, "Saw input EOS.");
                     bufferInfo.size = 0;
                     break;
                 } else {
                     bufferInfo.presentationTimeUs = extractor.getSampleTime();
                     if (endMs > 0 && bufferInfo.presentationTimeUs > (endMs * 1000)) {
-                        Log.d(LOGTAG, "The current sample is over the trim end time.");
                         break;
                     } else {
                         bufferInfo.flags = extractor.getSampleFlags();
                         trackIndex = extractor.getSampleTrackIndex();
-
                         muxer.writeSampleData(indexMap.get(trackIndex), dstBuf,
                                 bufferInfo);
                         extractor.advance();

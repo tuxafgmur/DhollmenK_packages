@@ -839,7 +839,6 @@ public class FilterShowActivity extends FragmentActivity implements OnItemClickL
             }
 
             if (null == CachingPipeline.getRenderScriptContext()){
-                Log.v(LOGTAG,"RenderScript context destroyed during load");
                 return;
             }
             final View imageShow = findViewById(R.id.imageShow);
@@ -1334,7 +1333,6 @@ public class FilterShowActivity extends FragmentActivity implements OnItemClickL
         if (currentPanel instanceof MainPanel) {
             if (!mImageShow.hasModifications()) {
                 if (!mLoadingComplete) {
-                    Log.v(LOGTAG,"Background processing is ON, rejecting back key event");
                     return;
                 }
                 done();

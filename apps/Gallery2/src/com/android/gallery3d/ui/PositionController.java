@@ -853,7 +853,6 @@ class PositionController {
         for (int i = 0; i < 2 * BOX_MAX + 1; i++) {
             convertBoxToRect(CENTER_OUT_INDEX[i]);
         }
-        //dumpState();
     }
 
     @SuppressWarnings("unused")

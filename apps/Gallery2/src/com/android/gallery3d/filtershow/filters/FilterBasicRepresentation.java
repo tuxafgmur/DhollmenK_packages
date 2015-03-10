@@ -33,7 +33,7 @@ public class FilterBasicRepresentation extends FilterRepresentation implements P
     private int mPreviewValue;
     public static final String SERIAL_NAME = "Name";
     public static final String SERIAL_VALUE = "Value";
-    private boolean mLogVerbose = Log.isLoggable(LOGTAG, Log.VERBOSE);
+    private boolean mLogVerbose = false;
 
     public FilterBasicRepresentation(String name, int minimum, int value, int maximum) {
         super(name);

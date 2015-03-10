@@ -69,7 +69,6 @@ public class GalleryWidgetMigrator {
             prefs.edit().putString(KEY_EXT_PATH, NEW_EXT_PATH).commit();
         } catch (Throwable t) {
             // exception may be thrown if external storage is not available(?)
-            Log.w(TAG, "migrateGalleryWidgets", t);
         }
     }
 
@@ -144,7 +143,6 @@ public class GalleryWidgetMigrator {
                                 .getParent()
                                 .getChild(newBucketId)
                                 .toString();
-                        Log.d(TAG, "migrate from " + entry.albumPath + " to " + newAlbumPath);
                         entry.albumPath = newAlbumPath;
                         // update entry's relative path
                         entry.relativePath = path.substring(RELATIVE_PATH_START);

@@ -706,10 +706,6 @@ public class AlbumSetPage extends ActivityState implements
 
     @Override
     public void onSyncDone(final MediaSet mediaSet, final int resultCode) {
-        if (resultCode == MediaSet.SYNC_RESULT_ERROR) {
-            Log.d(TAG, "onSyncDone: " + Utils.maskDebugInfo(mediaSet.getName()) + " result="
-                    + resultCode);
-        }
         ((Activity) mActivity).runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -720,9 +716,6 @@ public class AlbumSetPage extends ActivityState implements
                         mInitialSynced = true;
                     }
                     clearLoadingBit(BIT_LOADING_SYNC);
-                    if (resultCode == MediaSet.SYNC_RESULT_ERROR && mIsActive) {
-                        Log.w(TAG, "failed to load album set");
-                    }
                 } finally {
                     root.unlockRenderThread();
                 }

@@ -296,7 +296,6 @@ public class AlbumDataLoader {
             if ((items == null) || items.isEmpty()) {
                 if (info.reloadCount > 0) {
                     mFailedVersion = info.version;
-                    Log.d(TAG, "loading failed: " + mFailedVersion);
                 }
                 return null;
             }
@@ -356,13 +355,7 @@ public class AlbumDataLoader {
                 synchronized (this) {
                     if (mActive && !mDirty && updateComplete) {
                         updateLoading(false);
-                        if (mFailedVersion != MediaObject.INVALID_DATA_VERSION) {
-                            Log.d(TAG, "reload pause");
-                        }
                         Utils.waitWithoutInterrupt(this);
-                        if (mActive && (mFailedVersion != MediaObject.INVALID_DATA_VERSION)) {
-                            Log.d(TAG, "reload resume");
-                        }
                         continue;
                     }
                     mDirty = false;

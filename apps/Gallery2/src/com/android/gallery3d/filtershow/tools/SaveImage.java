@@ -467,7 +467,6 @@ public class SaveImage {
     private Uri moveSrcToAuxIfNeeded(Uri srcUri, File dstFile) {
         File srcFile = getLocalFileFromUri(mContext, srcUri);
         if (srcFile == null) {
-            Log.d(LOGTAG, "Source file is not a local file, no update.");
             return srcUri;
         }
 

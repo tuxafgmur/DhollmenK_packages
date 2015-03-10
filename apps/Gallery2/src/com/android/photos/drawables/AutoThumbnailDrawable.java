@@ -140,11 +140,6 @@ public abstract class AutoThumbnailDrawable<T> extends Drawable {
             scale = (float) vwidth / (float) dwidth;
             dy = (vheight - dheight * scale) * 0.5f;
         }
-        if (scale < .8f) {
-            Log.w(TAG, "sample size was too small! Overdrawing! " + scale + ", " + mSampleSize);
-        } else if (scale > 1.5f) {
-            Log.w(TAG, "Potential quality loss! " + scale + ", " + mSampleSize);
-        }
 
         mDrawMatrix.setScale(scale, scale);
         mDrawMatrix.postTranslate((int) (dx + 0.5f), (int) (dy + 0.5f));
@@ -276,7 +271,6 @@ public abstract class AutoThumbnailDrawable<T> extends Drawable {
                     }
                 }
             } catch (Exception e) {
-                Log.d(TAG, "Failed to fetch bitmap", e);
                 return;
             } finally {
                 try {
