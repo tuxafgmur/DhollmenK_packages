@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
   
-    <application android:theme="@android:style/Theme.Dialog"
+    <application android:theme="@android:style/Theme.Holo.Dialog"
         android:label="@string/voiceDialer"
         android:icon="@drawable/app_voicedialer">
         <!--  Initial Page -->
