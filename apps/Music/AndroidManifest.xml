@@ -31,14 +31,16 @@
 	<application android:icon="@drawable/app_music"
 		android:label="@string/musicbrowserlabel"
 		android:taskAffinity="android.task.music"
+	        android:theme="@android:style/Theme.Holo.Light"
 		android:allowTaskReparenting="true">
+
 		<meta-data
 			android:name="android.app.default_searchable"
 			android:value="com.android.music.QueryBrowserActivity"
 		/>
 
 		<activity android:name="com.android.music.MusicBrowserActivity"
-			android:theme="@android:style/Theme.NoTitleBar"
+			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:exported="true"  >
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -57,7 +59,7 @@
 		</receiver>
 
 		<activity android:name="com.android.music.MediaPlaybackActivity"
-			android:theme="@android:style/Theme.NoTitleBar"
+			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:label="@string/mediaplaybacklabel"
 			android:taskAffinity=""
 			android:launchMode="singleTask"
@@ -80,7 +82,8 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="AudioPreview" android:theme="@android:style/Theme.Dialog"
+		<activity android:name="AudioPreview"
+			android:theme="@android:style/Theme.Holo.Light.Dialog"
 			android:taskAffinity=""
 			android:excludeFromRecents="true" android:exported="true" >
 			<intent-filter>
@@ -115,7 +118,8 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.android.music.ArtistAlbumBrowserActivity" android:exported="false" >
+		<activity android:name="com.android.music.ArtistAlbumBrowserActivity"
+			android:exported="false">
 			<intent-filter>
 				<action android:name="android.intent.action.PICK" />
 				<category android:name="android.intent.category.DEFAULT" />
@@ -123,7 +127,8 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.android.music.AlbumBrowserActivity" android:exported="false" >
+		<activity android:name="com.android.music.AlbumBrowserActivity"
+			android:exported="false">
 			<intent-filter>
 				<action android:name="android.intent.action.PICK" />
 				<category android:name="android.intent.category.DEFAULT" />
@@ -131,7 +136,8 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.android.music.NowPlayingActivity" android:exported="false" >
+		<activity android:name="com.android.music.NowPlayingActivity"
+			android:exported="false">
 			<intent-filter>
 				<action android:name="android.intent.action.PICK" />
 				<category android:name="android.intent.category.DEFAULT" />
@@ -139,7 +145,8 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.android.music.TrackBrowserActivity" android:exported="false" >
+		<activity android:name="com.android.music.TrackBrowserActivity"
+			android:exported="false">
 			<intent-filter>
 				<action android:name="android.intent.action.EDIT" />
 				<action android:name="android.intent.action.PICK" />
@@ -149,7 +156,7 @@
 		</activity>
 
 		<activity android:name="com.android.music.QueryBrowserActivity"
-			android:theme="@android:style/Theme.NoTitleBar"
+			android:theme="@android:style/Theme.Light.NoTitleBar"
 			android:exported="true" >
 			<intent-filter>
 				<action android:name="android.intent.action.SEARCH" />
@@ -200,11 +207,13 @@
 		</activity>
 
 		<activity android:name="com.android.music.MediaPickerActivity"
-			android:label="@string/mediapickerlabel" android:exported="false" >
+			android:label="@string/mediapickerlabel"
+			android:exported="false" >
 		</activity>
 
 		<activity android:name="com.android.music.MusicPicker"
-			android:label="@string/music_picker_title" android:exported="true" >
+			android:label="@string/music_picker_title"
+			android:exported="true" >
 			<intent-filter>
 				<action android:name="android.intent.action.GET_CONTENT" />
 				<category android:name="android.intent.category.DEFAULT" />
@@ -222,22 +231,33 @@
 		</activity>
 
 		<activity android:name="com.android.music.CreatePlaylist"
-			android:theme="@android:style/Theme.Dialog" android:exported="false" />
+			android:theme="@android:style/Theme.Holo.Light.Dialog"
+			android:exported="false"
+		/>
 
 		<activity android:name="com.android.music.RenamePlaylist"
-			android:theme="@android:style/Theme.Dialog" android:exported="false" />
+			android:theme="@android:style/Theme.Holo.Light.Dialog"
+			android:exported="false"
+		/>
 
 		<activity android:name="com.android.music.WeekSelector"
-			android:theme="@android:style/Theme.Dialog" android:exported="false" />
+			android:theme="@android:style/Theme.Holo.Light.Dialog"
+			android:exported="false"
+		/>
 
 		<activity android:name="com.android.music.DeleteItems"
-			android:theme="@android:style/Theme.Dialog" android:exported="false" />
+			android:theme="@android:style/Theme.Holo.Light.Dialog"
+			android:exported="false"
+		/>
 
 		<activity android:name="com.android.music.ScanningProgress"
-			android:theme="@android:style/Theme.Dialog" android:exported="false" />
+			android:theme="@android:style/Theme.Holo.Light.Dialog"
+			android:exported="false"
+		/>
 
 		<service android:name="com.android.music.MediaPlaybackService"
-			android:exported="false" />
+			android:exported="false"
+		/>
 
 		<receiver android:name="com.android.music.MediaAppWidgetProvider">
 			<intent-filter>
