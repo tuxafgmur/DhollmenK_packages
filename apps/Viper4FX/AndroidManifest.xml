@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.vipercn.viper4android_v2"
 	android:installLocation="auto"
-	android:versionCode="22330"
-	android:versionName="22.3.3.0" >
+	android:versionCode="22340"
+	android:versionName="22.3.4.0" >
 
 	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19"/>
 
