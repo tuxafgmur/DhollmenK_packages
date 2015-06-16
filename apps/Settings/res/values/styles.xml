@@ -229,7 +229,7 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="TextAppearance.PagerTabs" parent="@*android:style/TextAppearance.DeviceDefault.Light.Small">
+    <style name="TextAppearance.PagerTabs" parent="@*android:style/TextAppearance.Holo.Light.Small">
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
     </style>

@@ -231,7 +231,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
         MenuItem syncNow = menu.add(0, MENU_SYNC_NOW_ID, 0,
                 getString(R.string.sync_menu_sync_now))
-                .setIcon(R.drawable.ic_menu_refresh_holo_dark);
+                .setIcon(R.drawable.ic_menu_refresh_holo_light);
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
                 getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
@@ -398,10 +398,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             if (lastSyncFailed && !activelySyncing && !authorityIsPending) {
                 syncIsFailing = true;
             }
-            if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                Log.d(TAG, "Update sync status: " + account + " " + authority +
-                        " active = " + activelySyncing + " pend =" +  authorityIsPending);
-            }
 
             final long successEndTime = (status == null) ? 0 : status.lastSuccessTime;
             if (!syncEnabled) {
@@ -457,10 +453,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                     authorities = new ArrayList<String>();
                     accountTypeToAuthorities.put(sa.accountType, authorities);
                 }
-                if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                    Log.d(TAG, "onAccountUpdated: added authority " + sa.authority
-                            + " to accountType " + sa.accountType);
-                }
                 authorities.add(sa.authority);
             } else {
                 // keep track of invisible sync adapters, so sync now forces
@@ -476,18 +468,12 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
         for (int i = 0, n = accounts.length; i < n; i++) {
             final Account account = accounts[i];
-            if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                Log.d(TAG, "looking for sync adapters that match account " + account);
-            }
             final ArrayList<String> authorities = accountTypeToAuthorities.get(account.type);
             if (authorities != null && (mAccount == null || mAccount.equals(account))) {
                 for (int j = 0, m = authorities.size(); j < m; j++) {
                     final String authority = authorities.get(j);
                     // We could check services here....
                     int syncState = ContentResolver.getIsSyncable(account, authority);
-                    if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                        Log.d(TAG, "  found authority " + authority + " " + syncState);
-                    }
                     if (syncState > 0) {
                         addSyncStateCheckBox(account, authority);
                     }

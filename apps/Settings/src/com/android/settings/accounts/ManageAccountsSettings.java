@@ -156,7 +156,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem syncNow = menu.add(0, MENU_SYNC_NOW_ID, 0,
                 getString(R.string.sync_menu_sync_now))
-                .setIcon(R.drawable.ic_menu_refresh_holo_dark);
+                .setIcon(R.drawable.ic_menu_refresh_holo_light);
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
                 getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
@@ -268,10 +268,6 @@ public class ManageAccountsSettings extends AccountPreferenceBase
                         lastSuccessTime = status.lastSuccessTime;
                     }
                     syncCount += syncEnabled && userFacing.contains(authority) ? 1 : 0;
-                }
-            } else {
-                if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                    Log.v(TAG, "no syncadapters found for " + account);
                 }
             }
             if (syncIsFailing) {

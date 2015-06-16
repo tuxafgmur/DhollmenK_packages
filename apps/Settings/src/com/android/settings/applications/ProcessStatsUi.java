@@ -201,7 +201,7 @@ public class ProcessStatsUi extends PreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         MenuItem refresh = menu.add(0, MENU_STATS_REFRESH, 0, R.string.menu_stats_refresh)
-                .setIcon(R.drawable.ic_menu_refresh_holo_dark)
+                .setIcon(R.drawable.ic_menu_refresh_holo_light)
                 .setAlphabeticShortcut('r');
         refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
@@ -231,13 +231,6 @@ public class ProcessStatsUi extends PreferenceFragment
 
         updateMenus();
 
-        /*
-        String helpUrl;
-        if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_battery))) {
-            final MenuItem help = menu.add(0, MENU_HELP, 0, R.string.help_label);
-            HelpUtils.prepareHelpMenuItem(getActivity(), help, helpUrl);
-        }
-        */
     }
 
     void updateMenus() {
@@ -389,16 +382,6 @@ public class ProcessStatsUi extends PreferenceFragment
                 getActivity().getString(statsLabel), durationString));
         mMemStatusPref.setSummary(getActivity().getString(R.string.process_stats_memory_status,
                         memString));
-        /*
-        mMemStatusPref.setTitle(DateFormat.format(DateFormat.getBestDateTimePattern(
-                getActivity().getResources().getConfiguration().locale,
-                "MMMM dd, yyyy h:mm a"), mStats.mTimePeriodStartClock));
-        */
-        /*
-        BatteryHistoryPreference hist = new BatteryHistoryPreference(getActivity(), mStats);
-        hist.setOrder(-1);
-        mAppListGroup.addPreference(hist);
-        */
 
         long now = SystemClock.uptimeMillis();
 
@@ -452,15 +435,6 @@ public class ProcessStatsUi extends PreferenceFragment
                 ProcessStats.ALL_SCREEN_ADJ, memStates, stats);
 
         ArrayList<ProcStatsEntry> entries = new ArrayList<ProcStatsEntry>();
-
-        /*
-        ArrayList<ProcessStats.ProcessState> rawProcs = mStats.collectProcessesLocked(
-                ProcessStats.ALL_SCREEN_ADJ, ProcessStats.ALL_MEM_ADJ,
-                ProcessStats.BACKGROUND_PROC_STATES, now, null);
-        for (int i=0, N=(rawProcs != null ? rawProcs.size() : 0); i<N; i++) {
-            procs.add(new ProcStatsEntry(rawProcs.get(i), totals));
-        }
-        */
 
         if (DEBUG) Log.d(TAG, "-------------------- PULLING PROCESSES");
 
@@ -525,31 +499,6 @@ public class ProcessStatsUi extends PreferenceFragment
             }
         }
 
-        /*
-        SparseArray<ArrayMap<String, ProcStatsEntry>> processes
-                = new SparseArray<ArrayMap<String, ProcStatsEntry>>();
-        for (int ip=0, N=mStats.mProcesses.getMap().size(); ip<N; ip++) {
-            SparseArray<ProcessStats.ProcessState> uids = mStats.mProcesses.getMap().valueAt(ip);
-            for (int iu=0; iu<uids.size(); iu++) {
-                ProcessStats.ProcessState st = uids.valueAt(iu);
-                ProcStatsEntry ent = new ProcStatsEntry(st, totals, mUseUss,
-                        mStatsType == MENU_TYPE_BACKGROUND);
-                if (ent.mDuration > 0) {
-                    if (DEBUG) Log.d(TAG, "Adding proc " + st.mName + "/" + st.mUid + ": time="
-                            + makeDuration(ent.mDuration) + " ("
-                            + ((((double)ent.mDuration) / memTotalTime) * 100) + "%)");
-                    procs.add(ent);
-                    ArrayMap<String, ProcStatsEntry> uidProcs = processes.get(ent.mUid);
-                    if (uidProcs == null) {
-                        uidProcs = new ArrayMap<String, ProcStatsEntry>();
-                        processes.put(ent.mUid, uidProcs);
-                    }
-                    uidProcs.put(ent.mName, ent);
-                }
-            }
-        }
-        */
-
         Collections.sort(entries, sEntryCompare);
 
         long maxWeight = 1;
@@ -601,9 +550,6 @@ public class ProcessStatsUi extends PreferenceFragment
             try {
                 is.close();
             } catch (IOException e) {
-            }
-            if (mStats.mReadError != null) {
-                Log.w(TAG, "Failure reading process stats: " + mStats.mReadError);
             }
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException:", e);
