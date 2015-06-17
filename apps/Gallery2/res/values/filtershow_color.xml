@@ -20,7 +20,7 @@
     <color name="red">#FF0000</color>
     <color name="blue">#0000FF</color>
     <color name="text_toolbar">#ff000000</color>
-    <color name="background_screen">#ffd4d4d4</color>
+    <color name="background_screen">#ff5c5c5c</color>
     <color name="background_toolbar">#ffe7e7e7</color>
     <color name="background_main_toolbar">#ffe7e7e7</color>
     <color name="toolbar_separation_line">#333333</color>
@@ -49,5 +49,4 @@
     <color name="draw_rect_border">#888888</color>
     <color name="color_chooser_unslected_border">#00000000</color>
     <color name="color_chooser_slected_border">#a7a7a7</color>
-
 </resources>

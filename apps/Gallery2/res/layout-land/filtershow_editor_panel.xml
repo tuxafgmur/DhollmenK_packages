@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/imageState"
+                android:textColor="@android:color/black"
                 android:background="@color/background_main_toolbar"
                 android:layout_alignParentTop="true"
                 />
@@ -85,6 +86,7 @@
                         android:layout_gravity="center"
                         android:background="@android:color/transparent"
                         android:text="@string/apply_effect"
+                        android:textColor="@android:color/black" 
                         android:textSize="18dip"
                         android:drawableEnd="@drawable/filtershow_menu_marker_rtl"
                         android:textAllCaps="true"/>
