@@ -46,9 +46,9 @@
 
         <ImageButton
             android:id="@+id/enter"
-            android:contentDescription="@string/set_string"
             android:src="@drawable/ic_action_set"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/set_string"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -56,12 +56,12 @@
 
         <ImageButton
             android:id="@+id/reset"
+            android:src="@drawable/ic_reset"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/reset_string"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_reset"
-            android:background="@android:color/transparent"
             android:gravity="center_vertical"/>
 
     </LinearLayout>

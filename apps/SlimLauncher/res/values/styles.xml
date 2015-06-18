@@ -178,7 +178,7 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="SettingsTheme" parent="android:Theme.Holo">
+    <style name="SettingsTheme" parent="android:Theme.Holo.Light">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/settings_bg_color</item>
         <item name="android:colorBackground">@color/settings_bg_color</item>
@@ -189,7 +189,6 @@
         <item name="android:dialogTheme">@style/SettingsDialogTheme</item>
         <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
         <item name="android:alertDialogStyle">@style/AlertDialogStyle</item>
-
         <item name="android:listDividerAlertDialog">@android:color/white</item>
     </style>
 
